@@ -13,5 +13,6 @@ module.exports = {
   rules: {
     'prettier/prettier': 1,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    'no-unused-vars': 'warn',
   },
 };
