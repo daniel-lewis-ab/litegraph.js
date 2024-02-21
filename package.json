@@ -16,6 +16,7 @@
     "react-router-dom": "^6.22.1"
   },
   "devDependencies": {
+    "@types/node": "^20.11.19",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
@@ -29,6 +30,7 @@
     "prettier": "^3.2.5",
     "sass": "^1.71.1",
     "typescript": "^5.2.2",
+    "url": "^0.11.3",
     "vite": "^5.1.0",
     "vite-plugin-checker": "^0.6.4"
   }
