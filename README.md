@@ -1,34 +1,26 @@
-# React + TypeScript + Vite
+# Salt Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Salt Frontend uses the strengths of Vite, TailwindCSS, and the power of SWC with React.
 
-Currently, two official plugins are available:
+## Quick Start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses
-  [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast
-  Refresh
+Clone the repository and install dependencies:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-};
+```bash
+git clone <repository-url> salt-frontend
+cd salt-frontend
+npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or
-  `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` &
-  `plugin:react/jsx-runtime` to the `extends` list
+## Scripts
+- npm run dev: Launches the Vite dev server.
+- npm run build: Compiles and bundles for production.
+- npm run lint: Runs ESLint to catch issues.
+- npm run lint-fix: Fixes ESLint issues automatically.
+- npm run preview: Previews the build locally.
+
+
+This setup includes Vite for a fast development experience, TailwindCSS for styling, and leverages SWC via the @vitejs/plugin-react for quick, efficient builds.
+
+## Contributing
+Contributions are welcome! Please read our contributing guidelines for details on how to submit contributions to this project.
