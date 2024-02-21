@@ -19,6 +19,9 @@ export default {
       }
     },
     extend: {
+      fontFamily: {
+        'plex-mono': ['IBM Plex Mono', 'monospace'],
+      }
     },
   },
   plugins: [],
