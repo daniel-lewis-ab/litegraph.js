@@ -2,17 +2,23 @@ import type { Config } from 'tailwindcss';
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: 'class',
   theme: {
-    extend: {
-      colors: {
-        primary: '#A08DEF',
-        secondary: '#4C4B7F',
-        tertiary: '#2D2E4E',
-        success: '#4AB637',
-        warning: '#D5A84C',
-        error: '#CF512F',
-        surface: '#080812',
+    colors: {
+      primary: 'var(--color-primary)',
+      secondary: 'var(--color-secondary)',
+      tertiary: 'var(--color-tertiary)',
+      success: 'var(--color-success)',
+      warning: 'var(--color-warning)',
+      error: 'var(--color-error)',
+      surface: {
+        DEFAULT: 'var(--color-surface)',
+        100: 'var(--color-surface-100)',
+        200: 'var(--color-surface-200)',
+        300: 'var(--color-surface-300)',
       }
+    },
+    extend: {
     },
   },
   plugins: [],
