@@ -1,4 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Icon } from '@/shared/components/icon/Icon';
 import { Logo } from '../icons/Logo';
 import { LayoutProps } from './Layout.types';
 import {
@@ -15,19 +15,11 @@ export const Layout = ({ children }: LayoutProps) => (
   <div className="flex flex-row min-h-screen">
     <div className="border-r border-r-[#626289] w-[64px] flex flex-col items-center justify-between">
       <Logo className="mt-2" />
-      <div className="flex flex-col">
-        <div className="h-[64px]">
-          <FontAwesomeIcon width={30} className="h-[30px]" icon={faRocket} color="#9F9FC5" />
-        </div>
-        <div className="h-[64px]">
-          <FontAwesomeIcon width={30} className="h-[30px]" icon={faCodeBranch} color="#9F9FC5" />
-        </div>
-        <div className="h-[64px]">
-          <FontAwesomeIcon width={30} className="h-[30px]" icon={faDatabase} color="#9F9FC5" />
-        </div>
-        <div className="h-[64px]">
-          <FontAwesomeIcon width={30} className="h-[30px]" icon={faHeartPulse} color="#9F9FC5" />
-        </div>
+      <div className="flex flex-col *:my-[20px]">
+        <Icon size={30} icon={faRocket} color="#9F9FC5" />
+        <Icon size={30} icon={faCodeBranch} color="#9F9FC5" />
+        <Icon size={30} icon={faDatabase} color="#9F9FC5" />
+        <Icon size={30} icon={faHeartPulse} color="#9F9FC5" />
       </div>
       <div className="h-[64px]"></div>
     </div>
@@ -37,13 +29,9 @@ export const Layout = ({ children }: LayoutProps) => (
           <Badge>Free</Badge>
           <p className="pl-3 text-2xl font-medium">Workflows</p>
         </div>
-        <div className="flex flex-row">
-          <div className="mx-4">
-            <FontAwesomeIcon width={30} className="h-[30px]" icon={faGear} color="#9F9FC5" />
-          </div>
-          <div className="mx-4">
-            <FontAwesomeIcon width={30} className="h-[30px]" icon={faCircleUser} color="#9F9FC5" />
-          </div>
+        <div className="flex flex-row *:mx-4">
+          <Icon size={30} icon={faGear} color="#9F9FC5" />
+          <Icon size={30} icon={faCircleUser} color="#9F9FC5" />
         </div>
       </header>
       <main className="flex grow p-4">{children}</main>
