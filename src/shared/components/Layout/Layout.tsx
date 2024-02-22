@@ -11,8 +11,8 @@ import {
 } from '@awesome.me/kit-b6cda292ae/icons/classic/light';
 
 export const Layout = ({ children }: LayoutProps) => (
-  <div className="flex flex-row min-h-screen">
-    <div className="border-r border-r-[#626289] w-[64px] flex flex-col items-center justify-between">
+  <div className="flex min-h-screen flex-row">
+    <div className="flex w-[64px] flex-col items-center justify-between border-r border-r-[#626289]">
       <Logo className="mt-2" />
       <div className="flex flex-col *:my-[20px]">
         <Icon size={30} icon={faRocket} color="#9F9FC5" />
@@ -22,8 +22,8 @@ export const Layout = ({ children }: LayoutProps) => (
       </div>
       <div className="h-[64px]"></div>
     </div>
-    <div className="flex flex-col flex-grow">
-      <header className="flex flex-row justify-between items-center border-b border-[#626289] h-[64px] px-6">
+    <div className="flex flex-grow flex-col">
+      <header className="flex h-[64px] flex-row items-center justify-between border-b border-[#626289] px-6">
         <div className="flex flex-row items-center">
           <p className="pl-3 text-2xl font-medium">Workflows</p>
         </div>

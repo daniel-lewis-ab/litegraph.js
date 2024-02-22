@@ -1,5 +1,8 @@
 module.exports = {
   root: true,
+  settings: {
+    react: { version: 'detect' },
+  },
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
