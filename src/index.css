@@ -58,6 +58,8 @@
     font-family: 'IBM Plex Mono', monospace;
     font-weight: 400;
     background-color: var(--color-surface);
+    /* @TODO: Update */
+    color: white;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

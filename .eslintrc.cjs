@@ -23,5 +23,6 @@ module.exports = {
     'prettier/prettier': 1,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'no-unused-vars': 'warn',
+    '@typescript-eslint/consistent-type-definitions': ['error', 'type']
   },
 };

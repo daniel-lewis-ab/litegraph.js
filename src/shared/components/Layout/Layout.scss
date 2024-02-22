@@ -1,0 +1,20 @@
+.container {
+  display: grid;
+  grid-template-columns: 200px 1fr; /* Sidebar width and main content flexible */
+  grid-template-rows: auto 1fr; /* Navbar height based on content and main content flexible */
+  height: 100vh; /* Use full height of the viewport */
+}
+
+.navbar {
+  grid-column: 1 / -1; /* Stretch across all columns */
+}
+
+.sidebar {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.main-content {
+  grid-column: 2;
+  grid-row: 2;
+}
