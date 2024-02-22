@@ -1,7 +1,7 @@
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 
 type IconProps = {
-  size: number;
+  size?: number;
 } & Omit<FontAwesomeIconProps, 'size'>;
 
 export const Icon = ({ size, width, height, ...props }: IconProps) => (
