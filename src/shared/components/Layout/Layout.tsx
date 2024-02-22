@@ -9,7 +9,6 @@ import {
   faCodeBranch,
   faHeartPulse,
 } from '@awesome.me/kit-b6cda292ae/icons/classic/light';
-import { Badge } from '@/shared/badge/Badge';
 
 export const Layout = ({ children }: LayoutProps) => (
   <div className="flex flex-row min-h-screen">
@@ -26,7 +25,6 @@ export const Layout = ({ children }: LayoutProps) => (
     <div className="flex flex-col flex-grow">
       <header className="flex flex-row justify-between items-center border-b border-[#626289] h-[64px] px-6">
         <div className="flex flex-row items-center">
-          <Badge>Free</Badge>
           <p className="pl-3 text-2xl font-medium">Workflows</p>
         </div>
         <div className="flex flex-row *:mx-4">
