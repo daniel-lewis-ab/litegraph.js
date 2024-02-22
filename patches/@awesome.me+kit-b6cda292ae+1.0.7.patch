@@ -1,0 +1,10 @@
+diff --git a/node_modules/@awesome.me/kit-b6cda292ae/icons/modules/icon-types.ts b/node_modules/@awesome.me/kit-b6cda292ae/icons/modules/icon-types.ts
+index c38b5fa..94fc245 100644
+--- a/node_modules/@awesome.me/kit-b6cda292ae/icons/modules/icon-types.ts
++++ b/node_modules/@awesome.me/kit-b6cda292ae/icons/modules/icon-types.ts
+@@ -1,5 +1,4 @@
+ import type { IconDefinition, IconPack } from '@fortawesome/fontawesome-common-types';
+-import type { Icon, IconParams } from '@fortawesome/fontawesome-svg-core'
+ 
+ export type IconPrefix = 'fast'|'fass'|'fasr'|'fasl'|'fakd'|'fak'|'fad'|'fat'|'fas'|'far'|'fal'|'fab';
+ 

@@ -8,7 +8,7 @@ import {
   faRocket,
   faCodeBranch,
   faHeartPulse,
-} from '@fortawesome/free-solid-svg-icons';
+} from '@awesome.me/kit-b6cda292ae/icons/classic/light';
 import { Badge } from '@/shared/badge/Badge';
 
 export const Layout = ({ children }: LayoutProps) => (
