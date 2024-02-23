@@ -1,0 +1,41 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  INFRASTRUCTURE_URL: https://gitlab-ci-token:${GITLAB_ACCESS_TOKEN}@gitlab.com/plai-app/ai-studio/orchestra-infrastructure.git
+  IMAGE_TAG: gcr.io/plaidev/plai-backend-registry-repository/salt-frontend:$CI_COMMIT_SHORT_SHA
+  SHORT_HASH: $CI_COMMIT_SHORT_SHA
+
+publish:
+  stage: build
+  image: docker:dind
+  services:
+    - docker:dind
+  script:
+    - docker build --tag $IMAGE_TAG .
+    - cat $GCP_SA_KEY | docker login -u _json_key --password-stdin https://gcr.io
+    - docker push $IMAGE_TAG
+  only:
+    - develop
+    - main
+
+deploy-dev:
+  stage: deploy
+  only:
+    - develop
+  environment:
+    name: dev
+  image:
+    name: alpine/git
+    entrypoint: [ "" ]
+  script:
+    - apk add kustomize yq nodejs npm --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git clone $INFRASTRUCTURE_URL infrastructure
+    - cd infrastructure/manifests/orchestra-backend/overlays/dev
+    - kustomize edit set image salt-frontend=$IMAGE_TAG
+    - kustomize build > ../../kustomization/dev/dev.yaml
+    - git commit -am "Set salt-frontend dev image tag to $SHORT_HASH"
+    - git push origin main
