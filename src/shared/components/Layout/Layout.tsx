@@ -32,7 +32,7 @@ export const Layout = ({ children }: LayoutProps) => (
           <Icon size={30} icon={faCircleUser} color="#9F9FC5" />
         </div>
       </header>
-      <main className="flex grow p-4">{children}</main>
+      <main className="flex w-full grow p-4">{children}</main>
     </div>
   </div>
 );
