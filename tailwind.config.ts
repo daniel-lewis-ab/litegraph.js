@@ -16,10 +16,13 @@ export default {
         100: 'var(--color-surface-100)',
         200: 'var(--color-surface-200)',
         300: 'var(--color-surface-300)',
-      }
+      },
+      foreground: "#E9E9F0",
+      black: "#000000",
     },
     extend: {
       fontFamily: {
+        'inter': ['Inter', 'monospace'],
         'plex-mono': ['IBM Plex Mono', 'monospace'],
       }
     },

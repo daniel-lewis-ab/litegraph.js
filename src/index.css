@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-primary: #A08DEF;
+    --color-secondary: #4C4B7F;
+    --color-tertiary: #2D2E4E;
+    --color-success: #4AB637;
+    --color-warning: #D5A84C;
+    --color-error: #CF512F;
+    --color-surface: #F3F3F7;
+    --color-surface-100: #DEDFEB;
+    --color-surface-200: #C4C5E0;
+    --color-surface-300: #9F9FC5;
+
+    font-family: 'Inter', monospace;
+    font-weight: 400;
+    background-color: var(--color-surface);
+    /* @TODO: Update */
+    color: white;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :root[class~="dark"] {
+    --color-surface: #080812;
+    --color-surface-100: #0D0E1F;
+    --color-surface-200: #171933;
+    --color-surface-300: #222341;
+  }
+}
+
 @font-face {
   font-family: 'IBM Plex Mono';
   src: url('./assets/fonts/IBMPlexMono-Regular.woff2') format('woff2'),
@@ -42,33 +73,37 @@
   font-style: normal;
 }
 
-@layer base {
-  :root {
-    --color-primary: #A08DEF;
-    --color-secondary: #4C4B7F;
-    --color-tertiary: #2D2E4E;
-    --color-success: #4AB637;
-    --color-warning: #D5A84C;
-    --color-error: #CF512F;
-    --color-surface: #F3F3F7;
-    --color-surface-100: #DEDFEB;
-    --color-surface-200: #C4C5E0;
-    --color-surface-300: #9F9FC5;
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Light.woff2') format('woff2'), url('./assets/fonts/Inter-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
 
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 400;
-    background-color: var(--color-surface);
-    /* @TODO: Update */
-    color: white;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Regular.woff2') format('woff2'), url('./assets/fonts/Inter-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
 
-  :root[class~="dark"] {
-    --color-surface: #080812;
-    --color-surface-100: #0D0E1F;
-    --color-surface-200: #171933;
-    --color-surface-300: #222341;
-  }
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Medium.woff2') format('woff2'), url('./assets/fonts/Inter-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-SemiBold.woff2') format('woff2'), url('./assets/fonts/Inter-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter-Bold.woff2') format('woff2'), url('./assets/fonts/Inter-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
 }
