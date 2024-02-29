@@ -45,12 +45,12 @@ export const WorkflowTile = ({ type, name, lastEdited, nodesCount, imageUrl, onA
   return (
     <Link to="#">
       <div
-        className="tile-background relative flex aspect-square flex-col justify-between rounded-lg bg-surface-100 bg-contain px-2.5 py-3"
+        className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-contain px-2.5 py-3"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
         {!imageUrl && (
-          <div className="absolute inset-0 flex  justify-center opacity-10">
-            <Icon style={{ width: '100%', height: '45%', paddingTop: '20%' }} icon={faDiagramProject} />
+          <div className="absolute inset-0 -z-10 flex justify-center bg-surface-100">
+            <Icon className="h-[45%] w-full pt-[20%] opacity-10" icon={faDiagramProject} />
           </div>
         )}
         <div className="flex flex-row justify-between">
