@@ -12,6 +12,7 @@ import {
   faShare,
   faDownload,
 } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
+import { faDiagramProject } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -44,9 +45,14 @@ export const WorkflowTile = ({ type, name, lastEdited, nodesCount, imageUrl, onA
   return (
     <Link to="#">
       <div
-        className="tile-background flex aspect-square flex-col justify-between rounded-lg bg-surface-100 bg-contain px-2.5 py-3"
+        className="tile-background relative flex aspect-square flex-col justify-between rounded-lg bg-surface-100 bg-contain px-2.5 py-3"
         style={{ backgroundImage: `url(${imageUrl})` }}
       >
+        {!imageUrl && (
+          <div className="absolute inset-0 flex  justify-center opacity-10">
+            <Icon style={{ width: '100%', height: '45%', paddingTop: '20%' }} icon={faDiagramProject} />
+          </div>
+        )}
         <div className="flex flex-row justify-between">
           {type && <Badge>{workflowToReadable[type]}</Badge>}
           <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
