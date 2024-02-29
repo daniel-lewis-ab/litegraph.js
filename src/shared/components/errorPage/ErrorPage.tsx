@@ -1,1 +1,3 @@
-export const ErrorPage = () => <h1>Error occurred</h1>;
+import { Layout } from '../Layout/Layout';
+
+export const ErrorPage = () => <Layout>Error occurred</Layout>;

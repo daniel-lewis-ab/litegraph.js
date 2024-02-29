@@ -58,7 +58,7 @@ export const LoginPage = ({ onSubmit }: LoginPageProps) => {
           <LogoFull className="mb-14" />
           <h1 className="mb-14 text-5xl font-bold">Sign in salt with</h1>
           <button
-            className="bg-foreground flex w-full flex-row justify-center rounded-lg py-3"
+            className="bg-foreground flex w-full max-w-md flex-row justify-center rounded-lg py-3"
             onClick={handleGoogleLogin}
           >
             <GoogleIcon />
@@ -67,7 +67,7 @@ export const LoginPage = ({ onSubmit }: LoginPageProps) => {
         </div>
       </div>
       <div className="relative flex-1">
-        <div className="bg-white absolute inset-0 h-full w-full bg-[radial-gradient(#6161C4,transparent_1px)] [background-size:26px_26px]"></div>
+        <div className="absolute inset-0 h-full w-full bg-[radial-gradient(#6161C4,transparent_1px)] [background-size:26px_26px]"></div>
       </div>
     </main>
   );

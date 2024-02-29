@@ -4,20 +4,61 @@
 
 @layer base {
   :root {
-    --color-primary: #A08DEF;
-    --color-secondary: #4C4B7F;
-    --color-tertiary: #2D2E4E;
+    /* Colors defined for themes */
+    --color-token-primary-400: #A697F9;
+    --color-token-primary-500: #8566FF;
+
+    --color-token-secondary-300: #B8B8CC;
+    --color-token-secondary-500: #4C4B7F;
+
+    --color-token-tertiary-400: #75BDD1;
+    --color-token-tertiary-500: #4AA2BD;
+
+    --color-token-OLD-midnight-600: #626289;
+
+    --color-token-surface-50: #F3F3F7;
+    --color-token-surface-100: #DEDFEB;
+    --color-token-surface-200: #C4C5E0;
+    --color-token-surface-300: #9F9FC5;
+    --color-token-surface-400: #313155;
+    --color-token-surface-500: #222341;
+    --color-token-surface-600: #171933;
+    --color-token-surface-700: #0D0E1F;
+    --color-token-surface-800: #080812;
+    /* ENDOF defined for themes */
+
+    /* Common colors for both themes */
     --color-success: #4AB637;
     --color-warning: #D5A84C;
     --color-error: #CF512F;
-    --color-surface: #F3F3F7;
-    --color-surface-100: #DEDFEB;
-    --color-surface-200: #C4C5E0;
-    --color-surface-300: #9F9FC5;
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+
+    --color-on-primary: #000000;
+    --color-on-tertiary: #000000;
+    --color-on-success: #000000;
+    --color-on-error: #000000;
+    --color-on-warning: #000000;
+
+    /* Light theme */
+    --color-primary: var(--color-token-primary-400);
+    --color-secondary: var(--color-token-secondary-300);
+    --color-on-secondary: #000000;
+    --color-tertiary: var(--color-token-tertiary-400);
+    --color-surface: var(--color-token-surface-50);
+    --color-surface-100: var(--color-token-surface-100);
+    --color-surface-200: var(--color-token-surface-200);
+    --color-surface-300: var(--color-token-surface-300);
+    --color-foreground: var(--color-token-surface-700);
+    --color-foreground-muted: var(--color-token-OLD-midnight-600);
+    --color-border-default: var(--color-token-surface-300);
+    --color-border-muted: var(--color-token-surface-300);
+    --color-border-strong: var(--color-token-surface-700);
 
     font-family: 'Inter', monospace;
     font-weight: 400;
     background-color: var(--color-surface);
+    color: var(--color-foreground);
     /* @TODO: Update */
     color: white;
     text-rendering: optimizeLegibility;
@@ -25,13 +66,31 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  p, svg {
+    color: var(--color-foreground);
+  }
+
   :root[class~="dark"] {
-    --color-surface: #080812;
-    --color-surface-100: #0D0E1F;
-    --color-surface-200: #171933;
-    --color-surface-300: #222341;
+    --color-primary: var(--color-token-primary-500);
+    --color-secondary: var(--color-token-secondary-500);
+    --color-on-secondary: #FFFFFF;
+    --color-tertiary: var(--color-token-tertiary-500);
+    --color-surface: var(--color-token-surface-800);
+    --color-surface-100: var(--color-token-surface-700);
+    --color-surface-200: var(--color-token-surface-600);
+    --color-surface-300: var(--color-token-surface-500);
+    --color-foreground: var(--color-token-surface-50);
+    --color-foreground-muted: var(--color-token-surface-300);
+    --color-border-default: var(--color-token-surface-400);
+    --color-border-muted: var(--color-token-surface-400);
+    --color-border-strong: var(--color-token-surface-200);
   }
 }
+
+button {
+  cursor: pointer;
+}
+
 
 @font-face {
   font-family: 'IBM Plex Mono';
@@ -106,4 +165,50 @@
   src: url('./assets/fonts/Inter-Bold.woff2') format('woff2'), url('./assets/fonts/Inter-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
+}
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  5. Improve media defaults
+*/
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+*/
+input, button, textarea, select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+/*
+  8. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
 }
