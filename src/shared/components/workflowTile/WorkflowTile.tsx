@@ -11,6 +11,7 @@ import {
   faICursor,
   faShare,
   faDownload,
+  faPen,
 } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { faDiagramProject } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import { useState } from 'react';
@@ -64,7 +65,7 @@ export const WorkflowTile = ({ type, name, lastEdited, nodesCount, imageUrl, onA
             <PopoverContent side="bottom" align="end">
               <OptionsList>
                 <OptionsList.Item icon={faRocket} onClick={() => handleActionClick('edit')}>
-                  Edit
+                  Deploy
                 </OptionsList.Item>
                 <OptionsList.Item icon={faClone} onClick={() => handleActionClick('duplicate')}>
                   Duplicate
@@ -74,6 +75,9 @@ export const WorkflowTile = ({ type, name, lastEdited, nodesCount, imageUrl, onA
                 </OptionsList.Item>
                 <OptionsList.Item icon={faICursor} onClick={() => handleActionClick('rename')}>
                   Rename
+                </OptionsList.Item>
+                <OptionsList.Item icon={faPen} onClick={() => handleActionClick('edit')}>
+                  Edit
                 </OptionsList.Item>
                 <OptionsList.Item icon={faShare} onClick={() => handleActionClick('share')}>
                   Share

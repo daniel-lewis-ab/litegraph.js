@@ -56,7 +56,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <div className="h-[64px]"></div>
       </div>
       <div className="flex flex-grow flex-col">
-        <header className="border-b-border-default sticky top-0 flex h-[64px] min-h-[64px] flex-row items-center justify-between border-b bg-surface px-6">
+        <header className="border-b-border-default sticky top-0 z-10 flex h-[64px] min-h-[64px] flex-row items-center justify-between border-b bg-surface px-6">
           <div className="flex flex-row items-center">
             <p className="text-2xl font-medium">Workflows</p>
           </div>
