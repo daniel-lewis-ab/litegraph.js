@@ -16,6 +16,7 @@ import {
 import { faDiagramProject } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { TimeSince } from '../timeSince/TimeSince';
 
 type Action = 'edit' | 'duplicate' | 'delete' | 'rename' | 'share' | 'export';
 
@@ -93,7 +94,9 @@ export const WorkflowTile = ({ type, name, lastEdited, nodesCount, imageUrl, onA
           <p className="text-foreground text-lg font-semibold">{name}</p>
           <div className="mt-4 flex flex-row justify-between">
             {/* @TODO: Change time */}
-            <p className="text-foreground-muted text-sm">Edited {lastEdited}</p>
+            <p className="text-foreground-muted text-sm">
+              Edited <TimeSince time={lastEdited} />
+            </p>
             <div className="flex flex-row items-center">
               <Icon className="text-foreground-muted mr-1" size={19} icon={faCircleNodes} />
               <p className="text-foreground">{nodesCount}</p>

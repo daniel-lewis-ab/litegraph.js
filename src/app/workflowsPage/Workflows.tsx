@@ -11,28 +11,28 @@ const baseWorkflows = [
     id: '1',
     name: 'comfyui_Title01af___a',
     type: 'image',
-    lastEdited: '3h ago',
+    lastEdited: new Date().toISOString(), // Current timestamp
     nodesCount: 33,
   },
   {
-    id: '1',
+    id: '2',
     name: 'comfyui_Title01af___a',
     type: 'controlnet',
-    lastEdited: '3h ago',
+    lastEdited: new Date(Date.now() - 3600 * 1000).toISOString(), // 1 hour ago
     nodesCount: 33,
   },
   {
-    id: '1',
+    id: '3',
     name: '(Video Tutorial Resources) Picture in Picture Goodness + Canvas Pose',
     type: 'image',
-    lastEdited: '3h ago',
+    lastEdited: new Date(Date.now() - 24 * 3600 * 1000).toISOString(), // 1 day ago
     nodesCount: 33,
   },
   {
-    id: '1',
+    id: '4',
     name: 'comfyui_Title01af___a',
     type: 'controlnet',
-    lastEdited: '3h ago',
+    lastEdited: new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString(), // 1 week ago
     nodesCount: 33,
     imageUrl: 'https://gcdnb.pbrd.co/images/aJIbNBtdViKg.png',
   },
@@ -48,7 +48,7 @@ const workflows = [
 ];
 
 export const WorkflowsPage = () => {
-  const isEmpty = false;
+  const isEmpty = true;
 
   if (isEmpty) {
     return <EmptyWorkflowsPage />;
