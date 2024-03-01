@@ -3,6 +3,8 @@ import { EmptyWorkflowsPage } from './components/EmptyWorkflowsPage';
 import { WorkflowTile } from '@/shared/components/workflowTile/WorkflowTile';
 import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { faRectangleHistory, faUpload } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
+import { Input } from '@/shared/components/input/Input';
+import { faMagnifyingGlass } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 
 const baseWorkflows = [
   {
@@ -67,6 +69,13 @@ export const WorkflowsPage = () => {
           <Icon size={20} icon={faUpload} className="rounded-full bg-surface-100 p-[12px]" />
           <p className="ml-2 text-sm">Import</p>
         </button>
+      </div>
+      <div>
+        <Input
+          className="mb-6 max-w-sm"
+          placeholder="Search this page..."
+          leftIcon={<Icon icon={faMagnifyingGlass} />}
+        />
       </div>
       <div className="grid grid-cols-1 content-start gap-4 md:grid-cols-3 lg:grid-cols-4">
         {workflows.map((workflow, i) => (
