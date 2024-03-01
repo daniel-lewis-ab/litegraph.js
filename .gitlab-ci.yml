@@ -39,3 +39,24 @@ deploy-dev:
     - kustomize build > ../../kustomization/dev/dev.yaml
     - git commit -am "Set salt-frontend dev image tag to $SHORT_HASH"
     - git push origin main
+
+deploy-prod:
+  stage: deploy
+  only:
+    - main
+  when: manual
+  environment:
+    name: prod
+  image:
+    name: alpine/git
+    entrypoint: [ "" ]
+  script:
+    - apk add kustomize yq nodejs npm --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git clone $INFRASTRUCTURE_URL infrastructure
+    - cd infrastructure/manifests/orchestra-backend/overlays/prod
+    - kustomize edit set image salt-frontend=$IMAGE_TAG
+    - kustomize build > ../../kustomization/prod/prod.yaml
+    - git commit -am "Set salt-frontend prod image tag to $SHORT_HASH"
+    - git push origin main
