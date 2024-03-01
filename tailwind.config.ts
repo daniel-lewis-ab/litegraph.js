@@ -29,6 +29,8 @@ export default {
       'on-success': 'var(--color-on-success)',
       'on-error': 'var(--color-on-error)',
       'on-warning': 'var(--color-on-warning)',
+
+      transparent: 'transparent',
     },
     extend: {
       fontFamily: {
