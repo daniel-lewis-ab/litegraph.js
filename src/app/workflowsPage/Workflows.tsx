@@ -48,7 +48,7 @@ const workflows = [
 ];
 
 export const WorkflowsPage = () => {
-  const isEmpty = true;
+  const isEmpty = false;
 
   if (isEmpty) {
     return <EmptyWorkflowsPage />;
