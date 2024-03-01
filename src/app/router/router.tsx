@@ -1,6 +1,6 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { ErrorPage } from '@/shared/components/errorPage/ErrorPage';
-import { DashboardPage } from '@/app/dashboardPage/DashboardPage';
+import { WorkflowsPage } from '@/app/workflowsPage/Workflows';
 import { Layout } from '@/shared/components/Layout/Layout';
 import { AuthorizedRoute } from '@/shared/components/authorizedRoute/AuthorizedRoute';
 import { LoginPageContainer } from '../loginPage/LoginPageContainer';
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <DashboardPage />,
+        element: <WorkflowsPage />,
       },
       {
         path: 'storybook',

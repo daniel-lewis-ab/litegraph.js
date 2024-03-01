@@ -45,7 +45,7 @@ const workflows = [
   ...baseWorkflows,
 ];
 
-export const DashboardPage = () => {
+export const WorkflowsPage = () => {
   const isEmpty = false;
 
   if (isEmpty) {
