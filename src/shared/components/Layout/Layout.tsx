@@ -31,23 +31,26 @@ export const Layout = ({ children }: LayoutProps) => {
           <Logo className="mt-2" />
         </NavLink>
         <nav className="flex flex-col *:my-[20px]">
-          <NavLink to="/" className={({ isActive }) => clsx(isActive ? '*:text-foreground' : 'text-secondary')}>
+          <NavLink to="/" end className={({ isActive }) => clsx(isActive ? '*:text-foreground' : '*:text-secondary')}>
             <Icon size={30} icon={faDiagramProject} />
           </NavLink>
           <NavLink
             to="/not-implemented"
+            end
             className={({ isActive }) => clsx(isActive ? '*:text-foreground' : '*:text-secondary')}
           >
             <Icon size={30} icon={faRocket} />
           </NavLink>
           <NavLink
             to="/not-implemented-1"
+            end
             className={({ isActive }) => clsx(isActive ? '*:text-foreground' : '*:text-secondary')}
           >
             <Icon size={30} icon={faDatabase} />
           </NavLink>
           <NavLink
             to="/not-implemented-2"
+            end
             className={({ isActive }) => clsx(isActive ? '*:text-foreground' : '*:text-secondary')}
           >
             <Icon size={30} icon={faWavePulse} />
