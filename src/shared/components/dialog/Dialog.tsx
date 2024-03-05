@@ -57,7 +57,7 @@ Dialog.Header = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) 
   <div className={clsx('mb-3 flex flex-col text-center', className)} {...props} />
 );
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (Dialog.Header as any).displayName = 'DialogHeader';
 
 Dialog.Title = forwardRef<

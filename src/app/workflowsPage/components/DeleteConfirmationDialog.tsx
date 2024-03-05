@@ -1,3 +1,4 @@
+import { toast } from 'react-hot-toast';
 import { Button } from '@/shared/components/button/Button';
 import { Dialog } from '@/shared/components/dialog/Dialog';
 import { LoaderIcon } from '@/shared/components/loaderIcon/LoaderIcon';
@@ -24,9 +25,15 @@ export const DeleteConfirmationDialog = ({ isOpen, onConfirm, onClose }: DeleteC
           className="mb-3"
           onClick={async () => {
             setIsDeleting(true);
-            await onConfirm();
-            setIsDeleting(false);
-            onClose();
+            try {
+              await onConfirm();
+              setIsDeleting(false);
+              onClose();
+            } catch (e) {
+              setIsDeleting(false);
+              console.error(e);
+              toast.error('Failed to delete workflow');
+            }
           }}
           disabled={isDeleting}
         >

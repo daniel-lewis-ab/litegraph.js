@@ -100,9 +100,30 @@ app.get('/v1/workflows', (req, res) => {
     if (err) return res.sendStatus(401);
     setTimeout(() => {
       console.log('GOING!');
-      res.json(workflows);
+      res.json(workflows.map((workflow, i) => ({...workflow, id:i })));
     }, TIMEOUT);
   });
+});
+
+app.delete('/v1/workflows/:workflowId', (req, res) => {
+  console.log('deleeetee!!');
+  // Extract the workflowId from the request parameters
+  const { workflowId } = req.params;
+
+  // // Look for the index of the workflow with the given ID in the workflows array
+  // const index = workflows.findIndex(workflow => workflow.id === workflowId);
+
+  // // Check if the workflow was found
+  // if (index === -1) {
+  //   // Workflow not found, return a 404 Not Found status
+  //   return res.status(404).json({ error: "Workflow not found" });
+  // }
+
+  // // Remove the workflow from the array
+  // workflows.splice(index, 1);
+
+  // Return true to indicate success
+  res.json(true);
 });
 
 app.listen(PORT, () => {

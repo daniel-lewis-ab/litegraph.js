@@ -1,19 +1,18 @@
 import { useWorkflowsQuery } from '@/api/hooks/useWorkflowsQuery/useWorkflowsQuery';
 import { WorkflowsPage } from './Workflows';
 import CenteredLoader from '@/shared/components/centeredLoader/CenteredLoader';
+import { useDeleteWorkflowMutation } from '@/api/hooks/useDeleteWorkflowMutation/useDeleteWorkflowMutation';
 
 export const WorkflowsContainer = () => {
   const { workflows, isLoading } = useWorkflowsQuery();
+  const { mutate: deleteWorkflow } = useDeleteWorkflowMutation();
 
   if (isLoading) {
     return <CenteredLoader />;
   }
 
   const onDelete = async (id: string) => {
-    console.log('delte workflow', id);
-    return new Promise<void>((resolve) => {
-      setTimeout(() => resolve(), 2000);
-    });
+    await deleteWorkflow(id);
   };
 
   return <WorkflowsPage workflows={workflows || []} onWorkflowDelete={onDelete} />;
