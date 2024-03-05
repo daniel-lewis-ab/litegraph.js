@@ -5,52 +5,19 @@ import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { faRectangleHistory, faUpload } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
 import { Input } from '@/shared/components/input/Input';
 import { faMagnifyingGlass } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
+import { Workflow } from '@/api/hooks/useWorkflowsQuery/useWorkflowsQuery';
+import { useState } from 'react';
+import { DeleteConfirmationDialog } from './components/DeleteConfirmationDialog';
 
-const baseWorkflows = [
-  {
-    id: '1',
-    name: 'comfyui_Title01af___a',
-    type: 'image',
-    lastEdited: new Date().toISOString(), // Current timestamp
-    nodesCount: 33,
-  },
-  {
-    id: '2',
-    name: 'comfyui_Title01af___a',
-    type: 'controlnet',
-    lastEdited: new Date(Date.now() - 3600 * 1000).toISOString(), // 1 hour ago
-    nodesCount: 33,
-  },
-  {
-    id: '3',
-    name: '(Video Tutorial Resources) Picture in Picture Goodness + Canvas Pose',
-    type: 'image',
-    lastEdited: new Date(Date.now() - 24 * 3600 * 1000).toISOString(), // 1 day ago
-    nodesCount: 33,
-  },
-  {
-    id: '4',
-    name: 'comfyui_Title01af___a',
-    type: 'controlnet',
-    lastEdited: new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString(), // 1 week ago
-    nodesCount: 33,
-    imageUrl: 'https://gcdnb.pbrd.co/images/aJIbNBtdViKg.png',
-  },
-];
+type WorkflowsPageProps = {
+  workflows: Workflow[];
+  onWorkflowDelete(id: string): Promise<void>;
+};
 
-const workflows = [
-  ...baseWorkflows,
-  ...baseWorkflows,
-  ...baseWorkflows,
-  ...baseWorkflows,
-  ...baseWorkflows,
-  ...baseWorkflows,
-];
+export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProps) => {
+  const [workflowIdToDelete, setWorkflowIdToDelete] = useState<null | string>(null);
 
-export const WorkflowsPage = () => {
-  const isEmpty = false;
-
-  if (isEmpty) {
+  if (workflows.length === 0) {
     return <EmptyWorkflowsPage />;
   }
 
@@ -82,15 +49,24 @@ export const WorkflowsPage = () => {
           <WorkflowTile
             key={i}
             name={workflow.name}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            type={workflow.type as any}
+            type={workflow.type}
             lastEdited={workflow.lastEdited}
             nodesCount={workflow.nodesCount}
             imageUrl={workflow.imageUrl}
-            onActionClick={(action) => console.log('clicked', action)}
+            onActionClick={(action) => {
+              if (action === 'delete') {
+                setWorkflowIdToDelete(workflow.id);
+              }
+              return Promise.resolve();
+            }}
           />
         ))}
       </div>
+      <DeleteConfirmationDialog
+        isOpen={!!workflowIdToDelete}
+        onClose={() => setWorkflowIdToDelete(null)}
+        onConfirm={() => onWorkflowDelete(workflowIdToDelete!)}
+      />
     </div>
   );
 };

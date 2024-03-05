@@ -1,6 +1,8 @@
 import { LogoFull } from '@/shared/components/icons/LogoFull';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth/useAuth';
+import { LoginResponse } from './LoginPageContainer';
+import { SET_TOKENS } from '@/context/authContext/authReducer';
 
 const GoogleIcon = ({ className }: { className?: string }) => (
   <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -31,20 +33,25 @@ const GoogleIcon = ({ className }: { className?: string }) => (
 );
 
 type LoginPageProps = {
-  onSubmit(): Promise<void>;
+  onSubmit(): Promise<LoginResponse | undefined>;
 };
 
 export const LoginPage = ({ onSubmit }: LoginPageProps) => {
-  const { currentUser } = useAuth();
+  const {
+    state: { isAuthorized },
+    dispatch,
+  } = useAuth();
   const navigate = useNavigate();
 
-  if (currentUser) {
+  if (isAuthorized) {
     return <Navigate to="/" replace />;
   }
 
   const handleGoogleLogin = async () => {
     try {
-      await onSubmit();
+      const tokens = await onSubmit();
+
+      dispatch({ type: SET_TOKENS, accessToken: tokens?.accessToken, refreshToken: tokens?.refreshToken });
       navigate('/');
     } catch (error) {
       console.error(error);

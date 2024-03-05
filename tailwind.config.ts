@@ -17,7 +17,8 @@ export default {
         DEFAULT: 'var(--color-surface)',
         100: 'var(--color-surface-100)',
         200: 'var(--color-surface-200)',
-        300: 'var(color-surface-300)',
+        300: 'var(--color-surface-300)',
+        500: 'var(--color-surface-500)',
       },
       foreground: "var(--color-foreground)",
       'foreground-muted': 'var(--color-foreground-muted)',
@@ -31,6 +32,7 @@ export default {
       'on-warning': 'var(--color-on-warning)',
 
       transparent: 'transparent',
+      'custom-purple': 'rgba(160, 141, 239, 0.2)',
     },
     extend: {
       fontFamily: {

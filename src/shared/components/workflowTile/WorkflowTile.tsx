@@ -26,7 +26,7 @@ type WorkflowTileProps = {
   lastEdited: string;
   nodesCount: number;
   imageUrl?: string;
-  onActionClick: (action: Action) => void;
+  onActionClick: (action: Action) => Promise<void>;
 };
 
 const workflowToReadable = {
@@ -39,71 +39,72 @@ export const WorkflowTile = ({ type, name, lastEdited, nodesCount, imageUrl, onA
 
   const closePopover = () => setIsPopoverOpen(false);
 
-  const handleActionClick = (action: Action) => {
-    onActionClick(action);
+  const handleActionClick = async (action: Action) => {
+    await onActionClick(action);
     closePopover();
   };
 
   return (
-    <Link to="#">
-      <div
-        className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-contain px-2.5 py-3"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      >
-        {!imageUrl && (
-          <div className="absolute inset-0 -z-10 flex justify-center bg-surface-100">
-            <Icon className="h-[45%] w-full pt-[20%] opacity-10" icon={faDiagramProject} />
+    <>
+      <Link to="#">
+        <div
+          className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-contain px-2.5 py-3"
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        >
+          {!imageUrl && (
+            <div className="absolute inset-0 -z-10 flex justify-center bg-surface-100">
+              <Icon className="h-[45%] w-full pt-[20%] opacity-10" icon={faDiagramProject} />
+            </div>
+          )}
+          <div className="flex flex-row justify-between">
+            {type && <Badge>{workflowToReadable[type]}</Badge>}
+            <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+              <PopoverTrigger asChild>
+                <button>
+                  <Icon size={20} icon={faEllipsisVertical} />
+                </button>
+              </PopoverTrigger>
+              <PopoverContent side="bottom" align="end" className="z-10">
+                <OptionsList>
+                  <OptionsList.Item icon={faRocket} onClick={() => handleActionClick('edit')}>
+                    Deploy
+                  </OptionsList.Item>
+                  <OptionsList.Item icon={faClone} onClick={() => handleActionClick('duplicate')}>
+                    Duplicate
+                  </OptionsList.Item>
+                  <OptionsList.Item icon={faTrash} onClick={() => onActionClick('delete')}>
+                    Delete
+                  </OptionsList.Item>
+                  <OptionsList.Item icon={faICursor} onClick={() => handleActionClick('rename')}>
+                    Rename
+                  </OptionsList.Item>
+                  <OptionsList.Item icon={faPen} onClick={() => handleActionClick('edit')}>
+                    Edit
+                  </OptionsList.Item>
+                  <OptionsList.Item icon={faShare} onClick={() => handleActionClick('share')}>
+                    Share
+                  </OptionsList.Item>
+                  <OptionsList.Item icon={faDownload} onClick={() => handleActionClick('export')}>
+                    Export JSON
+                  </OptionsList.Item>
+                </OptionsList>
+              </PopoverContent>
+            </Popover>
           </div>
-        )}
-        <div className="flex flex-row justify-between">
-          {type && <Badge>{workflowToReadable[type]}</Badge>}
-          <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-            <PopoverTrigger asChild>
-              <button>
-                <Icon size={20} icon={faEllipsisVertical} />
-              </button>
-            </PopoverTrigger>
-            <PopoverContent side="bottom" align="end">
-              <OptionsList>
-                <OptionsList.Item icon={faRocket} onClick={() => handleActionClick('edit')}>
-                  Deploy
-                </OptionsList.Item>
-                <OptionsList.Item icon={faClone} onClick={() => handleActionClick('duplicate')}>
-                  Duplicate
-                </OptionsList.Item>
-                <OptionsList.Item icon={faTrash} onClick={() => handleActionClick('delete')}>
-                  Delete
-                </OptionsList.Item>
-                <OptionsList.Item icon={faICursor} onClick={() => handleActionClick('rename')}>
-                  Rename
-                </OptionsList.Item>
-                <OptionsList.Item icon={faPen} onClick={() => handleActionClick('edit')}>
-                  Edit
-                </OptionsList.Item>
-                <OptionsList.Item icon={faShare} onClick={() => handleActionClick('share')}>
-                  Share
-                </OptionsList.Item>
-                <OptionsList.Item icon={faDownload} onClick={() => handleActionClick('export')}>
-                  Export JSON
-                </OptionsList.Item>
-              </OptionsList>
-            </PopoverContent>
-          </Popover>
-        </div>
-        <div>
-          <p className="text-foreground text-lg font-semibold">{name}</p>
-          <div className="mt-4 flex flex-row justify-between">
-            {/* @TODO: Change time */}
-            <p className="text-foreground-muted text-sm">
-              Edited <TimeSince time={lastEdited} />
-            </p>
-            <div className="flex flex-row items-center">
-              <Icon className="text-foreground-muted mr-1" size={19} icon={faCircleNodes} />
-              <p className="text-foreground">{nodesCount}</p>
+          <div>
+            <p className="text-foreground text-lg font-semibold">{name}</p>
+            <div className="mt-4 flex flex-row justify-between">
+              <p className="text-foreground-muted text-sm">
+                Edited <TimeSince time={lastEdited} />
+              </p>
+              <div className="flex flex-row items-center">
+                <Icon className="text-foreground-muted mr-1" size={19} icon={faCircleNodes} />
+                <p className="text-foreground">{nodesCount}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </>
   );
 };

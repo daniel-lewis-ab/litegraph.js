@@ -1,35 +1,42 @@
 import { ReactNode } from 'react';
 import clsx from 'clsx';
+import './Button.scss';
 
 type ButtonProps = {
   children: ReactNode;
   className?: string;
-  // @TODO: Add variants 'ghost' | 'soft' | 'ringed' | 'disabled'
-  variant?: 'filled';
+  variant?: 'filled' | 'ghost' | 'soft' | 'glass' | 'ringed' | 'disabled';
   color?: 'primary' | 'secondary' | 'tertiary' | 'surface' | 'success' | 'error';
-  // No difference between md and lg on designs
-  size?: 'sm' | 'md' | 'xl';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   disabled?: boolean;
   onClick?: () => void;
 };
 
-// TBD Later, not all buttons match the one used on designs so it's to be unified first
-export const Button = ({ children, size = 'md', color, className }: ButtonProps) => (
+export const Button = ({
+  children,
+  size = 'md',
+  color = 'primary',
+  variant,
+  className,
+  onClick,
+  disabled,
+}: ButtonProps) => (
   <button
+    type="button"
     className={clsx(
+      'button',
       'rounded-xl font-medium',
-      size === 'xl' && 'px-6 py-3',
-      size === 'md' && 'px-4 py-2',
-      size === 'sm' && 'px-6 py-2',
-      color === 'primary' && 'text-on-primary bg-primary',
-      color === 'secondary' && 'text-on-secondary bg-secondary',
-      color === 'tertiary' && 'text-on-tertiary bg-tertiary',
-      color === 'surface' && 'text-foreground bg-surface',
-      color === 'success' && 'text-on-success bg-success',
-      color === 'error' && 'text-on-error bg-error',
+      size === 'xl' && 'px-4 py-[13px] text-xl',
+      size === 'lg' && 'px-4 py-[10.5px] text-lg',
+      size === 'md' && 'px-4 py-[10px]',
+      size === 'sm' && 'px-3 py-2 text-sm',
+      size === 'xs' && 'px-2 py-[7px] text-sm',
+      variant && 'button--' + variant,
+      color && 'button--color-' + color,
+      disabled && 'button--disabled',
       className,
-      // color === 'primary' && variant === 'soft' && 'bg-[]'
     )}
+    onClick={onClick}
   >
     {children}
   </button>

@@ -13,7 +13,7 @@ export const Input = ({ leftIcon, className, inputClassName, ...props }: InputPr
       className,
     )}
   >
-    <div className="*:text-foreground-muted mr-3 h-[14px] w-[14px]">{leftIcon}</div>
+    {leftIcon && <div className="*:text-foreground-muted mr-3 h-[14px] w-[14px]">{leftIcon}</div>}
     <input
       className={clsx('text-foreground-muted bg-transparent placeholder-foreground-muted outline-none', inputClassName)}
       {...props}

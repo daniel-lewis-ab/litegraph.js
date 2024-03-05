@@ -1,10 +1,10 @@
 import { Outlet, createBrowserRouter } from 'react-router-dom';
 import { ErrorPage } from '@/shared/components/errorPage/ErrorPage';
-import { WorkflowsPage } from '@/app/workflowsPage/Workflows';
 import { Layout } from '@/shared/components/Layout/Layout';
 import { AuthorizedRoute } from '@/shared/components/authorizedRoute/AuthorizedRoute';
 import { LoginPageContainer } from '../loginPage/LoginPageContainer';
 import { Storybook } from '../storybook/storybook';
+import { WorkflowsContainer } from '../workflowsPage/WorkflowsContainer';
 
 export const isAuthenticated = () => {
   return false;
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <WorkflowsPage />,
+        element: <WorkflowsContainer />,
       },
       {
         path: 'storybook',

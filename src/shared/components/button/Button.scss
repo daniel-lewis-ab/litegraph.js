@@ -1,0 +1,83 @@
+button.button {
+  --base-color: var(--color-primary);
+  --second-base-color: var(--color-primary-opacity-20);
+  --text-color: var(--color-black);
+  background-color: var(--base-color);
+  color: var(--text-color);
+
+  &--color-secondary {
+    --base-color: var(--color-secondary);
+    --second-base-color: var(--color-secondary-opacity-20);
+    --text-color: var(--color-white);
+
+    &.button--soft {
+      --text-color: var(--color-white);
+    }
+  }
+
+  &--color-tertiary {
+    --base-color: var(--color-tertiary);
+    --second-base-color: var(--color-tertiary-opacity-20);
+    --text-color: var(--color-black);
+  }
+
+  &--color-surface {
+    --base-color: var(--color-surface-100);
+    --second-base-color: var(--color-surface-opacity-20);
+    --text-color: var(--color-white);
+    color: var(--color-white);
+
+    &.button--ringed, &.button--ghost {
+      border: 1px solid var(--color-border-muted);
+    }
+  }
+
+  &--color-success {
+    --base-color: var(--color-success);
+    --second-base-color: var(--color-success-opacity-20);
+    --text-color: var(--color-black);
+
+    &.button--glass, &.button--ringed {
+      --text-color: var(--base-color);
+    }
+  }
+
+  &--color-error {
+    --base-color: var(--color-error);
+    --second-base-color: var(--color-error-opacity-20);
+    --text-color: var(--color-black);
+
+    &.button--glass, &.button--ringed {
+      --text-color: var(--base-color);
+    }
+  }
+
+  // Variants
+  &--ghost {
+    border: 1px solid var(--base-color);
+    background-color: var(--second-base-color);
+    --text-color: var(--base-color);
+  }
+
+  &--soft {
+    background-color: var(--second-base-color);
+    --text-color: var(--base-color);
+  }
+
+  &--glass {
+    background-color: var(--second-base-color);
+    --text-color: var(--color-white);
+  }
+
+  &--ringed {
+    border: 1px solid var(--base-color);
+    background-color: transparent;
+    --text-color: var(--color-white);
+  }
+
+  &--disabled {
+    background-color: var(--color-disabled);
+    border: none !important;
+    color: var(--color-on-disabled) !important;
+  }
+}

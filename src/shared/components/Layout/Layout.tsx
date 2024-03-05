@@ -1,9 +1,9 @@
 import { Icon } from '@/shared/components/icon/Icon';
 import { Logo } from '../icons/Logo';
 import { LayoutProps } from './Layout.types';
-import { useAuth } from '@/hooks/useAuth/useAuth';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Popover, PopoverTrigger, PopoverContent } from '@radix-ui/react-popover';
+import { toast } from 'react-hot-toast';
 import clsx from 'clsx';
 import {
   faDiagramProject,
@@ -14,14 +14,15 @@ import {
   faRightFromBracket,
 } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { OptionsList } from '../optionsList/OptionsList';
+import { useAuth } from '@/hooks/useAuth/useAuth';
+import { CLEAR_TOKENS } from '@/context/authContext/authReducer';
+import { Button } from '../button/Button';
 
 export const Layout = ({ children }: LayoutProps) => {
-  const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { dispatch } = useAuth();
 
-  const handleLogout = async () => {
-    await logout();
-    navigate('/login');
+  const handleLogout = () => {
+    dispatch({ type: CLEAR_TOKENS });
   };
 
   return (
@@ -59,11 +60,23 @@ export const Layout = ({ children }: LayoutProps) => {
         <div className="h-[64px]"></div>
       </div>
       <div className="flex flex-grow flex-col">
-        <header className="border-b-border-default sticky top-0 z-10 flex h-[64px] min-h-[64px] flex-row items-center justify-between border-b bg-surface px-6">
+        <header className="border-b-border-default sticky top-0 z-20 flex h-[64px] min-h-[64px] flex-row items-center justify-between border-b bg-surface px-6">
           <div className="flex flex-row items-center">
             <p className="text-2xl font-medium">Workflows</p>
           </div>
-          <div>
+          <div className="flex flex-row">
+            <Button variant="soft" color="secondary" size="sm" className="mr-6" onClick={() => toast.error('Error')}>
+              Docs
+            </Button>
+            <Button
+              variant="soft"
+              color="secondary"
+              size="sm"
+              className="mr-6"
+              onClick={() => toast.success('Success')}
+            >
+              Feedback
+            </Button>
             <Popover>
               <PopoverTrigger asChild>
                 <button>

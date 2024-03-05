@@ -29,8 +29,11 @@
 
     /* Common colors for both themes */
     --color-success: #4AB637;
+    --color-success-opacity-20: rgba(74, 182, 55, 0.2);
     --color-warning: #D5A84C;
-    --color-error: #CF512F;
+    --color-warning-opacity-20: rgba(213, 168, 76, 0.2);
+    --color-error: #FE4949;
+    --color-error-opacity-20: rgba(254, 73, 73, 0.2);
     --color-white: #FFFFFF;
     --color-black: #000000;
 
@@ -42,18 +45,24 @@
 
     /* Light theme */
     --color-primary: var(--color-token-primary-400);
+    --color-primary-opacity-20: rgba(166, 151, 249, 0.2);
     --color-secondary: var(--color-token-secondary-300);
+    --color-secondary-opacity-20: rgba(184, 184, 204, 0.2);
     --color-on-secondary: #000000;
     --color-tertiary: var(--color-token-tertiary-400);
+    --color-tertiary-opacity-20: rgba(117, 189, 209, 0.2);
     --color-surface: var(--color-token-surface-50);
     --color-surface-100: var(--color-token-surface-100);
     --color-surface-200: var(--color-token-surface-200);
     --color-surface-300: var(--color-token-surface-300);
+    --color-surface-500: var(--color-token-surface-500);
     --color-foreground: var(--color-token-surface-700);
     --color-foreground-muted: var(--color-token-OLD-midnight-600);
     --color-border-default: var(--color-token-surface-300);
     --color-border-muted: var(--color-token-surface-300);
     --color-border-strong: var(--color-token-surface-700);
+    --color-disabled: #5D5B83;
+    --color-on-disabled: #E3E0F8;
 
     font-family: 'Inter', monospace;
     font-weight: 400;
@@ -72,18 +81,24 @@
 
   :root[class~="dark"] {
     --color-primary: var(--color-token-primary-500);
+    --color-primary-opacity-20: rgba(133, 102, 255, 0.2);
     --color-secondary: var(--color-token-secondary-500);
+    --color-secondary-opacity-20: rgba(76, 75, 127, 0.2);
     --color-on-secondary: #FFFFFF;
     --color-tertiary: var(--color-token-tertiary-500);
+    --color-tertiary-opacity-20: rgba(74, 162, 189, 0.2);
     --color-surface: var(--color-token-surface-800);
     --color-surface-100: var(--color-token-surface-700);
     --color-surface-200: var(--color-token-surface-600);
     --color-surface-300: var(--color-token-surface-500);
+    --color-surface-500: var(--color-token-surface-500);
     --color-foreground: var(--color-token-surface-50);
     --color-foreground-muted: var(--color-token-surface-300);
     --color-border-default: var(--color-token-surface-400);
     --color-border-muted: var(--color-token-surface-400);
     --color-border-strong: var(--color-token-surface-200);
+    --color-disabled: #5D5B83;
+    --color-on-disabled: #B3B1C4;
   }
 }
 

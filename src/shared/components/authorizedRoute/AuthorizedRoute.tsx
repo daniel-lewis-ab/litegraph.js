@@ -1,15 +1,17 @@
 import { Navigate } from 'react-router-dom';
-import FullScreenLoader from '../fullScreenLoader/FullScreenLoader';
+import CenteredLoader from '../centeredLoader/CenteredLoader';
 import { useAuth } from '@/hooks/useAuth/useAuth';
 
 export const AuthorizedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { isAuthorizing, currentUser } = useAuth();
+  const {
+    state: { isAuthorized, isAuthorizing },
+  } = useAuth();
 
   if (isAuthorizing) {
-    return <FullScreenLoader />;
+    return <CenteredLoader isFullscreen />;
   }
 
-  if (!currentUser) {
+  if (!isAuthorized) {
     return <Navigate to="/login" replace />;
   }
 
