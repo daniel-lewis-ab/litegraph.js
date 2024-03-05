@@ -14,18 +14,19 @@ import {
 import { faDiagramProject } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { TimeSince } from '../timeSince/TimeSince';
 
 type Action = 'edit' | 'duplicate' | 'delete' | 'rename' | 'share' | 'export';
 
 type WorkflowTileProps = {
   name: string;
-  lastEdited?: string;
+  lastEdited: string;
   nodesCount?: number;
   imageUrl?: string;
   onActionClick: (action: Action) => Promise<void>;
 };
 
-export const WorkflowTile = ({ name, imageUrl, onActionClick }: WorkflowTileProps) => {
+export const WorkflowTile = ({ name, imageUrl, lastEdited, onActionClick }: WorkflowTileProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const closePopover = () => setIsPopoverOpen(false);
@@ -83,15 +84,15 @@ export const WorkflowTile = ({ name, imageUrl, onActionClick }: WorkflowTileProp
           </div>
           <div>
             <p className="text-foreground text-lg font-semibold">{name}</p>
-            {/* <div className="mt-4 flex flex-row justify-between">
+            <div className="mt-4 flex flex-row justify-between">
               <p className="text-foreground-muted text-sm">
                 Edited <TimeSince time={lastEdited} />
               </p>
-              <div className="flex flex-row items-center">
+              {/* <div className="flex flex-row items-center">
                 <Icon className="text-foreground-muted mr-1" size={19} icon={faCircleNodes} />
                 <p className="text-foreground">{nodesCount}</p>
-              </div>
-            </div> */}
+              </div> */}
+            </div>
           </div>
         </div>
       </Link>

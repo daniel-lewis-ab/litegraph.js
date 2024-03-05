@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 export type Workflow = {
   id: string;
   name: string;
-  lastEdited?: string;
+  lastEdited: string;
   imageUrl?: string;
   nodesCount?: number;
 };
