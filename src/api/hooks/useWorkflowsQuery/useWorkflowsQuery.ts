@@ -5,10 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 export type Workflow = {
   id: string;
   name: string;
-  type: 'controlnet' | 'image';
-  lastEdited: string;
+  lastEdited?: string;
   imageUrl?: string;
-  nodesCount: number;
+  nodesCount?: number;
 };
 
 const getWorkflows = async () => {

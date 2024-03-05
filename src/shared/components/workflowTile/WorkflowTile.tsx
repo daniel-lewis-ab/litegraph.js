@@ -1,6 +1,5 @@
 import { Icon } from '@/shared/components/icon/Icon';
 import { Popover, PopoverTrigger, PopoverContent } from '@radix-ui/react-popover';
-import { faCircleNodes } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { faEllipsisVertical } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import { OptionsList } from '../optionsList/OptionsList';
 import {
@@ -15,19 +14,18 @@ import {
 import { faDiagramProject } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { TimeSince } from '../timeSince/TimeSince';
 
 type Action = 'edit' | 'duplicate' | 'delete' | 'rename' | 'share' | 'export';
 
 type WorkflowTileProps = {
   name: string;
-  lastEdited: string;
-  nodesCount: number;
+  lastEdited?: string;
+  nodesCount?: number;
   imageUrl?: string;
   onActionClick: (action: Action) => Promise<void>;
 };
 
-export const WorkflowTile = ({ name, lastEdited, nodesCount, imageUrl, onActionClick }: WorkflowTileProps) => {
+export const WorkflowTile = ({ name, imageUrl, onActionClick }: WorkflowTileProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const closePopover = () => setIsPopoverOpen(false);
@@ -85,7 +83,7 @@ export const WorkflowTile = ({ name, lastEdited, nodesCount, imageUrl, onActionC
           </div>
           <div>
             <p className="text-foreground text-lg font-semibold">{name}</p>
-            <div className="mt-4 flex flex-row justify-between">
+            {/* <div className="mt-4 flex flex-row justify-between">
               <p className="text-foreground-muted text-sm">
                 Edited <TimeSince time={lastEdited} />
               </p>
@@ -93,7 +91,7 @@ export const WorkflowTile = ({ name, lastEdited, nodesCount, imageUrl, onActionC
                 <Icon className="text-foreground-muted mr-1" size={19} icon={faCircleNodes} />
                 <p className="text-foreground">{nodesCount}</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </Link>
