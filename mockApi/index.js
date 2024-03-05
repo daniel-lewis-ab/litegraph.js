@@ -97,7 +97,7 @@ app.get('/v1/workflows', (req, res) => {
   if (token == null) return res.sendStatus(401); // Brak tokena
 
   jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) return res.sendStatus(401); // Nieautoryzowany dostęp lub token wygasł
+    if (err) return res.sendStatus(401);
     setTimeout(() => {
       console.log('GOING!');
       res.json(workflows);
