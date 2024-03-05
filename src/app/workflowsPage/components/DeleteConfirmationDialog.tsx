@@ -30,7 +30,7 @@ export const DeleteConfirmationDialog = ({ isOpen, onConfirm, onClose }: DeleteC
           }}
           disabled={isDeleting}
         >
-          Delete {isDeleting && <LoaderIcon />}
+          {isDeleting ? <LoaderIcon /> : 'Delete'}
         </Button>
         <Button disabled={isDeleting} onClick={onClose} color="primary" variant="glass">
           Cancel

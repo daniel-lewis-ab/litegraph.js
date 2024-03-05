@@ -5,9 +5,9 @@ const PORT = 3000;
 
 app.use(express.json());
 
-// Ustawienie nagłówków CORS
+
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // Umożliwia dostęp wszystkim domenom
+  res.header('Access-Control-Allow-Origin', '*'); 
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
@@ -17,13 +17,10 @@ app.use((req, res, next) => {
 });
 
 
-// Sekretne klucze dla JWT - w prawdziwej aplikacji użyj bezpiecznych, tajnych kluczy!
 const JWT_SECRET = 'your_secret_key';
 
-// Zmienne dla czasu życia tokenów
-const refreshTokenLife = '7d'; // 7 dni życia refresh token
+const refreshTokenLife = '7d'; 
 
-// Funkcja do generowania tokenów JWT
 const generateTokens = (accessTokenLife, refreshTokenLife = '1h') => {
   const accessToken = jwt.sign({}, JWT_SECRET, { expiresIn: accessTokenLife });
   const refreshToken = jwt.sign({}, JWT_SECRET, { expiresIn: refreshTokenLife });
@@ -31,7 +28,6 @@ const generateTokens = (accessTokenLife, refreshTokenLife = '1h') => {
   return { accessToken, refreshToken };
 };
 
-// Endpoint do logowania
 app.post('/v1/auth/login/firebase', (req, res) => {
   console.log('login');
   const tokens = generateTokens('1h');
