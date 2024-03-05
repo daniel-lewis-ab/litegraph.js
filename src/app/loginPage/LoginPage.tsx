@@ -55,7 +55,6 @@ export const LoginPage = ({ onSubmit }: LoginPageProps) => {
       dispatch({ type: SET_TOKENS, accessToken: tokens?.accessToken, refreshToken: tokens?.refreshToken });
       navigate('/');
     } catch (error) {
-      console.log('1');
       console.error(error);
       toast.error('Failed to sign in');
       dispatch({ type: CLEAR_TOKENS });

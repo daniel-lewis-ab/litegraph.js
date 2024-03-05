@@ -1,3 +1,5 @@
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleAuthProvider } from '@/firebase/auth';
 import { LoginPage } from './LoginPage';
 import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
@@ -8,10 +10,16 @@ export type LoginResponse = {
 };
 
 export const LoginPageContainer = () => {
+  // @TODO: Remove when google back working
+  const mockGoogle = true;
   const handleLogin = async () => {
     try {
-      //const result = await signInWithPopup(auth, googleAuthProvider);
-      const idToken = 'mocked token'; // result.user.getIdToken();
+      let idToken = 'mocked token';
+      if (!mockGoogle) {
+        const result = await signInWithPopup(auth, googleAuthProvider);
+        idToken = await result.user.getIdToken();
+      }
+
       if (!idToken) {
         throw new Error('No idToken');
       }
@@ -27,7 +35,6 @@ export const LoginPageContainer = () => {
 
       return response.data;
     } catch (error) {
-      console.log('2');
       console.error(error);
       throw error;
     }
