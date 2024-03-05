@@ -1,8 +1,9 @@
 import { LogoFull } from '@/shared/components/icons/LogoFull';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth/useAuth';
+import { toast } from 'react-hot-toast';
 import { LoginResponse } from './LoginPageContainer';
-import { SET_TOKENS } from '@/context/authContext/authReducer';
+import { CLEAR_TOKENS, SET_TOKENS } from '@/context/authContext/authReducer';
 
 const GoogleIcon = ({ className }: { className?: string }) => (
   <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +55,10 @@ export const LoginPage = ({ onSubmit }: LoginPageProps) => {
       dispatch({ type: SET_TOKENS, accessToken: tokens?.accessToken, refreshToken: tokens?.refreshToken });
       navigate('/');
     } catch (error) {
+      console.log('1');
       console.error(error);
+      toast.error('Failed to sign in');
+      dispatch({ type: CLEAR_TOKENS });
     }
   };
 
