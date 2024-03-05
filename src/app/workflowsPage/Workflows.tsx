@@ -49,7 +49,6 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
           <WorkflowTile
             key={i}
             name={workflow.name}
-            type={workflow.type}
             lastEdited={workflow.lastEdited}
             nodesCount={workflow.nodesCount}
             imageUrl={workflow.imageUrl}

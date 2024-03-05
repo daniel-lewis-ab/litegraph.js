@@ -2,7 +2,6 @@ import { Icon } from '@/shared/components/icon/Icon';
 import { Popover, PopoverTrigger, PopoverContent } from '@radix-ui/react-popover';
 import { faCircleNodes } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { faEllipsisVertical } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
-import { Badge } from '@/shared/components/badge/Badge';
 import { OptionsList } from '../optionsList/OptionsList';
 import {
   faRocket,
@@ -21,7 +20,6 @@ import { TimeSince } from '../timeSince/TimeSince';
 type Action = 'edit' | 'duplicate' | 'delete' | 'rename' | 'share' | 'export';
 
 type WorkflowTileProps = {
-  type: 'controlnet' | 'image';
   name: string;
   lastEdited: string;
   nodesCount: number;
@@ -29,12 +27,7 @@ type WorkflowTileProps = {
   onActionClick: (action: Action) => Promise<void>;
 };
 
-const workflowToReadable = {
-  controlnet: 'Controlnet',
-  image: 'Image',
-};
-
-export const WorkflowTile = ({ type, name, lastEdited, nodesCount, imageUrl, onActionClick }: WorkflowTileProps) => {
+export const WorkflowTile = ({ name, lastEdited, nodesCount, imageUrl, onActionClick }: WorkflowTileProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const closePopover = () => setIsPopoverOpen(false);
@@ -56,8 +49,7 @@ export const WorkflowTile = ({ type, name, lastEdited, nodesCount, imageUrl, onA
               <Icon className="h-[45%] w-full pt-[20%] opacity-10" icon={faDiagramProject} />
             </div>
           )}
-          <div className="flex flex-row justify-between">
-            {type && <Badge>{workflowToReadable[type]}</Badge>}
+          <div className="flex flex-row justify-end">
             <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
               <PopoverTrigger asChild>
                 <button>
