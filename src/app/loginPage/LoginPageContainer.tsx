@@ -1,5 +1,5 @@
 import { signInWithPopup } from 'firebase/auth';
-import { auth, googleAuthProvider } from '@/firebase/auth';
+import { auth, githubAuthProvider, googleAuthProvider } from '@/firebase/auth';
 import { LoginPage } from './LoginPage';
 import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
@@ -10,9 +10,9 @@ export type LoginResponse = {
 };
 
 export const LoginPageContainer = () => {
-  const handleLogin = async () => {
+  const handleLogin = async (source: 'google' | 'github') => {
     try {
-      const result = await signInWithPopup(auth, googleAuthProvider);
+      const result = await signInWithPopup(auth, source === 'github' ? githubAuthProvider : googleAuthProvider);
       const idToken = await result.user.getIdToken();
 
       if (!idToken) {
@@ -34,5 +34,5 @@ export const LoginPageContainer = () => {
     }
   };
 
-  return <LoginPage onSubmit={handleLogin} />;
+  return <LoginPage onLogin={handleLogin} />;
 };
