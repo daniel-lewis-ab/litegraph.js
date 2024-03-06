@@ -3,13 +3,14 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth/useAuth';
 import { FirebaseError } from '@firebase/util';
 import { toast } from 'react-hot-toast';
-import { LoginResponse } from './LoginPageContainer';
+
 import { CLEAR_TOKENS, SET_TOKENS } from '@/context/authContext/authReducer';
 import { GoogleIcon } from '@/shared/components/icons/GoogleIcon';
 import { GitHubIcon } from '@/shared/components/icons/GithubIcon';
+import { PostLoginResponse } from '@/api/types';
 
 type LoginPageProps = {
-  onLogin(source: 'github' | 'google'): Promise<LoginResponse | undefined>;
+  onLogin(source: 'github' | 'google'): Promise<PostLoginResponse | undefined>;
 };
 
 export const LoginPage = ({ onLogin }: LoginPageProps) => {

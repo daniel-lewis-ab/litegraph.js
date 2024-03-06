@@ -3,11 +3,7 @@ import { auth, githubAuthProvider, googleAuthProvider } from '@/firebase/auth';
 import { LoginPage } from './LoginPage';
 import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
-
-export type LoginResponse = {
-  access: string;
-  refresh: string;
-};
+import { PostLoginResponse } from '@/api/types';
 
 export const LoginPageContainer = () => {
   const handleLogin = async (source: 'google' | 'github') => {
@@ -19,7 +15,7 @@ export const LoginPageContainer = () => {
         throw new Error('No idToken');
       }
 
-      const response = await axiosClient.post<LoginResponse>(apiEndpoints.login, {
+      const response = await axiosClient.post<PostLoginResponse>(apiEndpoints.login, {
         token: idToken,
       });
 

@@ -5,7 +5,7 @@ import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { faRectangleHistory, faUpload } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
 import { Input } from '@/shared/components/input/Input';
 import { faMagnifyingGlass } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
-import { Workflow } from '@/api/hooks/useWorkflowsQuery/useWorkflowsQuery';
+import { Workflow } from '@/api/types';
 import { useState } from 'react';
 import { DeleteConfirmationDialog } from './components/DeleteConfirmationDialog';
 

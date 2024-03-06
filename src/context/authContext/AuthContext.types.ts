@@ -16,8 +16,3 @@ export type Token = {
   iat: number;
   exp: number;
 };
-
-export type RefreshTokensResponse = {
-  refresh: string;
-  access: string;
-};

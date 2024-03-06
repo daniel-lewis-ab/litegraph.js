@@ -5,7 +5,8 @@ import { axiosClient } from '@/api/axiosClient';
 import createAuthRefreshInterceptor from 'axios-auth-refresh';
 import { apiEndpoints } from '@/api/apiEndpoints';
 import { AxiosRequestConfig } from 'axios';
-import { AuthContextType, Token, RefreshTokensResponse } from './AuthContext.types';
+import { AuthContextType, Token } from './AuthContext.types';
+import { GetRefreshTokensResponse } from '@/api/types';
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -49,7 +50,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const refreshAuthLogic = (failedRequest: { response: { config: AxiosRequestConfig } }) => {
       const refreshToken = localStorage.getItem('refreshToken');
       return axiosClient
-        .post<RefreshTokensResponse>(apiEndpoints.refreshToken, { refresh: refreshToken }, {
+        .post<GetRefreshTokensResponse>(apiEndpoints.refreshToken, { refresh: refreshToken }, {
           skipAuthRefresh: true,
         } as object)
         .then((tokenRefreshResponse) => {

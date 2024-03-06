@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
-import { Workflow } from '../useWorkflowsQuery/useWorkflowsQuery';
+import { Workflow } from '@/api/types';
 
 const deleteWorkflow = async (workflowId: string) => {
   const response = await axiosClient.delete(apiEndpoints.workflow(workflowId));
