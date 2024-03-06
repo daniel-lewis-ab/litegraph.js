@@ -6,15 +6,15 @@ import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
-    <QueryClientProvider>
-      <AuthContextProvider>
+    <AuthContextProvider>
+      <QueryClientProvider>
         <RouterProvider router={router} />
         <Toaster
           position="bottom-right"
           toastOptions={{ success: { className: '!bg-success' }, error: { className: '!bg-error !text-white' } }}
         />
-      </AuthContextProvider>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </AuthContextProvider>
   );
 }
 
