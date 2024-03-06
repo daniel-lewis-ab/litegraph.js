@@ -22,21 +22,21 @@ const JWT_SECRET = 'your_secret_key';
 const refreshTokenLife = '7d'; 
 
 const generateTokens = (accessTokenLife, refreshTokenLife = '1h') => {
-  const accessToken = jwt.sign({}, JWT_SECRET, { expiresIn: accessTokenLife });
-  const refreshToken = jwt.sign({}, JWT_SECRET, { expiresIn: refreshTokenLife });
+  const access = jwt.sign({}, JWT_SECRET, { expiresIn: accessTokenLife });
+  const refresh = jwt.sign({}, JWT_SECRET, { expiresIn: refreshTokenLife });
 
-  return { accessToken, refreshToken };
+  return { access, refresh };
 };
 
-app.post('/v1/auth/login/firebase', (req, res) => {
+app.post('/v1/token/pair', (req, res) => {
   console.log('login');
   const tokens = generateTokens('1h');
   console.log(tokens);
   res.status(200).json(tokens);
 });
 
-// Endpoint do odświeżania tokenów
-app.post('/v1/auth/refresh/', (req, res) => {
+
+app.post('/v1/token/refresh', (req, res) => {
   console.log('calling refresh, sendign new tokens');
   const failure = false;
   if(failure) {
@@ -96,7 +96,7 @@ app.get('/v1/workflows', (req, res) => {
     if (err) return res.sendStatus(401);
     setTimeout(() => {
       console.log('GOING!');
-      res.json(workflows.map((workflow, i) => ({...workflow, id:i })));
+      res.json({results: workflows.map((workflow, i) => ({...workflow, id:i }))});
     }, TIMEOUT);
   });
 });

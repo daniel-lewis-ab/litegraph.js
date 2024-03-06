@@ -5,13 +5,17 @@ import { useQuery } from '@tanstack/react-query';
 export type Workflow = {
   id: string;
   name: string;
-  lastEdited: string;
+  last_edited: string;
   imageUrl?: string;
   nodesCount?: number;
 };
 
+type WorkflowsResponse = {
+  results: Workflow[];
+};
+
 const getWorkflows = async () => {
-  const response = await axiosClient.get<Workflow[]>(apiEndpoints.workflows);
+  const response = await axiosClient.get<WorkflowsResponse>(apiEndpoints.workflows);
 
   if (response.status === 200) {
     return response.data;
@@ -21,7 +25,7 @@ const getWorkflows = async () => {
 };
 
 export const useWorkflowsQuery = () => {
-  const { data: workflows, ...rest } = useQuery({ queryKey: ['workflows'], queryFn: getWorkflows });
+  const { data, ...rest } = useQuery({ queryKey: ['workflows'], queryFn: getWorkflows, retry: 0 });
 
-  return { workflows, ...rest };
+  return { workflows: data?.results, ...rest };
 };

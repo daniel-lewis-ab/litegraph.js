@@ -52,7 +52,7 @@ export const LoginPage = ({ onSubmit }: LoginPageProps) => {
     try {
       const tokens = await onSubmit();
 
-      dispatch({ type: SET_TOKENS, accessToken: tokens?.accessToken, refreshToken: tokens?.refreshToken });
+      dispatch({ type: SET_TOKENS, accessToken: tokens?.access, refreshToken: tokens?.refresh });
       navigate('/');
     } catch (error) {
       console.error(error);

@@ -54,14 +54,17 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         } as object)
         .then((tokenRefreshResponse) => {
           if (tokenRefreshResponse.status === 200) {
+            if (failedRequest?.response?.config?.headers) {
+              failedRequest.response.config.headers.Authorization = 'Bearer ' + tokenRefreshResponse.data.access;
+            }
+
+            localStorage.setItem('accessToken', tokenRefreshResponse?.data?.access);
+            localStorage.setItem('refreshToken', tokenRefreshResponse?.data?.refresh);
             dispatch({
               type: SET_TOKENS,
-              accessToken: tokenRefreshResponse?.data?.accessToken,
-              refreshToken: tokenRefreshResponse?.data?.refreshToken,
+              accessToken: tokenRefreshResponse?.data?.access,
+              refreshToken: tokenRefreshResponse?.data?.refresh,
             });
-            if (failedRequest?.response?.config?.headers) {
-              failedRequest.response.config.headers.Authorization = 'Bearer ' + tokenRefreshResponse.data.accessToken;
-            }
 
             return Promise.resolve();
           }
@@ -76,7 +79,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         });
     };
 
-    createAuthRefreshInterceptor(axiosClient, refreshAuthLogic);
+    createAuthRefreshInterceptor(axiosClient, refreshAuthLogic, { statusCodes: [401, 403] });
   }, []);
 
   const value = useMemo(() => ({ state, dispatch }), [state]);

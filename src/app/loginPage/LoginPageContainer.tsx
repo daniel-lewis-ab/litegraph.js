@@ -5,31 +5,25 @@ import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
 
 export type LoginResponse = {
-  accessToken: string;
-  refreshToken: string;
+  access: string;
+  refresh: string;
 };
 
 export const LoginPageContainer = () => {
-  // @TODO: Remove when google back working
-  const mockGoogle = true;
   const handleLogin = async () => {
     try {
-      let idToken = 'mocked token';
-      if (!mockGoogle) {
-        const result = await signInWithPopup(auth, googleAuthProvider);
-        idToken = await result.user.getIdToken();
-      }
+      const result = await signInWithPopup(auth, googleAuthProvider);
+      const idToken = await result.user.getIdToken();
 
       if (!idToken) {
         throw new Error('No idToken');
       }
 
       const response = await axiosClient.post<LoginResponse>(apiEndpoints.login, {
-        idToken: idToken,
+        token: idToken,
       });
 
-      // @TODO: Save opt-in info
-      if (!response.data.accessToken) {
+      if (!response.data.access) {
         throw new Error('No accessToken');
       }
 

@@ -18,6 +18,6 @@ export type Token = {
 };
 
 export type RefreshTokensResponse = {
-  refreshToken: string;
-  accessToken: string;
+  refresh: string;
+  access: string;
 };

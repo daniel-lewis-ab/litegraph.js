@@ -3,7 +3,7 @@ import { WorkflowsPage } from './Workflows';
 import CenteredLoader from '@/shared/components/centeredLoader/CenteredLoader';
 import { useDeleteWorkflowMutation } from '@/api/hooks/useDeleteWorkflowMutation/useDeleteWorkflowMutation';
 
-export const WorkflowsContainer = () => {
+export const WorkflowsPageContainer = () => {
   const { workflows, isLoading } = useWorkflowsQuery();
   const { mutate: deleteWorkflow } = useDeleteWorkflowMutation();
 
