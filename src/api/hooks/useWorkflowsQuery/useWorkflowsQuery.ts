@@ -1,4 +1,5 @@
 import { apiEndpoints } from '@/api/apiEndpoints';
+import { QueryKeys } from '@/api/queryKeys';
 import { axiosClient } from '@/api/axiosClient';
 import { GetWorkflowsResponse } from '@/api/types';
 import { useQuery } from '@tanstack/react-query';
@@ -14,7 +15,7 @@ const getWorkflows = async () => {
 };
 
 export const useWorkflowsQuery = () => {
-  const { data, ...rest } = useQuery({ queryKey: ['workflows'], queryFn: getWorkflows, retry: 0 });
+  const { data, ...rest } = useQuery({ queryKey: QueryKeys.workflows, queryFn: getWorkflows, retry: 0 });
 
   return { workflows: data?.results, ...rest };
 };
