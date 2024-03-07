@@ -7,6 +7,7 @@ import { faDiagramProject } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TimeSince } from '../timeSince/TimeSince';
+import { routes } from '@/routes/routes';
 
 type Action = 'deploy' | 'edit' | 'duplicate' | 'delete' | 'rename' | 'share' | 'export';
 
@@ -29,7 +30,7 @@ export const WorkflowTile = ({ id, name, lastEdited, onActionClick }: WorkflowTi
 
   return (
     <>
-      <Link to="#">
+      <Link to={routes.workflow(id)}>
         <div
           className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-contain px-2.5 py-3"
           // style={{ backgroundImage: `url(${imageUrl})` }}
@@ -39,12 +40,18 @@ export const WorkflowTile = ({ id, name, lastEdited, onActionClick }: WorkflowTi
           </div>
           <div className="flex flex-row justify-end">
             <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
-              <PopoverTrigger asChild>
+              <PopoverTrigger
+                asChild
+                onClick={(e) => {
+                  setIsPopoverOpen((o) => !o);
+                  e.preventDefault();
+                }}
+              >
                 <button>
                   <Icon size={20} icon={faEllipsisVertical} />
                 </button>
               </PopoverTrigger>
-              <PopoverContent side="bottom" align="end" className="z-10">
+              <PopoverContent side="bottom" align="end" className="z-10" onClick={(e) => e.preventDefault()}>
                 <OptionsList>
                   <OptionsList.Item icon={faRocket} onClick={() => handleActionClick('deploy')}>
                     Deploy

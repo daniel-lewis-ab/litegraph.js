@@ -1,5 +1,5 @@
 import { useWorkflowsQuery } from '@/api/hooks/useWorkflowsQuery/useWorkflowsQuery';
-import { WorkflowsPage } from './Workflows';
+import { WorkflowsPage } from './WorkflowsPage';
 import CenteredLoader from '@/shared/components/centeredLoader/CenteredLoader';
 import { useDeleteWorkflowMutation } from '@/api/hooks/useDeleteWorkflowMutation/useDeleteWorkflowMutation';
 
