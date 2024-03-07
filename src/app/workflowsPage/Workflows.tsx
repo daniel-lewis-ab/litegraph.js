@@ -51,11 +51,12 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
         />
       </div>
       <div className="grid grid-cols-1 content-start gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {workflows.map((workflow, i) => (
+        {workflows.map((workflow) => (
           <WorkflowTile
-            key={i}
+            key={workflow.id}
+            id={workflow.id}
             name={workflow.name}
-            lastEdited={workflow.last_edited}
+            lastEdited={workflow.updated_at}
             onActionClick={(action) => {
               if (action === 'delete') {
                 setWorkflowIdToDelete(workflow.id);

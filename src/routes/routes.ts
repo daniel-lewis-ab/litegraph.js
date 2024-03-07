@@ -1,7 +1,8 @@
 export const routes = {
   home: '/',
-  workflows: '/',
   login: '/login',
+  workflows: '/',
+  workflow: (id: string) => `/workflows/${id}`,
   newWorkflow: '/new-workflow',
   storybook: '/storybook',
 };

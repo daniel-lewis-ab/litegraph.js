@@ -11,12 +11,13 @@ import { TimeSince } from '../timeSince/TimeSince';
 type Action = 'deploy' | 'edit' | 'duplicate' | 'delete' | 'rename' | 'share' | 'export';
 
 type WorkflowTileProps = {
+  id: string;
   name: string;
   lastEdited: string;
   onActionClick: (action: Action) => Promise<void>;
 };
 
-export const WorkflowTile = ({ name, lastEdited, onActionClick }: WorkflowTileProps) => {
+export const WorkflowTile = ({ id, name, lastEdited, onActionClick }: WorkflowTileProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const closePopover = () => setIsPopoverOpen(false);

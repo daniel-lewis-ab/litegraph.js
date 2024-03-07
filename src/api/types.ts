@@ -11,7 +11,7 @@ export type GetRefreshTokensResponse = {
 export type Workflow = {
   id: string;
   name: string;
-  last_edited: string;
+  updated_at: string;
   content: string;
 };
 

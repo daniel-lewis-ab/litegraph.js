@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/workflows',
+    path: '/workflows/:id',
     element: (
       <AuthorizedRoute>
         <Outlet />
