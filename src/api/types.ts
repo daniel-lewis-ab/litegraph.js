@@ -16,7 +16,7 @@ export type Workflow = {
 };
 
 export type GetWorkflowsResponse = {
+  // links: { next: null; previous: null };
   count: number;
-  links: { next: null; previous: null };
   results: Workflow[];
 };

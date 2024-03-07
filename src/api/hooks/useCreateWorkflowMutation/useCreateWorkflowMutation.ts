@@ -36,7 +36,6 @@ export const useCreateWorkflowMutation = () => {
       queryClient.setQueryData<GetWorkflowsResponse>(QueryKeys.workflows, (oldData) => {
         const oldWorkflows = oldData?.results ?? [];
         const newData = {
-          links: oldData?.links ?? { next: null, previous: null },
           count: oldData?.count ? oldData.count + 1 : 1,
           results: [newWorkflow, ...oldWorkflows],
         };

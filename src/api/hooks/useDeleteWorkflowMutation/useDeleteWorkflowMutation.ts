@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
-import { Workflow } from '@/api/types';
+import { GetWorkflowsResponse } from '@/api/types';
 import { QueryKeys } from '@/api/queryKeys';
 
 const deleteWorkflow = async (workflowId: string) => {
@@ -20,8 +20,14 @@ export const useDeleteWorkflowMutation = () => {
   const { mutate, ...rest } = useMutation({
     mutationFn: deleteWorkflow,
     onSuccess: (_, workflowId) => {
-      queryClient.setQueryData<Workflow[]>(QueryKeys.workflows, (oldWorkflows) => {
-        return oldWorkflows?.filter((workflow) => workflow.id !== workflowId) || [];
+      queryClient.setQueryData<GetWorkflowsResponse>(QueryKeys.workflows, (oldData) => {
+        const newData = {
+          ...oldData,
+          count: oldData?.count ? oldData.count - 1 : 0,
+          results: oldData?.results.filter((workflow) => workflow.id !== workflowId) || [],
+        };
+
+        return newData;
       });
 
       queryClient.invalidateQueries({ queryKey: QueryKeys.workflows });
