@@ -34,5 +34,7 @@ module.exports = {
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-unsafe-member-access': 'off',
     'no-console': 'warn',
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn"],
   },
 };

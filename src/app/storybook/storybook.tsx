@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Button } from '@/shared/components/button/Button';
 import { Icon } from '@/shared/components/icon/Icon';
 import { Input } from '@/shared/components/input/Input';

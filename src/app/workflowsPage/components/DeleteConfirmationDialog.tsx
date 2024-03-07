@@ -31,7 +31,6 @@ export const DeleteConfirmationDialog = ({ isOpen, onConfirm, onClose }: DeleteC
               onClose();
             } catch (e) {
               setIsDeleting(false);
-              console.error(e);
               toast.error('Failed to delete workflow');
             }
           }}

@@ -19,18 +19,18 @@ export const useDeleteWorkflowMutation = () => {
 
   const { mutate, ...rest } = useMutation({
     mutationFn: deleteWorkflow,
-    onSuccess: (_, workflowId) => {
+    onSuccess: async (_, workflowId) => {
       queryClient.setQueryData<GetWorkflowsResponse>(QueryKeys.workflows, (oldData) => {
         const newData = {
           ...oldData,
           count: oldData?.count ? oldData.count - 1 : 0,
-          results: oldData?.results.filter((workflow) => workflow.id !== workflowId) || [],
+          results: oldData?.results.filter((workflow) => workflow.id !== workflowId) ?? [],
         };
 
         return newData;
       });
 
-      queryClient.invalidateQueries({ queryKey: QueryKeys.workflows });
+      await queryClient.invalidateQueries({ queryKey: QueryKeys.workflows });
     },
   });
 
