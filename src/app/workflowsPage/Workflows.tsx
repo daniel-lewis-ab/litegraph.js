@@ -8,6 +8,8 @@ import { faMagnifyingGlass } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid'
 import { Workflow } from '@/api/types';
 import { useState } from 'react';
 import { DeleteConfirmationDialog } from './components/DeleteConfirmationDialog';
+import { Link } from 'react-router-dom';
+import { routes } from '@/routes/routes';
 
 type WorkflowsPageProps = {
   workflows: Workflow[];
@@ -24,10 +26,13 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
   return (
     <div className="flex w-full flex-col p-6">
       <div className="mb-6 flex flex-row *:mr-4">
-        <button className="border-border-muted flex flex-row items-center rounded-xl border px-3 py-2">
+        <Link
+          className="border-border-muted flex flex-row items-center rounded-xl border px-3 py-2"
+          to={routes.newWorkflow}
+        >
           <Icon size={20} icon={faPlus} className="rounded-full bg-surface-100 p-[12px]" />
           <p className="ml-2 text-sm">New workflow</p>
-        </button>
+        </Link>
         <button className="border-border-muted flex flex-row items-center rounded-xl border px-3 py-2">
           <Icon size={20} icon={faRectangleHistory} className="rounded-full bg-surface-100 p-[12px]" />
           <p className="ml-2 text-sm">Start from a template</p>

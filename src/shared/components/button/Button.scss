@@ -4,6 +4,15 @@ button.button {
   --text-color: var(--color-black);
   background-color: var(--base-color);
   color: var(--text-color);
+  transition: opacity 0.3s ease-in-out;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
 
   &--color-secondary {
     --base-color: var(--color-secondary);

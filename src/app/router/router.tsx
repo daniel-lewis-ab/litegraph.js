@@ -5,6 +5,8 @@ import { AuthorizedRoute } from '@/shared/components/authorizedRoute/AuthorizedR
 import { LoginPageContainer } from '../loginPage/LoginPageContainer';
 import { Storybook } from '../storybook/storybook';
 import { WorkflowsPageContainer } from '../workflowsPage/WorkflowsPageContainer';
+import { NewWorkflowPage } from '../newWorkflowPage/NewWorkflowPage';
+import { routes } from '@/routes/routes';
 
 export const isAuthenticated = () => {
   return false;
@@ -12,7 +14,7 @@ export const isAuthenticated = () => {
 
 export const router = createBrowserRouter([
   {
-    path: '/login',
+    path: routes.login,
     element: <LoginPageContainer />,
   },
   {
@@ -31,8 +33,12 @@ export const router = createBrowserRouter([
         element: <WorkflowsPageContainer />,
       },
       {
-        path: 'storybook',
+        path: routes.storybook,
         element: import.meta.env.DEV ? <Storybook /> : null,
+      },
+      {
+        path: routes.newWorkflow,
+        element: <NewWorkflowPage />,
       },
     ],
   },

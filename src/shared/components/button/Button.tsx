@@ -9,6 +9,7 @@ type ButtonProps = {
   color?: 'primary' | 'secondary' | 'tertiary' | 'surface' | 'success' | 'error';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   disabled?: boolean;
+  type?: 'button' | 'submit';
   onClick?: () => void;
 };
 
@@ -20,9 +21,10 @@ export const Button = ({
   className,
   onClick,
   disabled,
+  type = 'button',
 }: ButtonProps) => (
   <button
-    type="button"
+    type={type}
     className={clsx(
       'button',
       'rounded-xl font-medium',
