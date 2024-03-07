@@ -28,6 +28,7 @@ export const DeleteConfirmationDialog = ({ isOpen, onConfirm, onClose }: DeleteC
             try {
               await onConfirm();
               setIsDeleting(false);
+              toast.success('Workflow successfully deleted');
               onClose();
             } catch (e) {
               setIsDeleting(false);

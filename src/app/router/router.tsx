@@ -7,6 +7,7 @@ import { Storybook } from '../storybook/storybook';
 import { WorkflowsPageContainer } from '../workflowsPage/WorkflowsPageContainer';
 import { routes } from '@/routes/routes';
 import { NewWorkflowPageContainer } from '../newWorkflowPage/NewWorkflowPageContainer';
+import { WorkflowEditorPageContainer } from '../workflowEditorPageContainer/WorkflowEditorPageContainer';
 
 export const isAuthenticated = () => {
   return false;
@@ -41,5 +42,15 @@ export const router = createBrowserRouter([
         element: <NewWorkflowPageContainer />,
       },
     ],
+  },
+  {
+    path: '/workflows',
+    element: (
+      <AuthorizedRoute>
+        <Outlet />
+      </AuthorizedRoute>
+    ),
+    errorElement: <ErrorPage />,
+    children: [{ index: true, element: <WorkflowEditorPageContainer /> }],
   },
 ]);
