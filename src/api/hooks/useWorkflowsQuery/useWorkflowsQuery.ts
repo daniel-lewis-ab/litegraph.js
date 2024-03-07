@@ -17,5 +17,5 @@ const getWorkflows = async () => {
 export const useWorkflowsQuery = () => {
   const { data, ...rest } = useQuery({ queryKey: QueryKeys.workflows, queryFn: getWorkflows, retry: 0 });
 
-  return { workflows: data?.results, ...rest };
+  return { workflows: data, ...rest };
 };

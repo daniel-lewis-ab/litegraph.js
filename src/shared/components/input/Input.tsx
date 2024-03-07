@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes, ReactNode } from 'react';
+import { DetailedHTMLProps, InputHTMLAttributes, ReactNode, forwardRef } from 'react';
 import clsx from 'clsx';
 
 export type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
@@ -7,23 +7,28 @@ export type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>
   variant?: 'primary' | 'secondary';
 };
 
-export const Input = ({ leftIcon, className, inputClassName, variant = 'primary', ...props }: InputProps) => (
-  <label
-    className={clsx(
-      variant === 'primary' &&
-        '0 flex flex-row rounded-lg bg-surface-100 p-4 focus-within:ring focus-within:ring-opacity-50',
-      className,
-    )}
-  >
-    {leftIcon && <div className="*:text-foreground-muted mr-3 h-[14px] w-[14px]">{leftIcon}</div>}
-    <input
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ leftIcon, className, inputClassName, variant = 'primary', ...props }, ref) => (
+    <label
       className={clsx(
-        'w-full',
-        'text-foreground-muted bg-transparent placeholder-foreground-muted outline-none',
-        variant === 'secondary' && 'border-border-default rounded-lg border px-4 py-2 text-sm',
-        inputClassName,
+        variant === 'primary' &&
+          '0 flex flex-row rounded-lg bg-surface-100 p-4 focus-within:ring focus-within:ring-opacity-50',
+        className,
       )}
-      {...props}
-    />
-  </label>
+    >
+      {leftIcon && <div className="*:text-foreground-muted mr-3 h-[14px] w-[14px]">{leftIcon}</div>}
+      <input
+        ref={ref}
+        className={clsx(
+          'w-full',
+          'text-foreground-muted bg-transparent placeholder-foreground-muted outline-none',
+          variant === 'secondary' && 'border-border-default rounded-lg border px-4 py-2 text-sm',
+          inputClassName,
+        )}
+        {...props}
+      />
+    </label>
+  ),
 );
+
+Input.displayName = 'Input';

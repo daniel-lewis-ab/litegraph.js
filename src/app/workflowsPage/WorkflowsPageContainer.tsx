@@ -7,6 +7,7 @@ export const WorkflowsPageContainer = () => {
   const { workflows, isLoading } = useWorkflowsQuery();
   const { mutate: deleteWorkflow } = useDeleteWorkflowMutation();
 
+  console.log('workflows', workflows?.results.length, workflows);
   if (isLoading) {
     return <CenteredLoader />;
   }
@@ -15,5 +16,5 @@ export const WorkflowsPageContainer = () => {
     await deleteWorkflow(id);
   };
 
-  return <WorkflowsPage workflows={workflows || []} onWorkflowDelete={onDelete} />;
+  return <WorkflowsPage workflows={workflows?.results || []} onWorkflowDelete={onDelete} />;
 };

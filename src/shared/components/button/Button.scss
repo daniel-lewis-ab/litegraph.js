@@ -4,7 +4,7 @@ button.button {
   --text-color: var(--color-black);
   background-color: var(--base-color);
   color: var(--text-color);
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity, background-color, color 0.15s ease-in-out;
 
   &:hover {
     opacity: 0.85;
@@ -88,5 +88,6 @@ button.button {
     background-color: var(--color-disabled);
     border: none !important;
     color: var(--color-on-disabled) !important;
+    pointer-events: none;
   }
 }

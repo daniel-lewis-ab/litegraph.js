@@ -8,6 +8,7 @@ import { CLEAR_TOKENS, SET_TOKENS } from '@/context/authContext/authReducer';
 import { GoogleIcon } from '@/shared/components/icons/GoogleIcon';
 import { GitHubIcon } from '@/shared/components/icons/GithubIcon';
 import { PostLoginResponse } from '@/api/types';
+import { routes } from '@/routes/routes';
 
 type LoginPageProps = {
   onLogin(source: 'github' | 'google'): Promise<PostLoginResponse | undefined>;
@@ -29,7 +30,7 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
       const tokens = await onLogin(source);
 
       dispatch({ type: SET_TOKENS, accessToken: tokens?.access, refreshToken: tokens?.refresh });
-      navigate('/');
+      navigate(routes.home);
     } catch (error) {
       if (error instanceof FirebaseError) {
         if (error.code === 'auth/account-exists-with-different-credential') {
