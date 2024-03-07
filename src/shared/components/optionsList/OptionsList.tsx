@@ -12,8 +12,8 @@ const Item = ({
   onClick(): void;
 }) => (
   <li>
-    <button className="hover:bg-surface-500 flex w-full items-center rounded-md p-2 transition-all" onClick={onClick}>
-      <Icon size={16} icon={icon} className="*:text-foreground-muted mr-2.5" />
+    <button className="flex w-full items-center rounded-md p-2 transition-all hover:bg-surface-500" onClick={onClick}>
+      <Icon size={16} icon={icon} className="mr-2.5 *:text-foreground-muted" />
       <span className="font-semibold">{children}</span>
     </button>
   </li>

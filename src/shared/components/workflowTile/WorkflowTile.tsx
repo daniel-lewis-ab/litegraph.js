@@ -79,9 +79,9 @@ export const WorkflowTile = ({ name, lastEdited, onActionClick }: WorkflowTilePr
             </Popover>
           </div>
           <div>
-            <p className="text-foreground text-lg font-semibold">{name}</p>
+            <p className="text-lg font-semibold text-foreground">{name}</p>
             <div className="mt-4 flex flex-row justify-between">
-              <p className="text-foreground-muted text-sm">
+              <p className="text-sm text-foreground-muted">
                 Edited <TimeSince time={lastEdited} />
               </p>
               {/* <div className="flex flex-row items-center">

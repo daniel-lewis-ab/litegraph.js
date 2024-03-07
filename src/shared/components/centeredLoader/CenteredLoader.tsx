@@ -12,7 +12,7 @@ const CenteredLoader = ({ isFullscreen }: CenteredLoaderProps) => {
         isFullscreen && 'min-h-screen',
       )}
     >
-      <div className="border-white h-32 w-32 animate-spin rounded-full border-b-4 border-t-4"></div>
+      <div className="h-32 w-32 animate-spin rounded-full border-b-4 border-t-4 border-white"></div>
     </div>
   );
 };

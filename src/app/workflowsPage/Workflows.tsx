@@ -27,17 +27,17 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
     <div className="flex w-full flex-col p-6">
       <div className="mb-6 flex flex-row *:mr-4">
         <Link
-          className="border-border-muted flex flex-row items-center rounded-xl border px-3 py-2"
+          className="flex flex-row items-center rounded-xl border border-border-muted px-3 py-2"
           to={routes.newWorkflow}
         >
           <Icon size={20} icon={faPlus} className="rounded-full bg-surface-100 p-[12px]" />
           <p className="ml-2 text-sm">New workflow</p>
         </Link>
-        <button className="border-border-muted flex flex-row items-center rounded-xl border px-3 py-2">
+        <button className="flex flex-row items-center rounded-xl border border-border-muted px-3 py-2">
           <Icon size={20} icon={faRectangleHistory} className="rounded-full bg-surface-100 p-[12px]" />
           <p className="ml-2 text-sm">Start from a template</p>
         </button>
-        <button className="border-border-muted flex flex-row items-center rounded-xl border px-3 py-2">
+        <button className="flex flex-row items-center rounded-xl border border-border-muted px-3 py-2">
           <Icon size={20} icon={faUpload} className="rounded-full bg-surface-100 p-[12px]" />
           <p className="ml-2 text-sm">Import</p>
         </button>
