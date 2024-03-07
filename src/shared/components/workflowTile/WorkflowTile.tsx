@@ -21,12 +21,10 @@ type Action = 'edit' | 'duplicate' | 'delete' | 'rename' | 'share' | 'export';
 type WorkflowTileProps = {
   name: string;
   lastEdited: string;
-  nodesCount?: number;
-  imageUrl?: string;
   onActionClick: (action: Action) => Promise<void>;
 };
 
-export const WorkflowTile = ({ name, imageUrl, lastEdited, onActionClick }: WorkflowTileProps) => {
+export const WorkflowTile = ({ name, lastEdited, onActionClick }: WorkflowTileProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const closePopover = () => setIsPopoverOpen(false);
@@ -41,13 +39,11 @@ export const WorkflowTile = ({ name, imageUrl, lastEdited, onActionClick }: Work
       <Link to="#">
         <div
           className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-contain px-2.5 py-3"
-          style={{ backgroundImage: `url(${imageUrl})` }}
+          // style={{ backgroundImage: `url(${imageUrl})` }}
         >
-          {!imageUrl && (
-            <div className="absolute inset-0 -z-10 flex justify-center bg-surface-100">
-              <Icon className="h-[45%] w-full pt-[20%] opacity-10" icon={faDiagramProject} />
-            </div>
-          )}
+          <div className="absolute inset-0 -z-10 flex justify-center bg-surface-100">
+            <Icon className="h-[45%] w-full pt-[20%] opacity-10" icon={faDiagramProject} />
+          </div>
           <div className="flex flex-row justify-end">
             <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
               <PopoverTrigger asChild>

@@ -55,8 +55,6 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
             key={i}
             name={workflow.name}
             lastEdited={workflow.last_edited}
-            nodesCount={workflow.nodesCount}
-            imageUrl={workflow.imageUrl}
             onActionClick={(action) => {
               if (action === 'delete') {
                 setWorkflowIdToDelete(workflow.id);

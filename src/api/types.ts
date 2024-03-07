@@ -12,8 +12,7 @@ export type Workflow = {
   id: string;
   name: string;
   last_edited: string;
-  imageUrl?: string;
-  nodesCount?: number;
+  content: string;
 };
 
 export type GetWorkflowsResponse = {
