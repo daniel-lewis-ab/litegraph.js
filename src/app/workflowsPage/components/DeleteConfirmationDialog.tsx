@@ -1,7 +1,7 @@
-import { toast } from 'react-hot-toast';
 import { Button } from '@/shared/components/button/Button';
 import { Dialog } from '@/shared/components/dialog/Dialog';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 type DeleteConfirmationDialogProps = {
   isOpen: boolean;
@@ -38,7 +38,7 @@ export const DeleteConfirmationDialog = ({ isOpen, onConfirm, onClose }: DeleteC
         >
           Delete
         </Button>
-        <Button disabled={isDeleting} onClick={onClose} color="primary" variant="glass">
+        <Button disabled={isDeleting} onClick={onClose} color="secondary" variant="glass">
           Cancel
         </Button>
       </Dialog.Content>

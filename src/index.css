@@ -5,36 +5,38 @@
 @layer base {
   :root {
     /* Colors defined for themes */
-    --color-token-primary-400: #A697F9;
-    --color-token-primary-500: #8566FF;
+    --color-token-purple-400: #a697f9;
+    --color-token-purple-500: #8566ff;
 
-    --color-token-secondary-300: #B8B8CC;
-    --color-token-secondary-500: #4C4B7F;
+    --color-token-bluegray-300: #b8b8cc;
+    --color-token-bluegray-500: #4c4b7f;
 
-    --color-token-tertiary-400: #75BDD1;
-    --color-token-tertiary-500: #4AA2BD;
+    --color-token-cerulean-400: #75bdd1;
+    --color-token-cerulean-500: #4aa2bd;
 
     --color-token-OLD-midnight-600: #626289;
 
-    --color-token-surface-50: #F3F3F7;
-    --color-token-surface-100: #DEDFEB;
-    --color-token-surface-200: #C4C5E0;
-    --color-token-surface-300: #9F9FC5;
+    --color-token-surface-50: #f3f3f7;
+    --color-token-surface-100: #dedfeb;
+    --color-token-surface-200: #c4c5e0;
+    --color-token-surface-300: #9f9fc5;
     --color-token-surface-400: #313155;
     --color-token-surface-500: #222341;
     --color-token-surface-600: #171933;
-    --color-token-surface-700: #0D0E1F;
+    --color-token-surface-700: #0d0e1f;
     --color-token-surface-800: #080812;
     /* ENDOF defined for themes */
 
     /* Common colors for both themes */
-    --color-success: #4AB637;
+    --color-success: #4ab637;
     --color-success-opacity-20: rgba(74, 182, 55, 0.2);
-    --color-warning: #D5A84C;
+    --color-warning: #d5a84c;
     --color-warning-opacity-20: rgba(213, 168, 76, 0.2);
-    --color-error: #FE4949;
+    --color-error: #fe4949;
     --color-error-opacity-20: rgba(254, 73, 73, 0.2);
-    --color-white: #FFFFFF;
+    --color-info: #acd9f3;
+    --color-info-opacity-20: rgba(172, 217, 243, 0.2);
+    --color-white: #ffffff;
     --color-black: #000000;
 
     --color-on-primary: #000000;
@@ -44,14 +46,15 @@
     --color-on-warning: #000000;
 
     /* Light theme */
-    --color-primary: var(--color-token-primary-400);
+    --color-primary: var(--color-token-purple-400);
     --color-primary-opacity-20: rgba(166, 151, 249, 0.2);
-    --color-secondary: var(--color-token-secondary-300);
+    --color-secondary: var(--color-token-bluegray-300);
     --color-secondary-opacity-20: rgba(184, 184, 204, 0.2);
     --color-on-secondary: #000000;
-    --color-tertiary: var(--color-token-tertiary-400);
+    --color-tertiary: var(--color-token-cerulean-400);
     --color-tertiary-opacity-20: rgba(117, 189, 209, 0.2);
-    --color-surface: var(--color-token-surface-50);
+    --color-surface: var(--color-token-surface);
+    --color-surface-50: var(--color-token-surface-50);
     --color-surface-100: var(--color-token-surface-100);
     --color-surface-200: var(--color-token-surface-200);
     --color-surface-300: var(--color-token-surface-300);
@@ -61,8 +64,8 @@
     --color-border-default: var(--color-token-surface-300);
     --color-border-muted: var(--color-token-surface-300);
     --color-border-strong: var(--color-token-surface-700);
-    --color-disabled: #5D5B83;
-    --color-on-disabled: #E3E0F8;
+    --color-disabled: #5d5b83;
+    --color-on-disabled: #e3e0f8;
 
     font-family: 'Inter', monospace;
     font-weight: 400;
@@ -75,30 +78,66 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  p, svg {
+  p,
+  svg {
     color: var(--color-foreground);
   }
 
-  :root[class~="dark"] {
-    --color-primary: var(--color-token-primary-500);
+  :root[class~='dark'] {
+    --color-primary: var(--color-token-purple-500);
     --color-primary-opacity-20: rgba(133, 102, 255, 0.2);
-    --color-secondary: var(--color-token-secondary-500);
+    --color-secondary: var(--color-token-blugray-500);
     --color-secondary-opacity-20: rgba(76, 75, 127, 0.2);
-    --color-on-secondary: #FFFFFF;
-    --color-tertiary: var(--color-token-tertiary-500);
+    --color-on-secondary: #ffffff;
+    --color-tertiary: var(--color-token-cerulean-500);
     --color-tertiary-opacity-20: rgba(74, 162, 189, 0.2);
     --color-surface: var(--color-token-surface-800);
+    --color-surface-50: #eeeef7;
     --color-surface-100: var(--color-token-surface-700);
     --color-surface-200: var(--color-token-surface-600);
     --color-surface-300: var(--color-token-surface-500);
     --color-surface-500: var(--color-token-surface-500);
     --color-foreground: var(--color-token-surface-50);
     --color-foreground-muted: var(--color-token-surface-300);
+    --color-foreground-muted-icon: var(--color-token-surface-300);
     --color-border-default: var(--color-token-surface-400);
     --color-border-muted: var(--color-token-surface-400);
     --color-border-strong: var(--color-token-surface-200);
-    --color-disabled: #5D5B83;
-    --color-on-disabled: #B3B1C4;
+    --color-disabled: #5d5b83;
+    --color-on-disabled: #b3b1c4;
+  }
+
+  :root[class~='mercury'] {
+    --color-primary: #ff9b61;
+    --color-primary-opacity-20: rgba(255, 155, 97, 0.2);
+    --color-secondary: #716d9c;
+    --color-secondary-opacity-20: rgba(113, 109, 156, 0.2);
+    --color-on-secondary: #000;
+    --color-tertiary: var(--color-token-cerulean-400);
+    --color-tertiary-opacity-20: rgba(117, 189, 209, 0.2);
+    --color-surface: #07070a;
+    --color-surface-50: #101014;
+    --color-surface-100: #17191e;
+    --color-surface-200: #21232b;
+    --color-surface-300: #282b34;
+    --color-surface-500: var(--color-token-surface-500);
+    --color-foreground: #dedee9;
+    --color-foreground-muted: #616071;
+    --color-foreground-muted-icon: #4f4f59;
+    --color-border-default: #3a3c45;
+    --color-border-muted: #262321;
+    --color-border-strong: #7c8189;
+    --border-gray-pale: #d3d3df;
+    --color-disabled: #3e3d48;
+    --color-on-disabled: #b3b1c4;
+    --color-success: #1bc47d;
+    --color-success-opacity-20: rgba(27, 196, 125, 0.2);
+    --color-warning: #dea002;
+    --color-warning-opacity-20: rgba(222, 160, 2, 0.2);
+    --color-error: #f85858;
+    --color-error-opacity-20: rgba(248, 88, 88, 0.2);
+    --color-info: #3f63f3;
+    --color-info-opacity-20: rgba(63, 99, 243, 0.2);
   }
 }
 
@@ -106,85 +145,101 @@ button {
   cursor: pointer;
 }
 
-
 @font-face {
   font-family: 'IBM Plex Mono';
-  src: url('./assets/fonts/IBMPlexMono-Regular.woff2') format('woff2'),
-       url('./assets/fonts/IBMPlexMono-Regular.woff') format('woff');
+  src:
+    url('./assets/fonts/IBMPlexMono-Regular.woff2') format('woff2'),
+    url('./assets/fonts/IBMPlexMono-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'IBM Plex Mono';
-  src: url('./assets/fonts/IBMPlexMono-Italic.woff2') format('woff2'),
-       url('./assets/fonts/IBMPlexMono-Italic.woff') format('woff');
+  src:
+    url('./assets/fonts/IBMPlexMono-Italic.woff2') format('woff2'),
+    url('./assets/fonts/IBMPlexMono-Italic.woff') format('woff');
   font-weight: 400;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'IBM Plex Mono';
-  src: url('./assets/fonts/IBMPlexMono-Medium.woff2') format('woff2'),
-       url('./assets/fonts/IBMPlexMono-Medium.woff') format('woff');
+  src:
+    url('./assets/fonts/IBMPlexMono-Medium.woff2') format('woff2'),
+    url('./assets/fonts/IBMPlexMono-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'IBM Plex Mono';
-  src: url('./assets/fonts/IBMPlexMono-SemiBold.woff2') format('woff2'),
-       url('./assets/fonts/IBMPlexMono-SemiBold.woff') format('woff');
+  src:
+    url('./assets/fonts/IBMPlexMono-SemiBold.woff2') format('woff2'),
+    url('./assets/fonts/IBMPlexMono-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'IBM Plex Mono';
-  src: url('./assets/fonts/IBMPlexMono-Bold.woff2') format('woff2'),
-       url('./assets/fonts/IBMPlexMono-Bold.woff') format('woff');
+  src:
+    url('./assets/fonts/IBMPlexMono-Bold.woff2') format('woff2'),
+    url('./assets/fonts/IBMPlexMono-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url('./assets/fonts/Inter-Light.woff2') format('woff2'), url('./assets/fonts/Inter-Light.woff') format('woff');
+  src:
+    url('./assets/fonts/Inter-Light.woff2') format('woff2'),
+    url('./assets/fonts/Inter-Light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url('./assets/fonts/Inter-Regular.woff2') format('woff2'), url('./assets/fonts/Inter-Regular.woff') format('woff');
+  src:
+    url('./assets/fonts/Inter-Regular.woff2') format('woff2'),
+    url('./assets/fonts/Inter-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url('./assets/fonts/Inter-Medium.woff2') format('woff2'), url('./assets/fonts/Inter-Medium.woff') format('woff');
+  src:
+    url('./assets/fonts/Inter-Medium.woff2') format('woff2'),
+    url('./assets/fonts/Inter-Medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url('./assets/fonts/Inter-SemiBold.woff2') format('woff2'), url('./assets/fonts/Inter-SemiBold.woff') format('woff');
+  src:
+    url('./assets/fonts/Inter-SemiBold.woff2') format('woff2'),
+    url('./assets/fonts/Inter-SemiBold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url('./assets/fonts/Inter-Bold.woff2') format('woff2'), url('./assets/fonts/Inter-Bold.woff') format('woff');
+  src:
+    url('./assets/fonts/Inter-Bold.woff2') format('woff2'),
+    url('./assets/fonts/Inter-Bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
 }
 /*
   1. Use a more-intuitive box-sizing model.
 */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 /*
@@ -205,25 +260,39 @@ body {
 /*
   5. Improve media defaults
 */
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 /*
   6. Remove built-in form typography styles
 */
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 /*
   7. Avoid text overflows
 */
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 /*
   8. Create a root stacking context
 */
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
