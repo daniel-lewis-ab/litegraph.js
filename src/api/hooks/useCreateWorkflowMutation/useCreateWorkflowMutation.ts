@@ -9,7 +9,6 @@ type CreateWorkflowData = {
 };
 
 const DEFAULT_WORKFLOW_DATA = {
-  org_id: '9f4285e8-ec6f-42ea-842b-68354ef1f9fd',
   format: 'CMFY',
   content: {},
 };
@@ -43,7 +42,7 @@ export const useCreateWorkflowMutation = () => {
         return newData;
       });
 
-      // queryClient.invalidateQueries({ queryKey: QueryKeys.workflows });
+      queryClient.invalidateQueries({ queryKey: QueryKeys.workflows });
     },
   });
 

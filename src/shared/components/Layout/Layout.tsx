@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { Icon } from '@/shared/components/icon/Icon';
 import { Logo } from '../icons/Logo';
 import { LayoutProps } from './Layout.types';
@@ -17,22 +18,29 @@ import { OptionsList } from '../optionsList/OptionsList';
 import { useAuth } from '@/hooks/useAuth/useAuth';
 import { CLEAR_TOKENS } from '@/context/authContext/authReducer';
 import { Button } from '../button/Button';
+import { routes } from '@/routes/routes';
 
 export const Layout = ({ children }: LayoutProps) => {
+  const queryClient = useQueryClient();
   const { dispatch } = useAuth();
 
   const handleLogout = () => {
     dispatch({ type: CLEAR_TOKENS });
+    queryClient.clear();
   };
 
   return (
     <div className="flex min-h-screen flex-row">
-      <div className="sticky top-0 flex max-h-screen min-w-[64px] flex-col items-center justify-between border-r border-r-border-default">
-        <NavLink to="/">
+      <div className="border-r-border-default sticky top-0 flex max-h-screen min-w-[64px] flex-col items-center justify-between border-r">
+        <NavLink to={routes.home}>
           <Logo className="mt-2" />
         </NavLink>
         <nav className="flex flex-col *:my-[20px]">
-          <NavLink to="/" end className={({ isActive }) => clsx(isActive ? '*:text-foreground' : '*:text-secondary')}>
+          <NavLink
+            to={routes.workflows}
+            end
+            className={({ isActive }) => clsx(isActive ? '*:text-foreground' : '*:text-secondary')}
+          >
             <Icon size={30} icon={faDiagramProject} />
           </NavLink>
           <NavLink
@@ -60,7 +68,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <div className="h-[64px]"></div>
       </div>
       <div className="flex flex-grow flex-col">
-        <header className="sticky top-0 z-20 flex h-[64px] min-h-[64px] flex-row items-center justify-between border-b border-b-border-default bg-surface px-6">
+        <header className="border-b-border-default sticky top-0 z-20 flex h-[64px] min-h-[64px] flex-row items-center justify-between border-b bg-surface px-6">
           <div className="flex flex-row items-center">
             <p className="text-2xl font-medium">Workflows</p>
           </div>

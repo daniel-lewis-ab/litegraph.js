@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import clsx from 'clsx';
 import './Button.scss';
+import { LoaderIcon } from '../loaderIcon/LoaderIcon';
 
 type ButtonProps = {
   children: ReactNode;
@@ -10,6 +11,7 @@ type ButtonProps = {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   disabled?: boolean;
   type?: 'button' | 'submit';
+  isLoading?: boolean;
   onClick?: () => void;
 };
 
@@ -22,6 +24,7 @@ export const Button = ({
   onClick,
   disabled,
   type = 'button',
+  isLoading,
 }: ButtonProps) => (
   <button
     type={type}
@@ -39,7 +42,8 @@ export const Button = ({
       className,
     )}
     onClick={onClick}
+    disabled={disabled || isLoading}
   >
-    {children}
+    {isLoading ? <LoaderIcon /> : children}
   </button>
 );

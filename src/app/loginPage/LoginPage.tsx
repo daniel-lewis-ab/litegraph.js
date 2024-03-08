@@ -22,7 +22,7 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
   const navigate = useNavigate();
 
   if (isAuthorized) {
-    return <Navigate to="/" replace />;
+    return <Navigate to={routes.workflows} replace />;
   }
 
   const handleLogin = async (source: 'github' | 'google') => {
@@ -48,26 +48,26 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
   return (
     <main className="flex h-screen w-full flex-row">
       <div className="flex flex-1">
-        <div className="flex flex-1 flex-col items-start justify-center md:px-9 lg:px-24">
+        <div className="flex flex-1 flex-col items-start justify-center p-6 md:px-9 lg:px-24">
           <LogoFull className="mb-14" />
           <h1 className="mb-14 text-5xl font-bold">Login or sign up</h1>
           <button
-            className="flex w-full max-w-md flex-row justify-center rounded-lg bg-foreground py-3"
+            className="bg-foreground flex w-full max-w-md flex-row justify-center rounded-lg py-3"
             onClick={() => handleLogin('google')}
           >
             <GoogleIcon />
-            <p className="ml-5 font-semibold text-black">Sign in with Google</p>
+            <p className="text-black ml-5 font-semibold">Sign in with Google</p>
           </button>
           <button
-            className="mt-3 flex w-full max-w-md flex-row justify-center rounded-lg bg-foreground py-3"
+            className="bg-foreground mt-3 flex w-full max-w-md flex-row justify-center rounded-lg py-3"
             onClick={() => handleLogin('github')}
           >
             <GitHubIcon />
-            <p className="ml-5 font-semibold text-black">Sign in with Github</p>
+            <p className="text-black ml-5 font-semibold">Sign in with Github</p>
           </button>
         </div>
       </div>
-      <div className="relative flex-1">
+      <div className="relative hidden flex-1 md:block">
         <div className="absolute inset-0 h-full w-full bg-[radial-gradient(#6161C4,transparent_1px)] [background-size:26px_26px]"></div>
       </div>
     </main>

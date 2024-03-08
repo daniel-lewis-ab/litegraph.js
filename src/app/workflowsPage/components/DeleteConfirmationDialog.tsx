@@ -1,7 +1,6 @@
 import { toast } from 'react-hot-toast';
 import { Button } from '@/shared/components/button/Button';
 import { Dialog } from '@/shared/components/dialog/Dialog';
-import { LoaderIcon } from '@/shared/components/loaderIcon/LoaderIcon';
 import { useState } from 'react';
 
 type DeleteConfirmationDialogProps = {
@@ -35,9 +34,9 @@ export const DeleteConfirmationDialog = ({ isOpen, onConfirm, onClose }: DeleteC
               toast.error('Failed to delete workflow');
             }
           }}
-          disabled={isDeleting}
+          isLoading={isDeleting}
         >
-          {isDeleting ? <LoaderIcon /> : 'Delete'}
+          Delete
         </Button>
         <Button disabled={isDeleting} onClick={onClose} color="primary" variant="glass">
           Cancel

@@ -1,6 +1,10 @@
 function timeSince(date: string): string {
   const seconds = Math.floor((new Date().getTime() - new Date(date).getTime()) / 1000);
 
+  if (seconds < 180) {
+    return 'just now';
+  }
+
   let interval = seconds / 31536000;
 
   if (interval > 1) {

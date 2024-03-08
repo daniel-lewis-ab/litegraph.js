@@ -143,8 +143,13 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => (
 export const Storybook = () => (
   <div className="flex flex-col">
     <h2 className="text-xl">Input</h2>
-    <div className="flex flex-row items-start *:mr-4">
+    <div className="flex flex-col items-start *:mr-4">
+      <p>Primary</p>
       <Input placeholder="Search this page..." leftIcon={<Icon icon={faMagnifyingGlass} />} />
+    </div>
+    <div className="flex flex-col items-start *:mr-4">
+      <p>Secondary</p>
+      <Input placeholder="My workflow name" variant="secondary" />
     </div>
     <h2 className="mt-6 text-xl">Options list</h2>
     <div style={{ width: 200 }}>

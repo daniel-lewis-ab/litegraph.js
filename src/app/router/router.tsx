@@ -8,14 +8,20 @@ import { WorkflowsPageContainer } from '../workflowsPage/WorkflowsPageContainer'
 import { routes } from '@/routes/routes';
 import { NewWorkflowPageContainer } from '../newWorkflowPage/NewWorkflowPageContainer';
 import { WorkflowEditorPageContainer } from '../workflowEditorPageContainer/WorkflowEditorPageContainer';
+import { HomePage } from '../homePage/HomePage';
 
 export const router = createBrowserRouter([
+  {
+    path: routes.home,
+    element: <HomePage />,
+    errorElement: <ErrorPage />,
+  },
   {
     path: routes.login,
     element: <LoginPageContainer />,
   },
   {
-    path: '/',
+    path: routes.workflows,
     element: (
       <AuthorizedRoute>
         <Layout>
@@ -23,24 +29,19 @@ export const router = createBrowserRouter([
         </Layout>
       </AuthorizedRoute>
     ),
-    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
         element: <WorkflowsPageContainer />,
       },
       {
-        path: routes.storybook,
-        element: import.meta.env.DEV ? <Storybook /> : null,
-      },
-      {
-        path: routes.newWorkflow,
+        path: routes.newWorkflow.replace('/workflows/', ''),
         element: <NewWorkflowPageContainer />,
       },
     ],
   },
   {
-    path: '/workflows/:id',
+    path: routes.workflow(':id'),
     element: (
       <AuthorizedRoute>
         <Outlet />
@@ -48,5 +49,10 @@ export const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [{ index: true, element: <WorkflowEditorPageContainer /> }],
+  },
+  // @TODO: Remove before prod
+  {
+    path: routes.storybook,
+    element: import.meta.env.DEV ? <Storybook /> : null,
   },
 ]);

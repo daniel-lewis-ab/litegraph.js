@@ -19,7 +19,7 @@ export const NewWorkflowPage = ({ onSubmit }: NewWorkflowPageProps) => {
   const {
     register,
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, isSubmitting },
   } = useForm<NewWorkflowFormData>();
 
   const handleFormSubmit = async (data: NewWorkflowFormData) => {
@@ -33,7 +33,7 @@ export const NewWorkflowPage = ({ onSubmit }: NewWorkflowPageProps) => {
   };
 
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="flex w-full items-center justify-center p-6">
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex w-full max-w-[340px] flex-col  items-center justify-center lg:w-[30%]"
@@ -47,10 +47,10 @@ export const NewWorkflowPage = ({ onSubmit }: NewWorkflowPageProps) => {
           {...register('name', { required: true })}
         />
         <div className="flex w-full flex-row">
-          <Button variant="glass" className="mr-4 flex-1">
+          <Button disabled={isSubmitting} variant="glass" className="mr-4 flex-1" onClick={() => navigate(-1)}>
             Cancel
           </Button>
-          <Button disabled={!isValid} variant="filled" className="flex-1" type="submit">
+          <Button disabled={!isValid} isLoading={isSubmitting} variant="filled" className="flex-1" type="submit">
             Next
           </Button>
         </div>

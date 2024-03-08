@@ -16,13 +16,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         className,
       )}
     >
-      {leftIcon && <div className="mr-3 h-[14px] w-[14px] *:text-foreground-muted">{leftIcon}</div>}
+      {leftIcon && <div className="*:text-foreground-muted mr-3 h-[14px] w-[14px]">{leftIcon}</div>}
       <input
         ref={ref}
         className={clsx(
           'w-full',
           'bg-transparent text-foreground-muted placeholder-foreground-muted outline-none',
-          variant === 'secondary' && 'rounded-lg border border-border-default px-4 py-2 text-sm',
+          variant === 'secondary' && 'border-border-default rounded-lg border px-4 py-2 text-sm',
           inputClassName,
         )}
         {...props}

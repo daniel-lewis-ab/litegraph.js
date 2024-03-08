@@ -18,4 +18,4 @@ axiosClient.interceptors.request.use(
 );
 
 // Another interceptor is added in AuthContext to clear tokens and logout if the refresh token is expired
-// @TODO: Move this axiosClient to context
+// @TODO: We might want to move this axiosClient to context
