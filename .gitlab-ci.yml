@@ -34,7 +34,7 @@ deploy-dev:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git clone $INFRASTRUCTURE_URL infrastructure
-    - cd infrastructure/manifests/orchestra-backend/overlays/dev
+    - cd infrastructure/manifests/salt-frontend/overlays/dev
     - kustomize edit set image salt-frontend=$IMAGE_TAG
     - kustomize build > ../../kustomization/dev/dev.yaml
     - git commit -am "Set salt-frontend dev image tag to $SHORT_HASH"
@@ -55,7 +55,7 @@ deploy-prod:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git clone $INFRASTRUCTURE_URL infrastructure
-    - cd infrastructure/manifests/orchestra-backend/overlays/prod
+    - cd infrastructure/manifests/salt-frontend/overlays/prod
     - kustomize edit set image salt-frontend=$IMAGE_TAG
     - kustomize build > ../../kustomization/prod/prod.yaml
     - git commit -am "Set salt-frontend prod image tag to $SHORT_HASH"
