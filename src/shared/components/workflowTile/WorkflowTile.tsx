@@ -1,13 +1,13 @@
+import { routes } from '@/routes/routes';
 import { Icon } from '@/shared/components/icon/Icon';
-import { Popover, PopoverTrigger, PopoverContent } from '@radix-ui/react-popover';
 import { faEllipsisVertical } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
-import { OptionsList } from '../optionsList/OptionsList';
-import { faRocket, faTrash, faDownload, faPen } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
+import { faDownload, faPen, faRocket, faTrash } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { faDiagramProject } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
+import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { OptionsList } from '../optionsList/OptionsList';
 import { TimeSince } from '../timeSince/TimeSince';
-import { routes } from '@/routes/routes';
 
 type Action = 'deploy' | 'edit' | 'duplicate' | 'delete' | 'rename' | 'share' | 'export';
 
@@ -30,13 +30,13 @@ export const WorkflowTile = ({ id, name, lastEdited, onActionClick }: WorkflowTi
 
   return (
     <>
-      <Link to={routes.workflow(id)}>
+      <Link to={routes.workflow(id)} className="workflowTile group">
         <div
-          className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg bg-contain px-2.5 py-3"
+          className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg border border-surface-1 px-2.5 py-3 hover:border-surface-7"
           // style={{ backgroundImage: `url(${imageUrl})` }}
         >
-          <div className="absolute inset-0 -z-10 flex justify-center bg-surface-100">
-            <Icon className="h-[45%] w-full pt-[20%] opacity-10" icon={faDiagramProject} />
+          <div className="icon absolute inset-0 -z-10 flex justify-center bg-surface-2 group-hover:bg-surface-3">
+            <Icon className="h-[45%] w-full pt-[20%] opacity-5" icon={faDiagramProject} />
           </div>
           <div className="flex flex-row justify-end">
             <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
@@ -47,11 +47,20 @@ export const WorkflowTile = ({ id, name, lastEdited, onActionClick }: WorkflowTi
                   e.preventDefault();
                 }}
               >
-                <button>
-                  <Icon size={20} icon={faEllipsisVertical} />
+                <button
+                  type="button"
+                  className="flex h-8 w-8 flex-row items-center justify-center rounded-lg bg-surface-2 p-3 hover:bg-surface-1 dark:hover:bg-surface-4"
+                >
+                  <Icon size={20} icon={faEllipsisVertical} className="text-surface-8" />
                 </button>
               </PopoverTrigger>
-              <PopoverContent side="bottom" align="end" className="z-10" onClick={(e) => e.preventDefault()}>
+              <PopoverContent
+                side="bottom"
+                sideOffset={10}
+                align="end"
+                className="PopoverContent z-10"
+                onClick={(e) => e.preventDefault()}
+              >
                 <OptionsList>
                   <OptionsList.Item icon={faRocket} onClick={() => handleActionClick('deploy')}>
                     Deploy
@@ -79,10 +88,10 @@ export const WorkflowTile = ({ id, name, lastEdited, onActionClick }: WorkflowTi
             </Popover>
           </div>
           <div>
-            <p className="text-foreground text-lg font-semibold">{name}</p>
+            <p className="text-lg font-medium text-foreground">{name}</p>
             {lastEdited && (
               <div className="mt-4 flex flex-row justify-between">
-                <p className="text-foreground-muted text-sm">
+                <p className="text-sm text-foreground-muted">
                   Edited <TimeSince time={lastEdited} />
                 </p>
                 {/* <div className="flex flex-row items-center">

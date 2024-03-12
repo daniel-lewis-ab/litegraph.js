@@ -6,12 +6,20 @@ button.button {
   color: var(--text-color);
   transition: opacity, background-color, color 0.15s ease-in-out;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   &:hover {
     opacity: 0.85;
   }
 
   &:active {
     opacity: 0.7;
+  }
+
+  & > svg {
+    color: var(--text-color);
   }
 
   &--color-secondary {
@@ -31,13 +39,12 @@ button.button {
   }
 
   &--color-surface {
-    --base-color: var(--color-surface-100);
-    --second-base-color: var(--color-surface-opacity-20);
-    --text-color: var(--color-white);
-    color: var(--color-white);
+    --base-color: var(--color-surface-4)
+    --second-base-color: var(--color-surface-4);
+    --text-color: var(--surface-12)
 
     &.button--ringed, &.button--ghost {
-      border: 1px solid var(--color-border-muted);
+      border: 1px solid var(--color-surface-5);
     }
   }
 

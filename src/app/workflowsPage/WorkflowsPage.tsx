@@ -1,16 +1,14 @@
-import { toast } from 'react-hot-toast';
-import { Icon } from '@/shared/components/icon/Icon';
-import { EmptyWorkflowsPage } from './components/EmptyWorkflowsPage';
-import { WorkflowTile } from '@/shared/components/workflowTile/WorkflowTile';
-import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
-import { faRectangleHistory, faUpload } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
-import { Input } from '@/shared/components/input/Input';
-import { faMagnifyingGlass } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { Workflow } from '@/api/types';
-import { useState } from 'react';
-import { DeleteConfirmationDialog } from './components/DeleteConfirmationDialog';
-import { Link } from 'react-router-dom';
+import { PageActions } from '@/app/workflowsPage/components/PageActions';
 import { routes } from '@/routes/routes';
+import { Icon } from '@/shared/components/icon/Icon';
+import { WorkflowTile } from '@/shared/components/workflowTile/WorkflowTile';
+import { faArrowUpRightFromSquare, faUpload } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
+import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
+import { useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { DeleteConfirmationDialog } from './components/DeleteConfirmationDialog';
+import { EmptyWorkflowsPage } from './components/EmptyWorkflowsPage';
 
 type WorkflowsPageProps = {
   workflows: Workflow[];
@@ -25,32 +23,25 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
   }
 
   return (
-    <div className="flex w-full flex-col p-6">
-      <div className="mb-6 flex flex-col *:mb-3 *:mr-4 md:flex-row md:*:mb-0">
-        <Link
-          className="border-border-muted flex flex-row items-center rounded-xl border px-3 py-2"
-          to={routes.newWorkflow}
-        >
-          <Icon size={20} icon={faPlus} className="rounded-full bg-surface-100 p-[12px]" />
-          <p className="ml-2 text-sm">New workflow</p>
-        </Link>
-        <button className="border-border-muted flex flex-row items-center rounded-xl border px-3 py-2">
-          <Icon size={20} icon={faRectangleHistory} className="rounded-full bg-surface-100 p-[12px]" />
-          <p className="ml-2 text-sm">Start from a template</p>
-        </button>
-        <button className="border-border-muted flex flex-row items-center rounded-xl border px-3 py-2">
-          <Icon size={20} icon={faUpload} className="rounded-full bg-surface-100 p-[12px]" />
-          <p className="ml-2 text-sm">Import</p>
-        </button>
+    <div className="flex w-full flex-col px-3 lg:px-16">
+      <div className="mb-16 mt-8 space-y-6">
+        <div className="flex items-center space-x-3">
+          <span className=" inline rounded-lg bg-surface-5 px-2 py-1 text-sm font-medium">Beta</span>
+          <a
+            href="/"
+            className="rounded-lg bg-amber-5 px-2 py-1 text-sm font-medium text-on-warning *:text-amber-12 dark:border-amber-12 dark:bg-amberA-5 dark:text-amber-5 dark:*:text-amber-5 dark:hover:bg-amberA-8"
+          >
+            Feedback&nbsp; <Icon icon={faArrowUpRightFromSquare} size={12} />
+          </a>
+        </div>
+        <h1 className="inline-block text-5xl font-medium">Workflows</h1>
       </div>
-      <div>
-        <Input
-          className="mb-6 max-w-sm"
-          placeholder="Search this page..."
-          leftIcon={<Icon icon={faMagnifyingGlass} />}
-        />
-      </div>
-      <div className="grid grid-cols-1 content-start gap-4 md:grid-cols-3 lg:grid-cols-4">
+      <PageActions>
+        <PageActions.Action to={routes.newWorkflow} icon={faPlus} text="New workflow" />
+        <PageActions.Action to={routes.newWorkflow} icon={faUpload} text="Import" />
+      </PageActions>
+
+      <div className="grid grid-cols-1 content-start gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {workflows.map((workflow) => (
           <WorkflowTile
             key={workflow.id}
