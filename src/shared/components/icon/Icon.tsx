@@ -1,6 +1,6 @@
 import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 
-type IconProps = {
+export type IconProps = {
   size?: number;
 } & Omit<FontAwesomeIconProps, 'size'>;
 

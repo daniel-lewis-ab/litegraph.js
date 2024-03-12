@@ -12,17 +12,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     <label
       className={clsx(
         variant === 'primary' &&
-          '0 flex flex-row rounded-lg bg-surface-100 p-4 focus-within:ring focus-within:ring-opacity-50',
+          '0 bg-surface-100 flex flex-row rounded-lg p-4 focus-within:ring focus-within:ring-opacity-50',
         className,
       )}
     >
-      {leftIcon && <div className="*:text-foreground-muted mr-3 h-[14px] w-[14px]">{leftIcon}</div>}
+      {leftIcon && <div className="mr-3 h-[14px] w-[14px] *:text-foreground-muted">{leftIcon}</div>}
       <input
         ref={ref}
         className={clsx(
           'w-full',
           'bg-transparent text-foreground-muted placeholder-foreground-muted outline-none',
-          variant === 'secondary' && 'border-border-default rounded-lg border px-4 py-2 text-sm',
+          variant === 'secondary' && 'rounded-lg border border-border-default px-4 py-2 text-sm',
           inputClassName,
         )}
         {...props}
