@@ -35,7 +35,6 @@ export default {
         11: 'var(--color-surfaceA-11)',
         12: 'var(--color-surfaceA-12)',
       },
-
       primary: {
         1: 'var(--color-primary-1)',
         2: 'var(--color-primary-2)',
