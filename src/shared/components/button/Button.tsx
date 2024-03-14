@@ -7,8 +7,8 @@ import './Button.scss';
 type ButtonProps = {
   children: ReactNode;
   className?: string;
-  variant?: 'filled' | 'ghost' | 'soft' | 'glass' | 'ringed' | 'disabled';
-  color?: 'primary' | 'secondary' | 'tertiary' | 'surface' | 'success' | 'error';
+  variant?: 'filled' | 'ghost' | 'soft' | 'glass' | 'ringed';
+  color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   disabled?: boolean;
   type?: 'button' | 'submit';
@@ -40,11 +40,11 @@ export const Button = ({
     className={clsx(
       'button',
       'rounded-lg font-medium',
-      size === 'xs' && 'space-x-1 rounded-md px-2 py-[7px] text-sm',
-      size === 'sm' && 'space-x-1 px-3 py-2 text-sm',
-      size === 'xl' && 'space-x-2 px-4 py-[13px] text-xl',
-      size === 'lg' && 'space-x-2 rounded-lg px-4 py-[10.5px] text-lg',
-      size === 'md' && 'space-x-2 px-4 py-[10px]',
+      size === 'xs' && 'space-x-1 rounded-md px-2 py-1 text-xs',
+      size === 'sm' && 'space-x-1 px-3 py-1.5 text-sm',
+      size === 'xl' && 'space-x-2 rounded-xl px-4 py-[13px] text-xl',
+      size === 'lg' && 'space-x-2 rounded-xl px-4 py-[10.5px] text-lg',
+      size === 'md' && 'space-x-2 rounded-lg px-4 py-2',
 
       variant && `button--${variant}`,
       color && `button--color-${color}`,

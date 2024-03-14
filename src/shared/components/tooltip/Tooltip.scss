@@ -2,7 +2,7 @@
   animation-duration: 0.6s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   @apply text-sm font-medium;
-  @apply rounded-lg p-2 text-foreground;
+  @apply text-text-muted rounded-lg p-2;
   @apply bg-surface-3;
   @apply flex-row content-center items-center justify-center space-x-2;
 }

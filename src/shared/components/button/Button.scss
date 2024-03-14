@@ -1,15 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 button.button {
-  --base-color: var(--color-primary);
-  --second-base-color: var(--color-primary-opacity-20);
-  --text-color: var(--color-black);
+  --base-color: var(--color-primary-10);
+  --second-base-color: var(--color-primaryA-5);
+  --text-color: var(--color-primary-1);
+  --text-color-muted: var(--color-primary-9);
+
   background-color: var(--base-color);
   color: var(--text-color);
-  transition: opacity, background-color, color 0.15s ease-in-out;
+  transition:
+    opacity,
+    background-color,
+    color 0.15s ease-in-out;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   &:hover {
     opacity: 0.85;
   }
@@ -22,79 +31,105 @@ button.button {
     color: var(--text-color);
   }
 
-  &--color-secondary {
-    --base-color: var(--color-secondary);
-    --second-base-color: var(--color-secondary-opacity-20);
-    --text-color: var(--color-white);
-
-    &.button--soft {
-      --text-color: var(--color-white);
+  &--color-primary:not([disabled]) {
+    .dark & {
+      --base-color: var(--color-primary-11);
+      &.button--ghost {
+        --text-color: var(--color-primary-11);
+      }
     }
   }
 
-  &--color-tertiary {
-    --base-color: var(--color-tertiary);
-    --second-base-color: var(--color-tertiary-opacity-20);
-    --text-color: var(--color-black);
-  }
+  &--color-secondary {
+    --base-color: var(--color-secondary-9);
+    --second-base-color: var(--color-secondaryA-5);
+    --text-color: white;
+    --text-color-muted: var(--color-secondary-9);
 
-  &--color-surface {
-    --base-color: var(--color-surface-4)
-    --second-base-color: var(--color-surface-4);
-    --text-color: var(--surface-12)
+    &.button--ghost,
+    &.button--soft,
+    &.button--glass {
+      --text-color: var(--color-secondaryA-11);
+    }
+    &.button--ringed {
+      --text-color: var(--color-secondary-11);
+    }
 
-    &.button--ringed, &.button--ghost {
-      border: 1px solid var(--color-surface-5);
+    .dark & {
+      --text-color: var(--color-secondary-12);
     }
   }
 
   &--color-success {
-    --base-color: var(--color-success);
-    --second-base-color: var(--color-success-opacity-20);
-    --text-color: var(--color-black);
+    --base-color: var(--color-success-9);
+    --second-base-color: var(--color-success-4);
+    --text-color: var(--color-success-1);
+    --text-color-muted: var(--color-success-10);
 
-    &.button--glass, &.button--ringed {
-      --text-color: var(--base-color);
+    &.button--ghost {
+      --text-color: var(--text-color-muted);
+    }
+
+    &.button--glass,
+    &.button--ringed {
+      --text-color: var(--color-success-10);
     }
   }
 
   &--color-error {
-    --base-color: var(--color-error);
-    --second-base-color: var(--color-error-opacity-20);
-    --text-color: var(--color-black);
+    --base-color: var(--color-error-10);
+    --second-base-color: var(--color-errorA-5);
+    --text-color: var(--color-error-1);
+    --text-color-muted: var(--color-error-10);
+  }
 
-    &.button--glass, &.button--ringed {
-      --text-color: var(--base-color);
+  &--color-warning {
+    --base-color: var(--color-warning-8);
+    --second-base-color: var(--color-warningA-5);
+    --text-color: var(--color-warning-1);
+    --text-color-muted: var(--color-warning-11);
+
+    .dark & {
+      --base-color: var(--color-warning-9);
+    }
+  }
+
+  &--color-disabled,
+  &[disabled] {
+    user-select: none !important;
+    pointer-events: none !important;
+    --base-color: var(--color-disabled-7);
+    --second-base-color: var(--color-disabled-4);
+    --text-color: var(--color-disabled-11);
+    --text-color-muted: var(--color-disabled-8);
+
+    &.button--ringed {
+      --text-color: var(--color-disabled-11);
     }
   }
 
   // Variants
-  &--ghost {
-    border: 1px solid var(--base-color);
-    background-color: var(--second-base-color);
-    --text-color: var(--base-color);
-  }
-
-  &--soft {
-    background-color: var(--second-base-color);
-    --text-color: var(--base-color);
-  }
-
-  &--glass {
-    background-color: var(--second-base-color);
-    --text-color: var(--color-white);
-  }
 
   &--ringed {
     border: 1px solid var(--base-color);
     background-color: transparent;
-    --text-color: var(--color-white);
+    --text-color: var(--base-color);
   }
 
-  &--disabled {
-    background-color: var(--color-disabled);
-    border: none !important;
-    color: var(--color-on-disabled) !important;
-    pointer-events: none;
+  &--ghost {
+    border: 1px solid var(--base-color);
+    background-color: var(--second-base-color);
+    --text-color: var(--text-color-muted);
+  }
+
+  &--soft {
+    background-color: var(--second-base-color);
+    --text-color: var(--text-color-muted);
+  }
+
+  &--glass {
+    background-color: var(--second-base-color);
+    --text-color: var(--text-color-muted);
+    backdrop-filter: blur(15px);
   }
 }

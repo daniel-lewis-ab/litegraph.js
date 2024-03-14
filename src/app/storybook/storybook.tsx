@@ -4,9 +4,7 @@ import { Button } from '@/shared/components/button/Button';
 import { Icon } from '@/shared/components/icon/Icon';
 import { Input } from '@/shared/components/input/Input';
 import { OptionsList } from '@/shared/components/optionsList/OptionsList';
-import { faArrowAltCircleRight } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import {
-  faArrowAltCircleLeft,
   faDownload,
   faGalleryThumbnails,
   faMagnifyingGlass,
@@ -21,51 +19,36 @@ import { faMoonStars, faSunBright } from '@awesome.me/kit-b6cda292ae/icons/sharp
 import { faClone, faICursor, faPen, faTrash } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { PageActions } from '../workflowsPage/components/PageActions';
 
-const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => (
-  <div className="flex flex-col items-start">
-    <div className="flex flex-row *:mb-4 *:mr-4">
-      <Button size={size} color="primary" leftIcon={faArrowAltCircleLeft} rightIcon={faArrowAltCircleRight}>
+const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; }) => (
+  <div className="flex flex-col items-start space-y-4">
+    <div className="flex flex-row items-center *:mr-4">
+      <h3 className="w-[120px]">Primary</h3>
+      <Button size={size} color="primary">
         Filled
-      </Button>
-      <Button
-        size={size}
-        color="primary"
-        variant="ghost"
-        leftIcon={faArrowAltCircleLeft}
-        rightIcon={faArrowAltCircleRight}
-      >
-        Ghost
-      </Button>
-      <Button
-        size={size}
-        color="primary"
-        variant="soft"
-        leftIcon={faArrowAltCircleLeft}
-        rightIcon={faArrowAltCircleRight}
-      >
-        Soft
-      </Button>
-      <Button
-        size={size}
-        color="primary"
-        variant="glass"
-        leftIcon={faArrowAltCircleLeft}
-        rightIcon={faArrowAltCircleRight}
-      >
-        Glass
       </Button>
       <Button size={size} color="primary" variant="ringed">
         Ringed
       </Button>
-      <Button size={size} disabled color="primary" variant="ringed">
-        Disabled
+      <Button size={size} color="primary" variant="ghost">
+        Ghost
+      </Button>
+      <Button size={size} color="primary" variant="soft">
+        Soft
+      </Button>
+      <Button size={size} color="primary" variant="glass">
+        Glass
       </Button>
     </div>
-    <div className="flex flex-row *:mb-4 *:mr-4">
-      <Button size={size} color="secondary" leftIcon={faArrowAltCircleLeft} rightIcon={faArrowAltCircleRight}>
+
+    <div className="flex flex-row items-center *:mr-4">
+      <h3 className="w-[120px]">Secondary</h3>
+      <Button size={size} color="secondary">
         Filled
       </Button>
-      <Button size={size} color="secondary" variant="ghost" leftIcon={faArrowAltCircleLeft}>
+      <Button size={size} color="secondary" variant="ringed">
+        Ringed
+      </Button>
+      <Button size={size} color="secondary" variant="ghost">
         Ghost
       </Button>
       <Button size={size} color="secondary" variant="soft">
@@ -74,56 +57,33 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => (
       <Button size={size} color="secondary" variant="glass">
         Glass
       </Button>
-      <Button size={size} color="secondary" variant="ringed">
-        Ringed
-      </Button>
-      <Button size={size} disabled color="secondary" variant="ringed">
-        Disabled
-      </Button>
     </div>
-    <div className="flex flex-row *:mb-4 *:mr-4">
-      <Button size={size} color="tertiary" leftIcon={faArrowAltCircleLeft} rightIcon={faArrowAltCircleRight}>
+
+    <div className="flex flex-row items-center *:mr-4">
+      <h3 className="w-[120px]">Disabled</h3>
+      <Button size={size} disabled variant="filled">
         Filled
       </Button>
-      <Button size={size} color="tertiary" variant="ghost">
-        Ghost
-      </Button>
-      <Button size={size} color="tertiary" variant="soft">
-        Soft
-      </Button>
-      <Button size={size} color="tertiary" variant="glass">
-        Glass
-      </Button>
-      <Button size={size} color="tertiary" variant="ringed">
+      <Button size={size} disabled variant="ringed">
         Ringed
       </Button>
-      <Button size={size} disabled color="tertiary" variant="ringed">
-        Disabled
-      </Button>
-    </div>
-    <div className="flex flex-row *:mb-4 *:mr-4">
-      <Button size={size} color="surface" leftIcon={faArrowAltCircleLeft} rightIcon={faArrowAltCircleRight}>
-        Filled
-      </Button>
-      <Button size={size} color="surface" variant="ghost">
+      <Button size={size} disabled variant="ghost">
         Ghost
       </Button>
-      <Button size={size} color="surface" variant="soft">
+      <Button size={size} disabled variant="soft">
         Soft
       </Button>
-      <Button size={size} color="surface" variant="glass">
+      <Button size={size} disabled variant="glass">
         Glass
       </Button>
-      <Button size={size} color="surface" variant="ringed">
-        Ringed
-      </Button>
-      <Button size={size} disabled color="surface" variant="ringed">
-        Disabled
-      </Button>
     </div>
-    <div className="flex flex-row *:mb-4 *:mr-4">
+    <div className="flex flex-row items-center *:mr-4">
+      <h3 className="w-[120px]">Success</h3>
       <Button size={size} color="success">
         Filled
+      </Button>
+      <Button size={size} color="success" variant="ringed">
+        Ringed
       </Button>
       <Button size={size} color="success" variant="ghost">
         Ghost
@@ -134,11 +94,41 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => (
       <Button size={size} color="success" variant="glass">
         Glass
       </Button>
-      <Button size={size} color="success" variant="ringed">
+    </div>
+    <div className="flex flex-row items-center *:mr-4">
+      <h3 className="w-[120px]">Error</h3>
+      <Button size={size} color="error">
+        Filled
+      </Button>
+      <Button size={size} color="error" variant="ringed">
         Ringed
       </Button>
-      <Button size={size} disabled color="success" variant="ringed">
-        Disabled
+      <Button size={size} color="error" variant="ghost">
+        Ghost
+      </Button>
+      <Button size={size} color="error" variant="soft">
+        Soft
+      </Button>
+      <Button size={size} color="error" variant="glass">
+        Glass
+      </Button>
+    </div>
+    <div className="flex flex-row items-center *:mr-4">
+      <h3 className="w-[120px]">Warning</h3>
+      <Button size={size} color="warning">
+        Filled
+      </Button>
+      <Button size={size} color="warning" variant="ringed">
+        Ringed
+      </Button>
+      <Button size={size} color="warning" variant="ghost">
+        Ghost
+      </Button>
+      <Button size={size} color="warning" variant="soft">
+        Soft
+      </Button>
+      <Button size={size} color="warning" variant="glass">
+        Glass
       </Button>
     </div>
   </div>
@@ -162,7 +152,7 @@ export const Storybook = () => {
           Theme: {theme}
         </Button>
       </div>
-      <h2 className="text-xl">Input</h2>
+      <h2 className="text-2xl">Inputs</h2>
       <div className="flex flex-col items-start *:mr-4">
         <p>Primary</p>
         <Input placeholder="Search this page..." leftIcon={<Icon icon={faMagnifyingGlass} />} />
@@ -171,7 +161,7 @@ export const Storybook = () => {
         <p>Secondary</p>
         <Input placeholder="My workflow name" variant="secondary" />
       </div>
-      <h2 className="mt-6 text-xl">Options list</h2>
+      <h2 className="mt-6 text-2xl">Options list</h2>
       <div style={{ width: 200 }}>
         <OptionsList>
           <OptionsList.Item icon={faRocket} onClick={() => console.log('edit')}>
@@ -197,17 +187,17 @@ export const Storybook = () => {
           </OptionsList.Item>
         </OptionsList>
       </div>
-      <h2 className="mt-6 text-xl">Buttons</h2>
-      <div className="flex flex-col">
-        <p>xl</p>
+      <h2 className="mt-6 text-2xl">Buttons</h2>
+      <div className="flex flex-col space-y-5">
+        <h3 className="text-xl">xl</h3>
         <ButtonSeries size="xl" />
-        <p>lg</p>
+        <h3 className="text-xl">lg</h3>
         <ButtonSeries size="lg" />
-        <p>md</p>
+        <h3 className="text-xl">md</h3>
         <ButtonSeries size="md" />
-        <p>sm</p>
+        <h3 className="text-xl">sm</h3>
         <ButtonSeries size="sm" />
-        <p>xs</p>
+        <h3 className="text-xl">xs</h3>
         <ButtonSeries size="xs" />
       </div>
       <h2 className="mb-4 mt-6 text-xl">Page Actions</h2>

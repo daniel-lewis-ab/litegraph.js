@@ -34,10 +34,10 @@ export const SideMenu = () => {
   return (
     <Tooltip.Provider>
       <Tooltip.Root>
-        <nav className="bg-surface-3 dark:bg-surface-2 sticky top-0 z-10 flex max-h-screen min-w-[80px] flex-col justify-between space-y-4">
+        <nav className="sticky top-0 z-10 flex max-h-screen min-w-[80px] flex-col justify-between space-y-4 bg-surface-3 dark:bg-surface-2">
           <div className="flex flex-col">
             <SideMenuButton to="/">
-              <Logo className="fill-foreground" />
+              <Logo className="fill-text-base" />
             </SideMenuButton>
 
             <SideMenuButton to="/workflows" tooltip="Workflows">
@@ -107,7 +107,7 @@ const SideMenuButton = ({ children, to, onClick, tooltip, tooltipIcon }: SideMen
     <Tooltip.Root delayDuration={300}>
       <Tooltip.Trigger>
         <button onClick={onClick} className="group flex h-[80px] w-[80px] p-2" type="button">
-          <div className="*:text-surface-8 *:hover:text-surface-10 flex h-full w-full items-center justify-center">
+          <div className="flex h-full w-full items-center justify-center *:text-surface-8 *:hover:text-surface-10">
             {children}
           </div>
         </button>

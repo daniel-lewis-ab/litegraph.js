@@ -33,7 +33,7 @@ export const WorkflowTile = ({ id, name, lastEdited, onActionClick }: WorkflowTi
       <Link to={routes.workflow(id)} className="workflowTile group">
         <div
           className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg border border-surface-1 px-2.5 py-3 hover:border-surface-7"
-          // style={{ backgroundImage: `url(${imageUrl})` }}
+        // style={{ backgroundImage: `url(${imageUrl})` }}
         >
           <div className="icon absolute inset-0 -z-10 flex justify-center bg-surface-2 group-hover:bg-surface-3">
             <Icon className="h-[45%] w-full pt-[20%] opacity-5" icon={faDiagramProject} />
@@ -88,15 +88,15 @@ export const WorkflowTile = ({ id, name, lastEdited, onActionClick }: WorkflowTi
             </Popover>
           </div>
           <div>
-            <p className="text-lg font-medium text-foreground">{name}</p>
+            <p className="text-text-base text-lg font-medium">{name}</p>
             {lastEdited && (
               <div className="mt-4 flex flex-row justify-between">
-                <p className="text-sm text-foreground-muted">
+                <p className="text-text-muted text-sm">
                   Edited <TimeSince time={lastEdited} />
                 </p>
                 {/* <div className="flex flex-row items-center">
-                <Icon className="text-foreground-muted mr-1" size={19} icon={faCircleNodes} />
-                <p className="text-foreground">{nodesCount}</p>
+                <Icon className="text-text-muted mr-1" size={19} icon={faCircleNodes} />
+                <p className="text-text-base">{nodesCount}</p>
               </div> */}
               </div>
             )}
