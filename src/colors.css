@@ -11,6 +11,15 @@
   /* background */
   --color-page-background: var(--color-surface-1);
 
+  /* icons */
+  --color-icon-muted: var(--color-surface-9);
+  --color-icon-base: var(--color-text-base);
+
+  /* borders */
+  --color-border-muted: var(--color-surface-6);
+  --color-border-base: var(--color-surface-8);
+  --color-border-strong: var(--color-surface-11);
+
   /* color sets */
   --color-surface-1: var(--color-mercury-1);
   --color-surface-2: var(--color-mercury-2);
