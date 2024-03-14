@@ -1,131 +1,40 @@
+@import 'colors.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /* Mercury Colors have both Light and Dark values */
-  :root[class~='light'] {
-    --color-token-mercury-1: #fbfbfd;
-    --color-token-mercury-2: #f3f3f6;
-    --color-token-mercury-3: #eeeef1;
-    --color-token-mercury-4: #e9e9ec;
-    --color-token-mercury-5: #e3e3e6;
-    --color-token-mercury-6: #dbdbe0;
-    --color-token-mercury-7: #c1c1c7;
-    --color-token-mercury-8: #b6b6be;
-    --color-token-mercury-9: #86868e;
-    --color-token-mercury-10: #7a7a81;
-    --color-token-mercury-11: #5e5e66;
-    --color-token-mercury-12: #09090b;
-  }
-
-  :root[class~='dark'] {
-    --color-token-mercury-1: #09090b;
-    --color-token-mercury-2: #17171c;
-    --color-token-mercury-3: #22222a;
-    --color-token-mercury-4: #2a2a32;
-    --color-token-mercury-5: #30303b;
-    --color-token-mercury-6: #34343d;
-    --color-token-mercury-7: #44444f;
-    --color-token-mercury-8: #575766;
-    --color-token-mercury-9: #636370;
-    --color-token-mercury-10: #787883;
-    --color-token-mercury-11: #aaaab2;
-    --color-token-mercury-12: #ededed;
-  }
-
   :root {
-    --color-page-background: var(--color-token-mercury-1);
-    /* Colors defined for themes */
-    --color-token-purple-400: #a697f9;
-    --color-token-purple-500: #8566ff;
-
-    --color-token-bluegray-300: #b8b8cc;
-    --color-token-bluegray-500: #4c4b7f;
-
-    --color-token-cerulean-400: #75bdd1;
-    --color-token-cerulean-500: #4aa2bd;
-
-    --color-token-OLD-midnight-600: #626289;
-
-    /* ENDOF defined for themes */
-
-    /* Common colors for both themes */
-    --color-success: #4ab637;
-    --color-success-opacity-20: rgba(74, 182, 55, 0.2);
-    --color-warning: #d5a84c;
-    --color-warning-opacity-20: rgba(213, 168, 76, 0.2);
-    --color-error: #fe4949;
-    --color-error-opacity-20: rgba(254, 73, 73, 0.2);
-    --color-info: #acd9f3;
-    --color-info-opacity-20: rgba(172, 217, 243, 0.2);
-    --color-white: #ffffff;
-    --color-black: #000000;
-
-    --color-on-primary: #000000;
-    --color-on-tertiary: #000000;
-    --color-on-success: #000000;
-    --color-on-error: #000000;
-    --color-on-warning: #000000;
-
-    /* Light theme */
-    --color-primary: var(--color-token-purple-400);
-    --color-primary-opacity-20: rgba(166, 151, 249, 0.2);
-    --color-secondary: var(--color-token-bluegray-300);
-    --color-secondary-opacity-20: rgba(184, 184, 204, 0.2);
-    --color-on-secondary: #000000;
-    --color-tertiary: var(--color-token-cerulean-400);
-    --color-tertiary-opacity-20: rgba(117, 189, 209, 0.2);
-    --color-foreground: var(--color-token-mercury-12);
-    --color-foreground-muted: var(--color-token-mercury-10);
-    --color-foreground-muted-icon: var(--color-token-mercury-8);
-    --color-border-default: var(--color-token-mercury-7);
-    --color-border-muted: var(--color-token-mercury-6);
-    --color-border-strong: var(--color-token-mercury-8);
-    --color-disabled: #5d5b83;
-    --color-on-disabled: #e3e0f8;
-
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family:
+      'Inter',
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      'Helvetica Neue',
+      Arial,
+      sans-serif;
     font-weight: 400;
     background-color: var(--color-page-background);
-    color: var(--color-foreground);
-
+    color: var(--color-text-base);
     /* @TODO: Update */
+
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+}
 
-  p,
-  svg,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: var(--color-foreground);
-  }
-
-  :root[class~='dark'] {
-    --color-page-background: var(--color-token-mercury-1);
-    --color-primary: #ff9b61;
-    --color-primary-opacity-20: rgba(255, 155, 97, 0.2);
-    --color-secondary: #716d9c;
-    --color-secondary-opacity-20: rgba(113, 109, 156, 0.2);
-    --color-on-secondary: #000;
-    --color-tertiary: var(--color-token-cerulean-400);
-    --color-tertiary-opacity-20: rgba(117, 189, 209, 0.2);
-    --border-gray-pale: #d3d3df;
-    --color-disabled: #3e3d48;
-    --color-on-disabled: #b3b1c4;
-    --color-warning: #dea002;
-    --color-warning-opacity-20: rgba(222, 160, 2, 0.2);
-    --color-error: #f85858;
-    --color-error-opacity-20: rgba(248, 88, 88, 0.2);
-    --color-info: #3f63f3;
-    --color-info-opacity-20: rgba(63, 99, 243, 0.2);
-  }
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text-base);
 }
 
 button {

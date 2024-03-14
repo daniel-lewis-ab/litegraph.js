@@ -1,6 +1,7 @@
 import { Workflow } from '@/api/types';
 import { PageActions } from '@/app/workflowsPage/components/PageActions';
 import { routes } from '@/routes/routes';
+import { Button } from '@/shared/components/button/Button';
 import { Icon } from '@/shared/components/icon/Icon';
 import { WorkflowTile } from '@/shared/components/workflowTile/WorkflowTile';
 import { faArrowUpRightFromSquare, faUpload } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
@@ -26,13 +27,10 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
     <div className="flex w-full flex-col px-3 lg:px-16">
       <div className="mb-16 mt-8 space-y-6">
         <div className="flex items-center space-x-3">
-          <span className=" inline rounded-lg bg-surface-5 px-2 py-1 text-sm font-medium">Beta</span>
-          <a
-            href="/"
-            className="rounded-lg bg-amber-5 px-2 py-1 text-sm font-medium text-on-warning *:text-amber-12 dark:border-amber-12 dark:bg-amberA-5 dark:text-amber-5 dark:*:text-amber-5 dark:hover:bg-amberA-8"
-          >
+          <span className="text-secondary-12 inline rounded-lg  bg-surface-5 px-2 py-1 text-sm font-medium">Beta</span>
+          <Button variant="filled" color="secondary" size="xs">
             Feedback&nbsp; <Icon icon={faArrowUpRightFromSquare} size={12} />
-          </a>
+          </Button>
         </div>
         <h1 className="inline-block text-5xl font-medium">Workflows</h1>
       </div>
@@ -41,7 +39,7 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
         <PageActions.Action to={routes.newWorkflow} icon={faUpload} text="Import" />
       </PageActions>
 
-      <div className="grid grid-cols-1 content-start gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="3xl:grid-cols-5 grid grid-cols-1 content-start gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {workflows.map((workflow) => (
           <WorkflowTile
             key={workflow.id}
