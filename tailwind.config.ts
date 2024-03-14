@@ -21,6 +21,21 @@ export default {
         11: 'var(--color-surface-11)',
         12: 'var(--color-surface-12)',
       },
+      surfaceA: {
+        1: 'var(--color-surfaceA-1)',
+        2: 'var(--color-surfaceA-2)',
+        3: 'var(--color-surfaceA-3)',
+        4: 'var(--color-surfaceA-4)',
+        5: 'var(--color-surfaceA-5)',
+        6: 'var(--color-surfaceA-6)',
+        7: 'var(--color-surfaceA-7)',
+        8: 'var(--color-surfaceA-8)',
+        9: 'var(--color-surfaceA-9)',
+        10: 'var(--color-surfaceA-10)',
+        11: 'var(--color-surfaceA-11)',
+        12: 'var(--color-surfaceA-12)',
+      },
+
       primary: {
         1: 'var(--color-primary-1)',
         2: 'var(--color-primary-2)',
