@@ -31,7 +31,7 @@ export const useCreateWorkflowMutation = () => {
 
   const { mutate, ...rest } = useMutation<Workflow, Error, CreateWorkflowData>({
     mutationFn: createWorkflow,
-    onSuccess: (newWorkflow) => {
+    onSuccess: async (newWorkflow) => {
       queryClient.setQueryData<GetWorkflowsResponse>(QueryKeys.workflows, (oldData) => {
         const oldWorkflows = oldData?.results ?? [];
         const newData = {
@@ -42,7 +42,7 @@ export const useCreateWorkflowMutation = () => {
         return newData;
       });
 
-      queryClient.invalidateQueries({ queryKey: QueryKeys.workflows });
+      await queryClient.invalidateQueries({ queryKey: QueryKeys.workflows });
     },
   });
 

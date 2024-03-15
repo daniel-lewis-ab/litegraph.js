@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     react(),
     checker({
-      // e.g. use TypeScript check
+      overlay: false,
       typescript: true,
     }),
   ],

@@ -52,14 +52,14 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
           <LogoFull className="mb-14" />
           <h1 className="mb-14 text-5xl font-bold">Login or sign up</h1>
           <button
-            className="flex w-full max-w-md flex-row justify-center rounded-lg bg-surface-12 py-3"
+            className="bg-surface-12 flex w-full max-w-md flex-row justify-center rounded-lg py-3 transition-all hover:opacity-95 active:opacity-90"
             onClick={() => handleLogin('google')}
           >
             <GoogleIcon />
             <p className="ml-5 font-semibold text-black">Sign in with Google</p>
           </button>
           <button
-            className="mt-3 flex w-full max-w-md flex-row justify-center rounded-lg bg-surface-12 py-3"
+            className="bg-surface-12 mt-3 flex w-full max-w-md flex-row justify-center rounded-lg py-3 transition-all hover:opacity-95 active:opacity-90"
             onClick={() => handleLogin('github')}
           >
             <GitHubIcon />

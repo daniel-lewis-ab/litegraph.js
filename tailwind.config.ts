@@ -1,3 +1,4 @@
+import type { Config } from 'tailwindcss';
 const colors = require('tailwindcss/colors');
 
 export default {
@@ -174,6 +175,34 @@ export default {
         10: 'var(--color-errorA-10)',
         11: 'var(--color-errorA-11)',
         12: 'var(--color-errorA-12)',
+      },
+      success: {
+        1: 'var(--color-success-1)',
+        2: 'var(--color-success-2)',
+        3: 'var(--color-success-3)',
+        4: 'var(--color-success-4)',
+        5: 'var(--color-success-5)',
+        6: 'var(--color-success-6)',
+        7: 'var(--color-success-7)',
+        8: 'var(--color-success-8)',
+        9: 'var(--color-success-9)',
+        10: 'var(--color-success-10)',
+        11: 'var(--color-success-11)',
+        12: 'var(--color-success-12)',
+      },
+      successA: {
+        1: 'var(--color-successA-1)',
+        2: 'var(--color-successA-2)',
+        3: 'var(--color-successA-3)',
+        4: 'var(--color-successA-4)',
+        5: 'var(--color-successA-5)',
+        6: 'var(--color-successA-6)',
+        7: 'var(--color-successA-7)',
+        8: 'var(--color-successA-8)',
+        9: 'var(--color-successA-9)',
+        10: 'var(--color-successA-10)',
+        11: 'var(--color-successA-11)',
+        12: 'var(--color-successA-12)',
       },
       'page-background': 'var(--color-page-background)',
       text: {

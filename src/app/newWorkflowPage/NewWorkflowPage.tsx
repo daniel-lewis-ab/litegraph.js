@@ -28,6 +28,7 @@ export const NewWorkflowPage = ({ onSubmit }: NewWorkflowPageProps) => {
       navigate(routes.workflows);
       toast.success('Workflow successfully created');
     } catch (e) {
+      console.error(e);
       toast.error('Failed to create workflow');
     }
   };

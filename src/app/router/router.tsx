@@ -9,6 +9,7 @@ import { routes } from '@/routes/routes';
 import { NewWorkflowPageContainer } from '../newWorkflowPage/NewWorkflowPageContainer';
 import { WorkflowEditorPageContainer } from '../workflowEditorPageContainer/WorkflowEditorPageContainer';
 import { HomePage } from '../homePage/HomePage';
+import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageContainer';
 
 export const router = createBrowserRouter([
   {
@@ -37,6 +38,22 @@ export const router = createBrowserRouter([
       {
         path: routes.newWorkflow.replace('/workflows/', ''),
         element: <NewWorkflowPageContainer />,
+      },
+    ],
+  },
+  {
+    path: routes.deployments,
+    element: (
+      <AuthorizedRoute>
+        <Layout>
+          <Outlet />
+        </Layout>
+      </AuthorizedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <DeploymentsPageContainer />,
       },
     ],
   },

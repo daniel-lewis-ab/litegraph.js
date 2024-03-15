@@ -37,7 +37,7 @@ Dialog.Content = forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={clsx(
-        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0  data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] bg-page-background fixed left-[50%] top-[50%] z-50 flex max-w-lg translate-x-[-50%] translate-y-[-50%] flex-col px-6 py-8 shadow-lg duration-200 sm:rounded-xl',
+        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0  data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] bg-surface-2 fixed left-[50%] top-[50%] z-50 flex min-w-[30%] max-w-lg translate-x-[-50%] translate-y-[-50%] flex-col p-6 shadow-lg duration-200 sm:rounded-xl',
         className,
       )}
       {...props}
@@ -54,7 +54,7 @@ Dialog.Content.displayName = DialogPrimitive.Content.displayName;
 
 // eslint-disable-next-line react/display-name
 Dialog.Header = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={clsx('mb-3 flex flex-col text-center', className)} {...props} />
+  <div className={clsx('mb-5 flex flex-col text-center', className)} {...props} />
 );
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -64,7 +64,7 @@ Dialog.Title = forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
-  <DialogPrimitive.Title ref={ref} className={clsx('text-xl font-medium', className)} {...props} />
+  <DialogPrimitive.Title ref={ref} className={clsx('text-text-base text-xl font-semibold', className)} {...props} />
 ));
 
 Dialog.Title.displayName = DialogPrimitive.Title.displayName;

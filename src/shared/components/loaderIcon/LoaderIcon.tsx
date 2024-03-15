@@ -7,5 +7,5 @@ type LoaderIconProps = {
 };
 
 export const LoaderIcon = ({ className }: LoaderIconProps) => (
-  <Icon icon={faLoader} className={clsx('animate-spin', className)} />
+  <Icon icon={faLoader} className={clsx('animate-spin', className)} size={24} />
 );

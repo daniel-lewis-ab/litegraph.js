@@ -3,4 +3,6 @@ export const apiEndpoints = {
   refreshToken: '/v1/token/refresh',
   workflows: '/v1/workflows/',
   workflow: (id: string) => `/v1/workflows/${id}`,
+  deployments: '/v1/deployments/',
+  deployment: (id: string) => `/v1/deployments/${id}`,
 };

@@ -4,28 +4,36 @@ import { WarningDialogContent } from '@/shared/components/warningDialog/WarningD
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 
-type DeleteConfirmationDialogProps = {
+type DeleteDeploymentConfirmationDialogProps = {
   isOpen: boolean;
-  onConfirm: () => Promise<void>;
+  onConfirm: () => Promise<boolean>;
   onClose: () => void;
 };
 
-export const DeleteConfirmationDialog = ({ isOpen, onConfirm, onClose }: DeleteConfirmationDialogProps) => {
+export const DeleteDeploymentConfirmationDialog = ({
+  isOpen,
+  onConfirm,
+  onClose,
+}: DeleteDeploymentConfirmationDialogProps) => {
   const [isDeleting, setIsDeleting] = useState(false);
 
   return (
     <Dialog.Root open={isOpen} onOpenChange={(open) => open === false && onClose()}>
-      <Dialog.Content>
-        <WarningDialogContent title="Confirm deletion" desc="Are you sure you want to delete this workflow?">
+      <Dialog.Content className="w-[38%]">
+        <WarningDialogContent
+          title="Confirm deletion"
+          desc="Are you sure you want to delete the deployed workflow? This action is irreversible."
+        >
           <Button
             color="error"
+            variant="filled"
             className="mb-3"
             onClick={async () => {
               setIsDeleting(true);
               try {
                 await onConfirm();
                 setIsDeleting(false);
-                toast.success('Workflow successfully deleted');
+                toast.success('Deployment successfully deleted');
                 onClose();
               } catch (e) {
                 setIsDeleting(false);
@@ -36,7 +44,7 @@ export const DeleteConfirmationDialog = ({ isOpen, onConfirm, onClose }: DeleteC
           >
             Delete
           </Button>
-          <Button disabled={isDeleting} onClick={onClose} color="secondary" variant="glass">
+          <Button disabled={isDeleting} onClick={onClose} color="secondary" variant="filled">
             Cancel
           </Button>
         </WarningDialogContent>

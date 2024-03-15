@@ -1,5 +1,5 @@
+import { DetailedHTMLProps, InputHTMLAttributes, ReactNode, forwardRef, useImperativeHandle, useRef } from 'react';
 import clsx from 'clsx';
-import { DetailedHTMLProps, InputHTMLAttributes, ReactNode, forwardRef } from 'react';
 
 export type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   leftIcon?: ReactNode;
@@ -8,27 +8,39 @@ export type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ leftIcon, className, inputClassName, variant = 'primary', ...props }, ref) => (
-    <label
-      className={clsx(
-        variant === 'primary' &&
-        '0 flex flex-row rounded-lg bg-surface-2 p-4 focus-within:ring focus-within:ring-opacity-50',
-        className,
-      )}
-    >
-      {leftIcon && <div className="*:text-text-muted mr-3 h-[14px] w-[14px]">{leftIcon}</div>}
-      <input
-        ref={ref}
+  ({ leftIcon, className, inputClassName, variant = 'primary', ...props }, ref) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    const focusInput = () => {
+      inputRef.current?.focus();
+    };
+
+    useImperativeHandle(ref, () => inputRef.current as unknown as HTMLInputElement);
+
+    return (
+      <div
         className={clsx(
-          'w-full',
-          'text-text-muted placeholder-text-muted bg-transparent outline-none',
-          variant === 'secondary' && 'rounded-lg border border-border-default px-4 py-2 text-sm',
-          inputClassName,
+          variant === 'primary' &&
+            '0 bg-surface-2 flex flex-row rounded-lg p-4 focus-within:ring focus-within:ring-opacity-50',
+          className,
         )}
-        {...props}
-      />
-    </label>
-  ),
+        onClick={focusInput}
+      >
+        {leftIcon && <div className="*:text-text-muted mr-3 h-[14px] w-[14px]">{leftIcon}</div>}
+        <input
+          ref={inputRef}
+          className={clsx(
+            'w-full',
+            'text-text-basetext-text-base placeholder-text-muted font-plex-mono font-medium outline-none',
+            variant === 'primary' && 'bg-transparent',
+            variant === 'secondary' && 'bg-surface-4  rounded-lg px-4 py-2 text-sm',
+            inputClassName,
+          )}
+          {...props}
+        />
+      </div>
+    );
+  },
 );
 
 Input.displayName = 'Input';
