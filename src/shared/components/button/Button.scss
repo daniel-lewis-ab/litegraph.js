@@ -33,9 +33,9 @@ button.button {
 
   &--color-primary:not([disabled]) {
     .dark & {
-      --base-color: var(--color-primary-11);
+      --base-color: var(--color-primary-10);
       &.button--ghost {
-        --text-color: var(--color-primary-11);
+        --text-color: var(--color-primary-10);
       }
     }
   }

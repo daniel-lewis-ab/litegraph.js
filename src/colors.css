@@ -332,8 +332,8 @@
   --color-creamsicle-7: #643a1f;
   --color-creamsicle-8: #814c2a;
   --color-creamsicle-9: #c07441;
-  --color-creamsicle-10: #de8a51;
-  --color-creamsicle-11: #f7a167;
+  --color-creamsicle-10: #f7a167;
+  --color-creamsicle-11: #facbac;
   --color-creamsicle-12: #ffffff;
 
   --color-creamsicleA-1: hsla(23, 100%, 5%, 0.99);
@@ -344,9 +344,9 @@
   --color-creamsicleA-6: hsla(23, 97%, 13%, 0.91);
   --color-creamsicleA-7: hsla(24, 100%, 16%, 0.88);
   --color-creamsicleA-8: hsla(24, 98%, 21%, 0.84);
-  --color-creamsicleA-9: hsla(24, 98%, 34%, 0.75);
-  --color-creamsicleA-10: hsla(24, 97%, 41%, 0.69);
-  --color-creamsicleA-11: hsla(24, 98%, 48%, 0.6);
+  --color-creamsicleA-9: hsla(24, 98%, 34%, 0.5);
+  --color-creamsicleA-10: hsla(24, 97%, 71%, 0.98);
+  --color-creamsicleA-11: hsla(24, 98%, 81%, 0.98);
   --color-creamsicleA-12: hsla(0, 0%, 100%, 1);
 
   --color-eggplant-1: #1c1b28;
@@ -518,7 +518,7 @@
   --color-creamsicleA-8: hsla(23, 97%, 49%, 0.39);
   --color-creamsicleA-9: hsla(24, 100%, 50%, 0.54);
   --color-creamsicleA-10: hsla(23, 100%, 48%, 0.64);
-  --color-creamsicleA-11: hsla(22, 98%, 47%, 0.71);
+  --color-creamsicleA-11: hsla(22, 99%, 42%, 0.82);
   --color-creamsicleA-12: hsla(23, 100%, 5%, 0.99);
 
   --color-eggplant-1: #fefdfd;
