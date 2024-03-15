@@ -34,14 +34,16 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
         <PageActions.Action to={routes.newWorkflow} icon={faUpload} text="Import" />
       </PageActions>
 
-      <div className="3xl:grid-cols-5 grid grid-cols-1 content-start gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-1 content-start gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
         {workflows.map((workflow) => (
           <WorkflowTile
             key={workflow.id}
             id={workflow.id}
             name={workflow.name}
             lastEdited={workflow.updated_at}
-            onDeployClick={() => setWorkflowIdToDeploy(workflow.id)}
+            // @TODO Deployments: Update when API working
+            onDeployClick={() => setWorkflowIdToDeploy(null)}
+            // onDeployClick={() => setWorkflowIdToDeploy(workflow.id)}
             onDeleteClick={() => setWorkflowIdToDelete(workflow.id)}
             onExportClick={() => toast('tbd')}
           />

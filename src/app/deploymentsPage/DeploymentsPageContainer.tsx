@@ -20,7 +20,7 @@ function downloadToStringJson(data: string, filename = 'file.json') {
 
 export const DeploymentsPageContainer = () => {
   const queryClient = useQueryClient();
-  const { deployments, isLoading } = useDeploymentsQuery();
+  const { isLoading } = useDeploymentsQuery();
   const { mutate: changeDeploymentState } = useChangeDeploymentStateMutation();
   const { mutateAsync: deleteDeployment } = useDeleteDeploymentMutation();
 
@@ -55,7 +55,9 @@ export const DeploymentsPageContainer = () => {
 
   return (
     <DeploymentsPage
-      deployments={deployments?.results ?? []}
+      // @TODO Deployments: Update when API working
+      deployments={[]}
+      // deployments={deployments?.results ?? []}
       onDeploymentStatusChange={handleDeploymentStatusChange}
       onDeploymentDelete={handleDeploymentDelete}
       onDownloadDeploymentJson={handleDownloadDeployment}
