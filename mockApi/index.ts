@@ -205,8 +205,8 @@ app.post('/v1/deployments/', async (req: Request, res: Response) => {
 
   const SHOW_ERROR = false;
   if(SHOW_ERROR) {
-    // res.status(400).json({error: {code: "WORKFLOW_NAME_EXISTS", message: "This workflow name already exists, pick another one"}});
-    res.status(400).json({error: "NO!"});
+    res.status(400).json({error_code: "deployment_name_exists_error", message: "This workflow name already exists, pick another one"});
+    // res.status(400).json({error: "NO!"});
   } else {
     apiDeployments.unshift(newDeployment);
     res.status(201).json(newDeployment);

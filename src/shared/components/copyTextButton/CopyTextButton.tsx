@@ -1,7 +1,8 @@
 import clsx from 'clsx';
 import { toast } from 'react-hot-toast';
 import { Icon } from '@/shared/components/icon/Icon';
-import { faClone } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
+import { faClone } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
+import './CopyTextButton.scss';
 
 export const CopyTextButton = ({
   text,
@@ -35,7 +36,9 @@ export const CopyTextButton = ({
       )}
       onClick={handleCopyClick}
     >
-      <p className="truncate text-text-subtle">{text}</p>
+      <div className="relative overflow-hidden">
+        <p className="truncate-shadow truncate text-text-subtle">{text}</p>
+      </div>
       <Icon icon={faClone} className="ml-2 *:text-icon-base" />
     </button>
   );

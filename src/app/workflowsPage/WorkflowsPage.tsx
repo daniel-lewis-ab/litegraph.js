@@ -41,9 +41,7 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
             id={workflow.id}
             name={workflow.name}
             lastEdited={workflow.updated_at}
-            // @TODO Deployments: Update when API working
-            onDeployClick={() => setWorkflowIdToDeploy(null)}
-            // onDeployClick={() => setWorkflowIdToDeploy(workflow.id)}
+            onDeployClick={() => setWorkflowIdToDeploy(workflow.id)}
             onDeleteClick={() => setWorkflowIdToDelete(workflow.id)}
             onExportClick={() => toast('tbd')}
           />

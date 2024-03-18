@@ -11,6 +11,7 @@ type CreateWorkflowData = {
 const DEFAULT_WORKFLOW_DATA = {
   format: 'CMFY',
   content: {},
+  api_content: {},
 };
 
 const createWorkflow = async (workflowData: CreateWorkflowData): Promise<Workflow> => {

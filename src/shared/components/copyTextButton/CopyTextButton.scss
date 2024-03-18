@@ -1,0 +1,9 @@
+.truncate-shadow::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 10%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, var(--color-surface-4) 100%);
+}

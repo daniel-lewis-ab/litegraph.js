@@ -45,7 +45,7 @@ export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }
       setOperationStatus('success');
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        if (e.response?.data?.error?.code === 'WORKFLOW_NAME_EXISTS') {
+        if (e.response?.data?.error_code === 'deployment_name_exists_error') {
           setError('name', { type: 'manual', message: 'Sorry, the workflow slug is unavailable' });
         } else {
           setOperationStatus('error');
