@@ -65,13 +65,13 @@ export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }
         <Dialog.Title>New Deployment</Dialog.Title>
       </Dialog.Header>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <div className="border-primary-10 mb-4 flex flex-row rounded-lg border p-4">
-          <div className="*:text-primary-10 mr-4">
+        <div className="mb-4 flex flex-row rounded-lg border border-primary-10 p-4">
+          <div className="mr-4 *:text-primary-10">
             <RadioIcon filled />
           </div>
           <div className="flex-1">
             <p className="text-color--surface-50 font-semibold">Deploy to Salt AI on Discord</p>
-            <p className="text-text-subtle mb-4 text-sm">
+            <p className="mb-4 text-sm text-text-subtle">
               Accessible to anyone that uses <span className="text-text-base">/workflow name</span>
             </p>
             <input hidden {...register('workflowId', { value: workflowId })} />
@@ -96,14 +96,14 @@ export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }
             </FormField>
           </div>
         </div>
-        <div className="border-surface-7 mb-6 flex cursor-not-allowed flex-row items-center justify-between rounded-lg border p-4">
+        <div className="mb-6 flex cursor-not-allowed flex-row items-center justify-between rounded-lg border border-surface-7 p-4">
           <div className="flex flex-row items-center">
-            <div className="*:text-surface-7 mr-4">
+            <div className="mr-4 *:text-surface-7">
               <RadioIcon />
             </div>
-            <p className="text-disabled text-surface-7 font-semibold">Deploy to API</p>
+            <p className="text-disabled font-semibold text-surface-7">Deploy to API</p>
           </div>
-          <div className="bg-surface-6 rounded-md px-2 py-1 text-xs font-medium">Coming soon</div>
+          <div className="rounded-md bg-surface-6 px-2 py-1 text-xs font-medium">Coming soon</div>
         </div>
         <Button color="primary" className="mb-3 w-full" type="submit" isLoading={isSubmitting}>
           Deploy
@@ -115,13 +115,13 @@ export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }
   const successResult = (
     <div className="flex flex-col">
       <div className="flex flex-col items-center">
-        <div className="bg-surface-4 mb-3 rounded-lg px-7 py-8">
+        <div className="mb-3 rounded-lg bg-surface-4 px-7 py-8">
           <DiscordIcon />
         </div>
         <Dialog.Title>Your Deployment is Live</Dialog.Title>
-        <p className="text-text-muted mb-6 mt-1 text-sm">Paste your command into Discord to run your workflow</p>
+        <p className="mb-6 mt-1 text-sm text-text-muted">Paste your command into Discord to run your workflow</p>
       </div>
-      <p className="text-text-base mb-2 self-start text-sm font-medium">Salt AI Bot command</p>
+      <p className="mb-2 self-start text-sm font-medium text-text-base">Salt AI Bot command</p>
       <CopyTextButton text={`/workflows name: ${getValues().name}`} className="mb-6" />
       <Button color="primary" className="mb-3" onClick={addToDiscordServerClick}>
         Add to Server

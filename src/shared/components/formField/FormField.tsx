@@ -21,7 +21,7 @@ export const FormField = ({ children, className, label, hint, htmlFor, errorMsg 
     {children}
     {!errorMsg && hint && <p className="mt-2 text-xs">{hint}</p>}
     {errorMsg && (
-      <p className="*:text-error-10 text-error-10 mt-2 text-xs">
+      <p className="mt-2 text-xs text-error-10 *:text-error-10">
         <Icon size={12} icon={faCircleExclamation} /> {errorMsg}
       </p>
     )}

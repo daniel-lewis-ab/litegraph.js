@@ -19,7 +19,7 @@ import { faMoonStars, faSunBright } from '@awesome.me/kit-b6cda292ae/icons/sharp
 import { faClone, faICursor, faPen, faTrash } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { PageActions } from '../workflowsPage/components/PageActions';
 
-const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl'; }) => (
+const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => (
   <div className="flex flex-col items-start space-y-4">
     <div className="flex flex-row items-center *:mr-4">
       <h3 className="w-[120px]">Primary</h3>

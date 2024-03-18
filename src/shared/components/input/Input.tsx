@@ -21,19 +21,19 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div
         className={clsx(
           variant === 'primary' &&
-            '0 bg-surface-2 flex flex-row rounded-lg p-4 focus-within:ring focus-within:ring-opacity-50',
+            '0 flex flex-row rounded-lg bg-surface-2 p-4 focus-within:ring focus-within:ring-opacity-50',
           className,
         )}
         onClick={focusInput}
       >
-        {leftIcon && <div className="*:text-text-muted mr-3 h-[14px] w-[14px]">{leftIcon}</div>}
+        {leftIcon && <div className="mr-3 h-[14px] w-[14px] *:text-text-muted">{leftIcon}</div>}
         <input
           ref={inputRef}
           className={clsx(
             'w-full',
-            'text-text-basetext-text-base placeholder-text-muted font-plex-mono font-medium outline-none',
+            'text-text-basetext-text-base font-plex-mono font-medium placeholder-text-muted outline-none',
             variant === 'primary' && 'bg-transparent',
-            variant === 'secondary' && 'bg-surface-4  rounded-lg px-4 py-2 text-sm',
+            variant === 'secondary' && 'rounded-lg  bg-surface-4 px-4 py-2 text-sm',
             inputClassName,
           )}
           {...props}

@@ -13,11 +13,11 @@ export const WarningDialogContent = ({
   children: ReactNode;
 }) => (
   <div className="flex flex-col items-center">
-    <div className="bg-surface-4 *:text-error-9 mb-6 flex rounded-full p-3">
+    <div className="mb-6 flex rounded-full bg-surface-4 p-3 *:text-error-9">
       <Icon icon={faCircleExclamation} size={28} />
     </div>
     <Dialog.Title>{title}</Dialog.Title>
-    <p className="text-text-muted mb-6 mt-1 text-center text-sm">{desc}</p>
+    <p className="mb-6 mt-1 text-center text-sm text-text-muted">{desc}</p>
     <div className="flex w-full flex-col">{children}</div>
   </div>
 );

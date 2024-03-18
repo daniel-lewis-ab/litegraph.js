@@ -64,13 +64,13 @@ export const DeploymentListItem = ({
   const addToDiscordServerClick = () => window.open(constants.addBotToDiscordUrl, '_blank');
 
   return (
-    <li className="bg-surface-2 flex flex-row rounded-2xl p-2">
-      <div className="bg-surface-4 rounded-lg px-7 py-8">
+    <li className="flex flex-row rounded-2xl bg-surface-2 p-2">
+      <div className="rounded-lg bg-surface-4 px-7 py-8">
         <DiscordIcon />
       </div>
       <div className="flex flex-1 flex-row items-center justify-between">
         <div className="ml-6">
-          <h3 className="text-text-base text-2xl font-medium">{name}</h3>
+          <h3 className="text-2xl font-medium text-text-base">{name}</h3>
           <div className="mt-2 *:font-medium">
             <DeploymentStatusText status={status} /> <Icon className="text-[#616071]" icon={faArrowRight} />{' '}
             <span className="text-text-muted">

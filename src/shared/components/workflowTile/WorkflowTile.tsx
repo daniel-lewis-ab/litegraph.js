@@ -39,10 +39,10 @@ export const WorkflowTile = ({
     <>
       <Link to={routes.workflow(id)} className="workflowTile group">
         <div
-          className="border-surface-1 hover:border-surface-7 relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg border px-2.5 py-3"
+          className="relative flex aspect-square flex-col justify-between overflow-hidden rounded-lg border border-surface-1 px-2.5 py-3 hover:border-surface-7"
           // style={{ backgroundImage: `url(${imageUrl})` }}
         >
-          <div className="icon bg-surface-2 group-hover:bg-surface-3 absolute inset-0 -z-10 flex justify-center">
+          <div className="icon absolute inset-0 -z-10 flex justify-center bg-surface-2 group-hover:bg-surface-3">
             <Icon className="h-[45%] w-full pt-[20%] opacity-5" icon={faDiagramProject} />
           </div>
           <div className="flex flex-row justify-end">
@@ -56,7 +56,7 @@ export const WorkflowTile = ({
               >
                 <button
                   type="button"
-                  className="bg-surface-2 hover:bg-surface-1 dark:hover:bg-surface-4 flex h-8 w-8 flex-row items-center justify-center rounded-lg p-3"
+                  className="flex h-8 w-8 flex-row items-center justify-center rounded-lg bg-surface-2 p-3 hover:bg-surface-1 dark:hover:bg-surface-4"
                 >
                   <Icon size={20} icon={faEllipsisVertical} className="text-surface-8" />
                 </button>
@@ -84,10 +84,10 @@ export const WorkflowTile = ({
             </Popover>
           </div>
           <div>
-            <p className="text-text-base text-lg font-medium">{name}</p>
+            <p className="text-lg font-medium text-text-base">{name}</p>
             {lastEdited && (
               <div className="mt-4 flex flex-row justify-between">
-                <p className="text-text-muted text-sm">
+                <p className="text-sm text-text-muted">
                   Edited <TimeSince time={lastEdited} />
                 </p>
                 {/* <div className="flex flex-row items-center">

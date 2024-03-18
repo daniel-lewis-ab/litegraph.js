@@ -12,7 +12,7 @@ export const PageTemplate = ({ children }: { children: ReactNode }) => (
 PageTemplate.Header = ({ children }: { children: ReactNode }) => (
   <div className="mb-16 mt-8 space-y-6">
     <div className="flex items-center space-x-3">
-      <span className="text-secondary-12 bg-surface-5 inline  rounded-lg px-2 py-1 text-sm font-medium">Beta</span>
+      <span className="inline rounded-lg bg-surface-5  px-2 py-1 text-sm font-medium text-secondary-12">Beta</span>
       <Button
         variant="filled"
         color="secondary"

@@ -30,13 +30,13 @@ export const CopyTextButton = ({
   return (
     <button
       className={clsx(
-        'bg-surface-4 flex select-text flex-row items-center justify-between rounded-lg py-2.5 pl-3 pr-2 transition-all hover:opacity-90 active:opacity-80',
+        'flex select-text flex-row items-center justify-between rounded-lg bg-surface-4 py-2.5 pl-3 pr-2 transition-all hover:opacity-90 active:opacity-80',
         className,
       )}
       onClick={handleCopyClick}
     >
-      <p className="text-text-subtle truncate">{text}</p>
-      <Icon icon={faClone} className="*:text-icon-base ml-2" />
+      <p className="truncate text-text-subtle">{text}</p>
+      <Icon icon={faClone} className="ml-2 *:text-icon-base" />
     </button>
   );
 };

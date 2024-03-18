@@ -3,5 +3,5 @@ type BadgeProps = {
 };
 
 export const Badge = ({ children }: BadgeProps) => (
-  <div className="3xl text-text-base bg-surface-1 px-3 py-1.5 text-xs font-medium">{children}</div>
+  <div className="3xl bg-surface-1 px-3 py-1.5 text-xs font-medium text-text-base">{children}</div>
 );
