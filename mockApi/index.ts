@@ -1,9 +1,12 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowsResponse, PostLoginResponse, Workflow, WorkflowDetails } from '../src/api/types';
+import expressWs from 'express-ws';
 
 const app = express();
 const PORT = 3000;
+
+expressWs(app);
 
 app.use(express.json());
 
@@ -240,6 +243,20 @@ app.delete('/v1/deployments/:deploymentId', (req: Request, res: Response) => {
 
   apiDeployments.splice(index, 1);
   res.json({ success: true });
+});
+
+// WebSocket endpoint
+(app as any).ws('/echo', (ws: any, _req: any) => {
+  console.log('WebSocket connection established');
+
+  ws.on('message', (msg: any) => {
+    console.log(`Received message: ${msg}`);
+    ws.send(`Echo: ${msg} xD`); // Echoes received messages back to the client
+  });
+
+  ws.on('close', () => {
+    console.log('WebSocket connection closed');
+  });
 });
 
 // Starting the server
