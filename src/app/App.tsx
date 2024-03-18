@@ -11,7 +11,6 @@ function App() {
     <AuthContextProvider>
       <QueryClientProvider>
         <WebSocketProvider>
-          <RouterProvider router={router} />
           {createPortal(
             <Toaster
               position="bottom-right"
