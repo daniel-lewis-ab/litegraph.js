@@ -36,8 +36,8 @@ export const CopyTextButton = ({
       )}
       onClick={handleCopyClick}
     >
-      <div className="relative overflow-hidden">
-        <p className="truncate-shadow truncate text-text-subtle">{text}</p>
+      <div className="relative flex-1 overflow-hidden">
+        <p className="truncate-shadow truncate text-left text-text-subtle">{text}</p>
       </div>
       <Icon icon={faClone} className="ml-2 *:text-icon-base" />
     </button>
