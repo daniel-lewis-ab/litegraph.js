@@ -22,7 +22,6 @@
 
   /* color sets */
   --color-surface-1: var(--color-mercury-1);
-  --color-surface-1-rgb: var(--color-mercury-1-rgb);
   --color-surface-2: var(--color-mercury-2);
   --color-surface-3: var(--color-mercury-3);
   --color-surface-4: var(--color-mercury-4);
@@ -299,7 +298,6 @@
   --color-ruby-12: #fed2e1;
 
   --color-mercury-1: #09090b;
-  --color-mercury-1-rgb: 9, 9, 11;
   --color-mercury-2: #17171c;
   --color-mercury-3: #22222a;
   --color-mercury-4: #2a2a32;
