@@ -10,7 +10,7 @@ export const EmptyDeploymentsPage = () => (
         <p className="font-medium"> Start Deploying Workflows</p>
         <p className="mt-1 text-sm text-[#787883]">
           Craft and deploy your workflow. Explore our {/* @TODO: Update link */}
-          <a href={constants.discordFlowCatalogueUrl} className="text-black underline">
+          <a href={constants.discordFlowCatalogueUrl} className="text-black underline" target="_blank" rel="noreferrer">
             Discord flow catalogue
           </a>{' '}
           for technical insights and inspiration.

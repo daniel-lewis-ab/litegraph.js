@@ -225,21 +225,27 @@ app.get('/v1/deployments/:deploymentId', (req: Request, res: Response) => {
 
 // Endpoint to update deployment status
 app.put('/v1/deployments/:deploymentId', (req: Request, res: Response) => {
+  const ERROR = false;
   const { deploymentId } = req.params;
   const { status } = req.body;
   const deployment = apiDeployments.find(d => d.id === deploymentId);
-  if (!deployment) return res.status(404).json({ error: 'Deployment not found.' });
+  if(ERROR) {
+    res.status(404).json({ error: 'Deployment not found.' });
+  }
 
-  deployment.status = status;
-  if (status === 'ONLINE') deployment.deployed_at = new Date().toISOString();
+  deployment!.status = status;
+  if (status === 'ONLINE') deployment!.deployed_at = new Date().toISOString();
   res.json(deployment);
 });
 
 // Endpoint to delete a specific deployment
 app.delete('/v1/deployments/:deploymentId', (req: Request, res: Response) => {
+  const ERROR = false;
   const { deploymentId } = req.params;
   const index = apiDeployments.findIndex(d => d.id === deploymentId);
-  if (index === -1) return res.status(404).json({ error: 'Deployment not found.' });
+  if(ERROR) {
+    res.status(404).json({ error: 'Deployment not found.' });
+  }
 
   apiDeployments.splice(index, 1);
   res.json({ success: true });
