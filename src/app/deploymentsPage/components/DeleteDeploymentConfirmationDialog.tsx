@@ -44,7 +44,7 @@ export const DeleteDeploymentConfirmationDialog = ({
           >
             Delete
           </Button>
-          <Button disabled={isDeleting} onClick={onClose} color="secondary" variant="filled">
+          <Button disabled={isDeleting} onClick={onClose} color="secondary" variant="ringed">
             Cancel
           </Button>
         </WarningDialogContent>

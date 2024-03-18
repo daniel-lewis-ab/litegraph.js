@@ -36,7 +36,7 @@ export const DeleteConfirmationDialog = ({ isOpen, onConfirm, onClose }: DeleteC
           >
             Delete
           </Button>
-          <Button disabled={isDeleting} onClick={onClose} color="secondary" variant="glass">
+          <Button disabled={isDeleting} onClick={onClose} color="secondary" variant="ringed">
             Cancel
           </Button>
         </WarningDialogContent>
