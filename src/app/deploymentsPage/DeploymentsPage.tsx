@@ -3,7 +3,7 @@ import { DeploymentListItem } from './components/DeploymentListItem';
 import { DeleteDeploymentConfirmationDialog } from './components/DeleteDeploymentConfirmationDialog';
 import { useState } from 'react';
 import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
-import { EmptyDeploymentsPage } from './components/EmptyDeploymentsPage';
+import { EmptyDeploymentsPage } from './components/emptyDeploymentsPage/EmptyDeploymentsPage';
 
 type DeploymentsPageProps = {
   deployments: Deployment[];
