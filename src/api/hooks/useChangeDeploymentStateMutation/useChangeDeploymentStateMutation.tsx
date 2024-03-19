@@ -37,6 +37,9 @@ export const useChangeDeploymentStateMutation = () => {
 
       return { previousDeployments };
     },
+    onSuccess: () => {
+      toast.success('Deployment state changed successfully');
+    },
     onError: (_, __, context) => {
       toast.error('Failed to change deployment state');
       if (context?.previousDeployments) {
