@@ -16,7 +16,12 @@ import toast from 'react-hot-toast';
 import { constants } from '@/contants';
 
 const DeploymentStatusText = ({ status }: { status: DeploymentStatus }) => (
-  <span className={clsx(status === 'ONLINE' && 'text-success-9', status === 'PAUSED' && 'text-warning-9')}>
+  <span
+    className={clsx(
+      status === 'ONLINE' && 'text-success-11 dark:text-success-10',
+      status === 'PAUSED' && 'text-warning-11 dark:text-warning-10',
+    )}
+  >
     {status === 'ONLINE' ? 'Running' : 'Paused'}
   </span>
 );
