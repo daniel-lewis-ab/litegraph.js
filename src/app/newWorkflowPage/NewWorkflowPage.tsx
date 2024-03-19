@@ -48,7 +48,13 @@ export const NewWorkflowPage = ({ onSubmit }: NewWorkflowPageProps) => {
           {...register('name', { required: true })}
         />
         <div className="flex w-full flex-row">
-          <Button disabled={isSubmitting} variant="glass" className="mr-4 flex-1" onClick={() => navigate(-1)}>
+          <Button
+            disabled={isSubmitting}
+            color="secondary"
+            variant="ringed"
+            className="mr-4 flex-1"
+            onClick={() => navigate(-1)}
+          >
             Cancel
           </Button>
           <Button disabled={!isValid} isLoading={isSubmitting} variant="filled" className="flex-1" type="submit">
