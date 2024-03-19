@@ -6,12 +6,12 @@ import './EmptyDeploymentsPage.scss';
 export const EmptyDeploymentsPage = () => (
   <div>
     <div className="mb-4 flex flex-row rounded-lg bg-surface-2 p-4">
-      <Icon icon={faCircleInfo} size={16} className="mt-1 *:text-[#B1B1B1]" />
+      <Icon icon={faCircleInfo} size={16} className="mt-1 *:text-text-subtle" />
       <div className="ml-3">
         <p className="font-medium"> Start Deploying Workflows</p>
-        <p className="mt-1 text-sm text-[#787883]">
+        <p className="mt-1 text-sm text-text-subtle">
           Craft and deploy your workflow. Explore our {/* @TODO: Update link */}
-          <a href={constants.discordFlowCatalogueUrl} className="text-black underline" target="_blank" rel="noreferrer">
+          <a href={constants.discordFlowCatalogueUrl} className="text-text-base" target="_blank" rel="noreferrer">
             Discord flow catalogue
           </a>{' '}
           for technical insights and inspiration.
