@@ -5,8 +5,8 @@
 
   /* foreground */
   --color-text-base: var(--color-surface-12);
-  --color-text-subtle: var(--color-surface-10);
-  --color-text-muted: var(--color-surface-9);
+  --color-text-subtle: var(--color-surface-11);
+  --color-text-muted: var(--color-surface-10);
 
   /* background */
   --color-page-background: var(--color-surface-1);
