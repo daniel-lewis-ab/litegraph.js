@@ -3,6 +3,20 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
+  /* flat gray scale that does not respond to light/dark */
+  --color-grayscale-1: rgb(253, 253, 253);
+  --color-grayscale-2: rgb(243, 243, 243);
+  --color-grayscale-3: rgb(232, 232, 232);
+  --color-grayscale-4: rgb(220, 220, 220);
+  --color-grayscale-5: rgb(208, 208, 208);
+  --color-grayscale-6: rgb(194, 194, 194);
+  --color-grayscale-7: rgb(179, 179, 179);
+  --color-grayscale-8: rgb(163, 163, 163);
+  --color-grayscale-9: rgb(143, 143, 143);
+  --color-grayscale-10: rgb(120, 120, 120);
+  --color-grayscale-11: rgb(89, 89, 89);
+  --color-grayscale-12: rgb(29, 29, 29);
+
   /* foreground */
   --color-text-base: var(--color-surface-12);
   --color-text-subtle: var(--color-surface-11);
