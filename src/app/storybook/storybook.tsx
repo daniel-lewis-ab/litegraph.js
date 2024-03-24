@@ -15,8 +15,10 @@ import {
 } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 
 import useTheme from '@/hooks/useTheme/useTheme';
+import { Switch } from '@/shared/components/switch/Switch';
 import { faMoonStars, faSunBright } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { faClone, faICursor, faPen, faTrash } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
+import { useState } from 'react';
 import { PageActions } from '../workflowsPage/components/PageActions';
 
 const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => (
@@ -137,6 +139,7 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => (
 // @TODO: Remove this page before going to prod
 export const Storybook = () => {
   const { theme, switchTheme } = useTheme();
+  const [switched, setSwitched] = useState(false);
 
   return (
     <div className=" flex flex-col space-y-8 p-8">
@@ -207,6 +210,11 @@ export const Storybook = () => {
           <PageActions.Action to={'#'} icon={faUpload} text="Import" />
           <PageActions.Action to={'#'} icon={faGalleryThumbnails} text="Browse Templates" />
         </PageActions>
+      </div>
+
+      <h2 className="mb-4 mt-6 text-xl">Switches</h2>
+      <div className="flex flex-col">
+        <Switch className="mr-4" checked={switched} onClick={() => setSwitched(!switched)} />
       </div>
     </div>
   );
