@@ -41,8 +41,8 @@ button.button {
   }
 
   &--color-secondary {
-    --base-color: var(--color-secondary-9);
-    --second-base-color: var(--color-secondaryA-5);
+    --base-color: var(--color-secondary-10);
+    --second-base-color: var(--color-secondaryA-3);
     --text-color: white;
     --text-color-muted: var(--color-secondary-9);
 
@@ -84,27 +84,44 @@ button.button {
   }
 
   &--color-warning {
-    --base-color: var(--color-warning-8);
-    --second-base-color: var(--color-warningA-5);
-    --text-color: var(--color-warning-1);
-    --text-color-muted: var(--color-warning-11);
-
-    .dark & {
-      --base-color: var(--color-warning-9);
-    }
+    --base-color: var(--color-warning-10);
+    --second-base-color: var(--color-warningA-3);
+    --text-color: black;
+    --text-color-muted: var(--color-warning-10);
   }
 
   &--color-disabled,
   &[disabled] {
     user-select: none !important;
     pointer-events: none !important;
-    --base-color: var(--color-disabled-7);
+    --base-color: var(--color-disabled-8);
     --second-base-color: var(--color-disabled-4);
-    --text-color: var(--color-disabled-11);
-    --text-color-muted: var(--color-disabled-8);
+    --text-color: var(--color-disabled-10);
+    --text-color-muted: var(--color-disabled-9);
 
-    &.button--ringed {
-      --text-color: var(--color-disabled-11);
+    &.button--filled {
+      --text-color: var(--color-disabled-2);
+    }
+  }
+
+  // Levels
+
+  $colors:
+    [ 'primary',
+    'secondary',
+    'success',
+    'error',
+    'warning',
+    'disabled'];
+
+  @for $i from 1 through 12 {
+    &.button--level-#{$i} {
+      @each $color in $colors {
+        &.button--color-#{$color} {
+          --base-color: var(--color-#{$color}-#{$i});
+          --text-color: #{if($i > 8, var(--color-#{$color}-1), var(--color-#{$color}-12))};
+        }
+      }
     }
   }
 
@@ -114,6 +131,10 @@ button.button {
     border: 1px solid var(--base-color);
     background-color: transparent;
     --text-color: var(--base-color);
+
+    &.button--color-secondary {
+      border: 1px solid var(--color-border-base);
+    }
   }
 
   &--ghost {

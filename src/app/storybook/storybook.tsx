@@ -21,121 +21,168 @@ import { faClone, faICursor, faPen, faTrash } from '@awesome.me/kit-b6cda292ae/i
 import { useState } from 'react';
 import { PageActions } from '../workflowsPage/components/PageActions';
 
-const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => (
-  <div className="flex flex-col items-start space-y-4">
-    <div className="flex flex-row items-center *:mr-4">
-      <h3 className="w-[120px]">Primary</h3>
-      <Button size={size} color="primary">
-        Filled
-      </Button>
-      <Button size={size} color="primary" variant="ringed">
-        Ringed
-      </Button>
-      <Button size={size} color="primary" variant="ghost">
-        Ghost
-      </Button>
-      <Button size={size} color="primary" variant="soft">
-        Soft
-      </Button>
-      <Button size={size} color="primary" variant="glass">
-        Glass
-      </Button>
-    </div>
+const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
+  const buttonColors = ['primary', 'secondary', 'success', 'error', 'warning'];
+  const buttonVariants = ['filled', 'ringed', 'ghost', 'soft', 'glass'];
+  const buttonLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
-    <div className="flex flex-row items-center *:mr-4">
-      <h3 className="w-[120px]">Secondary</h3>
-      <Button size={size} color="secondary">
-        Filled
-      </Button>
-      <Button size={size} color="secondary" variant="ringed">
-        Ringed
-      </Button>
-      <Button size={size} color="secondary" variant="ghost">
-        Ghost
-      </Button>
-      <Button size={size} color="secondary" variant="soft">
-        Soft
-      </Button>
-      <Button size={size} color="secondary" variant="glass">
-        Glass
-      </Button>
-    </div>
+  return (
+    <div className="flex flex-col items-start space-y-4">
+      <div className="flex flex-row items-center *:mr-4">
+        <h3 className="w-[120px]">Primary</h3>
+        <Button size={size} color="primary">
+          Filled
+        </Button>
+        <Button size={size} color="primary" variant="ringed">
+          Ringed
+        </Button>
+        <Button size={size} color="primary" variant="ghost">
+          Ghost
+        </Button>
+        <Button size={size} color="primary" variant="soft">
+          Soft
+        </Button>
+        <Button size={size} color="primary" variant="glass">
+          Glass
+        </Button>
+        <div className="flex gap-3">
+          {buttonLevels.map((level) => (
+            <Button size={size} color="primary" level={level} key={level}>
+              Level {level}
+            </Button>
+          ))}
+        </div>
+      </div>
 
-    <div className="flex flex-row items-center *:mr-4">
-      <h3 className="w-[120px]">Disabled</h3>
-      <Button size={size} disabled variant="filled">
-        Filled
-      </Button>
-      <Button size={size} disabled variant="ringed">
-        Ringed
-      </Button>
-      <Button size={size} disabled variant="ghost">
-        Ghost
-      </Button>
-      <Button size={size} disabled variant="soft">
-        Soft
-      </Button>
-      <Button size={size} disabled variant="glass">
-        Glass
-      </Button>
-    </div>
-    <div className="flex flex-row items-center *:mr-4">
-      <h3 className="w-[120px]">Success</h3>
-      <Button size={size} color="success">
-        Filled
-      </Button>
-      <Button size={size} color="success" variant="ringed">
-        Ringed
-      </Button>
-      <Button size={size} color="success" variant="ghost">
-        Ghost
-      </Button>
-      <Button size={size} color="success" variant="soft">
-        Soft
-      </Button>
-      <Button size={size} color="success" variant="glass">
-        Glass
-      </Button>
-    </div>
-    <div className="flex flex-row items-center *:mr-4">
-      <h3 className="w-[120px]">Error</h3>
-      <Button size={size} color="error">
-        Filled
-      </Button>
-      <Button size={size} color="error" variant="ringed">
-        Ringed
-      </Button>
-      <Button size={size} color="error" variant="ghost">
-        Ghost
-      </Button>
-      <Button size={size} color="error" variant="soft">
-        Soft
-      </Button>
-      <Button size={size} color="error" variant="glass">
-        Glass
-      </Button>
-    </div>
-    <div className="flex flex-row items-center *:mr-4">
-      <h3 className="w-[120px]">Warning</h3>
-      <Button size={size} color="warning">
-        Filled
-      </Button>
-      <Button size={size} color="warning" variant="ringed">
-        Ringed
-      </Button>
-      <Button size={size} color="warning" variant="ghost">
-        Ghost
-      </Button>
-      <Button size={size} color="warning" variant="soft">
-        Soft
-      </Button>
-      <Button size={size} color="warning" variant="glass">
-        Glass
-      </Button>
-    </div>
-  </div>
-);
+      <div className="flex flex-row items-center *:mr-4">
+        <h3 className="w-[120px]">Secondary</h3>
+        <Button size={size} color="secondary">
+          Filled
+        </Button>
+        <Button size={size} color="secondary" variant="ringed">
+          Ringed
+        </Button>
+        <Button size={size} color="secondary" variant="ghost">
+          Ghost
+        </Button>
+        <Button size={size} color="secondary" variant="soft">
+          Soft
+        </Button>
+        <Button size={size} color="secondary" variant="glass">
+          Glass
+        </Button>
+        <div className="flex gap-3">
+          {buttonLevels.map((level) => (
+            <Button size={size} color="secondary" level={level} key={level}>
+              Level {level}
+            </Button>
+          ))}
+        </div>
+      </div>
 
+      <div className="flex flex-row items-center *:mr-4">
+        <h3 className="w-[120px]">Disabled</h3>
+        <Button size={size} disabled variant="filled">
+          Filled
+        </Button>
+        <Button size={size} disabled variant="ringed">
+          Ringed
+        </Button>
+        <Button size={size} disabled variant="ghost">
+          Ghost
+        </Button>
+        <Button size={size} disabled variant="soft">
+          Soft
+        </Button>
+        <Button size={size} disabled variant="glass">
+          Glass
+        </Button>
+        <div className="flex gap-3">
+          {buttonLevels.map((level) => (
+            <Button size={size} color="disabled" disabled level={level} key={level}>
+              Level {level}
+            </Button>
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-row items-center *:mr-4">
+        <h3 className="w-[120px]">Success</h3>
+        <Button size={size} color="success">
+          Filled
+        </Button>
+        <Button size={size} color="success" variant="ringed">
+          Ringed
+        </Button>
+        <Button size={size} color="success" variant="ghost">
+          Ghost
+        </Button>
+        <Button size={size} color="success" variant="soft">
+          Soft
+        </Button>
+        <Button size={size} color="success" variant="glass">
+          Glass
+        </Button>
+        <div className="flex gap-3">
+          {buttonLevels.map((level) => (
+            <Button size={size} color="success" level={level} key={level}>
+              Level {level}
+            </Button>
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-row items-center *:mr-4">
+        <h3 className="w-[120px]">Error</h3>
+        <Button size={size} color="error">
+          Filled
+        </Button>
+        <Button size={size} color="error" variant="ringed">
+          Ringed
+        </Button>
+        <Button size={size} color="error" variant="ghost">
+          Ghost
+        </Button>
+        <Button size={size} color="error" variant="soft">
+          Soft
+        </Button>
+        <Button size={size} color="error" variant="glass">
+          Glass
+        </Button>
+        <div className="flex gap-3">
+          {buttonLevels.map((level) => (
+            <Button size={size} color="error" level={level} key={level}>
+              Level {level}
+            </Button>
+          ))}
+        </div>
+      </div>
+      <div className="flex flex-row items-center *:mr-4">
+        <h3 className="w-[120px]">Warning</h3>
+        <Button size={size} color="warning">
+          Filled
+        </Button>
+        <Button size={size} color="warning" variant="ringed">
+          Ringed
+        </Button>
+        <Button size={size} color="warning" variant="ghost">
+          Ghost
+        </Button>
+        <Button size={size} color="warning" variant="soft">
+          Soft
+        </Button>
+        <Button size={size} color="warning" variant="glass">
+          Glass
+        </Button>
+        <div className="flex gap-3">
+          {buttonLevels.map((level) => (
+            <Button size={size} color="warning" level={level} key={level}>
+              Level {level}
+            </Button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 // @TODO: Remove this page before going to prod
 export const Storybook = () => {
   const { theme, switchTheme } = useTheme();
