@@ -22,8 +22,6 @@ import { useState } from 'react';
 import { PageActions } from '../workflowsPage/components/PageActions';
 
 const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
-  const buttonColors = ['primary', 'secondary', 'success', 'error', 'warning'];
-  const buttonVariants = ['filled', 'ringed', 'ghost', 'soft', 'glass'];
   const buttonLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
@@ -99,7 +97,7 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
         </Button>
         <div className="flex gap-3">
           {buttonLevels.map((level) => (
-            <Button size={size} color="disabled" disabled level={level} key={level}>
+            <Button size={size} disabled level={level} key={level}>
               Level {level}
             </Button>
           ))}
