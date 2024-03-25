@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: nginx:latest
+    build:
+      context: ./comfyui/
+    ports:
+      - '8080:80'
+    volumes:
+      - ./comfyui:/usr/share/nginx/html
+    restart: always
