@@ -26,5 +26,6 @@
     }
   },
   "include": ["src"],
+  "exclude": ["comfyui", "mockApi"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
