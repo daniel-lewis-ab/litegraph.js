@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { useEffect, useRef, useState } from 'react';
 import { useWorkflowEditor } from '@/hooks/useWorkflowEditor/useWorkflowEditor';
-import { WorkflowContent } from '@/context/workflowEditorContext/WorkflowEditorContext';
+import { WorkflowContent } from '@/api/types';
 
 type LoadPromptMessage = {
   // @TODO: Remove internal
@@ -57,6 +57,8 @@ export const EditorIframe = () => {
           console.log('Updating the content in react');
           setCurrentWorkflow({ updateSource: 'iframe', content: newWorkflow });
         }
+      } else {
+        console.log('Receive message from iframe', message.data.internal.type, message);
       }
     };
 

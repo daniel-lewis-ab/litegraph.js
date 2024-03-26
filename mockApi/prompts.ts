@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/prefer-as-const */
-export const examplePrompt1 = JSON.stringify({
+export const examplePrompt1 = {
   prompt: {
     last_node_id: 14,
     last_link_id: 10,
@@ -295,10 +295,10 @@ export const examplePrompt1 = JSON.stringify({
     },
     version: 0.4,
   },
-});
+};
 
 
-export const examplePrompt2 = JSON.stringify({
+export const examplePrompt2 = {
   prompt: {
     last_node_id: 14,
     last_link_id: 10,
@@ -594,10 +594,10 @@ export const examplePrompt2 = JSON.stringify({
     },
     version: 0.4,
   },
-});
+};
 
 
-export const examplePrompt3 = JSON.stringify({
+export const examplePrompt3 = {
   prompt: {
     last_node_id: 14,
     last_link_id: 10,
@@ -893,4 +893,4 @@ export const examplePrompt3 = JSON.stringify({
     },
     version: 0.4,
   },
-});
+};

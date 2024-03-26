@@ -1,3 +1,7 @@
+// ============================
+// Authentication Responses
+// ============================
+
 export type PostLoginResponse = {
   access: string;
   refresh: string;
@@ -8,25 +12,34 @@ export type GetRefreshTokensResponse = {
   access: string;
 };
 
+// ============================
+// Workflows and Related Types
+// ============================
+
 export type Workflow = {
   id: string;
   name: string;
   updated_at: string;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type WorkflowContent = any; // TODO: Define this type more explicitly
+
 export type WorkflowDetails = Workflow & {
-  // Correctly define the content and api_content properties
-  content: object;
-  api_content: object;
+  content: WorkflowContent;
+  api_content: WorkflowContent;
 };
 
+export type GetWorkflowResponse = WorkflowDetails;
+
 export type GetWorkflowsResponse = {
-  // links: { next: null; previous: null };
   count: number;
   results: Workflow[];
 };
 
-export type GetWorkflowResponse = WorkflowDetails;
+// ============================
+// Deployments
+// ============================
 
 export type DeploymentStatus = 'LOADING' | 'ONLINE' | 'PAUSED' | 'FAILED';
 
@@ -49,6 +62,10 @@ export type GetDeploymentsResponse = {
   results: Deployment[];
 };
 
+// ============================
+// Workflow Executions
+// ============================
+
 export type WorkflowStatus = 'loading' | 'error' | 'success';
 
 export type WorkflowExecution = {
@@ -57,8 +74,12 @@ export type WorkflowExecution = {
   status: WorkflowStatus;
   workflow_id: string;
   completion_duration: number;
-  // Added by me
-  content: string;
+  // We add it in cache
+  content?: WorkflowContent;
+};
+
+export type WorkflowExecutionDetails = WorkflowExecution & {
+  content: WorkflowContent;
 };
 
 export type GetWorkflowExecutionsResponse = {
@@ -72,4 +93,24 @@ export type PostWorkflowExecutionsResponse = {
   id: string;
   operation_id: string;
   status: WorkflowStatus;
+};
+
+// ============================
+// Workflow Assets
+// ============================
+
+export type ApiWorkflowAsset = {
+  id: string;
+  asset_url: string;
+  workflow_execution_id: string;
+  // created_at: string;
+  // size: number;
+};
+
+export type ApiWorkflowAssetDetails = ApiWorkflowAsset & {
+  content: WorkflowContent;
+};
+
+export type GetWorkflowAssetsResponse = {
+  results: ApiWorkflowAsset[];
 };

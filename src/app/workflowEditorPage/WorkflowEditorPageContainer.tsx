@@ -1,5 +1,4 @@
 import { useWorkflowEditor } from '@/hooks/useWorkflowEditor/useWorkflowEditor';
-import { OldWorkflowEditorPage } from './OldWorkflowEditorPage';
 import { WorkflowEditorPage } from './WorkflowEditorPage';
 import { Navigate, useParams } from 'react-router-dom';
 import { useExecuteWorkflowMutation } from '@/api/hooks/useExecuteWorkflowMutation/useExecuteWorkflowMutation';
@@ -12,18 +11,17 @@ import { useUpdateWorkflowMutation } from '@/api/hooks/useUpdateWorkflowMutation
 import throttle from 'lodash.throttle';
 import { saveJsonFile } from '@/shared/functions/saveJsonFile';
 import { constants } from '@/contants';
+import { useWorkflowExecutionsQuery } from '@/api/hooks/useWorkflowExecutionsQuery/useWorkflowExecutionsQuery';
 
 export const WorkflowEditorPageContainer = () => {
   const [isInitialWorkflowUpdated, setIsInitialWorkflowUpdated] = useState(false);
   const { id } = useParams();
-  // const { workflowExecutions } = useWorkflowExecutionsQuery(id!);
+  const { workflowExecutions } = useWorkflowExecutionsQuery(id!);
   const { workflow, isLoading: isLoadingWorkflow } = useWorkflowQuery(id!);
   const { mutateAsync: createWorkflowExecution } = useExecuteWorkflowMutation(id!);
   const { mutateAsync: updateWorkflow } = useUpdateWorkflowMutation();
   const { currentWorkflow, setCurrentWorkflow } = useWorkflowEditor();
-
-  const showOld = false;
-  const workflowsRunningCount = 0; //workflowExecutions?.results.filter((w) => w.status === 'loading').length;
+  const workflowsRunningCount = workflowExecutions?.results.filter((w) => w.status === 'loading').length;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const throttledUpdateWorkflow = useCallback(throttle(updateWorkflow, constants.updateWorkflowThrottleTime), [
@@ -33,8 +31,7 @@ export const WorkflowEditorPageContainer = () => {
   useEffect(() => {
     try {
       if (workflow?.content && isInitialWorkflowUpdated === false) {
-        const parsedContent = typeof workflow.content === 'string' ? JSON.parse(workflow.content) : workflow.content;
-        setCurrentWorkflow({ updateSource: 'react', content: parsedContent });
+        setCurrentWorkflow({ updateSource: 'react', content: workflow.content });
         setIsInitialWorkflowUpdated(true);
       }
     } catch (e) {
@@ -47,7 +44,7 @@ export const WorkflowEditorPageContainer = () => {
     const updateWorkflowAsync = async () => {
       if (currentWorkflow?.updateSource === 'iframe') {
         await throttledUpdateWorkflow({
-          id: workflow!.id,
+          id: id!,
           content: currentWorkflow.content,
           name: workflow!.name,
           api_content: {},
@@ -59,10 +56,6 @@ export const WorkflowEditorPageContainer = () => {
     // Can't have workflow here as it will be updating all the time
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentWorkflow, throttledUpdateWorkflow]);
-
-  if (showOld) {
-    return <OldWorkflowEditorPage />;
-  }
 
   const handleExecuteWorkflow = async () => {
     await createWorkflowExecution();

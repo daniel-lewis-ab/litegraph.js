@@ -1,6 +1,6 @@
-import { WorkflowExecution } from "../src/api/types";
+import { WorkflowExecution, WorkflowExecutionDetails } from "../src/api/types";
 
-export const examplePrompt1 = JSON.stringify({
+export const examplePrompt1 = {
   last_node_id: 14,
   last_link_id: 10,
   nodes: [
@@ -294,10 +294,10 @@ export const examplePrompt1 = JSON.stringify({
     '0246.VERSION': [0, 0, 4],
   },
   version: 0.4,
-});
+};
 
 
-export const examplePrompt2 = JSON.stringify({
+export const examplePrompt2 = {
   last_node_id: 14,
   last_link_id: 10,
   nodes: [
@@ -591,10 +591,10 @@ export const examplePrompt2 = JSON.stringify({
     '0246.VERSION': [0, 0, 4],
   },
   version: 0.4,
-});
+};
 
 
-export const examplePrompt3 = JSON.stringify({
+export const examplePrompt3 = {
   last_node_id: 14,
   last_link_id: 10,
   nodes: [
@@ -888,11 +888,11 @@ export const examplePrompt3 = JSON.stringify({
     '0246.VERSION': [0, 0, 4],
   },
   version: 0.4,
-});
+};
 
-export const workflowExecutions: WorkflowExecution[] = [
+export const workflowExecutions: WorkflowExecutionDetails[] = [
   {
-    id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    id: '1',
     operation_id: 'b641f164-5742-4622-b3fc-2c963f66abc6',
     status: 'success',
     workflow_id: '1',
@@ -900,7 +900,7 @@ export const workflowExecutions: WorkflowExecution[] = [
     completion_duration: 16,
   },
   {
-    id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    id: '2',
     operation_id: 'b641f164-5742-4622-b3fc-2c963f66abc6',
     status: 'error',
     workflow_id: '2',
@@ -908,7 +908,7 @@ export const workflowExecutions: WorkflowExecution[] = [
     completion_duration: 12,
   },
   {
-    id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    id: '3',
     operation_id: 'b641f164-5742-4622-b3fc-2c963f66abc6',
     status: 'success',
     workflow_id: '3',

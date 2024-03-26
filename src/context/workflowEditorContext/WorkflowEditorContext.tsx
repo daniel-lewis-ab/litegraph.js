@@ -1,4 +1,5 @@
 // @TODO: Define proper types
+import { WorkflowContent } from '@/api/types';
 import { ReactNode, createContext, useState } from 'react';
 
 type WorkflowContext = {
@@ -12,10 +13,6 @@ export const WorkflowEditorContext = createContext<WorkflowContext | undefined>(
 type WorkflowEditorContextProviderProps = {
   children: ReactNode;
 };
-
-// @TODO: Update type
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type WorkflowContent = any;
 
 type WorkflowStateInfo = {
   content: WorkflowContent;

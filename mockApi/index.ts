@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import expressWs from 'express-ws';
-import { Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowsResponse, PostLoginResponse, Workflow, WorkflowDetails, WorkflowExecution } from '../src/api/types';
+import { ApiWorkflowAsset, ApiWorkflowAssetDetails, Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowAssetsResponse, GetWorkflowsResponse, PostLoginResponse, Workflow, WorkflowDetails, WorkflowExecution, WorkflowExecutionDetails } from '../src/api/types';
 import { initWebsocket } from './websocket';
 import { examplePrompt1, examplePrompt2, examplePrompt3, workflowExecutions } from './workflowExecutions';
 
@@ -294,12 +294,12 @@ app.get('/v1/workflows/:workflowId/executions', (req: Request, res: Response) =>
 app.post('/v1/workflows/:workflowId/executions', (req: Request, res: Response) => {
   const { workflowId } = req.params;
 
-  const newExecution: WorkflowExecution = {
+  const newExecution: WorkflowExecutionDetails = {
     id: generateUUID(),
     workflow_id: workflowId,
     status: 'loading',
     operation_id: 'xd',
-    content: '{}',
+    content: {},
     completion_duration: 16,
   };
 
@@ -308,6 +308,120 @@ app.post('/v1/workflows/:workflowId/executions', (req: Request, res: Response) =
   res.status(201).json(newExecution);
 });
 
+app.get('/v1/execution/:executionId', (req: Request, res: Response) => {
+  const { executionId } = req.params;
+
+  const execution: WorkflowExecutionDetails = workflowExecutions.find(execution => execution.id === executionId);
+  if (!execution) return res.status(404).json({ error: 'Execution not found.' });
+
+  res.json(execution);
+})
+
+app.delete('/v1/execution/:executionId', (req: Request, res: Response) => {
+  const { executionId } = req.params;
+
+  const index = workflowExecutions.findIndex(execution => execution.id === executionId);
+  if (index === -1) return res.status(404).json({ error: 'Execution not found.' });
+  workflowExecutions.splice(index, 1);
+
+  res.json({ success: true, message: 'Execution deleted successfully.' });
+})
+
+// ASSETS
+const outputsImagesSample: ApiWorkflowAsset[] = [
+  {
+    id: '1',
+    asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
+    workflow_execution_id: '1',
+    // created_at: '2024-03-08T12:35:43.304570Z',
+    // size: 345,
+  },
+  {
+    id: '2',
+    asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
+    workflow_execution_id: '2',
+    // created_at: '2024-03-08T12:35:43.304570Z',
+    // size: 345,
+  },
+  {
+    id: '3',
+    asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
+    workflow_execution_id: '3',
+    // created_at: '2024-03-08T12:35:43.304570Z',
+    // size: 345,
+  },
+  {
+    id: '4',
+    asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
+    workflow_execution_id: '5',
+    // created_at: '2024-03-08T12:35:43.304570Z',
+    // size: 345,
+  },
+  {
+    id: '5',
+    asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
+    workflow_execution_id: '6',
+    // created_at: '2024-03-08T12:35:43.304570Z',
+    // size: 345,
+  },
+  {
+    id: '6',
+    asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
+    workflow_execution_id: '7',
+    // created_at: '2024-03-08T12:35:43.304570Z',
+    // size: 345,
+  },
+  {
+    id: '7',
+    asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
+    workflow_execution_id: '8',
+    // created_at: '2024-03-08T12:35:43.304570Z',
+    // size: 345,
+  },
+];
+
+const outputsImages = [
+  ...outputsImagesSample,
+  ...outputsImagesSample,
+  ...outputsImagesSample,
+  ...outputsImagesSample,
+].map((x, i) => ({ ...x, id: i.toString() }));
+
+app.get('/v1/workflows/:workflowId/artifacts', (req: Request, res: Response) => {
+  const { workflowId } = req.params;
+
+  const response: GetWorkflowAssetsResponse = {results: outputsImages};
+
+
+  res.json(response);
+});
+
+app.delete('/v1/assets/:assetId', (req: Request, res: Response) => {
+  const { assetId } = req.params;
+
+  const index = outputsImages.findIndex(asset => asset.id === assetId);
+  if (index === -1) return res.status(404).json({ error: 'Asset not found.' });
+  outputsImages.splice(index, 1);
+
+  res.json({ success: true, message: 'Asset deleted successfully.' });
+});
+
+app.get('/v1/assets/:assetId', (req: Request, res: Response) => {
+  const { assetId } = req.params;
+
+  const asset = outputsImages.find(asset => asset.id === assetId);
+
+  if (!asset) {
+    return res.status(404).json({ error: 'Asset not found.' });
+  }
+
+  const assetDetails: ApiWorkflowAssetDetails = {
+    ...asset,
+    content: examplePrompt1,
+  }
+
+  res.json(assetDetails);
+});
 
 // WebSocket endpoint
 initWebsocket(app);

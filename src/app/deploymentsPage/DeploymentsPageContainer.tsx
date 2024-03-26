@@ -7,6 +7,7 @@ import { DeploymentStatus } from '@/api/types';
 import { useQueryClient } from '@tanstack/react-query';
 import { fetchDeploymentById } from '@/api/hooks/useDeploymentQuery/useDeploymentQuery';
 import { saveJsonFile } from '@/shared/functions/saveJsonFile';
+import { QueryKeys } from '@/api/queryKeys';
 
 export const DeploymentsPageContainer = () => {
   const queryClient = useQueryClient();
@@ -28,7 +29,7 @@ export const DeploymentsPageContainer = () => {
 
   const handleDownloadDeployment = async (id: string) => {
     const res = await queryClient.fetchQuery({
-      queryKey: ['deployment', id],
+      queryKey: [QueryKeys.deployments, id],
       queryFn: () => fetchDeploymentById(id),
       staleTime: 5 * 60 * 1000, // 5m
     });
@@ -37,7 +38,7 @@ export const DeploymentsPageContainer = () => {
 
   const handlePrefetchDeployment = async (deploymentId: string) => {
     await queryClient.prefetchQuery({
-      queryKey: ['deployment', deploymentId],
+      queryKey: [QueryKeys.deployments, deploymentId],
       queryFn: () => fetchDeploymentById(deploymentId),
       staleTime: 5 * 60 * 1000,
     });
