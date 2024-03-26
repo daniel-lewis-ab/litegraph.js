@@ -14,7 +14,7 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
   const wsUrl = import.meta.env.VITE_WEBSOCKET_URL;
 
   useMemo(() => {
-    const ws = new WebSocket(wsUrl);
+    const ws = new WebSocket(wsUrl as string);
     setSocket(ws);
     return () => ws.close();
   }, [wsUrl]);

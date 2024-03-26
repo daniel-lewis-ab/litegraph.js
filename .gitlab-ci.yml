@@ -1,4 +1,6 @@
 stages:
+  - lint
+  - test
   - build
   - deploy
 
@@ -7,6 +9,20 @@ variables:
   IMAGE_TAG: gcr.io/plaidev/plai-backend-registry-repository/salt-frontend:$CI_COMMIT_SHORT_SHA
   IFRAME_TAG: gcr.io/plaidev/plai-backend-registry-repository/salt-frontend-comfy-iframe:$CI_COMMIT_SHORT_SHA
   SHORT_HASH: $CI_COMMIT_SHORT_SHA
+
+lint:
+  stage: lint
+  image: node:latest
+  script:
+    - npm install
+    - npm run lint
+
+test:
+  stage: test
+  image: node:latest
+  script:
+    - npm install
+    - npm run build
 
 publish:
   stage: build
