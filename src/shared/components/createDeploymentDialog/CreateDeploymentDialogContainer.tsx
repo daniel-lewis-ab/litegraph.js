@@ -1,7 +1,7 @@
 import { useCreateDeploymentMutation } from '@/api/hooks/useCreateDeploymentMutation/useCreateDeploymentMutation';
 import { CreateDeploymentDialog, CreateDeploymentDialogProps, NewDeploymentFormData } from './CreateDeploymentDialog';
 
-export const CreateDeploymentDialogContainer = (props: CreateDeploymentDialogProps) => {
+export const CreateDeploymentDialogContainer = (props: Omit<CreateDeploymentDialogProps, 'onSubmit'>) => {
   const { mutateAsync: createDeployment } = useCreateDeploymentMutation();
 
   const handleCreateDeployment = async (values: NewDeploymentFormData) => {

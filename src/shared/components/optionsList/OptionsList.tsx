@@ -23,7 +23,7 @@ const Item = ({
       onClick={onClick}
       type="button"
     >
-      <Icon size={16} icon={icon} className="mr-2.5 text-surface-7 *:text-surface-8" />
+      <Icon size={16} icon={icon} className="mr-2.5 text-surface-7 *:text-text-muted" />
       <span className="font-medium">{children}</span>
     </button>
   </li>

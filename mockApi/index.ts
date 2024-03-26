@@ -1,14 +1,16 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowsResponse, PostLoginResponse, Workflow, WorkflowDetails } from '../src/api/types';
 import expressWs from 'express-ws';
+import { Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowsResponse, PostLoginResponse, Workflow, WorkflowDetails, WorkflowExecution } from '../src/api/types';
+import { initWebsocket } from './websocket';
+import { examplePrompt1, examplePrompt2, examplePrompt3, workflowExecutions } from './workflowExecutions';
 
 const app = express();
 const PORT = 3000;
 
 expressWs(app);
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 const JWT_SECRET = 'your_secret_key';
 
@@ -56,27 +58,31 @@ app.post('/v1/token/refresh', (_, res: Response) => {
 const baseWorkflows: WorkflowDetails[] = [
   {
     id: '1',
-    name: 'comfyui_Title01af___a',
+    name: 'comfyui_Title01af___a1',
     updated_at: new Date().toISOString(), // Current timestamp
-    content: '{}',
+    content: examplePrompt1,
+    api_content: '{}',
   },
   {
     id: '2',
-    name: 'comfyui_Title01af___a',
+    name: 'comfyui_Title01af___a2',
     updated_at: new Date(Date.now() - 3600 * 1000).toISOString(), // 1 hour ago
-    content: '{}',
+    content: examplePrompt2,
+    api_content: '{}',
   },
   {
     id: '3',
     name: '(Video Tutorial Resources) Picture in Picture Goodness + Canvas Pose',
     updated_at: new Date(Date.now() - 24 * 3600 * 1000).toISOString(), // 1 day ago
-    content: '{}',
+    content: examplePrompt3,
+    api_content: '{}',
   },
   {
     id: '4',
-    name: 'comfyui_Title01af___a',
+    name: 'comfyui_Title01af___aEMPTY',
     updated_at: new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString(), // 1 week ago
     content: '{}',
+    api_content: '{}',
   },
 ];
 const workflows = baseWorkflows;
@@ -101,6 +107,7 @@ app.post('/v1/workflows/', (req: Request, res: Response) => {
     id: generateUUID(),
     name,
     content: '{}',
+    api_content: '{}',
     updated_at: new Date().toISOString(),
   };
   workflows.unshift(newWorkflow);
@@ -117,6 +124,22 @@ app.get('/v1/workflows/:workflowId', (req: Request, res: Response) => {
   res.json(workflow);
 });
 
+// Endpoint to update a specific workflow
+app.put('/v1/workflows/:workflowId', (req: Request, res: Response) => {
+  const { workflowId } = req.params;
+  const { name, content, api_content } = req.body;
+
+  const index = workflows.findIndex(w => w.id === workflowId);
+  if (index === -1) return res.status(404).json({ error: 'Workflow not found.' });
+
+  // Updating the workflow with new values. Only update fields that are provided.
+  if (name !== undefined) workflows[index].name = name;
+  if (content !== undefined) workflows[index].content = content;
+  if (api_content !== undefined) workflows[index].api_content = api_content;
+  workflows[index].updated_at = new Date().toISOString(); // Update the 'updated_at' field to the current time
+
+  res.json(workflows[index]);
+});
 
 // Endpoint to delete a specific workflow
 app.delete('/v1/workflows/:workflowId', (req: Request, res: Response) => {
@@ -251,19 +274,43 @@ app.delete('/v1/deployments/:deploymentId', (req: Request, res: Response) => {
   res.json({ success: true });
 });
 
-// WebSocket endpoint
-(app as any).ws('/echo', (ws: any, _req: any) => {
-  console.log('WebSocket connection established');
+// WORKFLOW EXECUTIONS
+// Endpoint to retrieve workflow executions for a specific workflow
+app.get('/v1/workflows/:workflowId/executions', (req: Request, res: Response) => {
+  const { workflowId } = req.params;
 
-  ws.on('message', (msg: any) => {
-    console.log(`Received message: ${msg}`);
-    ws.send(`Echo: ${msg} xD`); // Echoes received messages back to the client
-  });
+  const executionsForWorkflow = workflowExecutions;  //.filter(execution => execution.workflow_id === workflowId);
 
-  ws.on('close', () => {
-    console.log('WebSocket connection closed');
-  });
+  const exampleResponse = {
+    count: executionsForWorkflow.length,
+    next: "http://api.example.org/v1/workflows/1/executions?page=2", // Adjust according to actual pagination logic
+    previous: "http://api.example.org/v1/workflows/1/executions?page=1", // Adjust according to actual pagination logic
+    results: executionsForWorkflow
+  };
+
+  res.json(exampleResponse);
 });
+
+app.post('/v1/workflows/:workflowId/executions', (req: Request, res: Response) => {
+  const { workflowId } = req.params;
+
+  const newExecution: WorkflowExecution = {
+    id: generateUUID(),
+    workflow_id: workflowId,
+    status: 'loading',
+    operation_id: 'xd',
+    content: '{}',
+    completion_duration: 16,
+  };
+
+  workflowExecutions.push(newExecution);
+
+  res.status(201).json(newExecution);
+});
+
+
+// WebSocket endpoint
+initWebsocket(app);
 
 // Starting the server
 app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));

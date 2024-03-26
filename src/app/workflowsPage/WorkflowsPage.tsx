@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { DeleteConfirmationDialog } from './components/DeleteConfirmationDialog';
 import { EmptyWorkflowsPage } from './components/EmptyWorkflowsPage';
-import { CreateDeploymentDialogContainer } from './components/createDeploymentDialog/CreateDeploymentDialogContainer';
+import { CreateDeploymentDialogContainer } from '../../shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
 import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
 
 type WorkflowsPageProps = {
@@ -56,7 +56,6 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
         isOpen={!!workflowIdToDeploy}
         workflowId={workflowIdToDeploy!}
         onClose={() => setWorkflowIdToDeploy(null)}
-        onSubmit={() => onWorkflowDelete(workflowIdToDelete!)}
       />
     </PageTemplate>
   );
