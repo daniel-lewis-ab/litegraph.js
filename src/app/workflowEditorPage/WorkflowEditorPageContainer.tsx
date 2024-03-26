@@ -35,7 +35,6 @@ export const WorkflowEditorPageContainer = () => {
         setIsInitialWorkflowUpdated(true);
       }
     } catch (e) {
-      console.error(e);
       toast.error('Error while trying to fetch workflow');
     }
   }, [workflow?.content, setCurrentWorkflow, isInitialWorkflowUpdated]);
