@@ -15,7 +15,9 @@ export type Workflow = {
 };
 
 export type WorkflowDetails = Workflow & {
-  content: string;
+  // Correctly define the content and api_content properties
+  content: object;
+  api_content: object;
 };
 
 export type GetWorkflowsResponse = {
@@ -23,6 +25,8 @@ export type GetWorkflowsResponse = {
   count: number;
   results: Workflow[];
 };
+
+export type GetWorkflowResponse = WorkflowDetails;
 
 export type DeploymentStatus = 'LOADING' | 'ONLINE' | 'PAUSED' | 'FAILED';
 
@@ -43,4 +47,29 @@ export type DeploymentDetails = Deployment & {
 export type GetDeploymentsResponse = {
   count?: number;
   results: Deployment[];
+};
+
+export type WorkflowStatus = 'loading' | 'error' | 'success';
+
+export type WorkflowExecution = {
+  id: string;
+  operation_id: string;
+  status: WorkflowStatus;
+  workflow_id: string;
+  completion_duration: number;
+  // Added by me
+  content: string;
+};
+
+export type GetWorkflowExecutionsResponse = {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: WorkflowExecution[];
+};
+
+export type PostWorkflowExecutionsResponse = {
+  id: string;
+  operation_id: string;
+  status: WorkflowStatus;
 };

@@ -7,9 +7,10 @@ import { Storybook } from '../storybook/storybook';
 import { WorkflowsPageContainer } from '../workflowsPage/WorkflowsPageContainer';
 import { routes } from '@/routes/routes';
 import { NewWorkflowPageContainer } from '../newWorkflowPage/NewWorkflowPageContainer';
-import { WorkflowEditorPageContainer } from '../workflowEditorPageContainer/WorkflowEditorPageContainer';
+import { WorkflowEditorPageContainer } from '../workflowEditorPage/WorkflowEditorPageContainer';
 import { HomePage } from '../homePage/HomePage';
 import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageContainer';
+import { WorkflowEditorContextProvider } from '@/context/workflowEditorContext/WorkflowEditorContext';
 
 export const router = createBrowserRouter([
   {
@@ -61,7 +62,9 @@ export const router = createBrowserRouter([
     path: routes.workflow(':id'),
     element: (
       <AuthorizedRoute>
-        <Outlet />
+        <WorkflowEditorContextProvider>
+          <Outlet />
+        </WorkflowEditorContextProvider>
       </AuthorizedRoute>
     ),
     errorElement: <ErrorPage />,

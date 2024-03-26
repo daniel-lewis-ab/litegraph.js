@@ -6,17 +6,7 @@ import { useDeleteDeploymentMutation } from '@/api/hooks/useDeleteDeploymentMuta
 import { DeploymentStatus } from '@/api/types';
 import { useQueryClient } from '@tanstack/react-query';
 import { fetchDeploymentById } from '@/api/hooks/useDeploymentQuery/useDeploymentQuery';
-
-function downloadToStringJson(data: string, filename = 'file.json') {
-  const blob = new Blob([data], { type: 'application/json' });
-  const href = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = href;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
+import { saveJsonFile } from '@/shared/functions/saveJsonFile';
 
 export const DeploymentsPageContainer = () => {
   const queryClient = useQueryClient();
@@ -42,7 +32,7 @@ export const DeploymentsPageContainer = () => {
       queryFn: () => fetchDeploymentById(id),
       staleTime: 5 * 60 * 1000, // 5m
     });
-    downloadToStringJson(res.workflow_json, `${res.name}.json`);
+    saveJsonFile(res.workflow_json, `${res.name}.json`);
   };
 
   const handlePrefetchDeployment = async (deploymentId: string) => {
