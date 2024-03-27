@@ -5,5 +5,6 @@ export const apiEndpoints = {
   workflow: (id: string) => `/v1/workflows/${id}/`,
   deployments: '/v1/deployments/',
   deployment: (id: string) => `/v1/deployments/${id}/`,
+  websocket: '/ws/v1/artcraft/',
   workflowExecutions: (workflowId: string) => `/v1/workflows/${workflowId}/executions/`,
 };
