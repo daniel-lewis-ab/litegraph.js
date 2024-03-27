@@ -1,9 +1,6 @@
 import { ReactNode, createContext, useMemo, useState } from 'react';
 
-export type WebSocketContextType = {
-  socket: WebSocket | undefined;
-};
-export const WebSocketContext = createContext<WebSocketContextType | undefined>(undefined);
+export const WebSocketContext = createContext<WebSocket | undefined>(undefined);
 
 type WebSocketProviderProps = {
   children: ReactNode;
@@ -14,11 +11,12 @@ export const WebSocketProvider = ({ children }: WebSocketProviderProps) => {
   const wsUrl = import.meta.env.VITE_WEBSOCKET_URL;
 
   useMemo(() => {
-    const ws = new WebSocket(wsUrl as string);
+    const token = localStorage.getItem('accessToken');
+    // @TODO Handle a null token
+    const ws = new WebSocket(wsUrl + '?bearer=' + token);
     setSocket(ws);
     return () => ws.close();
   }, [wsUrl]);
-  const contextValue: WebSocketContextType = { socket };
 
-  return <WebSocketContext.Provider value={contextValue}>{children}</WebSocketContext.Provider>;
+  return <WebSocketContext.Provider value={socket}>{children}</WebSocketContext.Provider>;
 };

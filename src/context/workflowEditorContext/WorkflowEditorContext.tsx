@@ -1,5 +1,5 @@
 // @TODO: Define proper types
-import { WorkflowContent } from '@/api/types';
+import { WorkflowContent, WorkflowAPIContent } from '@/api/types';
 import { ReactNode, createContext, useState } from 'react';
 
 type WorkflowContext = {
@@ -16,6 +16,7 @@ type WorkflowEditorContextProviderProps = {
 
 type WorkflowStateInfo = {
   content: WorkflowContent;
+  api_content: WorkflowAPIContent;
   updateSource: 'react' | 'iframe';
 };
 

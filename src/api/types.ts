@@ -24,6 +24,8 @@ export type Workflow = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type WorkflowContent = any; // TODO: Define this type more explicitly
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type WorkflowAPIContent = any; // TODO: Define this type more explicitly
 
 export type WorkflowDetails = Workflow & {
   content: WorkflowContent;
@@ -114,3 +116,10 @@ export type ApiWorkflowAssetDetails = ApiWorkflowAsset & {
 export type GetWorkflowAssetsResponse = {
   results: ApiWorkflowAsset[];
 };
+
+// ============================
+// Websockets
+// ============================
+
+// @TODO
+export type WebSocketResponse = unknown;

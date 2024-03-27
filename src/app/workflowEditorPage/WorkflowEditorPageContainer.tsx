@@ -31,13 +31,13 @@ export const WorkflowEditorPageContainer = () => {
   useEffect(() => {
     try {
       if (workflow?.content && isInitialWorkflowUpdated === false) {
-        setCurrentWorkflow({ updateSource: 'react', content: workflow.content });
+        setCurrentWorkflow({ updateSource: 'react', content: workflow.content, api_content: workflow.api_content });
         setIsInitialWorkflowUpdated(true);
       }
     } catch (e) {
       toast.error('Error while trying to fetch workflow');
     }
-  }, [workflow?.content, setCurrentWorkflow, isInitialWorkflowUpdated]);
+  }, [workflow, setCurrentWorkflow, isInitialWorkflowUpdated]);
 
   useEffect(() => {
     const updateWorkflowAsync = async () => {
@@ -46,7 +46,7 @@ export const WorkflowEditorPageContainer = () => {
           id: id!,
           content: currentWorkflow.content,
           name: workflow!.name,
-          api_content: {},
+          api_content: currentWorkflow.api_content,
         });
       }
     };
