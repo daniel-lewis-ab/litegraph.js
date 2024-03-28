@@ -1,7 +1,7 @@
 "use strict";
 import { extensions as h } from "./extensions.js";
 import { nodeDefinitions as l } from "./object_info.js";
-import { app as f } from "../comfy/scripts/app.js";
+import { app as f } from "../scripts/app.js";
 import { opaque as u } from "./opaque.js";
 const m = 500,
   d = {

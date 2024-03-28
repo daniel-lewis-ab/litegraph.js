@@ -1,7 +1,7 @@
 'use strict';
 import { extensions } from './extensions.js';
 import { nodeDefinitions } from './object_info.js';
-import { app } from '../comfy/scripts/app.js';
+import { app } from '../../comfy/scripts/app.js';
 import { opaque } from './opaque.js';
 
 const refreshInterval = 500;
