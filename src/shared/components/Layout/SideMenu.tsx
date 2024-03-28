@@ -19,6 +19,7 @@ import { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Logo } from '../icons/Logo';
 import { constants } from '@/contants';
+import { routes } from '@/routes/routes';
 
 const ICON_SIZE = 20;
 
@@ -41,11 +42,11 @@ export const SideMenu = () => {
               <Logo className="fill-text-base" />
             </SideMenuButton>
 
-            <SideMenuButton to="/workflows" tooltip="Workflows">
+            <SideMenuButton to={routes.workflows} tooltip="Workflows">
               <Icon size={ICON_SIZE} icon={faDiagramProject} />
             </SideMenuButton>
 
-            <SideMenuButton to="/deployments" tooltip="Deployments">
+            <SideMenuButton to={routes.deployments} tooltip="Deployments">
               <Icon size={ICON_SIZE} icon={faRocket} />
             </SideMenuButton>
           </div>

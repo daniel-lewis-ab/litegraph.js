@@ -11,68 +11,67 @@ import { WorkflowEditorPageContainer } from '../workflowEditorPage/WorkflowEdito
 import { HomePage } from '../homePage/HomePage';
 import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageContainer';
 import { WorkflowEditorContextProvider } from '@/context/workflowEditorContext/WorkflowEditorContext';
+import { AboutPage } from '../aboutPage/AboutPage';
 
 export const router = createBrowserRouter([
+  { path: routes.home, element: <HomePage />, errorElement: <ErrorPage /> },
+  { path: routes.about, element: <AboutPage />, errorElement: <ErrorPage /> },
+  { path: routes.login, element: <LoginPageContainer />, errorElement: <ErrorPage /> },
   {
-    path: routes.home,
-    element: <HomePage />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: routes.login,
-    element: <LoginPageContainer />,
-  },
-  {
-    path: routes.workflows,
+    path: '/app',
     element: (
       <AuthorizedRoute>
-        <Layout>
-          <Outlet />
-        </Layout>
+        <Outlet />
       </AuthorizedRoute>
     ),
     children: [
       {
-        index: true,
-        element: <WorkflowsPageContainer />,
+        path: routes.workflows,
+        element: (
+          <Layout>
+            <Outlet />
+          </Layout>
+        ),
+        children: [
+          {
+            index: true,
+            element: <WorkflowsPageContainer />,
+          },
+          {
+            path: routes.newWorkflow.replace('/app/workflows/', ''),
+            element: <NewWorkflowPageContainer />,
+          },
+        ],
       },
       {
-        path: routes.newWorkflow.replace('/workflows/', ''),
-        element: <NewWorkflowPageContainer />,
+        path: routes.deployments,
+        element: (
+          <Layout>
+            <Outlet />
+          </Layout>
+        ),
+        children: [
+          {
+            index: true,
+            element: <DeploymentsPageContainer />,
+          },
+        ],
       },
-    ],
-  },
-  {
-    path: routes.deployments,
-    element: (
-      <AuthorizedRoute>
-        <Layout>
-          <Outlet />
-        </Layout>
-      </AuthorizedRoute>
-    ),
-    children: [
       {
-        index: true,
-        element: <DeploymentsPageContainer />,
+        path: routes.workflow(':id'),
+        element: (
+          <WorkflowEditorContextProvider>
+            <Outlet />
+          </WorkflowEditorContextProvider>
+        ),
+        errorElement: <ErrorPage />,
+        children: [{ index: true, element: <WorkflowEditorPageContainer /> }],
+      },
+      // @TODO: Remove before prod
+      {
+        path: routes.storybook,
+        element: import.meta.env.DEV ? <Storybook /> : null,
       },
     ],
-  },
-  {
-    path: routes.workflow(':id'),
-    element: (
-      <AuthorizedRoute>
-        <WorkflowEditorContextProvider>
-          <Outlet />
-        </WorkflowEditorContextProvider>
-      </AuthorizedRoute>
-    ),
-    errorElement: <ErrorPage />,
-    children: [{ index: true, element: <WorkflowEditorPageContainer /> }],
-  },
-  // @TODO: Remove before prod
-  {
-    path: routes.storybook,
-    element: import.meta.env.DEV ? <Storybook /> : null,
   },
 ]);
