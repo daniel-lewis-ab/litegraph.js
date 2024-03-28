@@ -1,4 +1,4 @@
-import {patchApi} from "../../patch/api.js"
+import { patchApi } from '../patch/api.js';
 export const api = patchApi;
 
 // class ComfyApi extends EventTarget {
@@ -421,4 +421,3 @@ export const api = patchApi;
 // }
 //
 // export const api = new ComfyApi();
-

@@ -8,5 +8,5 @@ services:
     ports:
       - '8080:80'
     volumes:
-      - .:/usr/share/nginx/html
+      - ../comfyui/:/usr/share/nginx/html
     restart: always
