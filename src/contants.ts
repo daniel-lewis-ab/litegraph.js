@@ -4,5 +4,5 @@ export const constants = {
   addBotToDiscordUrl:
     'https://discord.com/oauth2/authorize?client_id=1113909066587185274&scope=bot&permissions=2147605568',
   discordFeedbackUrl: 'https://discord.com/invite/kuSdzT6f36',
-  updateWorkflowThrottleTime: 1500,
+  updateWorkflowThrottleTime: 1300,
 };

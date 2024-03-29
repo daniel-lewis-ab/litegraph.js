@@ -90,7 +90,7 @@ export const WorkflowEditorHeader = ({
             icon={faPlay}
             className={clsx(
               'mr-2 p-1 transition-opacity *:text-success-10 hover:opacity-95 active:opacity-85',
-              isCreatingWorkflow && 'opacity-50 hover:opacity-50 active:opacity-50',
+              isCreatingWorkflow && '!opacity-50',
             )}
             size={20}
           />

@@ -16,6 +16,7 @@ import { useUpdateWorkflowFromWebsocket } from '@/hooks/useUpdateWorkflowFromWeb
 import { usePrefetchWorkflowOutputAssets } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
 
 export const WorkflowEditorPageContainer = () => {
+  // We want to keep it to only send the update once
   const [isInitialWorkflowUpdated, setIsInitialWorkflowUpdated] = useState(false);
   const { id } = useParams();
   const { workflowExecutions } = useWorkflowExecutionsQuery(id!);
@@ -24,8 +25,9 @@ export const WorkflowEditorPageContainer = () => {
   const { mutateAsync: updateWorkflow } = useUpdateWorkflowMutation();
   const { currentWorkflow, setCurrentWorkflow } = useWorkflowEditor();
   const { prefetchWorkflowOutputAssets } = usePrefetchWorkflowOutputAssets();
-  useUpdateWorkflowFromWebsocket();
   const workflowsRunningCount = workflowExecutions?.results.filter((w) => w.status === 'PENDING').length;
+
+  useUpdateWorkflowFromWebsocket();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const throttledUpdateWorkflow = useCallback(throttle(updateWorkflow, constants.updateWorkflowThrottleTime), [
@@ -37,13 +39,9 @@ export const WorkflowEditorPageContainer = () => {
   }, [id, prefetchWorkflowOutputAssets]);
 
   useEffect(() => {
-    try {
-      if (workflow?.content && isInitialWorkflowUpdated === false) {
-        setCurrentWorkflow({ updateSource: 'react', content: workflow.content, api_content: workflow.api_content });
-        setIsInitialWorkflowUpdated(true);
-      }
-    } catch (e) {
-      toast.error('Error while trying to fetch workflow');
+    if (workflow?.content && isInitialWorkflowUpdated === false) {
+      setCurrentWorkflow({ updateSource: 'react', content: workflow.content, api_content: workflow.api_content });
+      setIsInitialWorkflowUpdated(true);
     }
   }, [workflow, setCurrentWorkflow, isInitialWorkflowUpdated]);
 
@@ -66,8 +64,8 @@ export const WorkflowEditorPageContainer = () => {
 
   const handleExecuteWorkflow = async () => {
     try {
+      toast.success('Workflow added to queue', { position: 'bottom-center' });
       await createWorkflowExecution({ workflow: workflow! });
-      // toast.success('Workflow added to queue', { position: 'bottom-center' });
     } catch (e) {
       toast.error('Failed to execute workflow', { position: 'bottom-center' });
     }

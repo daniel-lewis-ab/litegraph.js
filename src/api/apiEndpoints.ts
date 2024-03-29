@@ -9,6 +9,6 @@ export const apiEndpoints = {
   workflowExecutions: (workflowId: string) => `/v1/workflows/${workflowId}/executions/`,
   workflowOutputAssets: (workflowId: string) => `/v1/workflows/${workflowId}/artifacts/`,
   asset: ({ assetId, executionId }: { assetId: string; executionId: string }) =>
-    `/api/v1/executions/${executionId}/artifacts/${assetId}/`,
+    `/v1/executions/${executionId}/artifacts/${assetId}/`,
   execution: (executionId: string) => `/v1/executions/${executionId}/`,
 };

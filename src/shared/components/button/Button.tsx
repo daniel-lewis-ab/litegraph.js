@@ -22,7 +22,8 @@ type ButtonProps = LinkProps & {
   isLoading?: boolean;
   leftIcon?: IconProps['icon'];
   rightIcon?: IconProps['icon'];
-  onClick?: () => void;
+  onClick?(): void;
+  onMouseOver?(): void;
 };
 
 const iconSize = (size: string) => {
@@ -44,6 +45,7 @@ export const Button = ({
   asLink,
   level,
   to,
+  onMouseOver,
 }: ButtonProps) => {
   const ButtonOrLink = asLink && to ? Link : 'button';
 
@@ -68,6 +70,7 @@ export const Button = ({
       )}
       onClick={onClick}
       disabled={disabled ?? isLoading}
+      onMouseOver={onMouseOver}
     >
       {leftIcon && <Icon icon={leftIcon} size={iconSize(size)} />}
       {isLoading ? <LoaderIcon /> : <span>{children}</span>}

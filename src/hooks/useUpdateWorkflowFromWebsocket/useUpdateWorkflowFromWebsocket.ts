@@ -9,6 +9,7 @@ import { useWebsocket } from '../useWebsocket/useWebsocket';
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/api/queryKeys';
+import toast from 'react-hot-toast';
 
 export const useUpdateWorkflowFromWebsocket = () => {
   const socket = useWebsocket();
@@ -62,6 +63,7 @@ export const useUpdateWorkflowFromWebsocket = () => {
           completionDuration: data.completion_duration,
         });
         updateWorkflowAssetsWithNewArtifacts(data.workflow_id, data.generated_artifacts);
+        toast.success('Workflow execution completed', { position: 'bottom-center' });
       }
     };
 

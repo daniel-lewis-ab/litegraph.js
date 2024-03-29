@@ -70,7 +70,7 @@ export const OutputsGallerySection = ({
 
   return (
     <EditorSection icon={faImages} title="Outputs" onClose={onClose} className="relative">
-      {assets.length === 0 ? <p>No generated outputs</p> : null}
+      {assets.length === 0 ? <p className="text-text-subtle">No outputs yet</p> : null}
       {assets.length > 0 ? (
         <div className="no-scrollbar h-full overflow-auto">
           <div className="mb-14 grid grid-cols-3 gap-2">

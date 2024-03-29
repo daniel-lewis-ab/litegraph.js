@@ -12,7 +12,7 @@ export const EditorIframe = () => {
   const socket = useWebsocket();
 
   const sendMessageToIframe = (message: FullMessage) => {
-    import.meta.env.SHOW_IFRAME_LOGS && console.log('Sending message to iframe', message);
+    import.meta.env.VITE_SHOW_IFRAME_LOGS && console.log('Sending message to iframe', message);
     iframeRef.current?.contentWindow?.postMessage(message, '*');
   };
 
@@ -34,8 +34,9 @@ export const EditorIframe = () => {
       if (message.data.internal && message.data.internal.type === 'graph_data') {
         const newWorkflow = message.data.internal.data.content;
         const hasWorkflowBeenUpdated = JSON.stringify(currentWorkflow?.content) !== JSON.stringify(newWorkflow);
+
         if (hasWorkflowBeenUpdated) {
-          import.meta.env.SHOW_IFRAME_LOGS && console.log('Updating the content in react');
+          import.meta.env.VITE_SHOW_IFRAME_LOGS && console.log('Updating the content in react');
           setCurrentWorkflow({
             updateSource: 'iframe',
             content: newWorkflow,
@@ -55,7 +56,7 @@ export const EditorIframe = () => {
   useEffect(() => {
     const handleWebsocketMessage = (msg: MessageEvent<string>) => {
       const message: WebSocketMessage = JSON.parse(msg.data);
-      import.meta.env.SHOW_WEBSOCKET_LOGS && console.log('websocket message', message);
+      import.meta.env.VITE_SHOW_WEBSOCKET_LOGS && console.log('websocket message', message);
       // @TODO: Filter out websocket messages to only send the ones that iframe needs + correctly type them
       sendMessageToIframe({
         internal: message.data,

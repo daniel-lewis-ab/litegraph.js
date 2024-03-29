@@ -404,7 +404,7 @@ app.get('/v1/workflows/:workflowId/artifacts', (req: Request, res: Response) => 
   res.json(response);
 });
 
-app.delete('/v1/executions/:executions/artifacts/:assetId', (req: Request, res: Response) => {
+app.delete('/v1/executions/:executions/artifacts/:assetId/', (req: Request, res: Response) => {
   const { assetId } = req.params;
 
   const index = outputsImages.findIndex(asset => asset.id === assetId);

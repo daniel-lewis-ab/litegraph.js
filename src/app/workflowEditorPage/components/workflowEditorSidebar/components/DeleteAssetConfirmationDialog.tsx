@@ -1,5 +1,6 @@
 import { Button } from '@/shared/components/button/Button';
 import { Dialog } from '@/shared/components/dialog/Dialog';
+import { LoaderIcon } from '@/shared/components/loaderIcon/LoaderIcon';
 import { WarningDialogContent } from '@/shared/components/warningDialog/WarningDialog';
 import { useState } from 'react';
 
@@ -33,9 +34,9 @@ export const DeleteAssetConfirmationDialog = ({ isOpen, onConfirm, onClose }: De
                 setIsDeleting(false);
               }
             }}
-            isLoading={isDeleting}
+            disabled={isDeleting}
           >
-            Delete
+            {isDeleting ? <LoaderIcon size={16} /> : 'Delete'}
           </Button>
           <Button disabled={isDeleting} onClick={onClose} color="secondary" variant="ringed">
             Cancel

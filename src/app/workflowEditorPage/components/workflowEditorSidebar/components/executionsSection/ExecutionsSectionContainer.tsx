@@ -8,7 +8,7 @@ import { EditorSection } from '../EditorSection';
 import toast from 'react-hot-toast';
 
 export const ExecutionsSectionContainer = ({ workflowId, onClose }: { workflowId: string; onClose(): void }) => {
-  const { fetchExecutionDetails } = useFetchExecutionDetailsQuery();
+  const { fetchExecutionDetails, prefetchExecutionDetails } = useFetchExecutionDetailsQuery();
   const { workflowExecutions, isError } = useWorkflowExecutionsQuery(workflowId);
   const { setCurrentWorkflow } = useWorkflowEditor();
   const { mutateAsync: deleteWorkflowExecution } = useDeleteWorkflowExecutionMutation();
@@ -34,6 +34,10 @@ export const ExecutionsSectionContainer = ({ workflowId, onClose }: { workflowId
     return Promise.resolve();
   };
 
+  const handlePrefetchExecutionDetails = async (executionId: string) => {
+    await prefetchExecutionDetails(executionId);
+  };
+
   if (isError) {
     return (
       <EditorSection icon={faList} title="Jobs" onClose={onClose}>
@@ -47,6 +51,7 @@ export const ExecutionsSectionContainer = ({ workflowId, onClose }: { workflowId
       executions={workflowExecutions?.results ?? []}
       onLoadExecutionClick={handleExecutionLoad}
       onRemoveExecutionClick={handleExecutionRemove}
+      prefetchExecutionDetails={handlePrefetchExecutionDetails}
       onClose={onClose}
     />
   );

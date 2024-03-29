@@ -27,10 +27,10 @@ export const OutputsGalleryGridContainer = ({
   const handleDeleteAsset = async ({ assetId, executionId }: { assetId: string; executionId: string }) => {
     try {
       const res = await deleteAsset({ assetId, executionId, workflowId });
-      toast.success('Asset deleted', { position: 'bottom-center' });
+      toast.success('Output deleted', { position: 'bottom-center' });
       return res;
     } catch (error) {
-      toast.error('Failed to delete asset', { position: 'bottom-center' });
+      toast.error('Failed to delete output', { position: 'bottom-center' });
       return false;
     }
   };

@@ -25,6 +25,7 @@ export type CreateDeploymentDialogProps = {
 
 export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }: CreateDeploymentDialogProps) => {
   const [operationStatus, setOperationStatus] = useState<null | 'success' | 'error'>('success');
+  const [errorCode, setErrorCode] = useState<'deployment_validation_error' | string | null>(null);
   const {
     register,
     handleSubmit,
@@ -49,6 +50,9 @@ export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }
           setError('name', { type: 'manual', message: 'Sorry, the workflow slug is unavailable' });
         } else {
           setOperationStatus('error');
+          if (e.response?.data?.error_code) {
+            setErrorCode(e.response.data.error_code as string);
+          }
         }
       } else {
         setOperationStatus('error');
@@ -135,7 +139,11 @@ export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }
   const errorResult = (
     <WarningDialogContent
       title="Deployment Failed"
-      desc="Ensure that all models/checkpoints are accessible and your workflow is stable."
+      desc={
+        errorCode === 'deployment_validation_error'
+          ? 'The most recent job execution must be successful in order to proceed with deployment'
+          : 'Ensure that all models/checkpoints are accessible and your workflow is stable.'
+      }
     >
       <Button variant="filled" color="error" className="w-full" onClick={onClose}>
         Ok

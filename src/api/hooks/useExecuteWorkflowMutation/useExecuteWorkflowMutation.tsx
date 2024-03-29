@@ -65,7 +65,7 @@ export const useExecuteWorkflowMutation = () => {
 
       return { previousExecutions };
     },
-    onSuccess: (execution, { workflow }) => {
+    onSuccess: (newExecution, { workflow }) => {
       queryClient.setQueryData<GetWorkflowExecutionsResponse>(
         [QueryKeys.workflowExecutions, workflow.id],
         (oldData) => {
@@ -73,7 +73,7 @@ export const useExecuteWorkflowMutation = () => {
             count: oldData?.count ?? 1,
             results:
               oldData?.results.map((execution) =>
-                execution.id === 'optimistic-id' ? { ...execution, id: execution.id } : execution,
+                execution.id === 'optimistic-id' ? { ...execution, id: newExecution.id } : execution,
               ) ?? [],
           };
 
@@ -82,16 +82,16 @@ export const useExecuteWorkflowMutation = () => {
       );
 
       const newExecutionDetails: WorkflowExecutionDetails = {
-        id: execution.id,
-        operation_id: execution.operation_id,
-        status: execution.status,
+        id: newExecution.id,
+        operation_id: newExecution.operation_id,
+        status: newExecution.status,
         workflow_id: workflow.id,
         workflow_content: workflow.content,
         workflow_api_content: workflow.api_content,
-        created_at: execution.created_at,
+        created_at: newExecution.created_at,
       };
 
-      queryClient.setQueryData<WorkflowExecutionDetails>([QueryKeys.execution, execution.id], newExecutionDetails);
+      queryClient.setQueryData<WorkflowExecutionDetails>([QueryKeys.execution, newExecution.id], newExecutionDetails);
     },
     onError: (_, __, context) => {
       if (context?.previousExecutions) {
@@ -101,11 +101,11 @@ export const useExecuteWorkflowMutation = () => {
         );
       }
     },
-    onSettled: (_, __, { workflow }) => {
-      queryClient.invalidateQueries({
-        queryKey: [QueryKeys.workflowExecutions, workflow.id],
-      });
-    },
+    // onSettled: (_, __, { workflow }) => {
+    // queryClient.invalidateQueries({
+    //   queryKey: [QueryKeys.workflowExecutions, workflow.id],
+    // });
+    // },
   });
 
   return { mutate, ...rest };

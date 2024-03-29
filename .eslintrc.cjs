@@ -38,5 +38,6 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": ["warn"],
     '@typescript-eslint/unbound-method': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-redundant-type-constituents': 'off',
   },
 };
