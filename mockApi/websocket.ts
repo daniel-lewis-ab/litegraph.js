@@ -4,7 +4,7 @@ export const initWebsocket = (app: any) => {
 
     ws.on('message', (msg: any) => {
       console.log(`Received message: ${msg}`);
-      ws.send(`Echo: ${msg} xD`); // Echoes received messages back to the client
+      ws.send(msg); // Echoes received messages back to the client
     });
 
     ws.on('close', () => {

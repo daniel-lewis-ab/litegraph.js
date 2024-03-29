@@ -28,6 +28,10 @@ export const useUpdateWorkflowMutation = () => {
 
       // Optimistic update for workflows list cache
       queryClient.setQueryData<GetWorkflowsResponse>(QueryKeys.workflows, (oldData) => {
+        if (!oldData) {
+          return undefined;
+        }
+
         const updatedResults =
           oldData?.results.map((workflow) =>
             workflow.id === id

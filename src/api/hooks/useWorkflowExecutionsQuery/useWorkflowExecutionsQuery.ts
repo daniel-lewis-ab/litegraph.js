@@ -1,12 +1,12 @@
 import { apiEndpoints } from '@/api/apiEndpoints';
 import { QueryKeys } from '@/api/queryKeys';
 import { axiosClient } from '@/api/axiosClient';
-import { GetWorkflowExecutionsResponse } from '@/api/types'; // Assume this type is defined in your types file
+import { GetWorkflowExecutionsResponse } from '@/api/types';
 import { useQuery } from '@tanstack/react-query';
+import { QUERY_CACHE_CONFIG } from '@/api/queryCacheConfig';
 
-// Function to fetch workflow executions, now accepting a workflowId
 const getWorkflowExecutions = async (workflowId: string) => {
-  const response = await axiosClient.get<GetWorkflowExecutionsResponse>(apiEndpoints.workflowExecutions(workflowId)); // Adjusted to include workflowId in the request
+  const response = await axiosClient.get<GetWorkflowExecutionsResponse>(apiEndpoints.workflowExecutions(workflowId));
 
   if (response.status === 200) {
     return response.data;
@@ -15,13 +15,13 @@ const getWorkflowExecutions = async (workflowId: string) => {
   throw new Error(`Failed to get workflow executions for workflow ID: ${workflowId}`);
 };
 
-// Custom hook to use the query for fetching workflow executions, now accepts workflowId as a parameter
 export const useWorkflowExecutionsQuery = (workflowId: string) => {
   const { data, ...rest } = useQuery({
-    queryKey: [QueryKeys.workflowExecutions, workflowId], // queryKey is now an array including workflowId
+    queryKey: [QueryKeys.workflowExecutions, workflowId],
     queryFn: () => getWorkflowExecutions(workflowId),
-    retry: 0,
-    enabled: !!workflowId, // Only fetch when a workflowId is provided
+    staleTime: QUERY_CACHE_CONFIG.executions.staleTime,
+    gcTime: QUERY_CACHE_CONFIG.executions.cacheTime,
+    enabled: !!workflowId,
   });
 
   return { workflowExecutions: data, ...rest };

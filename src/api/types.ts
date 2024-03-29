@@ -68,26 +68,26 @@ export type GetDeploymentsResponse = {
 // Workflow Executions
 // ============================
 
-export type WorkflowStatus = 'loading' | 'error' | 'success';
+export type WorkflowStatus = 'PENDING' | 'RUNNING' | 'COMPLETED' | 'FAILED';
 
 export type WorkflowExecution = {
   id: string;
   operation_id: string;
   status: WorkflowStatus;
   workflow_id: string;
-  completion_duration: number;
-  // We add it in cache
-  content?: WorkflowContent;
+  completion_duration?: number;
+  created_at: string;
 };
 
 export type WorkflowExecutionDetails = WorkflowExecution & {
-  content: WorkflowContent;
+  workflow_content: WorkflowContent;
+  workflow_api_content: WorkflowContent;
 };
 
 export type GetWorkflowExecutionsResponse = {
   count: number;
-  next: string | null;
-  previous: string | null;
+  // next: string | null;
+  // previous: string | null;
   results: WorkflowExecution[];
 };
 
@@ -95,6 +95,7 @@ export type PostWorkflowExecutionsResponse = {
   id: string;
   operation_id: string;
   status: WorkflowStatus;
+  created_at: string;
 };
 
 // ============================
@@ -103,23 +104,40 @@ export type PostWorkflowExecutionsResponse = {
 
 export type ApiWorkflowAsset = {
   id: string;
+  name: string;
   asset_url: string;
   workflow_execution_id: string;
-  // created_at: string;
-  // size: number;
+  created_at: string;
+  size: number;
 };
 
 export type ApiWorkflowAssetDetails = ApiWorkflowAsset & {
   content: WorkflowContent;
 };
 
-export type GetWorkflowAssetsResponse = {
-  results: ApiWorkflowAsset[];
-};
+export type GetWorkflowAssetsResponse = ApiWorkflowAsset[];
 
 // ============================
 // Websockets
 // ============================
 
+export type ExecutionFinishedData = {
+  type: 'send_response';
+  data: {
+    completion_duration: number;
+    execution_id: string;
+    workflow_id: string;
+    generated_artifacts: ApiWorkflowAsset[];
+  };
+};
+
+type GeneralIframeMessageData = { data: object; type: string };
+
 // @TODO
-export type WebSocketResponse = unknown;
+export type WebSocketMessage = {
+  errors: object[];
+  // We might want to define this more explicitly, but we just send it to iframe for now (it includes type and data - https://gitlab.com/plai-app/ai-studio/orchestra-backend/-/blob/develop/docs/socket_message.md?ref_type=heads)
+  data: GeneralIframeMessageData | ExecutionFinishedData;
+  action: 'artcraft_status' | 'send_response';
+  response_status: number;
+};

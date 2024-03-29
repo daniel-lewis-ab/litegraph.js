@@ -16,7 +16,9 @@ type WorkflowEditorContextProviderProps = {
 
 type WorkflowStateInfo = {
   content: WorkflowContent;
-  api_content: WorkflowAPIContent;
+  // Only iframe sends api_content
+  api_content?: WorkflowAPIContent;
+  // If update is coming from react, we don't want to send it to API, as iframe will send it back (it sends graph_data message every X ms)
   updateSource: 'react' | 'iframe';
 };
 

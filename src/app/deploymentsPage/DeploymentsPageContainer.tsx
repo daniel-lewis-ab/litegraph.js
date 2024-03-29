@@ -4,13 +4,12 @@ import CenteredLoader from '@/shared/components/centeredLoader/CenteredLoader';
 import { useChangeDeploymentStateMutation } from '@/api/hooks/useChangeDeploymentStateMutation/useChangeDeploymentStateMutation';
 import { useDeleteDeploymentMutation } from '@/api/hooks/useDeleteDeploymentMutation/useDeleteDeploymentMutation';
 import { DeploymentStatus } from '@/api/types';
-import { useQueryClient } from '@tanstack/react-query';
-import { fetchDeploymentById } from '@/api/hooks/useDeploymentQuery/useDeploymentQuery';
+import { useFetchDeployment } from '@/api/hooks/useDeploymentQuery/useDeploymentQuery';
 import { saveJsonFile } from '@/shared/functions/saveJsonFile';
-import { QueryKeys } from '@/api/queryKeys';
+import toast from 'react-hot-toast';
 
 export const DeploymentsPageContainer = () => {
-  const queryClient = useQueryClient();
+  const { prefetchDeployment, fetchDeployment } = useFetchDeployment();
   const { deployments, isLoading } = useDeploymentsQuery();
   const { mutate: changeDeploymentState } = useChangeDeploymentStateMutation();
   const { mutateAsync: deleteDeployment } = useDeleteDeploymentMutation();
@@ -28,21 +27,16 @@ export const DeploymentsPageContainer = () => {
   };
 
   const handleDownloadDeployment = async (id: string) => {
-    const res = await queryClient.fetchQuery({
-      queryKey: [QueryKeys.deployments, id],
-      queryFn: () => fetchDeploymentById(id),
-      staleTime: 5 * 60 * 1000, // 5m
-    });
-    saveJsonFile(res.workflow_json, `${res.name}.json`);
+    try {
+      const res = await fetchDeployment(id);
+      saveJsonFile(res.workflow_json, `${res.name}.json`);
+      toast.success('Deployment JSON downloaded');
+    } catch (error) {
+      toast.error('Failed to download deployment JSON');
+    }
   };
 
-  const handlePrefetchDeployment = async (deploymentId: string) => {
-    await queryClient.prefetchQuery({
-      queryKey: [QueryKeys.deployments, deploymentId],
-      queryFn: () => fetchDeploymentById(deploymentId),
-      staleTime: 5 * 60 * 1000,
-    });
-  };
+  const handlePrefetchDeployment = async (deploymentId: string) => await prefetchDeployment(deploymentId);
 
   return (
     <DeploymentsPage

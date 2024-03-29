@@ -4,8 +4,9 @@ import { Icon } from '../icon/Icon';
 
 type LoaderIconProps = {
   className?: string;
+  size?: number;
 };
 
-export const LoaderIcon = ({ className }: LoaderIconProps) => (
-  <Icon icon={faLoader} className={clsx('animate-spin', className)} size={24} />
+export const LoaderIcon = ({ className, size }: LoaderIconProps) => (
+  <Icon icon={faLoader} className={clsx('animate-spin', className)} size={size ?? 24} />
 );

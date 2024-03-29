@@ -12,21 +12,29 @@ import throttle from 'lodash.throttle';
 import { saveJsonFile } from '@/shared/functions/saveJsonFile';
 import { constants } from '@/contants';
 import { useWorkflowExecutionsQuery } from '@/api/hooks/useWorkflowExecutionsQuery/useWorkflowExecutionsQuery';
+import { useUpdateWorkflowFromWebsocket } from '@/hooks/useUpdateWorkflowFromWebsocket/useUpdateWorkflowFromWebsocket';
+import { usePrefetchWorkflowOutputAssets } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
 
 export const WorkflowEditorPageContainer = () => {
   const [isInitialWorkflowUpdated, setIsInitialWorkflowUpdated] = useState(false);
   const { id } = useParams();
   const { workflowExecutions } = useWorkflowExecutionsQuery(id!);
   const { workflow, isLoading: isLoadingWorkflow } = useWorkflowQuery(id!);
-  const { mutateAsync: createWorkflowExecution } = useExecuteWorkflowMutation(id!);
+  const { mutateAsync: createWorkflowExecution } = useExecuteWorkflowMutation();
   const { mutateAsync: updateWorkflow } = useUpdateWorkflowMutation();
   const { currentWorkflow, setCurrentWorkflow } = useWorkflowEditor();
-  const workflowsRunningCount = workflowExecutions?.results.filter((w) => w.status === 'loading').length;
+  const { prefetchWorkflowOutputAssets } = usePrefetchWorkflowOutputAssets();
+  useUpdateWorkflowFromWebsocket();
+  const workflowsRunningCount = workflowExecutions?.results.filter((w) => w.status === 'PENDING').length;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const throttledUpdateWorkflow = useCallback(throttle(updateWorkflow, constants.updateWorkflowThrottleTime), [
     updateWorkflow,
   ]);
+
+  useEffect(() => {
+    prefetchWorkflowOutputAssets(id!);
+  }, [id, prefetchWorkflowOutputAssets]);
 
   useEffect(() => {
     try {
@@ -57,12 +65,17 @@ export const WorkflowEditorPageContainer = () => {
   }, [currentWorkflow, throttledUpdateWorkflow]);
 
   const handleExecuteWorkflow = async () => {
-    await createWorkflowExecution();
+    try {
+      await createWorkflowExecution({ workflow: workflow! });
+      // toast.success('Workflow added to queue', { position: 'bottom-center' });
+    } catch (e) {
+      toast.error('Failed to execute workflow', { position: 'bottom-center' });
+    }
+
+    return Promise.resolve();
   };
 
-  const handleSaveWorkflow = () => {
-    saveJsonFile(JSON.stringify(currentWorkflow?.content), `${workflow!.name}.json`);
-  };
+  const handleSaveWorkflow = () => saveJsonFile(JSON.stringify(currentWorkflow?.content), `${workflow!.name}.json`);
 
   if (isLoadingWorkflow) {
     return <CenteredLoader isFullscreen />;

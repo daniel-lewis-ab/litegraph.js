@@ -1,12 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { toast } from 'react-hot-toast';
 import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
 import { QueryKeys } from '@/api/queryKeys';
-import { GetWorkflowExecutionsResponse, PostWorkflowExecutionsResponse, WorkflowExecution } from '@/api/types';
+import {
+  GetWorkflowExecutionsResponse,
+  PostWorkflowExecutionsResponse,
+  WorkflowDetails,
+  WorkflowExecution,
+  WorkflowExecutionDetails,
+} from '@/api/types';
 
-const executeWorkflow = async (workflowId: string) => {
-  const response = await axiosClient.post<PostWorkflowExecutionsResponse>(apiEndpoints.workflowExecutions(workflowId));
+const executeWorkflow = async ({ workflow }: MutationParams) => {
+  await new Promise((r) => setTimeout(r, 2000));
+
+  const response = await axiosClient.post<PostWorkflowExecutionsResponse>(apiEndpoints.workflowExecutions(workflow.id));
 
   if (response.status !== 201) {
     throw new Error('Failed to execute workflow');
@@ -15,41 +22,89 @@ const executeWorkflow = async (workflowId: string) => {
   return response.data;
 };
 
-export const useExecuteWorkflowMutation = (workflowId: string) => {
+type MutationParams = {
+  workflow: WorkflowDetails;
+};
+
+export const useExecuteWorkflowMutation = () => {
   const queryClient = useQueryClient();
 
-  const { mutate, ...rest } = useMutation<PostWorkflowExecutionsResponse, Error, void>({
-    mutationFn: () => executeWorkflow(workflowId),
-    onSuccess: (data) => {
-      queryClient.setQueryData<GetWorkflowExecutionsResponse>([QueryKeys.workflowExecutions, workflowId], (oldData) => {
-        const newData: WorkflowExecution = {
-          id: data.id,
-          operation_id: data.operation_id,
-          status: data.status,
-          workflow_id: '1',
-          content: '{}',
-          completion_duration: 0,
-        };
+  const { mutate, ...rest } = useMutation<
+    PostWorkflowExecutionsResponse,
+    Error,
+    MutationParams,
+    { previousExecutions?: GetWorkflowExecutionsResponse }
+  >({
+    mutationFn: executeWorkflow,
+    onMutate: ({ workflow }) => {
+      const previousExecutions = queryClient.getQueryData<GetWorkflowExecutionsResponse>([
+        QueryKeys.workflowExecutions,
+        workflow.id,
+      ]);
 
-        if (!oldData) {
-          return {
-            count: 1,
-            next: null,
-            previous: null,
-            results: [newData],
+      const optimisticUpdate: WorkflowExecution = {
+        id: 'optimistic-id',
+        operation_id: 'optimistic-operation-id',
+        status: 'PENDING',
+        workflow_id: workflow.id,
+        created_at: new Date().toISOString(),
+      };
+
+      queryClient.setQueryData<GetWorkflowExecutionsResponse>(
+        [QueryKeys.workflowExecutions, workflow.id],
+        (oldData) => {
+          const newData: GetWorkflowExecutionsResponse = {
+            ...oldData,
+            count: (oldData?.count ?? 0) + 1,
+            results: [optimisticUpdate, ...(oldData?.results ?? [])],
           };
-        }
 
-        return {
-          previous: oldData.previous,
-          next: oldData.next,
-          count: oldData.count + 1,
-          results: [...oldData.results, newData],
-        };
-      });
+          return newData;
+        },
+      );
+
+      return { previousExecutions };
     },
-    onError: (error) => {
-      toast.error(`Failed to execute workflow: ${error.message}`);
+    onSuccess: (execution, { workflow }) => {
+      queryClient.setQueryData<GetWorkflowExecutionsResponse>(
+        [QueryKeys.workflowExecutions, workflow.id],
+        (oldData) => {
+          const newData: GetWorkflowExecutionsResponse = {
+            count: oldData?.count ?? 1,
+            results:
+              oldData?.results.map((execution) =>
+                execution.id === 'optimistic-id' ? { ...execution, id: execution.id } : execution,
+              ) ?? [],
+          };
+
+          return newData;
+        },
+      );
+
+      const newExecutionDetails: WorkflowExecutionDetails = {
+        id: execution.id,
+        operation_id: execution.operation_id,
+        status: execution.status,
+        workflow_id: workflow.id,
+        workflow_content: workflow.content,
+        workflow_api_content: workflow.api_content,
+        created_at: execution.created_at,
+      };
+
+      queryClient.setQueryData<WorkflowExecutionDetails>([QueryKeys.execution, execution.id], newExecutionDetails);
+    },
+    onError: (_, __, context) => {
+      if (context?.previousExecutions) {
+        queryClient.setQueryData(
+          [QueryKeys.workflowExecutions, context.previousExecutions],
+          context.previousExecutions,
+        );
+      }
+    },
+    onSettled: (_, __, { workflow }) => {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.workflowExecutions, workflow.id],
+      });
     },
   });
 

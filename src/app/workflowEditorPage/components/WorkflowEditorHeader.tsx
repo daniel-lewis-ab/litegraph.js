@@ -8,7 +8,7 @@ import { faDownload, faList, faPlay } from '@awesome.me/kit-b6cda292ae/icons/cla
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 type WorkflowHeaderProps = {
   workflowName: string;
@@ -16,23 +16,35 @@ type WorkflowHeaderProps = {
   activeSection?: null | 'images' | 'executions';
   workflowsRunningCount?: number;
   onOpenSidebarSectionClick(section: 'images' | 'executions' | null): void;
-  onRunClick(): void;
+  onRunWorkflowClick(): Promise<void>;
   onSaveClick(): void;
   onDeployClick(): void;
 };
 
-export const WorkflowHeader = ({
+export const WorkflowEditorHeader = ({
   workflowName,
   className,
   activeSection,
   workflowsRunningCount,
   onOpenSidebarSectionClick,
-  onRunClick,
+  onRunWorkflowClick,
   onSaveClick,
   onDeployClick,
 }: WorkflowHeaderProps) => {
+  const popoverRef = useRef(null);
   const [areOptionsOpen, setAreOptionOpen] = useState(false);
+  const [isCreatingWorkflow, setIsCreatingWorkflow] = useState(false);
   const navigate = useNavigate();
+
+  const handleRunWorkflowClick = async () => {
+    try {
+      setIsCreatingWorkflow(true);
+      await onRunWorkflowClick();
+      setIsCreatingWorkflow(false);
+    } catch (e) {
+      setIsCreatingWorkflow(false);
+    }
+  };
 
   return (
     <header
@@ -46,13 +58,19 @@ export const WorkflowHeader = ({
           <Icon icon={faAngleLeft} className="mr-1" />
           <Logo className="mr-4 fill-text-base" />
         </button>
-        <Popover open={areOptionsOpen}>
+        <Popover modal open={areOptionsOpen} onOpenChange={setAreOptionOpen}>
           <PopoverTrigger onClick={() => setAreOptionOpen(true)}>
             <div className="mr-1.5 rounded-lg px-1.5 py-1 font-medium text-text-muted hover:bg-surface-1 dark:hover:bg-surface-4">
               File
             </div>
           </PopoverTrigger>
-          <PopoverContent side="bottom" sideOffset={2} align="start" onClick={(e) => e.preventDefault()}>
+          <PopoverContent
+            ref={popoverRef}
+            side="bottom"
+            sideOffset={2}
+            align="start"
+            onClick={(e) => e.preventDefault()}
+          >
             <OptionsList onClick={() => setAreOptionOpen(false)}>
               <OptionsList.Item icon={faDownload} onClick={onSaveClick}>
                 Export as...
@@ -63,10 +81,17 @@ export const WorkflowHeader = ({
       </div>
       <p className="text-sm font-medium text-surface-12">{workflowName}</p>
       <div className="flex flex-row items-center">
-        <button onClick={onRunClick} className="mr-3 flex h-8 w-8 items-center justify-center *:text-icon-muted">
+        <button
+          disabled={isCreatingWorkflow}
+          onClick={handleRunWorkflowClick}
+          className="mr-3 flex h-8 w-8 items-center justify-center *:text-icon-muted"
+        >
           <Icon
             icon={faPlay}
-            className="mr-2 p-1 transition-opacity *:text-success-10 hover:opacity-95 active:opacity-85"
+            className={clsx(
+              'mr-2 p-1 transition-opacity *:text-success-10 hover:opacity-95 active:opacity-85',
+              isCreatingWorkflow && 'opacity-50 hover:opacity-50 active:opacity-50',
+            )}
             size={20}
           />
         </button>

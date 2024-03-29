@@ -297,10 +297,12 @@ app.post('/v1/workflows/:workflowId/executions', (req: Request, res: Response) =
   const newExecution: WorkflowExecutionDetails = {
     id: generateUUID(),
     workflow_id: workflowId,
-    status: 'loading',
+    status: 'PENDING',
     operation_id: 'xd',
-    content: {},
+    workflow_content: {},
+    workflow_api_content: {},
     completion_duration: 16,
+    created_at: new Date().toISOString(),
   };
 
   workflowExecutions.push(newExecution);
@@ -308,7 +310,7 @@ app.post('/v1/workflows/:workflowId/executions', (req: Request, res: Response) =
   res.status(201).json(newExecution);
 });
 
-app.get('/v1/execution/:executionId', (req: Request, res: Response) => {
+app.get('/v1/executions/:executionId', (req: Request, res: Response) => {
   const { executionId } = req.params;
 
   const execution: WorkflowExecutionDetails = workflowExecutions.find(execution => execution.id === executionId);
@@ -317,7 +319,7 @@ app.get('/v1/execution/:executionId', (req: Request, res: Response) => {
   res.json(execution);
 })
 
-app.delete('/v1/execution/:executionId', (req: Request, res: Response) => {
+app.delete('/v1/executions/:executionId', (req: Request, res: Response) => {
   const { executionId } = req.params;
 
   const index = workflowExecutions.findIndex(execution => execution.id === executionId);
@@ -333,50 +335,57 @@ const outputsImagesSample: ApiWorkflowAsset[] = [
     id: '1',
     asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
     workflow_execution_id: '1',
-    // created_at: '2024-03-08T12:35:43.304570Z',
-    // size: 345,
+    created_at: '2024-03-08T12:35:43.304570Z',
+    size: 345,
+    name: 'my image',
   },
   {
     id: '2',
     asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
     workflow_execution_id: '2',
-    // created_at: '2024-03-08T12:35:43.304570Z',
-    // size: 345,
+    created_at: '2024-03-08T12:35:43.304570Z',
+    size: 30045,
+    name: 'my image',
   },
   {
     id: '3',
     asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
     workflow_execution_id: '3',
-    // created_at: '2024-03-08T12:35:43.304570Z',
-    // size: 345,
+    created_at: '2024-03-08T12:35:43.304570Z',
+    size: 30045,
+    name: 'my image',
   },
   {
     id: '4',
     asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
     workflow_execution_id: '5',
-    // created_at: '2024-03-08T12:35:43.304570Z',
-    // size: 345,
+    created_at: '2024-03-08T12:35:43.304570Z',
+    size: 30045,
+    name: 'my image',
   },
   {
     id: '5',
     asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
     workflow_execution_id: '6',
-    // created_at: '2024-03-08T12:35:43.304570Z',
-    // size: 345,
+    created_at: '2024-03-08T12:35:43.304570Z',
+    size: 30045,
+    name: 'my image',
   },
   {
     id: '6',
     asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
     workflow_execution_id: '7',
-    // created_at: '2024-03-08T12:35:43.304570Z',
-    // size: 345,
+    created_at: '2024-03-08T12:35:43.304570Z',
+    size: 30045,
+    name: 'my image',
   },
   {
     id: '7',
     asset_url: 'https://gcdnb.pbrd.co/images/VIfR3smggZqW.png?o=1',
     workflow_execution_id: '8',
-    // created_at: '2024-03-08T12:35:43.304570Z',
-    // size: 345,
+    created_at: '2024-03-08T12:35:43.304570Z',
+    size: 30045,
+    name: 'my image',
   },
 ];
 
@@ -390,13 +399,12 @@ const outputsImages = [
 app.get('/v1/workflows/:workflowId/artifacts', (req: Request, res: Response) => {
   const { workflowId } = req.params;
 
-  const response: GetWorkflowAssetsResponse = {results: outputsImages};
-
+  const response: GetWorkflowAssetsResponse = outputsImages;
 
   res.json(response);
 });
 
-app.delete('/v1/assets/:assetId', (req: Request, res: Response) => {
+app.delete('/v1/executions/:executions/artifacts/:assetId', (req: Request, res: Response) => {
   const { assetId } = req.params;
 
   const index = outputsImages.findIndex(asset => asset.id === assetId);
