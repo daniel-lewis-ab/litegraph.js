@@ -2,10 +2,8 @@ import { Workflow } from '@/api/types';
 import { PageActions } from '@/app/workflowsPage/components/PageActions';
 import { routes } from '@/routes/routes';
 import { WorkflowTile } from '@/shared/components/workflowTile/WorkflowTile';
-import { faUpload } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
 import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
 import { DeleteConfirmationDialog } from './components/DeleteConfirmationDialog';
 import { EmptyWorkflowsPage } from './components/EmptyWorkflowsPage';
 import { CreateDeploymentDialogContainer } from '../../shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
@@ -14,9 +12,16 @@ import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
 type WorkflowsPageProps = {
   workflows: Workflow[];
   onWorkflowDelete(id: string): Promise<void>;
+  onExportWorkflow(id: string): Promise<void>;
+  prefetchWorkflowDetails(id: string): void;
 };
 
-export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProps) => {
+export const WorkflowsPage = ({
+  workflows,
+  onWorkflowDelete,
+  onExportWorkflow,
+  prefetchWorkflowDetails,
+}: WorkflowsPageProps) => {
   const [workflowIdToDelete, setWorkflowIdToDelete] = useState<null | string>(null);
   const [workflowIdToDeploy, setWorkflowIdToDeploy] = useState<null | string>(null);
 
@@ -31,7 +36,7 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
       </PageTemplate.Header>
       <PageActions>
         <PageActions.Action to={routes.newWorkflow} icon={faPlus} text="New workflow" />
-        <PageActions.Action to={routes.newWorkflow} icon={faUpload} text="Import" />
+        {/* <PageActions.Action to={routes.newWorkflow} icon={faUpload} text="Import" /> */}
       </PageActions>
 
       <div className="grid grid-cols-1 content-start gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
@@ -43,7 +48,8 @@ export const WorkflowsPage = ({ workflows, onWorkflowDelete }: WorkflowsPageProp
             lastEdited={workflow.updated_at}
             onDeployClick={() => setWorkflowIdToDeploy(workflow.id)}
             onDeleteClick={() => setWorkflowIdToDelete(workflow.id)}
-            onExportClick={() => toast('tbd')}
+            onExportClick={() => onExportWorkflow(workflow.id)}
+            onTileOptionsMouseOver={() => prefetchWorkflowDetails(workflow.id)}
           />
         ))}
       </div>

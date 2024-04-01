@@ -16,6 +16,7 @@ type WorkflowTileProps = {
   onDeployClick: () => void;
   onDeleteClick: () => void;
   onExportClick: () => void;
+  onTileOptionsMouseOver: () => void;
 };
 
 export const WorkflowTile = ({
@@ -25,15 +26,11 @@ export const WorkflowTile = ({
   onDeployClick,
   onDeleteClick,
   onExportClick,
+  onTileOptionsMouseOver,
 }: WorkflowTileProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const closePopover = () => setIsPopoverOpen(false);
-
-  // const handleActionClick = async (action: Action) => {
-  //   await onActionClick(action);
-  //   closePopover();
-  // };
 
   return (
     <>
@@ -53,6 +50,7 @@ export const WorkflowTile = ({
                   setIsPopoverOpen((o) => !o);
                   e.preventDefault();
                 }}
+                onMouseEnter={onTileOptionsMouseOver}
               >
                 <button
                   type="button"

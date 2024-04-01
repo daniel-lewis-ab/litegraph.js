@@ -31,11 +31,19 @@ export const useFetchWorkflow = () => {
 
   const fetchWorkflow = async (workflowId: string) => {
     return await queryClient.fetchQuery({
-      queryKey: ['workflow', workflowId],
+      queryKey: [QueryKeys.workflows, workflowId],
       queryFn: () => getWorkflow(workflowId),
       staleTime: QUERY_CACHE_CONFIG.workflowDetails.staleTime,
     });
   };
 
-  return { fetchWorkflow };
+  const prefetchWorkflow = async (workflowId: string) => {
+    return await queryClient.fetchQuery({
+      queryKey: [QueryKeys.workflows, workflowId],
+      queryFn: () => getWorkflow(workflowId),
+      staleTime: QUERY_CACHE_CONFIG.workflowDetails.staleTime,
+    });
+  };
+
+  return { fetchWorkflow, prefetchWorkflow };
 };
