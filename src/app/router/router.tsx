@@ -12,6 +12,7 @@ import { HomePage } from '../homePage/HomePage';
 import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageContainer';
 import { WorkflowEditorContextProvider } from '@/context/workflowEditorContext/WorkflowEditorContext';
 import { AboutPage } from '../aboutPage/AboutPage';
+import { WebSocketProvider } from '@/context/websocketContext/WebSocketContext';
 
 export const router = createBrowserRouter([
   { path: routes.home, element: <HomePage />, errorElement: <ErrorPage /> },
@@ -60,9 +61,11 @@ export const router = createBrowserRouter([
       {
         path: routes.workflow(':id'),
         element: (
-          <WorkflowEditorContextProvider>
-            <Outlet />
-          </WorkflowEditorContextProvider>
+          <WebSocketProvider>
+            <WorkflowEditorContextProvider>
+              <Outlet />
+            </WorkflowEditorContextProvider>
+          </WebSocketProvider>
         ),
         errorElement: <ErrorPage />,
         children: [{ index: true, element: <WorkflowEditorPageContainer /> }],
