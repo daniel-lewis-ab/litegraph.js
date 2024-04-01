@@ -2,7 +2,7 @@ import { useWorkflowEditor } from '@/hooks/useWorkflowEditor/useWorkflowEditor';
 import { WorkflowEditorPage } from './WorkflowEditorPage';
 import { Navigate, useParams } from 'react-router-dom';
 import { useExecuteWorkflowMutation } from '@/api/hooks/useExecuteWorkflowMutation/useExecuteWorkflowMutation';
-import { useWorkflowQuery } from '@/api/hooks/useWorkflowQuery/useWorkflowQuery';
+import { useWorkflowDetailsQuery } from '@/api/hooks/useWorkflowDetailsQuery/useWorkflowDetailsQuery';
 import CenteredLoader from '@/shared/components/centeredLoader/CenteredLoader';
 import toast from 'react-hot-toast';
 import { routes } from '@/routes/routes';
@@ -20,7 +20,7 @@ export const WorkflowEditorPageContainer = () => {
   const [isInitialWorkflowUpdated, setIsInitialWorkflowUpdated] = useState(false);
   const { id } = useParams();
   const { workflowExecutions } = useWorkflowExecutionsQuery(id!);
-  const { workflow, isLoading: isLoadingWorkflow } = useWorkflowQuery(id!);
+  const { workflow, isLoading: isLoadingWorkflow } = useWorkflowDetailsQuery(id!);
   const { mutateAsync: createWorkflowExecution } = useExecuteWorkflowMutation();
   const { mutateAsync: updateWorkflow } = useUpdateWorkflowMutation();
   const { currentWorkflow, setCurrentWorkflow } = useWorkflowEditor();

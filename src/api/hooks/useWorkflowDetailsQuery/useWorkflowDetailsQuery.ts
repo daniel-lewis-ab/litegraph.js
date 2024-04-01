@@ -15,7 +15,7 @@ const getWorkflow = async (id: string) => {
   throw new Error('Failed to get workflows');
 };
 
-export const useWorkflowQuery = (id: string, enabled = true) => {
+export const useWorkflowDetailsQuery = (id: string, enabled = true) => {
   const { data, ...rest } = useQuery({
     queryKey: [QueryKeys.workflows, id],
     queryFn: () => getWorkflow(id),
@@ -26,10 +26,10 @@ export const useWorkflowQuery = (id: string, enabled = true) => {
   return { workflow: data, ...rest };
 };
 
-export const useFetchWorkflow = () => {
+export const useFetchWorkflowDetails = () => {
   const queryClient = useQueryClient();
 
-  const fetchWorkflow = async (workflowId: string) => {
+  const fetchWorkflowDetails = async (workflowId: string) => {
     return await queryClient.fetchQuery({
       queryKey: [QueryKeys.workflows, workflowId],
       queryFn: () => getWorkflow(workflowId),
@@ -37,7 +37,7 @@ export const useFetchWorkflow = () => {
     });
   };
 
-  const prefetchWorkflow = async (workflowId: string) => {
+  const prefetchWorkflowDetails = async (workflowId: string) => {
     return await queryClient.fetchQuery({
       queryKey: [QueryKeys.workflows, workflowId],
       queryFn: () => getWorkflow(workflowId),
@@ -45,5 +45,5 @@ export const useFetchWorkflow = () => {
     });
   };
 
-  return { fetchWorkflow, prefetchWorkflow };
+  return { fetchWorkflowDetails, prefetchWorkflowDetails };
 };
