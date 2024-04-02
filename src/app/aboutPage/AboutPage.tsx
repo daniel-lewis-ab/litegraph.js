@@ -13,6 +13,6 @@ export default AboutPage;
 // eslint-disable-next-line react-refresh/only-export-components, @typescript-eslint/require-await
 export const aboutPageLoader = async () => {
   // const res = await axios.get('http://localhost:3000/cms-data');
-  const resData = { name: 'About page', title: 'About page' };
+  const resData = { name: 'About page', title: 'About page2' };
   return resData;
 };

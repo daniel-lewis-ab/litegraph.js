@@ -26,6 +26,6 @@ export default HomePage;
 // eslint-disable-next-line react-refresh/only-export-components, @typescript-eslint/require-await
 export const homePageLoader = async () => {
   // const res = await axios.get('http://localhost:3000/cms-data');
-  const resData = { name: 'Home page', title: 'Home page' };
+  const resData = { name: 'Home page', title: 'Home page2' };
   return resData;
 };
