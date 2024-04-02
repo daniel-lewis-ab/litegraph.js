@@ -338,6 +338,7 @@ const outputsImagesSample: ApiWorkflowAsset[] = [
     created_at: '2024-03-08T12:35:43.304570Z',
     size: 345,
     name: 'my image',
+    storage_path: 'path/to/image.png',
   },
   {
     id: '2',
@@ -346,6 +347,7 @@ const outputsImagesSample: ApiWorkflowAsset[] = [
     created_at: '2024-03-08T12:35:43.304570Z',
     size: 30045,
     name: 'my image',
+    storage_path: 'path/to/image.png',
   },
   {
     id: '3',
@@ -354,6 +356,7 @@ const outputsImagesSample: ApiWorkflowAsset[] = [
     created_at: '2024-03-08T12:35:43.304570Z',
     size: 30045,
     name: 'my image',
+    storage_path: 'path/to/image.png',
   },
   {
     id: '4',
@@ -362,6 +365,7 @@ const outputsImagesSample: ApiWorkflowAsset[] = [
     created_at: '2024-03-08T12:35:43.304570Z',
     size: 30045,
     name: 'my image',
+    storage_path: 'path/to/image.png',
   },
   {
     id: '5',
@@ -370,6 +374,7 @@ const outputsImagesSample: ApiWorkflowAsset[] = [
     created_at: '2024-03-08T12:35:43.304570Z',
     size: 30045,
     name: 'my image',
+    storage_path: 'path/to/image.png',
   },
   {
     id: '6',
@@ -378,6 +383,7 @@ const outputsImagesSample: ApiWorkflowAsset[] = [
     created_at: '2024-03-08T12:35:43.304570Z',
     size: 30045,
     name: 'my image',
+    storage_path: 'path/to/image.png',
   },
   {
     id: '7',
@@ -386,6 +392,7 @@ const outputsImagesSample: ApiWorkflowAsset[] = [
     created_at: '2024-03-08T12:35:43.304570Z',
     size: 30045,
     name: 'my image',
+    storage_path: 'path/to/image.png',
   },
 ];
 
