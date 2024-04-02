@@ -47,7 +47,7 @@ export const useUpdateWorkflowFromWebsocket = () => {
       }
     };
 
-    const updateWorkflowAssetsWithNewArtifacts = (workflowId: string, newArtifacts: ApiWorkflowAsset[]) => {
+    const updateWorkflowAssetsWithNewArtifacts = (workflowId: string, newArtifacts: ApiWorkflowAsset[] = []) => {
       const currentData =
         queryClient.getQueryData<GetWorkflowAssetsResponse>([QueryKeys.workflowAssets, workflowId]) ?? [];
 
