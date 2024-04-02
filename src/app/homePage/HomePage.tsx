@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { routes } from '@/routes/routes';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Head } from 'vite-react-ssg';
@@ -5,6 +6,7 @@ import { Head } from 'vite-react-ssg';
 const HomePage = () => {
   const data = useLoaderData() as { name: string; title: string };
   const navigate = useNavigate();
+  console.log('data', data);
 
   return (
     <>
@@ -21,8 +23,8 @@ const HomePage = () => {
 
 export default HomePage;
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const homePageLoader = () => {
+// eslint-disable-next-line react-refresh/only-export-components, @typescript-eslint/require-await
+export const homePageLoader = async () => {
   // const res = await axios.get('http://localhost:3000/cms-data');
   const resData = { name: 'Home page', title: 'Home page' };
   return resData;
