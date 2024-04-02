@@ -9,6 +9,7 @@ import { DeleteAssetConfirmationDialog } from '../DeleteAssetConfirmationDialog'
 
 import './OutputsGallerySection.scss';
 import { TimeSince } from '@/shared/components/timeSince/TimeSince';
+import { getImageUrl } from '@/shared/functions/getImageUrl';
 
 type ImageTileProps = {
   imgUrl: string;
@@ -52,6 +53,14 @@ type OutputsGalleryGridProps = {
   onClose(): void;
 };
 
+// @TODO: Replace once backend returns image id correctly
+const getImageId = (imgUrl: string) => imgUrl.match(/\/([a-f0-9]+)\.png/)?.[1];
+
+const TILE_IMG_CONFIG = {
+  width: 200,
+  height: 200,
+};
+
 export const OutputsGallerySection = ({
   assets,
   onCopyAssetContent,
@@ -62,7 +71,6 @@ export const OutputsGallerySection = ({
 }: OutputsGalleryGridProps) => {
   const [imageIdToDelete, setImageIdToDelete] = useState<string | null>(null);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
-
   const handleImageClick = (id: string) => {
     prefetchAssetInfo(id);
     setSelectedImageId((oldImgId) => (oldImgId === id ? null : id));
@@ -77,7 +85,7 @@ export const OutputsGallerySection = ({
             {assets.map((i) => (
               <ImageTile
                 key={i.id}
-                imgUrl={i.asset_url}
+                imgUrl={getImageUrl(i.workflow_execution_id, getImageId(i.asset_url)!, TILE_IMG_CONFIG)}
                 name={i.name}
                 created_at={i.created_at}
                 size={i.size}

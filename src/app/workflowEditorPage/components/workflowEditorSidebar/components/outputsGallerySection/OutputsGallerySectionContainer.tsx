@@ -8,6 +8,10 @@ import { useDeleteAssetMutation } from '@/api/hooks/useDeleteAssetMutation/useDe
 import toast from 'react-hot-toast';
 import { saveImage } from '@/shared/functions/saveImage';
 import { useFetchExecutionDetailsQuery } from '@/api/hooks/useWorkflowExecutionDetailsQuery/useWorkflowExecutionDetailsQuery';
+import { getImageUrl } from '@/shared/functions/getImageUrl';
+
+// @TODO: Replace once backend returns image id correctly
+const getImageId = (imgUrl: string) => imgUrl.match(/\/([a-f0-9]+)\.png/)?.[1];
 
 type OutputsGalleryGridContainerProps = {
   workflowId: string;
@@ -56,7 +60,8 @@ export const OutputsGalleryGridContainer = ({
   const handleDownloadAsset = async (assetId: string) => {
     try {
       const asset = assets!.find((a) => a.id === assetId)!;
-      await saveImage(asset.asset_url, workflowName);
+      const imgUrl = getImageUrl(asset.workflow_execution_id, getImageId(asset.asset_url)!);
+      await saveImage(imgUrl, workflowName);
       toast.success('Asset downloaded', { position: 'bottom-center' });
     } catch (error) {
       toast.error('Failed to download asset', { position: 'bottom-center' });
