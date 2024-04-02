@@ -128,6 +128,8 @@ export type ExecutionFinishedData = {
     execution_id: string;
     workflow_id: string;
     generated_artifacts: ApiWorkflowAsset[];
+    // JSON as string
+    error?: string;
   };
 };
 

@@ -16,14 +16,16 @@ export const useUpdateWorkflowFromWebsocket = () => {
   const queryClient = useQueryClient();
 
   useEffect(() => {
-    const updateExecutionToCompleted = ({
+    const updateExecutionStatus = ({
       workflowId,
       executionId,
       completionDuration,
+      status,
     }: {
       workflowId: string;
       executionId: string;
       completionDuration: number;
+      status: 'COMPLETED' | 'FAILED';
     }) => {
       const currentData = queryClient.getQueryData<GetWorkflowExecutionsResponse>([
         QueryKeys.workflowExecutions,
@@ -33,7 +35,7 @@ export const useUpdateWorkflowFromWebsocket = () => {
       if (currentData) {
         const updatedResults = currentData.results.map((execution) => {
           if (execution.id === executionId) {
-            return { ...execution, status: 'COMPLETED', completion_duration: completionDuration };
+            return { ...execution, status, completion_duration: completionDuration };
           }
           return execution;
         });
@@ -57,10 +59,23 @@ export const useUpdateWorkflowFromWebsocket = () => {
       const message: WebSocketMessage = JSON.parse(msg.data);
       if (message.data.type === 'send_response') {
         const data = (message.data as ExecutionFinishedData).data;
-        updateExecutionToCompleted({
+        if (data.error?.length) {
+          toast.error('Workflow execution failed', { position: 'bottom-center' });
+          updateExecutionStatus({
+            workflowId: data.workflow_id,
+            executionId: data.execution_id,
+            completionDuration: data.completion_duration,
+            status: 'FAILED',
+          });
+
+          return;
+        }
+
+        updateExecutionStatus({
           workflowId: data.workflow_id,
           executionId: data.execution_id,
           completionDuration: data.completion_duration,
+          status: 'COMPLETED',
         });
         updateWorkflowAssetsWithNewArtifacts(data.workflow_id, data.generated_artifacts);
         toast.success('Workflow execution completed', { position: 'bottom-center' });
