@@ -64,7 +64,7 @@ const ExecutionItem = ({
         <StatusIcon status={status} />
         {status === 'COMPLETED' && <p className="ml-3">{completionDuration ?? 0}s</p>}
         {/* @TODO: Display error */}
-        {status === 'FAILED' && <p className="ml-3 !text-error-9">Error here</p>}
+        {status === 'FAILED' && <p className="ml-3 !text-error-9">Error occurred</p>}
         {(status === 'PENDING' || status === 'RUNNING') && <p className="ml-3">Running...</p>}
       </div>
       <div className="flex flex-row items-center">
@@ -102,15 +102,37 @@ export const ExecutionsSection = ({
   prefetchExecutionDetails(exId: string): void;
   onClose(): void;
 }) => {
+  const [activeTab, setActiveTab] = useState<'queue' | 'history'>('queue');
+  const executionsToDisplay = activeTab === 'queue' ? executions.slice(0, 5) : executions;
+
   return (
     <EditorSection icon={faList} title="Jobs" onClose={onClose}>
-      {/* @TODO: Tab switch */}
       {executions.length === 0 ? <p className="text-text-subtle">Jobs queue is empty</p> : null}
       {executions.length > 0 ? (
         <>
+          <div className="mb-4">
+            <button
+              onClick={() => setActiveTab('queue')}
+              className={clsx(
+                'rounded-lg px-4 py-2 font-medium text-text-muted transition-all',
+                activeTab === 'queue' && 'bg-surface-4 !text-surface-12',
+              )}
+            >
+              Queue
+            </button>
+            <button
+              onClick={() => setActiveTab('history')}
+              className={clsx(
+                'rounded-lg px-4 py-2 font-medium text-text-muted transition-all',
+                activeTab === 'history' && 'bg-surface-4 !text-surface-12',
+              )}
+            >
+              History
+            </button>
+          </div>
           <p className="mb-2 text-sm font-medium text-text-muted">Latest</p>
           <div className="no-scrollbar h-full overflow-auto *:mb-2">
-            {executions.map((ex, i) => (
+            {executionsToDisplay.map((ex, i) => (
               <ExecutionItem
                 key={ex.id}
                 index={executions.length - i}
