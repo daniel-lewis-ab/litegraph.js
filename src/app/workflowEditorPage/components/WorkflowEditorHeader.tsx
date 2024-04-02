@@ -9,6 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover
 import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
+import { routes } from '@/routes/routes';
 
 type WorkflowHeaderProps = {
   workflowName: string;
@@ -54,7 +55,7 @@ export const WorkflowEditorHeader = ({
       )}
     >
       <div className="flex flex-row items-center">
-        <button className="flex flex-row" onClick={() => navigate(-1)}>
+        <button className="flex flex-row" onClick={() => navigate(routes.workflows)}>
           <Icon icon={faAngleLeft} className="mr-1" />
           <Logo className="mr-4 fill-text-base" />
         </button>
