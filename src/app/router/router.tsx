@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import type { RouteRecord } from 'vite-react-ssg';
 import LoginPageContainer from '../loginPage/LoginPageContainer';
 import { routes } from '@/routes/routes';
-import AboutPage from '../aboutPage/AboutPage';
+import AboutPage, { aboutPageLoader } from '../aboutPage/AboutPage';
 import { Layout } from '@/shared/components/Layout/Layout';
 import WorkflowsPageContainer from '../workflowsPage/WorkflowsPageContainer';
 import DeploymentsPageContainer from '../deploymentsPage/DeploymentsPageContainer';
@@ -24,7 +24,7 @@ export const appRoutes: RouteRecord[] = [
         <Outlet />
       </App>
     ),
-    errorElement: <ErrorPage />,
+    errorElement: <div>Error occurred</div>,
     children: [
       {
         index: true,
@@ -36,6 +36,7 @@ export const appRoutes: RouteRecord[] = [
         path: '/about',
         Component: AboutPage,
         entry: 'src/app/aboutPage/AboutPage.tsx',
+        loader: aboutPageLoader,
       },
       {
         path: routes.login,

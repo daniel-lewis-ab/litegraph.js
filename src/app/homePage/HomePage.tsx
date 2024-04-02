@@ -1,5 +1,4 @@
 import { routes } from '@/routes/routes';
-import axios from 'axios';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { Head } from 'vite-react-ssg';
 
@@ -22,8 +21,9 @@ const HomePage = () => {
 
 export default HomePage;
 
-export const homePageLoader = async () => {
-  const res = await axios.get('http://localhost:3000/cms-data');
-  const resData = res.data;
+// eslint-disable-next-line react-refresh/only-export-components
+export const homePageLoader = () => {
+  // const res = await axios.get('http://localhost:3000/cms-data');
+  const resData = { name: 'Home page', title: 'Home page' };
   return resData;
 };
