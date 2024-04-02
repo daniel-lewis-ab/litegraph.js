@@ -1,1 +1,3 @@
-export const AboutPage = () => <h1>About tbd</h1>;
+const AboutPage = () => <h1>About tbd</h1>;
+
+export default AboutPage;

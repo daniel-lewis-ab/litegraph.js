@@ -10,3 +10,5 @@ export const NewWorkflowPageContainer = () => {
 
   return <NewWorkflowPage onSubmit={handleSubmit} />;
 };
+
+export default NewWorkflowPageContainer;

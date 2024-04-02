@@ -48,3 +48,5 @@ export const DeploymentsPageContainer = () => {
     />
   );
 };
+
+export default DeploymentsPageContainer;

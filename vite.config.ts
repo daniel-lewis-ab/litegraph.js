@@ -24,4 +24,8 @@ export default defineConfig({
     // },
     // ]
   },
+  ssgOptions: {
+    includedRoutes: () => ['/', '/about'],
+    mock: true,
+  },
 });

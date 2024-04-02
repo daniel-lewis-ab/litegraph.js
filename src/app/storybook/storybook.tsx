@@ -264,3 +264,5 @@ export const Storybook = () => {
     </div>
   );
 };
+
+export default Storybook;

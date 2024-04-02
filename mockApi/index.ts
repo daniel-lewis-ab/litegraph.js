@@ -14,6 +14,7 @@ app.use(express.json({ limit: '50mb' }));
 
 const JWT_SECRET = 'your_secret_key';
 
+
 // Middleware for CORS
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -23,6 +24,11 @@ app.use((req, res, next) => {
     return res.status(200).json({});
   }
   next();
+});
+
+// CMS
+app.get('/cms-data', (req: Request, res: Response) => {
+  res.json({name: 'Im coming from cms', title: "Awesome salt page"});
 });
 
 // Function to generate UUID for various entities

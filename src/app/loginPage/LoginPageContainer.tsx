@@ -5,7 +5,7 @@ import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
 import { PostLoginResponse } from '@/api/types';
 
-export const LoginPageContainer = () => {
+const LoginPageContainer = () => {
   const handleLogin = async (source: 'google' | 'github') => {
     try {
       const result = await signInWithPopup(auth, source === 'github' ? githubAuthProvider : googleAuthProvider);
@@ -33,3 +33,5 @@ export const LoginPageContainer = () => {
 
   return <LoginPage onLogin={handleLogin} />;
 };
+
+export default LoginPageContainer;

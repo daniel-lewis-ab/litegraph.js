@@ -1,5 +1,29 @@
 import { routes } from '@/routes/routes';
-import { Navigate } from 'react-router-dom';
+import axios from 'axios';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Head } from 'vite-react-ssg';
 
-// Scott - here is home page
-export const HomePage = () => <Navigate to={routes.workflows} />;
+const HomePage = () => {
+  const data = useLoaderData() as { name: string; title: string };
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <Head>
+        <title>{data.title}</title>
+      </Head>
+      <div>
+        <h1>Hooola {data?.name}</h1>
+        <button onClick={() => navigate(routes.login)}>Login</button>
+      </div>
+    </>
+  );
+};
+
+export default HomePage;
+
+export const homePageLoader = async () => {
+  const res = await axios.get('http://localhost:3000/cms-data');
+  const resData = res.data;
+  return resData;
+};

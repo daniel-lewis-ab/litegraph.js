@@ -94,3 +94,5 @@ export const WorkflowEditorPageContainer = () => {
     />
   );
 };
+
+export default WorkflowEditorPageContainer;

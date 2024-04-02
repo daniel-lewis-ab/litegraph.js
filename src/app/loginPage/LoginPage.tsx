@@ -30,7 +30,7 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
       const tokens = await onLogin(source);
 
       dispatch({ type: SET_TOKENS, accessToken: tokens?.access, refreshToken: tokens?.refresh });
-      navigate(routes.home);
+      navigate(routes.workflows);
     } catch (error) {
       if (error instanceof FirebaseError) {
         if (error.code === 'auth/account-exists-with-different-credential') {

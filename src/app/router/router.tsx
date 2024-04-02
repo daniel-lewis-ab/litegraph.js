@@ -1,80 +1,114 @@
-import { Outlet, createBrowserRouter } from 'react-router-dom';
-import { ErrorPage } from '@/shared/components/errorPage/ErrorPage';
-import { Layout } from '@/shared/components/Layout/Layout';
-import { AuthorizedRoute } from '@/shared/components/authorizedRoute/AuthorizedRoute';
-import { LoginPageContainer } from '../loginPage/LoginPageContainer';
-import { Storybook } from '../storybook/storybook';
-import { WorkflowsPageContainer } from '../workflowsPage/WorkflowsPageContainer';
+import { Outlet } from 'react-router-dom';
+import type { RouteRecord } from 'vite-react-ssg';
+import LoginPageContainer from '../loginPage/LoginPageContainer';
 import { routes } from '@/routes/routes';
-import { NewWorkflowPageContainer } from '../newWorkflowPage/NewWorkflowPageContainer';
-import { WorkflowEditorPageContainer } from '../workflowEditorPage/WorkflowEditorPageContainer';
-import { HomePage } from '../homePage/HomePage';
-import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageContainer';
+import AboutPage from '../aboutPage/AboutPage';
+import { Layout } from '@/shared/components/Layout/Layout';
+import WorkflowsPageContainer from '../workflowsPage/WorkflowsPageContainer';
+import DeploymentsPageContainer from '../deploymentsPage/DeploymentsPageContainer';
 import { WorkflowEditorContextProvider } from '@/context/workflowEditorContext/WorkflowEditorContext';
-import { AboutPage } from '../aboutPage/AboutPage';
 import { WebSocketProvider } from '@/context/websocketContext/WebSocketContext';
+import { ErrorPage } from '@/shared/components/errorPage/ErrorPage';
+import WorkflowEditorPageContainer from '../workflowEditorPage/WorkflowEditorPageContainer';
+import Storybook from '../storybook/storybook';
+import NewWorkflowPageContainer from '../newWorkflowPage/NewWorkflowPageContainer';
+import { AuthorizedRoute } from '@/shared/components/authorizedRoute/AuthorizedRoute';
+import App from '../App';
+import HomePage, { homePageLoader } from '../homePage/HomePage';
 
-export const router = createBrowserRouter([
-  { path: routes.home, element: <HomePage />, errorElement: <ErrorPage /> },
-  { path: routes.about, element: <AboutPage />, errorElement: <ErrorPage /> },
-  { path: routes.login, element: <LoginPageContainer />, errorElement: <ErrorPage /> },
+export const appRoutes: RouteRecord[] = [
   {
-    path: '/app',
+    path: '/',
     element: (
-      <AuthorizedRoute>
+      <App>
         <Outlet />
-      </AuthorizedRoute>
+      </App>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
-        path: routes.workflows,
-        element: (
-          <Layout>
-            <Outlet />
-          </Layout>
-        ),
-        children: [
-          {
-            index: true,
-            element: <WorkflowsPageContainer />,
-          },
-          {
-            path: routes.newWorkflow.replace('/app/workflows/', ''),
-            element: <NewWorkflowPageContainer />,
-          },
-        ],
+        index: true,
+        Component: HomePage,
+        entry: 'src/app/homePage/HomePage.tsx',
+        loader: homePageLoader,
       },
       {
-        path: routes.deployments,
-        element: (
-          <Layout>
-            <Outlet />
-          </Layout>
-        ),
-        children: [
-          {
-            index: true,
-            element: <DeploymentsPageContainer />,
-          },
-        ],
+        path: '/about',
+        Component: AboutPage,
+        entry: 'src/app/aboutPage/AboutPage.tsx',
       },
       {
-        path: routes.workflow(':id'),
-        element: (
-          <WebSocketProvider>
-            <WorkflowEditorContextProvider>
-              <Outlet />
-            </WorkflowEditorContextProvider>
-          </WebSocketProvider>
-        ),
-        errorElement: <ErrorPage />,
-        children: [{ index: true, element: <WorkflowEditorPageContainer /> }],
+        path: routes.login,
+        Component: LoginPageContainer,
       },
-      // @TODO: Remove before prod
       {
         path: routes.storybook,
-        element: import.meta.env.DEV ? <Storybook /> : null,
+        Component: Storybook,
+        entry: 'src/app/storybook/storybook.tsx',
+      },
+      {
+        path: '/app',
+        element: (
+          <AuthorizedRoute>
+            <Outlet />
+          </AuthorizedRoute>
+        ),
+        children: [
+          {
+            path: routes.workflows,
+            element: (
+              <Layout>
+                <Outlet />
+              </Layout>
+            ),
+            children: [
+              {
+                index: true,
+                element: <WorkflowsPageContainer />,
+                entry: 'src/app/workflowsPage/WorkflowsPageContainer.tsx',
+              },
+              {
+                path: routes.newWorkflow.replace('/app/workflows/', ''),
+                element: <NewWorkflowPageContainer />,
+                entry: 'src/app/newWorkflowPage/NewWorkflowPageContainer.tsx',
+              },
+            ],
+          },
+          {
+            path: routes.deployments,
+            element: (
+              <Layout>
+                <Outlet />
+              </Layout>
+            ),
+            children: [
+              {
+                index: true,
+                element: <DeploymentsPageContainer />,
+                entry: 'src/app/deploymentsPage/DeploymentsPageContainer.tsx',
+              },
+            ],
+          },
+          {
+            path: routes.workflow(':id'),
+            element: (
+              <WebSocketProvider>
+                <WorkflowEditorContextProvider>
+                  <Outlet />
+                </WorkflowEditorContextProvider>
+              </WebSocketProvider>
+            ),
+            errorElement: <ErrorPage />,
+            children: [
+              {
+                index: true,
+                element: <WorkflowEditorPageContainer />,
+                entry: 'src/app/workflowEditorPage/WorkflowEditorPageContainer.tsx',
+              },
+            ],
+          },
+        ],
       },
     ],
   },
-]);
+];

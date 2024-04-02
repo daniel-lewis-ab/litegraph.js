@@ -40,3 +40,5 @@ export const WorkflowsPageContainer = () => {
     />
   );
 };
+
+export default WorkflowsPageContainer;
