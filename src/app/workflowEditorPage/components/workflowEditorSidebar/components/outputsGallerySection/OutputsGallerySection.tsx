@@ -53,9 +53,6 @@ type OutputsGalleryGridProps = {
   onClose(): void;
 };
 
-// @TODO: Replace once backend returns image id correctly
-const getImageId = (imgUrl: string) => imgUrl.match(/\/([a-f0-9]+)\.png/)?.[1];
-
 const TILE_IMG_CONFIG = {
   width: 200,
   height: 200,
@@ -85,7 +82,7 @@ export const OutputsGallerySection = ({
             {assets.map((i) => (
               <ImageTile
                 key={i.id}
-                imgUrl={getImageUrl(i.workflow_execution_id, getImageId(i.asset_url)!, TILE_IMG_CONFIG)}
+                imgUrl={getImageUrl(i.storage_path, TILE_IMG_CONFIG)}
                 name={i.name}
                 created_at={i.created_at}
                 size={i.size}

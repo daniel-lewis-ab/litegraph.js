@@ -109,6 +109,7 @@ export type ApiWorkflowAsset = {
   workflow_execution_id: string;
   created_at: string;
   size: number;
+  storage_path: string;
 };
 
 export type ApiWorkflowAssetDetails = ApiWorkflowAsset & {
