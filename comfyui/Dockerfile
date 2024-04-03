@@ -2,8 +2,8 @@
 FROM nginx:latest
 
 # Set the working directory in the container to /usr/share/nginx/html
-COPY .* /usr/share/nginx/html
-
+WORKDIR /usr/share/nginx/html/
+COPY . .
 # Copy the Nginx configuration file into the container
 COPY nginx.conf /etc/nginx/nginx.conf
 
