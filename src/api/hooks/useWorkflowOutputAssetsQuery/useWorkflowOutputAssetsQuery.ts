@@ -8,7 +8,7 @@ import { QUERY_CACHE_CONFIG } from '@/api/queryCacheConfig';
 
 const getWorkflowOutputAssets = async (workflowId: string) => {
   const response = await axiosClient.get<GetWorkflowAssetsResponse>(apiEndpoints.workflowOutputAssets(workflowId), {
-    params: { workflow_execution_artifact_type: 'OUTPUT' },
+    params: { artifact_type: 'OUTPUT' },
   });
 
   if (response.status === 200) {
