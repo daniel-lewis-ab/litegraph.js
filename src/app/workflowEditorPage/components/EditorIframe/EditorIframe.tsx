@@ -44,6 +44,23 @@ export const EditorIframe = () => {
           });
         }
       }
+
+      if (message.data.internal && message.data.internal.type === 'loaded') {
+        setState('loaded');
+      }
+
+      if (message.data.internal && message.data.internal.type === 'upload') {
+        console.log('uploading new asset', message.data.internal.data);
+        // TODO upload and handle asset
+        sendMessageToIframe({
+          internal: {
+            type: 'upload_done',
+            data: {
+              name: message.data.internal.data.file.name,
+            },
+          },
+        });
+      }
     };
 
     window.addEventListener('message', handleMessageFromIframe);
@@ -73,7 +90,6 @@ export const EditorIframe = () => {
   return (
     <iframe
       ref={iframeRef}
-      onLoad={() => setState('loaded')}
       src={import.meta.env.VITE_IFRAME_URL}
       className="h-full w-full rounded-lg"
       title="Local HTML Content"
