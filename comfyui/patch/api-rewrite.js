@@ -70,7 +70,7 @@ class ComfyGraphPatcher extends EventTarget {
     if (
       message.event === 'validation_error' &&
       ((this.app.lastNodeErrors = message.data?.node_errors || []),
-      this.app.lastNodeErrors.length > 0 && this.app.canvas.draw(true, true))
+        this.app.lastNodeErrors.length > 0 && this.app.canvas.draw(true, true))
     );
     if (message.internal) {
       const internalMessage = message.internal;
@@ -100,8 +100,8 @@ class ComfyGraphPatcher extends EventTarget {
                 loadPrompt();
                 this.postMessageToParent('prompt_load_error');
               });
+            break;
           }
-          break;
         }
         case 'get_prompt': {
           this.app
@@ -116,12 +116,12 @@ class ComfyGraphPatcher extends EventTarget {
         case 'refresh_defs': {
           if (
             (internalMessage.data.models && (this.models = internalMessage.data.models),
-            internalMessage.data.inputs && (this.inputs = internalMessage.data.inputs),
-            this.getNodeDefs().then((nodeDefs) => {
-              this.app.registerNodesFromDefs(nodeDefs).then(() => {
-                this.updateNodeDefinitions();
-              });
-            }))
+              internalMessage.data.inputs && (this.inputs = internalMessage.data.inputs),
+              this.getNodeDefs().then((nodeDefs) => {
+                this.app.registerNodesFromDefs(nodeDefs).then(() => {
+                  this.updateNodeDefinitions();
+                });
+              }))
           )
             break;
         }
@@ -425,9 +425,9 @@ class ComfyGraphPatcher extends EventTarget {
       : (path === '/upload/image' || path === '/upload/mask') && !this.readOnly
         ? /\.DS_Store|__MACOSX/.test(options.body.get('image')?.name)
           ? this.createResponse({
-              file: options.body.get('image')?.name,
-              subfolder: options.body.get('subfolder') || 'editor',
-            })
+            file: options.body.get('image')?.name,
+            subfolder: options.body.get('subfolder') || 'editor',
+          })
           : await this.uploadFile(options.body.get('image'), options.body.get('subfolder'))
         : path === '/impact/wildcards/list'
           ? this.createResponse([])
@@ -559,13 +559,13 @@ class ComfyGraphPatcher extends EventTarget {
     return await res.json();
   };
 
-  init = () => {};
+  init = () => { };
 
-  deleteItem = async (_, __) => {};
+  deleteItem = async (_, __) => { };
 
-  clearItems = async (_) => {};
+  clearItems = async (_) => { };
 
-  interrupt = async () => {};
+  interrupt = async () => { };
 
   getUserConfig = async () => ({ storage: 'browser', migrated: true });
 
