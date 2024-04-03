@@ -29,6 +29,17 @@ export type IframeToParentGetGraphData = {
   data: WorkflowContent;
 };
 
+// When user uploads new asset
+export type IframeToParentUploadData = {
+  type: 'upload';
+  data: WorkflowContent;
+};
+
+export type IframeToParentLoadedData = {
+  type: 'loaded';
+  data: WorkflowContent;
+};
+
 export type IframeToParentMessage = {
-  internal: IframeToParentGetGraphData;
+  internal: IframeToParentGetGraphData | IframeToParentUploadData | IframeToParentLoadedData;
 };

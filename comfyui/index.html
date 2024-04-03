@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <title>ComfyUI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" href="comfy/lib/litegraph.css" />
-    <link rel="stylesheet" type="text/css" href="comfy/style.css" />
-    <link rel="stylesheet" type="text/css" href="comfy/user.css" />
-    <script type="text/javascript" src="comfy/lib/litegraph.core.js"></script>
-    <script type="text/javascript" src="comfy/lib/litegraph.extensions.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="lib/litegraph.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="user.css" />
+    <script type="text/javascript" src="lib/litegraph.core.js"></script>
+    <script type="text/javascript" src="lib/litegraph.extensions.js" defer></script>
     <script type="module">
-      import { app } from './comfy/scripts/app.js';
-      import { api } from './comfy/patch/api-rewrite.js';
+      import { app } from './scripts/app.js';
+      import { api } from './patch/api-rewrite.js';
       await app.setup();
       api.initWithApp(app);
       window.app = app;
