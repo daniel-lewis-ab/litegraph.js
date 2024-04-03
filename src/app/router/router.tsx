@@ -110,6 +110,10 @@ export const appRoutes: RouteRecord[] = [
           },
         ],
       },
+      {
+        path: '*',
+        Component: () => <div>Not found</div>,
+      },
     ],
   },
 ];

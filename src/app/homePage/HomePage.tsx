@@ -1,21 +1,19 @@
-/* eslint-disable no-console */
 import { routes } from '@/routes/routes';
+import { Button } from '@/shared/components/button/Button';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-import { Head } from 'vite-react-ssg';
 
 const HomePage = () => {
   const data = useLoaderData() as { name: string; title: string };
   const navigate = useNavigate();
-  console.log('data', data);
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <title>{data.title}</title>
-      </Head>
-      <div>
-        <h1>Hooola {data?.name}</h1>
-        <button onClick={() => navigate(routes.login)}>Login</button>
+      </Head> */}
+      <div className="flex h-screen flex-col items-center justify-center">
+        <h1 className="mb-4">{data?.name}</h1>
+        <Button onClick={() => navigate(routes.login)}>Login</Button>
       </div>
     </>
   );
@@ -26,6 +24,6 @@ export default HomePage;
 // eslint-disable-next-line react-refresh/only-export-components, @typescript-eslint/require-await
 export const homePageLoader = async () => {
   // const res = await axios.get('http://localhost:3000/cms-data');
-  const resData = { name: 'Home page', title: 'Home page2' };
+  const resData = { name: 'This is home page placeholder, will be updated soon', title: 'Home page2' };
   return resData;
 };
