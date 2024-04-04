@@ -5,6 +5,8 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 const HomePage = () => {
   const data = useLoaderData() as { name: string; title: string };
   const navigate = useNavigate();
+  // eslint-disable-next-line no-console
+  console.log('4');
 
   return (
     <>
@@ -24,6 +26,6 @@ export default HomePage;
 // eslint-disable-next-line react-refresh/only-export-components, @typescript-eslint/require-await
 export const homePageLoader = async () => {
   // const res = await axios.get('http://localhost:3000/cms-data');
-  const resData = { name: 'This is home page placeholder, will be updated soon', title: 'Home page2' };
+  const resData = { name: 'This is home page placeholder, will be updated soon', title: 'Home page' };
   return resData;
 };
