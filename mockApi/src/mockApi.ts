@@ -1,8 +1,8 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import expressWs from 'express-ws';
-import { ApiWorkflowAsset, ApiWorkflowAssetDetails, Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowAssetsResponse, GetWorkflowsResponse, PostLoginResponse, Workflow, WorkflowDetails, WorkflowExecution, WorkflowExecutionDetails } from '../src/api/types';
-import { initWebsocket } from './websocket';
+import { ApiWorkflowAsset, ApiWorkflowAssetDetails, Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowAssetsResponse, GetWorkflowsResponse, PostLoginResponse, Workflow, WorkflowDetails, WorkflowExecution, WorkflowExecutionDetails } from '../../src/api/types';
+import { initWebsocket } from './mockWebsocket';
 import { examplePrompt1, examplePrompt2, examplePrompt3, workflowExecutions } from './workflowExecutions';
 
 const app = express();

@@ -1,4 +1,4 @@
-import { WorkflowExecution, WorkflowExecutionDetails } from "../src/api/types";
+import { WorkflowExecution, WorkflowExecutionDetails } from "../../src/api/types";
 
 export const examplePrompt1 = {
   last_node_id: 14,

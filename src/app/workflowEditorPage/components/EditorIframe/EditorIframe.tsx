@@ -1,15 +1,29 @@
 /* eslint-disable no-console */
 import { useEffect, useRef, useState } from 'react';
 import { useWorkflowEditor } from '@/hooks/useWorkflowEditor/useWorkflowEditor';
-import { WebSocketMessage } from '@/api/types';
-import { useWebsocket } from '@/hooks/useWebsocket/useWebsocket';
 import { FullMessage, IframeToParentMessage } from './EditorIframe.types';
+import { WebSocketMessage } from '@/api/types';
+import { useWebSocket } from '@/hooks/useWebsocket/useWebsocket';
 
 export const EditorIframe = () => {
   const { currentWorkflow, setCurrentWorkflow } = useWorkflowEditor();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [state, setState] = useState<'init' | 'loaded'>('init');
-  const socket = useWebsocket();
+  const { lastMessage, readyState } = useWebSocket();
+
+  useEffect(() => {
+    const handleWebsocketMessage = (message: WebSocketMessage | null) => {
+      if (!message?.data) return;
+
+      import.meta.env.VITE_SHOW_WEBSOCKET_LOGS === 'true' && console.log('websocket message', message);
+
+      sendMessageToIframe({
+        internal: message.data,
+      });
+    };
+
+    handleWebsocketMessage(lastMessage);
+  }, [lastMessage, readyState]);
 
   const sendMessageToIframe = (message: FullMessage) => {
     import.meta.env.VITE_SHOW_IFRAME_LOGS === 'true' && console.log('Sending message to iframe', message);
@@ -69,23 +83,6 @@ export const EditorIframe = () => {
       window.removeEventListener('message', handleMessageFromIframe);
     };
   }, [currentWorkflow?.content, setCurrentWorkflow]);
-
-  useEffect(() => {
-    const handleWebsocketMessage = (msg: MessageEvent<string>) => {
-      const message: WebSocketMessage = JSON.parse(msg.data);
-      import.meta.env.VITE_SHOW_WEBSOCKET_LOGS === 'true' && console.log('websocket message', message);
-      // @TODO: Filter out websocket messages to only send the ones that iframe needs + correctly type them
-      sendMessageToIframe({
-        internal: message.data,
-      });
-    };
-
-    socket?.addEventListener('message', handleWebsocketMessage);
-
-    return () => {
-      socket?.removeEventListener('message', handleWebsocketMessage);
-    };
-  });
 
   return (
     <iframe

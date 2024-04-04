@@ -7,7 +7,6 @@ import { Layout } from '@/shared/components/Layout/Layout';
 import WorkflowsPageContainer from '../workflowsPage/WorkflowsPageContainer';
 import DeploymentsPageContainer from '../deploymentsPage/DeploymentsPageContainer';
 import { WorkflowEditorContextProvider } from '@/context/workflowEditorContext/WorkflowEditorContext';
-import { WebSocketProvider } from '@/context/websocketContext/WebSocketContext';
 import { ErrorPage } from '@/shared/components/errorPage/ErrorPage';
 import WorkflowEditorPageContainer from '../workflowEditorPage/WorkflowEditorPageContainer';
 import Storybook from '../storybook/storybook';
@@ -15,6 +14,7 @@ import NewWorkflowPageContainer from '../newWorkflowPage/NewWorkflowPageContaine
 import { AuthorizedRoute } from '@/shared/components/authorizedRoute/AuthorizedRoute';
 import App from '../App';
 import HomePage, { homePageLoader } from '../homePage/HomePage';
+import { WebSocketProvider } from '@/context/websocketContext/WebsocketContextProvider';
 
 export const appRoutes: RouteRecord[] = [
   {

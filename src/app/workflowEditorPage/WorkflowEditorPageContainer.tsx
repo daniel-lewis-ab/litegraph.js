@@ -12,8 +12,8 @@ import throttle from 'lodash.throttle';
 import { saveJsonFile } from '@/shared/functions/saveJsonFile';
 import { constants } from '@/contants';
 import { useWorkflowExecutionsQuery } from '@/api/hooks/useWorkflowExecutionsQuery/useWorkflowExecutionsQuery';
-import { useUpdateWorkflowFromWebsocket } from '@/hooks/useUpdateWorkflowFromWebsocket/useUpdateWorkflowFromWebsocket';
 import { usePrefetchWorkflowOutputAssets } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
+import { useUpdateWorkflowFromWebsocket } from '@/hooks/useUpdateWorkflowFromWebsocket/useUpdateWorkflowFromWebsocket';
 
 export const WorkflowEditorPageContainer = () => {
   // We want to keep it to only send the update once

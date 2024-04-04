@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon -I --exec node --loader ts-node/esm index.ts --watch './**/*.ts'"
+    "dev": "nodemon -I --exec node --loader ts-node/esm src/mockApi.ts --watch './**/*.ts'"
   },
   "keywords": [],
   "author": "",

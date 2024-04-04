@@ -5,14 +5,15 @@ import {
   GetWorkflowExecutionsResponse,
   WebSocketMessage,
 } from '@/api/types';
-import { useWebsocket } from '../useWebsocket/useWebsocket';
+
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/api/queryKeys';
 import toast from 'react-hot-toast';
+import { useWebSocket } from '@/hooks/useWebsocket/useWebsocket';
 
 export const useUpdateWorkflowFromWebsocket = () => {
-  const socket = useWebsocket();
+  const { lastMessage } = useWebSocket();
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -55,8 +56,9 @@ export const useUpdateWorkflowFromWebsocket = () => {
       queryClient.setQueryData([QueryKeys.workflowAssets, workflowId], updatedAssets);
     };
 
-    const handleWebsocketMessage = (msg: MessageEvent<string>) => {
-      const message: WebSocketMessage = JSON.parse(msg.data);
+    const handleWebsocketMessage = (message: WebSocketMessage | null) => {
+      if (!message?.data) return;
+
       if (message.data.type === 'send_response') {
         const data = (message.data as ExecutionFinishedData).data;
         if (data.error?.length) {
@@ -82,10 +84,6 @@ export const useUpdateWorkflowFromWebsocket = () => {
       }
     };
 
-    socket?.addEventListener('message', handleWebsocketMessage);
-
-    return () => {
-      socket?.removeEventListener('message', handleWebsocketMessage);
-    };
-  }, [socket, queryClient]);
+    handleWebsocketMessage(lastMessage);
+  }, [lastMessage, queryClient]);
 };
