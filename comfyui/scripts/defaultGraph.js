@@ -75,14 +75,14 @@ export const defaultGraph = {
 		},
 		{
 			id: 9,
-			type: "SaveImage",
+			type: 'SaltOutput',
 			pos: [1451, 189],
 			size: { 0: 210, 1: 26 },
 			flags: {},
 			order: 6,
 			mode: 0,
-			inputs: [{ name: "images", type: "IMAGE", link: 9 }],
-			properties: {},
+			inputs: [{ name: 'output_data', type: '*', link: 9 }],
+			properties: { 'node name for S&R': 'SaltOutput' },
 		},
 		{
 			id: 4,
