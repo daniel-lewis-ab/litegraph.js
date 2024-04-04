@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import type { RouteRecord } from 'vite-react-ssg';
 import LoginPageContainer from '../loginPage/LoginPageContainer';
 import { routes } from '@/routes/routes';
@@ -55,6 +55,10 @@ export const appRoutes: RouteRecord[] = [
           </AuthorizedRoute>
         ),
         children: [
+          {
+            index: true,
+            element: <Navigate to={routes.workflows} replace />,
+          },
           {
             path: routes.workflows,
             element: (
