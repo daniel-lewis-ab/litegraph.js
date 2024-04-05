@@ -4,6 +4,7 @@ import { WorkflowEditorSidebar } from './components/workflowEditorSidebar/Workfl
 import { EditorIframe } from './components/EditorIframe/EditorIframe';
 import { CreateDeploymentDialogContainer } from '@/shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
 import { EditorDevTools } from './components/EditorDevTools';
+import { EditorFooter } from './components/EditorFooter';
 
 export const WorkflowEditorPage = ({
   workflowId,
@@ -22,7 +23,7 @@ export const WorkflowEditorPage = ({
   const [showDeploymentDialog, setShowDeploymentDialog] = useState(false);
 
   return (
-    <div className="flex h-screen flex-row p-1.5">
+    <div className="flex h-screen flex-row bg-surface-1 p-1.5">
       <div
         className={`flex flex-1 flex-col ${activeSidebarSection !== null ? 'flex grow basis-0' : 'flex basis-full'}`}
       >
@@ -36,11 +37,7 @@ export const WorkflowEditorPage = ({
           workflowsRunningCount={workflowsRunningCount}
         />
         <EditorIframe />
-        <CreateDeploymentDialogContainer
-          workflowId={workflowId}
-          isOpen={showDeploymentDialog}
-          onClose={() => setShowDeploymentDialog(false)}
-        />
+        <EditorFooter />
       </div>
       <div
         className={`duration-300 ${activeSidebarSection !== null ? 'w-[450px]' : 'w-0'} flex h-full overflow-hidden`}
@@ -52,6 +49,11 @@ export const WorkflowEditorPage = ({
           onClose={() => setActiveSidebarSection(null)}
         />
       </div>
+      <CreateDeploymentDialogContainer
+        workflowId={workflowId}
+        isOpen={showDeploymentDialog}
+        onClose={() => setShowDeploymentDialog(false)}
+      />
       {import.meta.env.MODE === 'development' && import.meta.env.VITE_WEBSOCKET_URL.includes('localhost') ? (
         <EditorDevTools />
       ) : null}

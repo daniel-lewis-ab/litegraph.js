@@ -22,8 +22,20 @@ export type Workflow = {
   updated_at: string;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type WorkflowContent = any; // TODO: Define this type more explicitly
+type NodeInfo = {
+  id: number;
+  type: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+};
+
+// TODO: Define this type more explicitly
+export type WorkflowContent = {
+  nodes: NodeInfo[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type WorkflowAPIContent = any; // TODO: Define this type more explicitly
 
