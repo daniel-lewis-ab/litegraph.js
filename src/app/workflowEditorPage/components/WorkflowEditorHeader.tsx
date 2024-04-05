@@ -50,11 +50,11 @@ export const WorkflowEditorHeader = ({
   return (
     <header
       className={clsx(
-        'mb-1.5 flex flex-row items-center justify-between rounded-xl bg-surface-2 px-3 py-1.5',
+        'relative mb-1.5 flex flex-row items-center justify-between rounded-xl bg-surface-2 px-3 py-1.5',
         className,
       )}
     >
-      <div className="flex flex-row items-center">
+      <div className="z-10 flex flex-row items-center">
         <button className="flex flex-row" onClick={() => navigate(routes.workflows)}>
           <Icon icon={faAngleLeft} className="mr-1" />
           <Logo className="mr-4 fill-text-base" />
@@ -80,8 +80,10 @@ export const WorkflowEditorHeader = ({
           </PopoverContent>
         </Popover>
       </div>
-      <p className="text-sm font-medium text-surface-12">{workflowName}</p>
-      <div className="flex flex-row items-center">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <p className="text-sm font-medium text-surface-12">{workflowName}</p>
+      </div>
+      <div className="z-10 flex flex-row items-center">
         <button
           disabled={isCreatingWorkflow}
           onClick={handleRunWorkflowClick}
