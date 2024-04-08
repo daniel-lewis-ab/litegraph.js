@@ -4,7 +4,7 @@ import { EditorSection } from '../EditorSection';
 import { useState } from 'react';
 import { Icon } from '@/shared/components/icon/Icon';
 import { faArrowDownToLine, faBracketsCurly, faTrash } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
-import { ApiWorkflowAsset } from '@/api/types';
+import { ApiWorkflowOutputAsset } from '@/api/types';
 import { DeleteAssetConfirmationDialog } from '../DeleteAssetConfirmationDialog';
 
 import './OutputsGallerySection.scss';
@@ -45,7 +45,7 @@ const ImageTile = ({ imgUrl, name, created_at, size, isSelected, onClick }: Imag
 };
 
 type OutputsGalleryGridProps = {
-  assets: ApiWorkflowAsset[];
+  assets: ApiWorkflowOutputAsset[];
   onCopyAssetContent(imgId: string): void;
   onDownloadAsset(imgId: string): void;
   onDeleteOutputAsset({ assetId, executionId }: { assetId: string; executionId: string }): Promise<boolean>;

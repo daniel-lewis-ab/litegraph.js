@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
 import { QueryKeys } from '@/api/queryKeys';
-import { GetWorkflowAssetsResponse } from '@/api/types';
+import { GetWorkflowOutputAssetsResponse } from '@/api/types';
 
 const deleteAsset = async ({ assetId, executionId }: { assetId: string; executionId: string; workflowId: string }) => {
   const response = await axiosClient.delete(apiEndpoints.asset({ assetId, executionId }));
@@ -22,11 +22,14 @@ export const useDeleteAssetMutation = () => {
   const { mutate, ...rest } = useMutation({
     mutationFn: deleteAsset,
     onSuccess: (_, { assetId, workflowId }) => {
-      queryClient.setQueryData<GetWorkflowAssetsResponse>([QueryKeys.workflowAssets, workflowId], (oldData) => {
-        return oldData ? oldData.filter((asset) => asset.id !== assetId) : [];
-      });
+      queryClient.setQueryData<GetWorkflowOutputAssetsResponse>(
+        [QueryKeys.workflowOutputAssets, workflowId],
+        (oldData) => {
+          return oldData ? oldData.filter((asset) => asset.id !== assetId) : [];
+        },
+      );
 
-      queryClient.invalidateQueries({ queryKey: [QueryKeys.workflowAssets, workflowId] });
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.workflowOutputAssets, workflowId] });
     },
   });
 

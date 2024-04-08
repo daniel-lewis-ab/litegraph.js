@@ -114,7 +114,13 @@ export type PostWorkflowExecutionsResponse = {
 // Workflow Assets
 // ============================
 
-export type ApiWorkflowAsset = {
+export type ApiWorkflowInputAsset = {
+  id: string;
+  comfy_file_path: string;
+  file_url: string;
+};
+
+export type ApiWorkflowOutputAsset = {
   id: string;
   name: string;
   asset_url: string;
@@ -124,11 +130,17 @@ export type ApiWorkflowAsset = {
   storage_path: string;
 };
 
-export type ApiWorkflowAssetDetails = ApiWorkflowAsset & {
+export type ApiWorkflowOutputAssetDetails = ApiWorkflowOutputAsset & {
   content: WorkflowContent;
 };
 
-export type GetWorkflowAssetsResponse = ApiWorkflowAsset[];
+export type GetWorkflowOutputAssetsResponse = ApiWorkflowOutputAsset[];
+export type GetWorkflowInputAssetsResponse = {
+  // count: number;
+  // next: string | null;
+  // previous: string | null;
+  results: ApiWorkflowInputAsset[];
+};
 
 // ============================
 // Websockets
@@ -140,7 +152,7 @@ export type ExecutionFinishedData = {
     completion_duration: number;
     execution_id: string;
     workflow_id: string;
-    generated_artifacts: ApiWorkflowAsset[];
+    generated_artifacts: ApiWorkflowOutputAsset[];
     // JSON as string
     error?: string;
   };

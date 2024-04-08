@@ -3,9 +3,11 @@ import { extensions } from './extensions.js';
 import { nodeDefinitions } from './object_info.js';
 import { opaque } from './opaque.js';
 
-const refreshInterval = 500;
+const refreshInterval = 1000;
 const apiHostMappings = {
-  'http://localhost:8080': 'https://salt-api-dev.getsalt.ai/api',
+  'http://localhost:1218': 'http://localhost:8000/api',
+  'https://iframe-dev.getsalt.ai/': 'https://salt-api-dev.getsalt.ai/api',
+  'https://iframe.getsalt.ai/': 'https://salt-api-prod.getsalt.ai/api',
 };
 const selectedCategories = [];
 const opaqueNodeSet = new Set(opaque);
@@ -26,11 +28,8 @@ class ComfyGraphPatcher extends EventTarget {
     this.inputs = [];
     this.apiHost = location.host;
     this.apiBase = location.pathname.split('/').slice(0, -1).join('/');
+    this.workflow_id = '';
     this.createIFrameCommunication(false);
-  }
-
-  apiURL(endpoint) {
-    return this.getApiURL(endpoint);
   }
 
   handlePreviewData = (previewData) => {
@@ -70,7 +69,7 @@ class ComfyGraphPatcher extends EventTarget {
     if (
       message.event === 'validation_error' &&
       ((this.app.lastNodeErrors = message.data?.node_errors || []),
-        this.app.lastNodeErrors.length > 0 && this.app.canvas.draw(true, true))
+      this.app.lastNodeErrors.length > 0 && this.app.canvas.draw(true, true))
     );
     if (message.internal) {
       const internalMessage = message.internal;
@@ -90,6 +89,7 @@ class ComfyGraphPatcher extends EventTarget {
               this.updateNodeDefinitions();
               this.loadCategories();
             };
+            this.workflow_id = internalMessage.data.workflow_id;
             this.app
               .loadGraphData(internalMessage.data.prompt, true)
               .then(() => {
@@ -116,12 +116,12 @@ class ComfyGraphPatcher extends EventTarget {
         case 'refresh_defs': {
           if (
             (internalMessage.data.models && (this.models = internalMessage.data.models),
-              internalMessage.data.inputs && (this.inputs = internalMessage.data.inputs),
-              this.getNodeDefs().then((nodeDefs) => {
-                this.app.registerNodesFromDefs(nodeDefs).then(() => {
-                  this.updateNodeDefinitions();
-                });
-              }))
+            internalMessage.data.inputs && (this.inputs = internalMessage.data.inputs),
+            this.getNodeDefs().then((nodeDefs) => {
+              this.app.registerNodesFromDefs(nodeDefs).then(() => {
+                this.updateNodeDefinitions();
+              });
+            }))
           )
             break;
         }
@@ -370,7 +370,7 @@ class ComfyGraphPatcher extends EventTarget {
     this.postMessageToParent('loaded');
   };
 
-  getApiURL(path) {
+  apiURL = (path) => {
     if (path.startsWith('/view')) {
       const params = new URLSearchParams(path.split('?')[1]);
       if (params.get('file_url')) {
@@ -382,7 +382,7 @@ class ComfyGraphPatcher extends EventTarget {
           fileName = params.get('subfolder') + '/' + fileName;
         }
         if (apiHostMappings[window.location.origin]) {
-          return `${apiHostMappings[window.location.origin]}/assets/resolve?p=${encodeURIComponent(fileName)}`;
+          return `${apiHostMappings[window.location.origin]}/v1/workflows/${this.workflow_id}/assets/resolve?file_path=${encodeURIComponent(fileName)}`;
         }
       }
     }
@@ -419,21 +419,27 @@ class ComfyGraphPatcher extends EventTarget {
       }
     });
 
-  fetchApi = async (path, options) =>
-    path === '/mtb/debug'
-      ? this.createResponse({})
-      : (path === '/upload/image' || path === '/upload/mask') && !this.readOnly
-        ? /\.DS_Store|__MACOSX/.test(options.body.get('image')?.name)
-          ? this.createResponse({
-            file: options.body.get('image')?.name,
-            subfolder: options.body.get('subfolder') || 'editor',
-          })
-          : await this.uploadFile(options.body.get('image'), options.body.get('subfolder'))
-        : path === '/impact/wildcards/list'
-          ? this.createResponse([])
-          : path === '/jovimetrix/config'
-            ? this.createResponse({})
-            : fetch(this.getApiURL(path), options);
+  fetchApi = async (path, options) => {
+    if (path === '/mtb/debug') {
+      return this.createResponse({});
+    } else if ((path === '/upload/image' || path === '/upload/mask') && !this.readOnly) {
+      const imageName = options.body.get('image')?.name;
+      if (/\.DS_Store|__MACOSX/.test(imageName)) {
+        return this.createResponse({
+          file: imageName,
+          subfolder: options.body.get('subfolder') || 'editor',
+        });
+      } else {
+        return await this.uploadFile(options.body.get('image'), options.body.get('subfolder'));
+      }
+    } else if (path === '/impact/wildcards/list') {
+      return this.createResponse([]);
+    } else if (path === '/jovimetrix/config') {
+      return this.createResponse({});
+    } else {
+      return fetch(this.apiURL(path), options);
+    }
+  };
 
   addEventListener = (eventName, listener, options) => {
     super.addEventListener(eventName, listener, options);
@@ -559,13 +565,13 @@ class ComfyGraphPatcher extends EventTarget {
     return await res.json();
   };
 
-  init = () => { };
+  init = () => {};
 
-  deleteItem = async (_, __) => { };
+  deleteItem = async (_, __) => {};
 
-  clearItems = async (_) => { };
+  clearItems = async (_) => {};
 
-  interrupt = async () => { };
+  interrupt = async () => {};
 
   getUserConfig = async () => ({ storage: 'browser', migrated: true });
 

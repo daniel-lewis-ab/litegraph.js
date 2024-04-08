@@ -1,7 +1,7 @@
 import {
-  ApiWorkflowAsset,
+  ApiWorkflowOutputAsset,
   ExecutionFinishedData,
-  GetWorkflowAssetsResponse,
+  GetWorkflowOutputAssetsResponse,
   GetWorkflowExecutionsResponse,
   WebSocketMessage,
 } from '@/api/types';
@@ -48,12 +48,12 @@ export const useUpdateWorkflowFromWebsocket = () => {
       }
     };
 
-    const updateWorkflowAssetsWithNewArtifacts = (workflowId: string, newArtifacts: ApiWorkflowAsset[] = []) => {
+    const updateWorkflowAssetsWithNewArtifacts = (workflowId: string, newArtifacts: ApiWorkflowOutputAsset[] = []) => {
       const currentData =
-        queryClient.getQueryData<GetWorkflowAssetsResponse>([QueryKeys.workflowAssets, workflowId]) ?? [];
+        queryClient.getQueryData<GetWorkflowOutputAssetsResponse>([QueryKeys.workflowOutputAssets, workflowId]) ?? [];
 
       const updatedAssets = [...newArtifacts, ...currentData];
-      queryClient.setQueryData([QueryKeys.workflowAssets, workflowId], updatedAssets);
+      queryClient.setQueryData([QueryKeys.workflowOutputAssets, workflowId], updatedAssets);
     };
 
     const handleWebsocketMessage = (message: WebSocketMessage | null) => {

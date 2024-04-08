@@ -19,6 +19,10 @@ export const QUERY_CACHE_CONFIG = {
     staleTime: 3 * 24 * 60 * 1000, // 3 days
     cacheTime: 24 * 60 * 1000,
   },
+  workflowInputAssets: {
+    staleTime: 5 * 60 * 1000, // 10m
+    // cacheTime: 10 * 60 * 1000, // 10m
+  },
   workflowOutputAssets: {
     staleTime: 5 * 60 * 1000, // 10m
     cacheTime: 10 * 60 * 1000, // 10m

@@ -7,6 +7,7 @@ import { apiEndpoints } from '@/api/apiEndpoints';
 import { AxiosRequestConfig } from 'axios';
 import { AuthContextType, Token } from './AuthContext.types';
 import { GetRefreshTokensResponse } from '@/api/types';
+import { useCookies } from 'react-cookie';
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -21,6 +22,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     accessToken: String(localStorage.getItem('accessToken')),
     refreshToken: String(localStorage.getItem('refreshToken')),
   });
+  const [, setCookie] = useCookies(['accessToken']);
 
   useEffect(() => {
     try {
@@ -44,7 +46,12 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         type: SET_UNAUTHORIZED,
       });
     }
-  }, [state.accessToken, state.refreshToken]);
+  }, [state.accessToken, state.refreshToken, setCookie]);
+
+  useEffect(() => {
+    // We access this cookie in iframe
+    setCookie('accessToken', state.accessToken);
+  }, [state.accessToken, setCookie]);
 
   useEffect(() => {
     const refreshAuthLogic = (failedRequest: { response: { config: AxiosRequestConfig } }) => {

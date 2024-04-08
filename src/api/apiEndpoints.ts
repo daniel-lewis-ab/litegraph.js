@@ -7,6 +7,7 @@ export const apiEndpoints = {
   deployment: (id: string) => `/v1/deployments/${id}/`,
   websocket: '/ws/v1/artcraft/',
   workflowExecutions: (workflowId: string) => `/v1/workflows/${workflowId}/executions/`,
+  workflowInputAssets: (workflowId: string) => `/v1/workflows/${workflowId}/assets/`,
   workflowOutputAssets: (workflowId: string) => `/v1/workflows/${workflowId}/artifacts/`,
   asset: ({ assetId, executionId }: { assetId: string; executionId: string }) =>
     `/v1/executions/${executionId}/artifacts/${assetId}/`,
