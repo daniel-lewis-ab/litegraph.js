@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   VITE_IMAGE_SERVICE_URL: string;
   VITE_SHOW_IFRAME_LOGS: string;
   VITE_SHOW_WEBSOCKET_LOGS: string;
+  MODE: 'development' | 'production';
 }
 
 interface ImportMeta {
