@@ -2,8 +2,8 @@ import { useWorkflowEditor } from '@/hooks/useWorkflowEditor/useWorkflowEditor';
 
 export const EditorFooter = () => {
   const { currentWorkflow } = useWorkflowEditor();
-  const inputs = currentWorkflow?.content?.nodes.filter((node) => node.type === 'SaltInput').length ?? 0;
-  const outputs = currentWorkflow?.content?.nodes.filter((node) => node.type === 'SaltOutput').length ?? 0;
+  const inputs = currentWorkflow?.content?.nodes?.filter((node) => node.type === 'SaltInput').length ?? 0;
+  const outputs = currentWorkflow?.content?.nodes?.filter((node) => node.type === 'SaltOutput').length ?? 0;
   const nodes = currentWorkflow?.content?.nodes?.length ?? 0;
 
   return (

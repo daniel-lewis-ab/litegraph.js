@@ -31,7 +31,7 @@ type NodeInfo = {
 
 // TODO: Define this type more explicitly
 export type WorkflowContent = {
-  nodes: NodeInfo[];
+  nodes?: NodeInfo[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };
