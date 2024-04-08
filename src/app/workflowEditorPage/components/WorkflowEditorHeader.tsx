@@ -10,6 +10,7 @@ import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { routes } from '@/routes/routes';
+import { constants } from '@/contants';
 
 type WorkflowHeaderProps = {
   workflowName: string;
@@ -33,7 +34,7 @@ export const WorkflowEditorHeader = ({
   onDeployClick,
 }: WorkflowHeaderProps) => {
   const popoverRef = useRef(null);
-  const [areOptionsOpen, setAreOptionOpen] = useState(false);
+  const [optionsSectionOpen, setOptionsSectionOpen] = useState<null | 'file' | 'help'>(null);
   const [isCreatingWorkflow, setIsCreatingWorkflow] = useState(false);
   const navigate = useNavigate();
 
@@ -47,6 +48,8 @@ export const WorkflowEditorHeader = ({
     }
   };
 
+  const closeOptions = () => setOptionsSectionOpen(null);
+
   return (
     <header
       className={clsx(
@@ -59,8 +62,12 @@ export const WorkflowEditorHeader = ({
           <Icon icon={faAngleLeft} className="mr-1" />
           <Logo className="mr-4 fill-text-base" />
         </button>
-        <Popover modal open={areOptionsOpen} onOpenChange={setAreOptionOpen}>
-          <PopoverTrigger onClick={() => setAreOptionOpen(true)}>
+        <Popover
+          modal
+          open={optionsSectionOpen === 'file'}
+          onOpenChange={(isOpen) => setOptionsSectionOpen(isOpen ? 'file' : null)}
+        >
+          <PopoverTrigger onClick={() => setOptionsSectionOpen('file')}>
             <div className="mr-1.5 rounded-lg px-1.5 py-1 font-medium text-text-muted hover:bg-surface-1 dark:hover:bg-surface-4">
               File
             </div>
@@ -72,9 +79,33 @@ export const WorkflowEditorHeader = ({
             align="start"
             onClick={(e) => e.preventDefault()}
           >
-            <OptionsList onClick={() => setAreOptionOpen(false)}>
+            <OptionsList onClick={() => setOptionsSectionOpen(null)}>
               <OptionsList.Item icon={faDownload} onClick={onSaveClick}>
                 Export as...
+              </OptionsList.Item>
+            </OptionsList>
+          </PopoverContent>
+        </Popover>
+        <Popover
+          modal
+          open={optionsSectionOpen === 'help'}
+          onOpenChange={(isOpen) => setOptionsSectionOpen(isOpen ? 'help' : null)}
+        >
+          <PopoverTrigger onClick={() => setOptionsSectionOpen('help')}>
+            <div className="mr-1.5 rounded-lg px-1.5 py-1 font-medium text-text-muted hover:bg-surface-1 dark:hover:bg-surface-4">
+              Help
+            </div>
+          </PopoverTrigger>
+          <PopoverContent ref={popoverRef} side="bottom" sideOffset={2} align="start">
+            <OptionsList>
+              <OptionsList.Item asLink to={constants.helpLinks.helpDocs} onClick={closeOptions}>
+                Help docs
+              </OptionsList.Item>
+              <OptionsList.Item asLink to={constants.helpLinks.requestModels} onClick={closeOptions} className="pr-12">
+                Request nodes/models
+              </OptionsList.Item>
+              <OptionsList.Item asLink to={constants.helpLinks.joinCommunity} onClick={closeOptions}>
+                Join community
               </OptionsList.Item>
             </OptionsList>
           </PopoverContent>
