@@ -6,8 +6,8 @@ import { opaque } from './opaque.js';
 const refreshInterval = 1000;
 const apiHostMappings = {
   'http://localhost:1218': 'http://localhost:8000/api',
-  'https://iframe-dev.getsalt.ai/': 'https://salt-api-dev.getsalt.ai/api',
-  'https://iframe.getsalt.ai/': 'https://salt-api-prod.getsalt.ai/api',
+  'https://iframe-dev.getsalt.ai': 'https://salt-api-dev.getsalt.ai/api',
+  'https://iframe.getsalt.ai': 'https://salt-api-prod.getsalt.ai/api',
 };
 const selectedCategories = [];
 const opaqueNodeSet = new Set(opaque);
@@ -33,18 +33,7 @@ class ComfyGraphPatcher extends EventTarget {
   }
 
   handlePreviewData = (previewData) => {
-    const dataType = new DataView(previewData).getUint32(0);
-    const data = previewData.slice(4);
-    let mimeType;
-    if (dataType === 1) {
-      mimeType = 'image/jpeg';
-    } else if (dataType === 2) {
-      mimeType = 'image/png';
-    } else {
-      return;
-    }
-    const blob = new Blob([data], { type: mimeType });
-    this.dispatchEvent(new CustomEvent('b_preview', { detail: blob }));
+    this.dispatchEvent(new CustomEvent('b_preview', { detail: previewData }));
   };
 
   postMessageToParent = (type, data) => {
@@ -53,10 +42,6 @@ class ComfyGraphPatcher extends EventTarget {
 
   handleMessage = (event) => {
     const message = event.data;
-    if (message instanceof ArrayBuffer) {
-      this.handlePreviewData(message);
-      return;
-    }
     if (
       message.event &&
       this.registeredEvents.has(message.event) &&
@@ -73,6 +58,9 @@ class ComfyGraphPatcher extends EventTarget {
     );
     if (message.internal) {
       const internalMessage = message.internal;
+      if (internalMessage.data.previews) {
+        this.handlePreviewData(internalMessage.data.previews);
+      }
       switch (internalMessage.type) {
         case 'load_prompt': {
           if (internalMessage.data && internalMessage.data.prompt) {

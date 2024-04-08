@@ -50,7 +50,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
 
   useEffect(() => {
     // We access this cookie in iframe
-    setCookie('accessToken', state.accessToken);
+    setCookie('accessToken', state.accessToken, { domain: import.meta.env.VITE_COOKIE_DOMAIN });
   }, [state.accessToken, setCookie]);
 
   useEffect(() => {

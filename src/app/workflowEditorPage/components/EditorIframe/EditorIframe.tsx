@@ -1,12 +1,22 @@
 /* eslint-disable no-console */
 import { useEffect, useRef, useState } from 'react';
 import { useWorkflowEditor } from '@/hooks/useWorkflowEditor/useWorkflowEditor';
-import { GetWorkflowInputAssetsResponse, WebSocketMessage } from '@/api/types';
+import { GetWorkflowInputAssetsResponse, PreviewExecutionData, WebSocketMessage } from '@/api/types';
 import { FullMessage, IframeToParentMessage } from './EditorIframe.types';
 import { useWebSocket } from '@/hooks/useWebsocket/useWebsocket';
 import { useWorkflowInputAssetsQuery } from '@/api/hooks/useWorkflowInputAssetsQuery/useWorkflowInputAssetsQuery';
 import { useCreateWorkflowInputAssetMutation } from '@/api/hooks/useCreateWorkflowInputAssetMutation/useCreateWorkflowInputAssetMutation';
 import { useParams } from 'react-router-dom';
+import { publicAxiosClient } from '@/api/axiosClient';
+
+const getWorkflowPreviewAsset = async (url: string) => {
+  const response = await publicAxiosClient.get(url, { responseType: 'blob' });
+
+  if (response.status === 200) {
+    return response.data;
+  }
+  throw new Error('Failed to get workflows preview assets');
+};
 
 export const EditorIframe = () => {
   const { id } = useParams();
@@ -18,14 +28,40 @@ export const EditorIframe = () => {
   const { lastMessage, readyState } = useWebSocket();
 
   useEffect(() => {
-    const handleWebsocketMessage = (message: WebSocketMessage | null) => {
+    const handleWebsocketMessage = async (message: WebSocketMessage | null) => {
       if (!message?.data) return;
 
       import.meta.env.VITE_SHOW_WEBSOCKET_LOGS === 'true' && console.log('websocket message', message);
 
-      sendMessageToIframe({
-        internal: message.data,
-      });
+      if (message.data.type == 'executed' || message.data.type == 'executing') {
+        const previewData = message.data as PreviewExecutionData;
+        if (previewData.data.previews) {
+          try {
+            const response = await getWorkflowPreviewAsset(previewData.data.previews.images[0]);
+            sendMessageToIframe({
+              internal: {
+                type: message.data.type,
+                data: {
+                  previews: response,
+                  execution_id: previewData.data.execution_id,
+                  workflow_id: previewData.data.workflow_id,
+                  node: previewData.data.node,
+                },
+              },
+            });
+          } catch (e) {
+            console.error('Error:', e);
+          }
+        } else {
+          sendMessageToIframe({
+            internal: message.data,
+          });
+        }
+      } else {
+        sendMessageToIframe({
+          internal: message.data,
+        });
+      }
     };
 
     handleWebsocketMessage(lastMessage);

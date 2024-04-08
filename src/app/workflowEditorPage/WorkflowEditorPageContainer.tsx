@@ -65,7 +65,7 @@ export const WorkflowEditorPageContainer = () => {
   const handleExecuteWorkflow = async () => {
     try {
       toast.success('Workflow added to queue', { position: 'bottom-center' });
-      await createWorkflowExecution({ workflow: workflow! });
+      await createWorkflowExecution({ workflow: workflow!, includePreviews: true });
     } catch (e) {
       toast.error('Failed to execute workflow', { position: 'bottom-center' });
     }

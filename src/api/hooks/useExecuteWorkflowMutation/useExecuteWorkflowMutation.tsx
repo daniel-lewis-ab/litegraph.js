@@ -10,10 +10,20 @@ import {
   WorkflowExecutionDetails,
 } from '@/api/types';
 
-const executeWorkflow = async ({ workflow }: MutationParams) => {
+type ExecuteWorkflowRequestParams = {
+  workflow: WorkflowDetails;
+  includePreviews: boolean;
+};
+
+const executeWorkflow = async (request: ExecuteWorkflowRequestParams) => {
   await new Promise((r) => setTimeout(r, 2000));
 
-  const response = await axiosClient.post<PostWorkflowExecutionsResponse>(apiEndpoints.workflowExecutions(workflow.id));
+  const response = await axiosClient.post<PostWorkflowExecutionsResponse>(
+    apiEndpoints.workflowExecutions(request.workflow.id),
+    {
+      include_previews: request.includePreviews,
+    },
+  );
 
   if (response.status !== 201) {
     throw new Error('Failed to execute workflow');
@@ -22,17 +32,13 @@ const executeWorkflow = async ({ workflow }: MutationParams) => {
   return response.data;
 };
 
-type MutationParams = {
-  workflow: WorkflowDetails;
-};
-
 export const useExecuteWorkflowMutation = () => {
   const queryClient = useQueryClient();
 
   const { mutate, ...rest } = useMutation<
     PostWorkflowExecutionsResponse,
     Error,
-    MutationParams,
+    ExecuteWorkflowRequestParams,
     { previousExecutions?: GetWorkflowExecutionsResponse }
   >({
     mutationFn: executeWorkflow,
