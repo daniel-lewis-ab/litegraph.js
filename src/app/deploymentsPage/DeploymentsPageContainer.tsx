@@ -29,7 +29,7 @@ export const DeploymentsPageContainer = () => {
   const handleDownloadDeployment = async (id: string) => {
     try {
       const res = await fetchDeployment(id);
-      saveJsonFile(res.workflow_json, `${res.name}.json`);
+      saveJsonFile(JSON.stringify(res.workflow_json), `${res.name}.json`);
       toast.success('Deployment JSON downloaded');
     } catch (error) {
       toast.error('Failed to download deployment JSON');
