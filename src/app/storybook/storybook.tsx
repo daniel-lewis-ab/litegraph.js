@@ -181,7 +181,7 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
     </div>
   );
 };
-// @TODO: Remove this page before going to prod
+// @TODO Prod: Remove this page before going to prod
 export const Storybook = () => {
   const { theme, switchTheme } = useTheme();
   const [switched, setSwitched] = useState(false);
