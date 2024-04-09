@@ -1,8 +1,8 @@
-import { PublicLayout } from '../publicLayout/PublicLayout';
+import { PublicContainer } from '../PublicContainer';
 import s from './AngledSeparator.module.css';
 
 export const AngledSeparator = () => (
-  <PublicLayout.Container>
+  <PublicContainer>
     <hr className={s.separator} />
-  </PublicLayout.Container>
+  </PublicContainer>
 );

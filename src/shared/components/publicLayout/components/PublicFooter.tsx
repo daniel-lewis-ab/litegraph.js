@@ -1,4 +1,4 @@
-import { AngledSeparator } from '@/shared/components/angledSeparator/AngledSeparator';
+import { AngledSeparator } from '@/shared/components/publicLayout/components/angledSeparator/AngledSeparator';
 import { faDiscord, faGithub, faLinkedin } from '@awesome.me/kit-b6cda292ae/icons/classic/brands';
 import { faX } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import clsx from 'clsx';

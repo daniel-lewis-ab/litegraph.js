@@ -3,6 +3,7 @@ import { PublicFooter } from './components/PublicFooter';
 import { PublicMenubar } from './components/PublicMenubar';
 import { PublicContainer } from './components/PublicContainer';
 import './PublicLayout.scss';
+import { AngledSeparator } from './components/angledSeparator/AngledSeparator';
 
 export const PublicLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -17,3 +18,4 @@ export const PublicLayout = ({ children }: { children: ReactNode }) => {
 };
 
 PublicLayout.Container = PublicContainer;
+PublicLayout.AngledSeparator = AngledSeparator;

@@ -4,7 +4,6 @@ import { faArrowUpRight } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import clsx from 'clsx';
 import { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
-import { AngledSeparator } from '@/shared/components/angledSeparator/AngledSeparator';
 import img from './images/deploy-discord-min.png';
 import gpuPromoImg from './images/promo-gpu.svg';
 import ideImg from './images/promo-ide.jpg';
@@ -45,11 +44,11 @@ export const HomePage = () => {
           </div>
 
           <DeploymentsSection />
-          <AngledSeparator />
+          <PublicLayout.AngledSeparator />
           <GPUSection />
-          <AngledSeparator />
+          <PublicLayout.AngledSeparator />
           <IDESection />
-          <AngledSeparator />
+          <PublicLayout.AngledSeparator />
           <TeamSection />
           <BigCardSection />
           <CTASection />
