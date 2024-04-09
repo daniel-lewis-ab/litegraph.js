@@ -138,7 +138,7 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
     </div>
   );
 };
-// @TODO Prod: Remove this page before going to prod
+
 export const StorybookPage = () => {
   const { theme, switchTheme } = useTheme();
   const [switched, setSwitched] = useState(false);

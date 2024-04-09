@@ -19,7 +19,7 @@ import { WebSocketProvider } from '@/context/websocketContext/WebsocketContextPr
 
 export const appRoutes: RouteRecord[] = [
   {
-    path: '/',
+    path: routes.home,
     element: (
       <App>
         <Outlet />
@@ -34,7 +34,7 @@ export const appRoutes: RouteRecord[] = [
         // loader: homePageLoader,
       },
       {
-        path: '/about',
+        path: routes.about,
         Component: AboutPage,
         entry: 'src/app/aboutPage/AboutPage.tsx',
         loader: aboutPageLoader,
