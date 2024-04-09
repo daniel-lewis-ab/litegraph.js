@@ -37,7 +37,7 @@ export const HomePage = () => {
                 <h2 className="inline text-2xl leading-normal text-text-subtle">
                   Build faster in an open ecosystem designed for scale
                 </h2>
-                <Button size="lg" className="" color="primary" to={routes.login}>
+                <Button size="lg" className="" color="primary" asLink to={routes.login}>
                   <span className="block px-4">Start for free</span>
                 </Button>
               </div>
