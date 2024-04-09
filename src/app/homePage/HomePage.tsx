@@ -1,16 +1,16 @@
+import { routes } from '@/routes/routes';
 import { Button } from '@/shared/components/button/Button';
 import { Icon } from '@/shared/components/icon/Icon';
+import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
 import { faArrowUpRight } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import clsx from 'clsx';
 import { Suspense, lazy } from 'react';
 import { Link } from 'react-router-dom';
+import { ClientOnly } from 'vite-react-ssg';
+import s from './HomePage.module.css';
 import img from './images/deploy-discord-min.png';
 import gpuPromoImg from './images/promo-gpu.svg';
 import ideImg from './images/promo-ide.jpg';
-import { ClientOnly } from 'vite-react-ssg';
-import s from './HomePage.module.css';
-import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
-import { routes } from '@/routes/routes';
 
 const LogoAnimation = lazy(() => import('./components/LogoAnimation'));
 
@@ -124,7 +124,7 @@ const IDESection = () => {
         <div className="grid-cols-6 flex-col space-y-3 md:grid">
           <div className="col-span-4 col-start-2 space-y-4">
             <div className="font-mono text-xs tracking-wide text-text-subtle">03</div>
-            <h2 className="leading-1 text-4xl">SAn IDE designed with function in mind</h2>
+            <h2 className="leading-1 text-4xl">An IDE designed with function in mind</h2>
             <p className="max-w-lg rounded-lg text-2xl text-text-subtle">
               With Salt&apos;s IDE, you have access to thousands of nodes and a web-based environment built for power
               users.
