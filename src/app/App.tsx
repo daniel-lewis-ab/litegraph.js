@@ -5,8 +5,11 @@ import React, { ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { ClientOnly, Head } from 'vite-react-ssg';
 import { createPortal } from 'react-dom';
+import { useScrollToTop } from '@/hooks/useScrollToTop/useScrollToTop';
 
 export const App = ({ children }: { children: ReactNode }) => {
+  useScrollToTop();
+
   return (
     <React.StrictMode>
       {import.meta.env.MODE !== 'production' && (
