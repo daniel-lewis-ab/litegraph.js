@@ -5,13 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite-react-ssg dev",
-    "build": "tsc && vite-react-ssg build",
-    "build-dev": "tsc && vite-react-ssg build --mode development",
+    "build": "tsc && vite-react-ssg build; npm run robots:prod",
+    "build-dev": "tsc && vite-react-ssg build --mode development; npm run robots:dev",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",
     "preview": "vite preview",
     "postinstall": "patch-package",
-    "generate": "graphql-codegen --config codegen.yml"
+    "generate-datocms-types": "graphql-codegen --config codegen.yml",
+    "robots:prod": "cp robots/robots.prod.txt dist/robots.txt",
+    "robots:dev": "cp robots/robots.dev.txt dist/robots.txt"
   },
   "dependencies": {
     "@awesome.me/kit-b6cda292ae": "^1.0.7",
