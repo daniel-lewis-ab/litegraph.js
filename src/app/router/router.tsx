@@ -49,9 +49,13 @@ export const appRoutes: RouteRecord[] = [
         Component: LoginPageContainer,
       },
       {
-        path: routes.storybook,
-        Component: StorybookPage,
-        entry: 'src/app/storybook/storybook.tsx',
+        ...(import.meta.env.MODE !== 'production'
+          ? {
+              path: routes.storybook,
+              Component: StorybookPage,
+              entry: 'src/app/storybook/storybook.tsx',
+            }
+          : {}),
       },
       {
         path: '/app',
