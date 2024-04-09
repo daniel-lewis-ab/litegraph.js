@@ -135,4 +135,5 @@ export const extensions = [
   '/extensions/ComfyUI-Custom-Scripts/js/common/utils.js',
   '/extensions/ComfyUI-Custom-Scripts/js/common/modelInfoDialog.js',
   '/extensions/ComfyUI-Custom-Scripts/js/common/spinner.js',
+  '/extensions/saltai_displayany/display_any.js',
 ];
