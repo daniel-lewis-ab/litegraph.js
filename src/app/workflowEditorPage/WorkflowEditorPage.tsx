@@ -1,9 +1,9 @@
+import { CreateDeploymentDialogContainer } from '@/shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
 import { useState } from 'react';
+import { EditorDevTools } from './components/EditorDevTools';
+import { EditorIframe } from './components/EditorIframe/EditorIframe';
 import { WorkflowEditorHeader } from './components/WorkflowEditorHeader';
 import { WorkflowEditorSidebar } from './components/workflowEditorSidebar/WorkflowEditorSidebar';
-import { EditorIframe } from './components/EditorIframe/EditorIframe';
-import { CreateDeploymentDialogContainer } from '@/shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
-import { EditorDevTools } from './components/EditorDevTools';
 import { EditorFooter } from './components/EditorFooter';
 
 export const WorkflowEditorPage = ({
@@ -23,7 +23,7 @@ export const WorkflowEditorPage = ({
   const [showDeploymentDialog, setShowDeploymentDialog] = useState(false);
 
   return (
-    <div className="flex h-screen flex-row bg-surface-1 p-1.5">
+    <div className="flex h-screen flex-row bg-surface-1 p-1.5 font-inter">
       <div
         className={`flex flex-1 flex-col ${activeSidebarSection !== null ? 'flex grow basis-0' : 'flex basis-full'}`}
       >

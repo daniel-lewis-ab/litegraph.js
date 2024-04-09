@@ -3,7 +3,7 @@ import { EditorSection } from '../EditorSection';
 import './OutputsGallerySection.scss';
 import { useWorkflowOutputAssetsQuery } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
 import { OutputsGallerySection } from './OutputsGallerySection';
-import CenteredLoader from '@/shared/components/centeredLoader/CenteredLoader';
+import { CenteredLoader } from '@/shared/components/centeredLoader/CenteredLoader';
 import { useDeleteAssetMutation } from '@/api/hooks/useDeleteAssetMutation/useDeleteAssetMutation';
 import toast from 'react-hot-toast';
 import { saveImage } from '@/shared/functions/saveImage';

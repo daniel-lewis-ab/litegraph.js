@@ -223,8 +223,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        inter: ['Inter', 'monospace'],
-        'plex-mono': ['IBM Plex Mono', 'monospace'],
+        inter: ['Inter', 'sans-serif'],
+        aeonik: ['Aeonik', 'sans-serif'],
+        mono: ['Aeonik Mono', 'monospace']
       },
       screens: {
         '3xl': '1600px',

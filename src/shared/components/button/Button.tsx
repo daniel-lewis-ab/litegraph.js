@@ -17,7 +17,6 @@ type ButtonProps = LinkProps & {
   color?: 'primary' | 'secondary' | 'success' | 'error' | 'warning';
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   disabled?: boolean;
-  level?: number;
   type?: 'button' | 'submit';
   isLoading?: boolean;
   leftIcon?: IconProps['icon'];
@@ -43,7 +42,6 @@ export const Button = ({
   type = 'button',
   isLoading,
   asLink,
-  level,
   to,
   onMouseOver,
 }: ButtonProps) => {
@@ -65,7 +63,6 @@ export const Button = ({
         variant && `button--${variant}`,
         color && `button--color-${color}`,
         disabled && 'button--disabled',
-        level && `button--level-${level}`,
         className,
       )}
       onClick={onClick}

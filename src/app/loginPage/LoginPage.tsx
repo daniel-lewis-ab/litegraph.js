@@ -1,14 +1,17 @@
-import { LogoFull } from '@/shared/components/icons/LogoFull';
-import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth/useAuth';
 import { FirebaseError } from '@firebase/util';
 import { toast } from 'react-hot-toast';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 
-import { CLEAR_TOKENS, SET_TOKENS } from '@/context/authContext/authReducer';
-import { GoogleIcon } from '@/shared/components/icons/GoogleIcon';
-import { GitHubIcon } from '@/shared/components/icons/GithubIcon';
 import { PostLoginResponse } from '@/api/types';
+import { CLEAR_TOKENS, SET_TOKENS } from '@/context/authContext/authReducer';
 import { routes } from '@/routes/routes';
+import { Button } from '@/shared/components/button/Button';
+import { GitHubIcon } from '@/shared/components/icons/GithubIcon';
+import { GoogleIcon } from '@/shared/components/icons/GoogleIcon';
+import { LogoFull } from '@/shared/components/icons/LogoFull';
+import img from './promo.jpg';
+import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
 
 type LoginPageProps = {
   onLogin(source: 'github' | 'google'): Promise<PostLoginResponse | undefined>;
@@ -46,30 +49,46 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
   };
 
   return (
-    <main className="flex h-screen w-full flex-row">
-      <div className="flex flex-1">
-        <div className="flex flex-1 flex-col items-start justify-center p-6 md:px-9 lg:px-24">
-          <LogoFull className="mb-14" />
-          <h1 className="mb-14 text-5xl font-bold">Login or sign up</h1>
-          <button
-            className="flex w-full max-w-md flex-row justify-center rounded-lg bg-surface-12 py-3 transition-all hover:opacity-95 active:opacity-90"
-            onClick={() => handleLogin('google')}
+    <>
+      <header className="fixed left-0 top-0 z-[100] w-full">
+        <PublicLayout.Container className="mx-auto py-6">
+          <nav
+            className="rounded-xl font-medium sm:flex sm:items-center sm:justify-between lg:translate-x-[-7.5px] lg:translate-y-[-2px]"
+            aria-label="Global"
           >
-            <GoogleIcon />
-            <p className="ml-5 font-semibold text-black">Sign in with Google</p>
-          </button>
-          <button
-            className="mt-3 flex w-full max-w-md flex-row justify-center rounded-lg bg-surface-12 py-3 transition-all hover:opacity-95 active:opacity-90"
-            onClick={() => handleLogin('github')}
-          >
-            <GitHubIcon />
-            <p className="ml-5 font-semibold text-black">Sign in with Github</p>
-          </button>
+            <NavLink className="flex-none dark:text-white md:min-w-[200px]" to={routes.home} title="Salt AI">
+              <LogoFull className="w-12 md:w-16" />
+            </NavLink>
+          </nav>
+        </PublicLayout.Container>
+      </header>
+      <main className="flex h-screen w-full flex-row">
+        <div className="light flex flex-1 bg-surface-2">
+          <div className="flex flex-1 flex-col items-start justify-center p-6 md:px-9 lg:px-[20%]">
+            <div className="mx-auto flex w-full flex-col justify-center space-y-4 text-center">
+              <h1 className="text-3xl font-medium xl:text-4xl">Login or sign-up</h1>
+              <p className="text-base text-text-subtle">Start building and sharing your workflows with the world.</p>
+
+              <Button size="lg" color="secondary" variant="glass" onClick={() => handleLogin('google')}>
+                <div className="flex space-x-3">
+                  <GoogleIcon />
+                  <span>Continue with Google</span>
+                </div>
+              </Button>
+              <Button size="lg" color="secondary" variant="glass" onClick={() => handleLogin('github')}>
+                <div className="flex space-x-3">
+                  <GitHubIcon />
+                  <span>Continue with Github</span>
+                </div>
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="relative hidden flex-1 md:block">
-        <div className="absolute inset-0 h-full w-full bg-[radial-gradient(#6161C4,transparent_1px)] [background-size:26px_26px]"></div>
-      </div>
-    </main>
+        <div className="relative hidden flex-1 md:block">
+          {/* <div className="absolute inset-0 h-full w-full bg-[radial-gradient(#6161C4,transparent_1px)] [background-size:26px_26px]"></div> */}
+          <img src={img} className="h-full w-full object-contain" />
+        </div>
+      </main>
+    </>
   );
 };

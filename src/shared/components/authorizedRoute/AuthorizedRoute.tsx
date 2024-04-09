@@ -1,5 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import CenteredLoader from '../centeredLoader/CenteredLoader';
+import { CenteredLoader } from '../centeredLoader/CenteredLoader';
 import { useAuth } from '@/hooks/useAuth/useAuth';
 import { routes } from '@/routes/routes';
 

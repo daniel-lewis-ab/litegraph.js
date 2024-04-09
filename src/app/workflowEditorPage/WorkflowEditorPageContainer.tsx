@@ -3,7 +3,7 @@ import { WorkflowEditorPage } from './WorkflowEditorPage';
 import { Navigate, useParams } from 'react-router-dom';
 import { useExecuteWorkflowMutation } from '@/api/hooks/useExecuteWorkflowMutation/useExecuteWorkflowMutation';
 import { useWorkflowDetailsQuery } from '@/api/hooks/useWorkflowDetailsQuery/useWorkflowDetailsQuery';
-import CenteredLoader from '@/shared/components/centeredLoader/CenteredLoader';
+import { CenteredLoader } from '@/shared/components/centeredLoader/CenteredLoader';
 import toast from 'react-hot-toast';
 import { routes } from '@/routes/routes';
 import { useCallback, useEffect, useState } from 'react';

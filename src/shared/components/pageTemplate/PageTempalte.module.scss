@@ -1,0 +1,13 @@
+.pageTemplateContainer {
+  max-width: calc(100% - 24px);
+  margin: 0 auto;
+  padding: 0 1rem;
+
+  @screen lg {
+    max-width: calc(100% - 80px);
+  }
+
+  @screen 3xl {
+    max-width: 1500px;
+  }
+}

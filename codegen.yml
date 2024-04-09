@@ -1,0 +1,13 @@
+overwrite: true
+schema: "https://graphql.datocms.com/"
+headers:
+       Authorization: "Bearer ecb4ceebb269c475b374eec6e8b3ce"
+       X-Exclude-Invalid: true
+documents: null
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"

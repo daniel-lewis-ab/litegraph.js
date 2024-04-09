@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-button.button {
+button.button,
+a.button {
   --base-color: var(--color-primary-10);
   --second-base-color: var(--color-primaryA-5);
   --text-color: var(--color-primary-1);
@@ -101,27 +102,6 @@ button.button {
 
     &.button--filled {
       --text-color: var(--color-disabled-2);
-    }
-  }
-
-  // Levels
-
-  $colors:
-    [ 'primary',
-    'secondary',
-    'success',
-    'error',
-    'warning',
-    'disabled'];
-
-  @for $i from 1 through 12 {
-    &.button--level-#{$i} {
-      @each $color in $colors {
-        &.button--color-#{$color} {
-          --base-color: var(--color-#{$color}-#{$i});
-          --text-color: #{if($i > 8, var(--color-#{$color}-1), var(--color-#{$color}-12))};
-        }
-      }
     }
   }
 

@@ -14,7 +14,7 @@ import {
   faUpload,
 } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 
-import useTheme from '@/hooks/useTheme/useTheme';
+import { useTheme } from '@/hooks/useTheme/useTheme';
 import { Switch } from '@/shared/components/switch/Switch';
 import { faMoonStars, faSunBright } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { faClone, faICursor, faPen, faTrash } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
@@ -22,8 +22,6 @@ import { useState } from 'react';
 import { PageActions } from '../workflowsPage/components/PageActions';
 
 const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
-  const buttonLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
   return (
     <div className="flex flex-col items-start space-y-4">
       <div className="flex flex-row items-center *:mr-4">
@@ -43,13 +41,7 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
         <Button size={size} color="primary" variant="glass">
           Glass
         </Button>
-        <div className="flex gap-3">
-          {buttonLevels.map((level) => (
-            <Button size={size} color="primary" level={level} key={level}>
-              Level {level}
-            </Button>
-          ))}
-        </div>
+        <div className="flex gap-3"></div>
       </div>
 
       <div className="flex flex-row items-center *:mr-4">
@@ -69,13 +61,6 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
         <Button size={size} color="secondary" variant="glass">
           Glass
         </Button>
-        <div className="flex gap-3">
-          {buttonLevels.map((level) => (
-            <Button size={size} color="secondary" level={level} key={level}>
-              Level {level}
-            </Button>
-          ))}
-        </div>
       </div>
 
       <div className="flex flex-row items-center *:mr-4">
@@ -95,13 +80,6 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
         <Button size={size} disabled variant="glass">
           Glass
         </Button>
-        <div className="flex gap-3">
-          {buttonLevels.map((level) => (
-            <Button size={size} disabled level={level} key={level}>
-              Level {level}
-            </Button>
-          ))}
-        </div>
       </div>
       <div className="flex flex-row items-center *:mr-4">
         <h3 className="w-[120px]">Success</h3>
@@ -120,13 +98,6 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
         <Button size={size} color="success" variant="glass">
           Glass
         </Button>
-        <div className="flex gap-3">
-          {buttonLevels.map((level) => (
-            <Button size={size} color="success" level={level} key={level}>
-              Level {level}
-            </Button>
-          ))}
-        </div>
       </div>
       <div className="flex flex-row items-center *:mr-4">
         <h3 className="w-[120px]">Error</h3>
@@ -145,13 +116,6 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
         <Button size={size} color="error" variant="glass">
           Glass
         </Button>
-        <div className="flex gap-3">
-          {buttonLevels.map((level) => (
-            <Button size={size} color="error" level={level} key={level}>
-              Level {level}
-            </Button>
-          ))}
-        </div>
       </div>
       <div className="flex flex-row items-center *:mr-4">
         <h3 className="w-[120px]">Warning</h3>
@@ -170,19 +134,12 @@ const ButtonSeries = ({ size }: { size: 'xs' | 'sm' | 'md' | 'lg' | 'xl' }) => {
         <Button size={size} color="warning" variant="glass">
           Glass
         </Button>
-        <div className="flex gap-3">
-          {buttonLevels.map((level) => (
-            <Button size={size} color="warning" level={level} key={level}>
-              Level {level}
-            </Button>
-          ))}
-        </div>
       </div>
     </div>
   );
 };
 // @TODO Prod: Remove this page before going to prod
-export const Storybook = () => {
+export const StorybookPage = () => {
   const { theme, switchTheme } = useTheme();
   const [switched, setSwitched] = useState(false);
 
@@ -265,4 +222,4 @@ export const Storybook = () => {
   );
 };
 
-export default Storybook;
+export default StorybookPage;

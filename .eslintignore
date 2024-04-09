@@ -1,3 +1,4 @@
 tailwind.config.ts
 postcss.config.js
 comfyui
+src/generated/graphql.ts

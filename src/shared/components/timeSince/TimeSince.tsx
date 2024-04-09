@@ -13,21 +13,21 @@ function timeSince(date: string, format: 'ago' | 'short'): string {
   }
   interval = seconds / 2592000;
   if (interval > 1) {
-    return Math.floor(interval) + (format === 'ago' ? ' m ago' : ' mths');
+    return Math.floor(interval) + (format === 'ago' ? 'm ago' : ' mths');
   }
   interval = seconds / 86400;
   if (interval > 1) {
-    return Math.floor(interval) + (format === 'ago' ? ' d ago' : ' days');
+    return Math.floor(interval) + (format === 'ago' ? 'd ago' : ' days');
   }
   interval = seconds / 3600;
   if (interval > 1) {
-    return Math.floor(interval) + (format === 'ago' ? ' h ago' : ' hours');
+    return Math.floor(interval) + (format === 'ago' ? 'h ago' : ' hours');
   }
   interval = seconds / 60;
   if (interval > 1) {
-    return Math.floor(interval) + (format === 'ago' ? ' min ago' : ' mins');
+    return Math.floor(interval) + (format === 'ago' ? 'min ago' : ' mins');
   }
-  return Math.floor(seconds) + (format === 'ago' ? ' s ago' : ' secs');
+  return Math.floor(seconds) + (format === 'ago' ? 's ago' : ' secs');
 }
 
 type TimeSinceProps = {

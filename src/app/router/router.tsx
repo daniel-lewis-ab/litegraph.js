@@ -1,19 +1,20 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import type { RouteRecord } from 'vite-react-ssg';
-import LoginPageContainer from '../loginPage/LoginPageContainer';
-import { routes } from '@/routes/routes';
-import AboutPage, { aboutPageLoader } from '../aboutPage/AboutPage';
-import { Layout } from '@/shared/components/Layout/Layout';
-import WorkflowsPageContainer from '../workflowsPage/WorkflowsPageContainer';
-import DeploymentsPageContainer from '../deploymentsPage/DeploymentsPageContainer';
 import { WorkflowEditorContextProvider } from '@/context/workflowEditorContext/WorkflowEditorContext';
-import { ErrorPage } from '@/shared/components/errorPage/ErrorPage';
-import WorkflowEditorPageContainer from '../workflowEditorPage/WorkflowEditorPageContainer';
-import Storybook from '../storybook/storybook';
-import NewWorkflowPageContainer from '../newWorkflowPage/NewWorkflowPageContainer';
+import { routes } from '@/routes/routes';
+import { Layout } from '@/shared/components/Layout/Layout';
 import { AuthorizedRoute } from '@/shared/components/authorizedRoute/AuthorizedRoute';
-import App from '../App';
-import HomePage, { homePageLoader } from '../homePage/HomePage';
+import { ErrorPage } from '@/shared/components/errorPage/ErrorPage';
+import { Navigate, Outlet } from 'react-router-dom';
+import AboutPage, { aboutPageLoader } from '../aboutPage/AboutPage';
+import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageContainer';
+import ExamplesPage, { examplesPageLoader } from '../examplesPage/ExamplesPage';
+import { HomePage } from '../homePage/HomePage';
+import { NewWorkflowPageContainer } from '../newWorkflowPage/NewWorkflowPageContainer';
+import { StorybookPage } from '../storybookPage/StorybookPage';
+import { WorkflowEditorPageContainer } from '../workflowEditorPage/WorkflowEditorPageContainer';
+import { WorkflowsPageContainer } from '../workflowsPage/WorkflowsPageContainer';
+import { RouteRecord } from 'vite-react-ssg';
+import LoginPageContainer from '../loginPage/LoginPageContainer';
+import { App } from '../App';
 import { WebSocketProvider } from '@/context/websocketContext/WebsocketContextProvider';
 
 export const appRoutes: RouteRecord[] = [
@@ -30,7 +31,7 @@ export const appRoutes: RouteRecord[] = [
         index: true,
         Component: HomePage,
         entry: 'src/app/homePage/HomePage.tsx',
-        loader: homePageLoader,
+        // loader: homePageLoader,
       },
       {
         path: '/about',
@@ -39,12 +40,17 @@ export const appRoutes: RouteRecord[] = [
         loader: aboutPageLoader,
       },
       {
+        path: routes.examples,
+        Component: ExamplesPage,
+        loader: examplesPageLoader,
+      },
+      {
         path: routes.login,
         Component: LoginPageContainer,
       },
       {
         path: routes.storybook,
-        Component: Storybook,
+        Component: StorybookPage,
         entry: 'src/app/storybook/storybook.tsx',
       },
       {

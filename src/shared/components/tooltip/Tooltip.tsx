@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import * as React from 'react';
 import './Tooltip.scss';
 
-const Tooltip = () => <></>;
+export const Tooltip = () => <></>;
 Tooltip.Provider = TooltipPrimitive.Provider;
 
 Tooltip.Root = TooltipPrimitive.Root;
@@ -25,5 +25,3 @@ const Content = React.forwardRef<
 Content.displayName = TooltipPrimitive.Content.displayName;
 
 Tooltip.Content = Content;
-
-export default Tooltip;

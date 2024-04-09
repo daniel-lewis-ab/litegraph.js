@@ -21,7 +21,7 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs', 'mockApi'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'unused-imports', 'prettier'],
+  plugins: ['react-refresh', 'import', 'unused-imports', 'prettier'],
   rules: {
     'prettier/prettier': 1,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
@@ -40,4 +40,13 @@ module.exports = {
     '@typescript-eslint/no-floating-promises': 'off',
     '@typescript-eslint/no-redundant-type-constituents': 'off',
   },
+  overrides: [
+    {
+      files: ['*'],
+      excludedFiles: ['*Page*.tsx', 'vite.config.ts'],
+      rules: {
+        'import/no-default-export': 'error',
+      },
+    },
+  ],
 };

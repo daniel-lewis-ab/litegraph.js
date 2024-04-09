@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import { ClientOnly } from 'vite-react-ssg';
 import { createPortal } from 'react-dom';
 
-function App({ children }: { children: ReactNode }) {
+export const App = ({ children }: { children: ReactNode }) => {
   return (
     <React.StrictMode>
       {/* @TODO: Show correct error + report to sentry */}
@@ -35,6 +35,4 @@ function App({ children }: { children: ReactNode }) {
       </ErrorBoundary>
     </React.StrictMode>
   );
-}
-
-export default App;
+};

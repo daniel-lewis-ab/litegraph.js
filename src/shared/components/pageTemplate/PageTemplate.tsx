@@ -1,12 +1,14 @@
 /* eslint-disable react/display-name */
-import { ReactNode } from 'react';
+import { constants } from '@/contants';
 import { Icon } from '@/shared/components/icon/Icon';
 import { faArrowUpRightFromSquare } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
+import { ReactNode } from 'react';
 import { Button } from '../button/Button';
-import { constants } from '@/contants';
+import clsx from 'clsx';
+import styles from './PageTempalte.module.scss';
 
 export const PageTemplate = ({ children }: { children: ReactNode }) => (
-  <div className="flex w-full flex-col px-3 lg:px-16">{children}</div>
+  <div className={clsx(styles.pageTemplateContainer, 'flex w-full flex-col px-3')}>{children}</div>
 );
 
 PageTemplate.Header = ({ children }: { children: ReactNode }) => (

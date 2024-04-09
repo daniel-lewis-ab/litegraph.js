@@ -4,7 +4,7 @@ type CenteredLoaderProps = {
   isFullscreen?: boolean;
 };
 
-const CenteredLoader = ({ isFullscreen }: CenteredLoaderProps) => {
+export const CenteredLoader = ({ isFullscreen }: CenteredLoaderProps) => {
   return (
     <div
       className={clsx(
@@ -16,5 +16,3 @@ const CenteredLoader = ({ isFullscreen }: CenteredLoaderProps) => {
     </div>
   );
 };
-
-export default CenteredLoader;

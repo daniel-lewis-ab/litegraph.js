@@ -1,8 +1,8 @@
 import { CLEAR_TOKENS } from '@/context/authContext/authReducer';
 import { useAuth } from '@/hooks/useAuth/useAuth';
-import useTheme from '@/hooks/useTheme/useTheme';
+import { useTheme } from '@/hooks/useTheme/useTheme';
 import { Icon, IconProps } from '@/shared/components/icon/Icon';
-import Tooltip from '@/shared/components/tooltip/Tooltip';
+import { Tooltip } from '@/shared/components/tooltip/Tooltip';
 import { faDiscord } from '@awesome.me/kit-b6cda292ae/icons/classic/brands';
 import {
   faArrowRightFromBracket,
@@ -38,7 +38,7 @@ export const SideMenu = () => {
       <Tooltip.Root>
         <nav className="sticky top-0 z-10 flex max-h-screen min-w-[80px] flex-col justify-between space-y-4 bg-surface-3 dark:bg-surface-2">
           <div className="flex flex-col">
-            <SideMenuButton to="/">
+            <SideMenuButton to={routes.home}>
               <Logo className="fill-text-base" />
             </SideMenuButton>
 

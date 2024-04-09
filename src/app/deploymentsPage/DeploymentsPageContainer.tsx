@@ -1,6 +1,6 @@
 import { useDeploymentsQuery } from '@/api/hooks/useDeploymentsQuery/useDeploymentsQuery';
 import { DeploymentsPage } from './DeploymentsPage';
-import CenteredLoader from '@/shared/components/centeredLoader/CenteredLoader';
+import { CenteredLoader } from '@/shared/components/centeredLoader/CenteredLoader';
 import { useChangeDeploymentStateMutation } from '@/api/hooks/useChangeDeploymentStateMutation/useChangeDeploymentStateMutation';
 import { useDeleteDeploymentMutation } from '@/api/hooks/useDeleteDeploymentMutation/useDeleteDeploymentMutation';
 import { DeploymentStatus } from '@/api/types';

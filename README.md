@@ -24,3 +24,8 @@ This setup includes Vite for a fast development experience, TailwindCSS for styl
 
 ## Contributing
 Contributions are welcome! Please read our contributing guidelines for details on how to submit contributions to this project.
+
+
+## Known issues
+
+There is an issue with circular dependencies in the SSG (Static Site Generator) package. Specifically, when one file imports a component from another, and then the second file attempts to import a component from the first, this creates a circular import situation. This has been causing the development command to cease functioning properly.

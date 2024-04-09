@@ -1,5 +1,5 @@
-import { DetailedHTMLProps, InputHTMLAttributes, ReactNode, forwardRef, useImperativeHandle, useRef } from 'react';
 import clsx from 'clsx';
+import { DetailedHTMLProps, InputHTMLAttributes, ReactNode, forwardRef, useImperativeHandle, useRef } from 'react';
 
 export type InputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   leftIcon?: ReactNode;
@@ -31,7 +31,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={inputRef}
           className={clsx(
             'w-full',
-            'text-text-basetext-text-base font-plex-mono font-medium placeholder-text-muted outline-none',
+            'font-medium text-text-base placeholder-text-muted outline-none',
             variant === 'primary' && 'bg-transparent',
             variant === 'secondary' && 'rounded-lg  bg-surface-4 px-4 py-2 text-sm',
             inputClassName,

@@ -1,6 +1,6 @@
 import { useWorkflowsQuery } from '@/api/hooks/useWorkflowsQuery/useWorkflowsQuery';
 import { WorkflowsPage } from './WorkflowsPage';
-import CenteredLoader from '@/shared/components/centeredLoader/CenteredLoader';
+import { CenteredLoader } from '@/shared/components/centeredLoader/CenteredLoader';
 import { useDeleteWorkflowMutation } from '@/api/hooks/useDeleteWorkflowMutation/useDeleteWorkflowMutation';
 import { useFetchWorkflowDetails } from '@/api/hooks/useWorkflowDetailsQuery/useWorkflowDetailsQuery';
 import toast from 'react-hot-toast';
