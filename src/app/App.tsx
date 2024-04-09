@@ -5,10 +5,10 @@ import React, { ReactNode } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { ClientOnly, Head } from 'vite-react-ssg';
 import { createPortal } from 'react-dom';
-import { useScrollToTop } from '@/hooks/useScrollToTop/useScrollToTop';
+import { useScrollToTopOnPathChange } from '@/hooks/useScrollToTopOnPathChange/useScrollToTopOnPathChange';
 
 export const App = ({ children }: { children: ReactNode }) => {
-  useScrollToTop();
+  useScrollToTopOnPathChange();
 
   return (
     <React.StrictMode>
