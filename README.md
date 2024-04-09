@@ -29,3 +29,9 @@ Contributions are welcome! Please read our contributing guidelines for details o
 ## Known issues
 
 There is an issue with circular dependencies in the SSG (Static Site Generator) package. Specifically, when one file imports a component from another, and then the second file attempts to import a component from the first, this creates a circular import situation. This has been causing the development command to cease functioning properly.
+
+
+## SEO config
+
+1. We setup `<meta name="robots" content="noindex, nofollow" />` for non-dev environment on every .html file (setup in `App.tsx`)
+1. We also setup `<meta name="robots" content="noindex, nofollow" />` for every route under `/app` because you need to be logged in in order to get content (check `AuthorizedRoute.tsx`)
