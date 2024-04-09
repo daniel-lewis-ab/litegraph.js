@@ -91,7 +91,7 @@ export const PublicFooter = () => {
 
           <div className="flex flex-col-reverse gap-8 md:flex-col md:justify-between lg:flex-row">
             <div className="pt-4 font-mono text-sm uppercase text-text-muted">&copy; {year} Salt AI </div>
-            <div className="socialLinks grid w-[200px] grid-cols-4 content-center items-center gap-4">
+            <div className="socialLinks grid w-[210px] grid-cols-4 content-center items-center gap-4">
               {social.map((item, i) => (
                 <a
                   key={i}
