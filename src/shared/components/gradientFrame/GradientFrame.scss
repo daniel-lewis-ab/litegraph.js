@@ -1,0 +1,65 @@
+$borderSize: 1px;
+
+.wrapper {
+  @apply rounded-xl;
+  z-index: 0;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  padding: $borderSize;
+}
+
+.gradientIframeBackground {
+  @apply rounded-xl;
+  margin: $borderSize;
+  position: absolute;
+  z-index: -1;
+}
+
+.gradientIframe {
+  @apply transition-all duration-200;
+  @apply rounded-xl;
+  z-index: 1;
+
+  color: white;
+  // padding: 10px;
+  display: block;
+  text-align: center;
+  background-size: 0% 0%;
+}
+
+.gradientIframe::before,
+.gradientIframe::after {
+  @apply rounded-xl;
+  content: "";
+  position: absolute;
+  z-index: -2;
+  width: calc(100% + $borderSize * 2);
+  height: calc(100% + $borderSize * 2);
+  left: -$borderSize;
+  top: -$borderSize;
+  background: repeating-linear-gradient(
+      95deg,
+      var(--color-surface-2) 0%,
+      var(--color-jade-6) 25%,
+      var(--color-jade-10) 50%,
+      var(--color-jade-8) 75%,
+      var(--color-surface-2) 100%
+    ),
+    var(--color-surface-2);
+  background-size: 200%;
+  animation: border 10s linear infinite;
+}
+
+@keyframes border {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+.gradientIframe::after {
+  filter: blur(40px);
+}
