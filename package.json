@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite-react-ssg dev",
     "build": "npm run build-prod",
-    "build-prod": "tsc && vite-react-ssg build; npm run robots:prod",
+    "build-prod": "tsc && vite-react-ssg build --mode production; npm run robots:prod",
     "build-dev": "tsc && vite-react-ssg build --mode development; npm run robots:dev",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint-fix": "npm run lint -- --fix",

@@ -61,9 +61,7 @@ export const useUpdateWorkflowFromWebsocket = () => {
 
       if (message.data.type === 'send_response') {
         const data = (message.data as ExecutionFinishedData).data;
-        import.meta.env.VITE_SHOW_WEBSOCKET_LOGS === 'true' && console.log('Job failed', data);
         if (data.error?.length) {
-          console.log('Job failed', data.error, import.meta.env.VITE_SHOW_WEBSOCKET_LOGS);
           toast.error('Workflow execution failed', { position: 'bottom-center' });
           updateExecutionStatus({
             workflowId: data.workflow_id,
