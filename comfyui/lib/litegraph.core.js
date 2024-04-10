@@ -183,7 +183,7 @@
 
             const prev = this.registered_node_types[type];
             if(prev) {
-                console.log("replacing node type: " + type);
+                // console.log("replacing node type: " + type);
             }
             if( !Object.prototype.hasOwnProperty.call( base_class.prototype, "shape") ) {
                 Object.defineProperty(base_class.prototype, "shape", {
@@ -3124,7 +3124,6 @@
             
             default:
                 return false;
-                break;
         }
         this.mode = modeTo;
         return true;
