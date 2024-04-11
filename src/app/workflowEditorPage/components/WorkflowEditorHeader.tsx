@@ -98,17 +98,17 @@ export const WorkflowEditorHeader = ({
           </PopoverTrigger>
           <PopoverContent ref={popoverRef} side="bottom" sideOffset={2} align="start">
             <OptionsList>
-              <OptionsList.Item asLink to={constants.helpLinks.helpDocs} onClick={closeOptions}>
+              <OptionsList.Item asLink to={constants.helpDocs} onClick={closeOptions}>
                 Help docs
               </OptionsList.Item>
-              <OptionsList.Item asLink to={constants.helpLinks.requestModels} onClick={closeOptions} className="pr-12">
+              <OptionsList.Item asLink to={constants.supportUrl} onClick={closeOptions}>
+                Salt support
+              </OptionsList.Item>
+              <OptionsList.Item asLink to={constants.requestModelsUrl} onClick={closeOptions} className="pr-12">
                 Request nodes/models
               </OptionsList.Item>
               <OptionsList.Item asLink to={constants.discordFeedbackUrl} onClick={closeOptions}>
-                Submit feedback
-              </OptionsList.Item>
-              <OptionsList.Item asLink to={constants.helpLinks.joinCommunity} onClick={closeOptions}>
-                Join community
+                Feedback
               </OptionsList.Item>
             </OptionsList>
           </PopoverContent>
