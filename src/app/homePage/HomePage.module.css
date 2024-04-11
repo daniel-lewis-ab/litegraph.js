@@ -8,9 +8,15 @@
   display: block;
   position: fixed !important;
   overflow: hidden;
-  max-height: 90vh;
+  max-height: 50vh;
   width: 100%;
-  z-index: 0;
+  pointer-events: none !important;
+}
+
+@screen lg {
+  .canvas {
+    max-height: 80vh;
+  }
 }
 
 .canvas::after {
@@ -33,7 +39,15 @@
   position: relative;
 }
 
-.section--team,
+.sectionBody {
+  @apply max-w-lg rounded-lg text-xl text-text-subtle;
+}
+
+.sectionTitle {
+  @apply text-2xl font-medium lg:text-4xl;
+}
+
+.sectionBody .section--team,
 .section--bigCards {
   @apply lg:pb-16 xl:pb-20 !important;
   min-height: auto;

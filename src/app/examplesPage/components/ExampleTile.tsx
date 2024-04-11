@@ -39,7 +39,7 @@ export const ExampleTile = ({ example }: ExampleTileProps) => {
   };
 
   return (
-    <li className="exampleTile text-slate-200 pmd:p-6 relative flex flex-col space-y-3 rounded-md">
+    <li className="exampleTile relative flex flex-col space-y-3 rounded-md">
       <div className="">
         <Zoom zoomImg={{ width: 1500, src: firstAsset.full.src }}>
           <div className="relative w-full">
@@ -66,7 +66,7 @@ export const ExampleTile = ({ example }: ExampleTileProps) => {
         </Zoom>
       </div>
       <div className="space-y-2">
-        <h2 className="text-xl font-medium md:text-xl lg:text-xl">{example.title}</h2>
+        <h2 className="text-xl font-medium md:text-xl lg:text-2xl">{example.title}</h2>
         <div className="flex flex-row gap-3">
           <p className="text-gray-300 text-sm text-text-muted">by {example.author}</p>
         </div>

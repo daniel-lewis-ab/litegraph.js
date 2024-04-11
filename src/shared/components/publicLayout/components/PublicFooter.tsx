@@ -1,75 +1,27 @@
 import { AngledSeparator } from '@/shared/components/publicLayout/components/angledSeparator/AngledSeparator';
-import { faDiscord, faGithub, faLinkedin } from '@awesome.me/kit-b6cda292ae/icons/classic/brands';
-import { faX } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { Icon } from '../../icon/Icon';
 import { PublicContainer } from './PublicContainer';
+import { footerLinks, socialLinks } from './PublicLinks';
 
 export const PublicFooter = () => {
   const year = new Date().getFullYear();
-  const links = [
-    {
-      product: [
-        { label: 'Deployments', href: '#deployments', title: 'Deploy with ease' },
-        { label: 'Infra', href: '#infra', title: 'Fast infrastructure and GPUs' },
-        { label: 'Editor', href: '#ide', title: 'Comfy UI with Salt' },
-      ],
-      resources: [
-        { label: 'Examples', href: '/examples', title: 'Salt AI Examples' },
-        { label: 'Docs', href: 'https://docs.getsalt.ai', title: 'Salt AI Documentation' },
-        { label: 'Github', href: 'https://github.com/get-salt-AI/SaltAI', title: 'Salt AI Blog' },
-      ],
-      company: [
-        { label: 'Team', href: '#team', title: 'Salt AI Examples' },
-        { label: 'About', href: '/about', title: 'About Salt AI' },
-        { label: 'Blog', href: 'https://blog.getsalt.ai', title: 'Salt AI Blog' },
-      ],
-    },
-  ];
-
-  const social = [
-    {
-      label: 'X',
-      href: 'https://twitter.com/getsalt_ai',
-      title: 'Salt AI Twitter',
-      icon: <Icon icon={faX} />,
-    },
-    {
-      label: 'Discord',
-      href: 'https://discord.gg/saltai',
-      title: 'Salt AI Discord',
-      icon: <Icon icon={faDiscord} />,
-    },
-
-    {
-      label: 'Github',
-      href: 'https://github.com/get-salt-AI/SaltAI',
-      title: 'Salt AI Github',
-      icon: <Icon icon={faGithub} />,
-    },
-    {
-      label: 'LinkedIn',
-      href: 'https://www.linkedin.com/company/getsalt-ai',
-      title: 'Salt AI LinkedIn',
-      icon: <Icon icon={faLinkedin} />,
-    },
-  ];
   return (
-    <div className={'z-10 overflow-x-hidden overflow-y-hidden'}>
+    <div className={'overflow-x-hidden overflow-y-hidden'}>
       <AngledSeparator />
       <PublicContainer>
         <footer className={clsx('space-y-8 overflow-x-hidden py-10 xl:py-20')}>
           <div className="flex flex-col justify-between gap-8 md:flex-row">
-            {links.map((link, i) => (
+            {footerLinks.map((section, i) => (
               <div key={i} className="grid w-full grid-cols-2 gap-12 md:grid-cols-3 xl:w-1/2">
-                {Object.entries(link).map(([key, value]) => (
+                {Object.entries(section).map(([key, value]) => (
                   <div key={key} className="flex flex-col gap-8">
                     <h4 className="font-mono text-sm uppercase text-text-muted">{key}</h4>
                     <ul className="flex flex-col gap-2">
                       {value.map((item, i) => (
                         <li key={i}>
-                          <Link to={item.href} className="text-base font-medium hover:opacity-80" title={item.title}>
+                          <Link to={item.href} className="text-base font-medium hover:opacity-80" title={item.label}>
                             {item.label}
                           </Link>
                         </li>
@@ -92,14 +44,14 @@ export const PublicFooter = () => {
           <div className="flex flex-col-reverse gap-8 md:flex-col md:justify-between lg:flex-row">
             <div className="pt-4 font-mono text-sm uppercase text-text-muted">&copy; {year} Salt AI </div>
             <div className="socialLinks grid w-[210px] grid-cols-4 content-center items-center gap-4">
-              {social.map((item, i) => (
+              {socialLinks.map((item, i) => (
                 <a
                   key={i}
                   href={item.href}
                   className="flex aspect-square h-8 w-8 content-center items-center justify-center rounded-lg border border-border-muted hover:border-border-bright hover:bg-surface-3 lg:h-10 lg:w-10"
                   title={item.title}
                 >
-                  {item.icon}
+                  <Icon icon={item.icon} />
                 </a>
               ))}
             </div>

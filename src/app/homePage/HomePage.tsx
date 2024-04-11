@@ -27,15 +27,13 @@ export const HomePage = () => {
         </ClientOnly>
 
         <div className={s.content}>
-          <div className="relative z-10">
+          <div className="relative">
             <PublicLayout.Container>
-              <div className="flex min-h-[50vh] flex-col content-center items-center justify-center space-y-6 pt-20 text-center lg:mb-[-10vh] lg:min-h-[70vh] lg:pt-[33vh]">
+              <div className="flex min-h-[70vh]  flex-col content-center items-center justify-end space-y-6 text-center md:min-h-[50vh] md:justify-center md:pt-[20vh] lg:mb-[-10vh] lg:min-h-[70vh] lg:pt-[33vh]">
                 <h1 className="max-w-2xl text-5xl font-medium leading-[1] text-surface-12 md:text-8xl">
                   Workflows for the real world
                 </h1>
-                <h2 className="inline text-2xl leading-normal text-text-subtle">
-                  Build faster in an open ecosystem designed for scale
-                </h2>
+                <h2 className={s.sectionBody}>Build faster in an open ecosystem designed for scale</h2>
                 <Button size="lg" className="" color="primary" asLink to={routes.login}>
                   <span className="block px-4">Start for free</span>
                 </Button>
@@ -73,15 +71,15 @@ const Section = ({ children, name, id }: { children: React.ReactNode; name: stri
 const DeploymentsSection = () => {
   return (
     <Section name="deployments" id="deployments">
-      <div className="grid-cols-2 items-center py-12 lg:grid">
-        <div>
+      <div className="grid grid-cols-1 items-center gap-8 py-12 lg:grid-cols-2">
+        <div className="order-last md:order-first">
           <img src={img} alt={'Deploy to Discord and APIs with Salt'} />
         </div>
-        <div className="grid-cols-6 flex-col space-y-3 md:grid">
+        <div className="grid-row-1 space-y-3 md:grid md:grid-cols-6">
           <div className="col-span-4 col-start-2 space-y-4">
             <div className="font-mono text-xs tracking-wide text-text-subtle">01</div>
-            <h2 className="leading-1 text-4xl">From proof-of-concept to production-ready in seconds</h2>
-            <p className="max-w-lg rounded-lg text-2xl text-text-subtle">
+            <h2 className={s.sectionTitle}>From proof-of-concept to production-ready in seconds</h2>
+            <p className={s.sectionBody}>
               Effortlessly deploy your ComfyUI workflows to any Discord, or expose them as APIs. There&apos;s no set up,
               so the journey from idea to reality is faster.
             </p>
@@ -99,8 +97,8 @@ const GPUSection = () => {
         <div className="mb-8 grid-cols-6 flex-col space-y-3 md:mb-0 md:grid">
           <div className="col-span-4 col-start-2 space-y-4">
             <div className="font-mono text-xs tracking-wide text-text-subtle">02</div>
-            <h2 className="leading-1 text-4xl">High performance for you and your end user</h2>
-            <p className="max-w-lg rounded-lg text-2xl text-text-subtle">
+            <h2 className={s.sectionTitle}>High performance for you and your end user</h2>
+            <p className={s.sectionBody}>
               Harness the power of top-tier GPUs, delivering the performance your projects demand in a scalable cloud
               environemnt.
             </p>
@@ -124,8 +122,8 @@ const IDESection = () => {
         <div className="grid-cols-6 flex-col space-y-3 md:grid">
           <div className="col-span-4 col-start-2 space-y-4">
             <div className="font-mono text-xs tracking-wide text-text-subtle">03</div>
-            <h2 className="leading-1 text-4xl">An IDE designed with function in mind</h2>
-            <p className="max-w-lg rounded-lg text-2xl text-text-subtle">
+            <h2 className={s.sectionTitle}>An IDE designed with function in mind</h2>
+            <p className={s.sectionBody}>
               With Salt&apos;s IDE, you have access to thousands of nodes and a web-based environment built for power
               users.
             </p>
@@ -203,28 +201,3 @@ const CTASection = () => {
     </Section>
   );
 };
-
-// const homePageQuery = `
-// query Home {
-//   site: _site {
-//     favicon: faviconMetaTags {
-//       attributes
-//       content
-//       tag
-//     }
-//   }
-//   page: homePage {
-//     callToAction,
-//     h1,
-//     h2,
-//     seo: _seoMetaTags {
-//       attributes
-//       content
-//       tag
-//     }
-//     rtbs {
-//       title
-//       text
-//     }
-//   }
-// }`;

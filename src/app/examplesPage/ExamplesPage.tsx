@@ -1,8 +1,8 @@
 import { ExamplesPageRecord } from '@/generated/graphql';
-import { ExampleTile } from './components/ExampleTile';
 import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
 import { fetchDatoCmsData } from '@/shared/functions/fetchDatoCmsData';
 import { useLoaderData } from 'react-router-dom';
+import { ExampleTile } from './components/ExampleTile';
 
 const ExamplesPage = () => {
   const data = useLoaderData() as { page: ExamplesPageRecord } | undefined;
@@ -16,10 +16,10 @@ const ExamplesPage = () => {
 
   return (
     <PublicLayout>
-      <PublicLayout.Container className="py-20">
-        <div className="space-y-8">
+      <PublicLayout.Container className="py-24 pt-40">
+        <div className="space-y-16">
           <div className="space-y-4">
-            <h1 className="text-3xl font-medium xl:text-4xl">Example Workflows</h1>
+            <h1 className="text-5xl font-medium">Example Workflows</h1>
             <h2 className="text-xl text-text-muted">{page.h2}</h2>
           </div>
 
