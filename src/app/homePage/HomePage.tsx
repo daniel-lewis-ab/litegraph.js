@@ -15,7 +15,7 @@ import ideImg from './images/promo-ide.jpg';
 const LogoAnimation = lazy(() => import('./components/LogoAnimation'));
 
 export const HomePage = () => {
-  console.log('1');
+  console.log('2');
   return (
     <PublicLayout>
       <div className={s.homePage}>
