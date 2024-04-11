@@ -400,7 +400,8 @@ class ComfyGraphPatcher extends EventTarget {
           }
         };
         window.addEventListener('message', handleMessage);
-        this.postMessageToParent('upload', { file, subdir });
+        subdir = subdir || 'editor';
+        this.postMessageToParent('upload', { file, subdir});
       } catch (error) {
         console.error(error);
         resolve(this.createResponse(null, true));

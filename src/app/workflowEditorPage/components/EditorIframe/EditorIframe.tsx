@@ -21,11 +21,16 @@ const getWorkflowPreviewAsset = async (url: string) => {
 export const EditorIframe = () => {
   const { id } = useParams();
   const { currentWorkflow, setCurrentWorkflow } = useWorkflowEditor();
-  const { inputAssets } = useWorkflowInputAssetsQuery(id!);
+  const { inputAssets, refetch: refetchInputAsset } = useWorkflowInputAssetsQuery(id!);
   const { mutateAsync: createAssetAsync } = useCreateWorkflowInputAssetMutation();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [state, setState] = useState<'init' | 'loaded'>('init');
   const { lastMessage, readyState } = useWebSocket();
+
+  const sendMessageToIframe = (message: FullMessage) => {
+    import.meta.env.VITE_SHOW_IFRAME_LOGS === 'true' && console.log('Sending message to iframe', message);
+    iframeRef.current?.contentWindow?.postMessage(message, '*');
+  };
 
   useEffect(() => {
     const handleWebsocketMessage = async (message: WebSocketMessage | null) => {
@@ -67,11 +72,6 @@ export const EditorIframe = () => {
     handleWebsocketMessage(lastMessage);
   }, [lastMessage, readyState]);
 
-  const sendMessageToIframe = (message: FullMessage) => {
-    import.meta.env.VITE_SHOW_IFRAME_LOGS === 'true' && console.log('Sending message to iframe', message);
-    iframeRef.current?.contentWindow?.postMessage(message, '*');
-  };
-
   useEffect(() => {
     if (state === 'loaded' && currentWorkflow && currentWorkflow.updateSource === 'react') {
       sendMessageToIframe({
@@ -83,7 +83,11 @@ export const EditorIframe = () => {
           },
         },
       });
+    }
+  }, [state, currentWorkflow, inputAssets, id]);
 
+  useEffect(() => {
+    if (state === 'loaded') {
       sendMessageToIframe({
         internal: {
           type: 'refresh_defs',
@@ -93,7 +97,7 @@ export const EditorIframe = () => {
         },
       });
     }
-  }, [state, currentWorkflow, inputAssets, id]);
+  }, [state, inputAssets]);
 
   useEffect(() => {
     const handleMessageFromIframe = async (message: MessageEvent<IframeToParentMessage>) => {
@@ -116,8 +120,7 @@ export const EditorIframe = () => {
       }
 
       if (message.data.internal && message.data.internal.type === 'upload') {
-        console.log('uploading new asset', message.data.internal.data);
-        const subdir = message.data.internal.data.subdir || 'editor';
+        const subdir = message.data.internal.data.subdir;
         const file = message.data.internal.data.file;
         try {
           await createAssetAsync({
@@ -128,16 +131,17 @@ export const EditorIframe = () => {
           sendMessageToIframe({ internal: { type: 'upload_done', data: { name: file.name } } });
         } catch (e) {
           sendMessageToIframe({ internal: { type: 'upload_rejected', data: { name: file.name, error: e } } });
+        } finally {
+          await refetchInputAsset();
         }
       }
     };
 
     window.addEventListener('message', handleMessageFromIframe);
-
     return () => {
       window.removeEventListener('message', handleMessageFromIframe);
     };
-  }, [currentWorkflow?.content, setCurrentWorkflow, createAssetAsync, id]);
+  }, [currentWorkflow?.content, setCurrentWorkflow, createAssetAsync, id, refetchInputAsset]);
 
   return (
     <iframe
