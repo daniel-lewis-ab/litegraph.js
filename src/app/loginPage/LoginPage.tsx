@@ -10,8 +10,8 @@ import { Button } from '@/shared/components/button/Button';
 import { GitHubIcon } from '@/shared/components/icons/GithubIcon';
 import { GoogleIcon } from '@/shared/components/icons/GoogleIcon';
 import { LogoFull } from '@/shared/components/icons/LogoFull';
-import img from './promo.jpg';
 import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
+import img from './promo.jpg';
 
 type LoginPageProps = {
   onLogin(source: 'github' | 'google'): Promise<PostLoginResponse | undefined>;
@@ -66,7 +66,7 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
         <div className="light flex flex-1 bg-surface-2">
           <div className="flex flex-1 flex-col items-start justify-center p-6 md:px-9 lg:px-[20%]">
             <div className="mx-auto flex w-full flex-col justify-center space-y-4 text-center">
-              <h1 className="text-3xl font-medium xl:text-4xl">Login or sign-up</h1>
+              <h1 className="text-3xl font-medium xl:text-4xl">Login or sign up</h1>
               <p className="text-base text-text-subtle">Start building and sharing your workflows with the world.</p>
 
               <Button size="lg" color="secondary" variant="glass" onClick={() => handleLogin('google')}>
