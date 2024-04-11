@@ -62,6 +62,12 @@ export const useUpdateWorkflowFromWebsocket = () => {
       if (message.data.type === 'send_response') {
         const data = (message.data as ExecutionFinishedData).data;
         if (data.error?.length) {
+          try {
+            // eslint-disable-next-line no-console
+            console.error('Workflow job failed, details:', JSON.parse(data.error));
+            // eslint-disable-next-line no-empty
+          } catch (e) {}
+
           toast.error('Workflow execution failed', { position: 'bottom-center' });
           updateExecutionStatus({
             workflowId: data.workflow_id,
