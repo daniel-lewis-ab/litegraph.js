@@ -51,6 +51,14 @@ export const appRoutes: RouteRecord[] = [
         Component: LoginPageContainer,
       },
       {
+        path: 'not-found',
+        Component: () => (
+          <PublicLayout hideFooter>
+            <PageErrorTemplate variant="404" />
+          </PublicLayout>
+        ),
+      },
+      {
         ...(import.meta.env.MODE !== 'production'
           ? {
               path: routes.storybook,
