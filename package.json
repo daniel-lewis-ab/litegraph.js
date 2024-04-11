@@ -87,6 +87,7 @@
     "url": "^0.11.3",
     "vite": "^5.1.0",
     "vite-plugin-checker": "^0.6.4",
+    "vite-plugin-radar": "^0.9.4",
     "vite-react-ssg": "^0.6.1"
   },
   "optionalDepsAddedBecauseOfThisIssue->": "https://github.com/npm/cli/issues/4828",
