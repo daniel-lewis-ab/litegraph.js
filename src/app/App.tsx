@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import { ClientOnly, Head } from 'vite-react-ssg';
 import { createPortal } from 'react-dom';
 import { useScrollToTopOnPathChange } from '@/hooks/useScrollToTopOnPathChange/useScrollToTopOnPathChange';
+import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
 
 export const App = ({ children }: { children: ReactNode }) => {
   useScrollToTopOnPathChange();
@@ -17,8 +18,8 @@ export const App = ({ children }: { children: ReactNode }) => {
           <meta name="robots" content="noindex, nofollow" />
         </Head>
       )}
-      {/* @TODO: Show correct error + report to sentry */}
-      <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      {/* @TODO: Report to sentry */}
+      <ErrorBoundary fallback={<PageErrorTemplate variant="down" inApp={false} className="h-screen" />}>
         <AuthContextProvider>
           <QueryClientProvider>
             <ClientOnly>

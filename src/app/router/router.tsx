@@ -16,6 +16,8 @@ import { RouteRecord } from 'vite-react-ssg';
 import LoginPageContainer from '../loginPage/LoginPageContainer';
 import { App } from '../App';
 import { WebSocketProvider } from '@/context/websocketContext/WebsocketContextProvider';
+import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
+import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
 
 export const appRoutes: RouteRecord[] = [
   {
@@ -25,7 +27,7 @@ export const appRoutes: RouteRecord[] = [
         <Outlet />
       </App>
     ),
-    errorElement: <div>Error occurred</div>,
+    errorElement: <PageErrorTemplate variant="down" inApp={false} className="h-screen" />,
     children: [
       {
         index: true,
@@ -63,6 +65,11 @@ export const appRoutes: RouteRecord[] = [
           <AuthorizedRoute>
             <Outlet />
           </AuthorizedRoute>
+        ),
+        errorElement: (
+          <Layout>
+            <PageErrorTemplate variant="down" />
+          </Layout>
         ),
         children: [
           {
@@ -122,11 +129,23 @@ export const appRoutes: RouteRecord[] = [
               },
             ],
           },
+          {
+            path: '*',
+            Component: () => (
+              <Layout>
+                <PageErrorTemplate variant="404" />
+              </Layout>
+            ),
+          },
         ],
       },
       {
         path: '*',
-        Component: () => <div>Not found</div>,
+        Component: () => (
+          <PublicLayout hideFooter>
+            <PageErrorTemplate variant="404" />
+          </PublicLayout>
+        ),
       },
     ],
   },
