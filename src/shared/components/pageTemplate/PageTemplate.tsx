@@ -7,8 +7,8 @@ import { Button } from '../button/Button';
 import clsx from 'clsx';
 import styles from './PageTempalte.module.scss';
 
-export const PageTemplate = ({ children }: { children: ReactNode }) => (
-  <div className={clsx(styles.pageTemplateContainer, 'flex w-full flex-col px-3')}>{children}</div>
+export const PageTemplate = ({ children, className }: { children: ReactNode; className?: string }) => (
+  <div className={clsx(styles.pageTemplateContainer, 'flex w-full flex-col px-3', className)}>{children}</div>
 );
 
 PageTemplate.Header = ({ children }: { children: ReactNode }) => (
