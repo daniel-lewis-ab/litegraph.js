@@ -19,7 +19,7 @@ export const App = ({ children }: { children: ReactNode }) => {
         </Head>
       )}
       {/* @TODO: Report to sentry */}
-      <ErrorBoundary fallback={<PageErrorTemplate variant="down" inApp={false} className="h-screen" />}>
+      <ErrorBoundary fallback={<PageErrorTemplate variant="down" className="h-screen" />}>
         <AuthContextProvider>
           <QueryClientProvider>
             <ClientOnly>

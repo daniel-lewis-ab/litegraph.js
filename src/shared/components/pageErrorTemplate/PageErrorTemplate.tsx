@@ -10,7 +10,7 @@ type PageErrorTemplateProps = {
   className?: string;
 };
 
-export const PageErrorTemplate = ({ variant, className, inApp = true }: PageErrorTemplateProps) => {
+export const PageErrorTemplate = ({ variant, className, inApp = false }: PageErrorTemplateProps) => {
   const navigate = useNavigate();
 
   return (

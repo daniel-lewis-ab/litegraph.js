@@ -15,7 +15,7 @@
     "generate-datocms-types": "graphql-codegen --config codegen.yml",
     "robots:prod": "cp robots/robots.prod.txt dist/robots.txt",
     "robots:dev": "cp robots/robots.dev.txt dist/robots.txt",
-    "bundle-analyze": "npx vite-bundle-visualizer"
+    "bundle-analyze": "npx vite-bundle-visualizer -t sunburst"
   },
   "dependencies": {
     "@awesome.me/kit-b6cda292ae": "^1.0.7",

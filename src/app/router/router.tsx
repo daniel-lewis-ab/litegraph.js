@@ -27,7 +27,7 @@ export const appRoutes: RouteRecord[] = [
         <Outlet />
       </App>
     ),
-    errorElement: <PageErrorTemplate variant="down" inApp={false} className="h-screen" />,
+    errorElement: <PageErrorTemplate variant="down" className="h-screen" />,
     children: [
       {
         index: true,
@@ -76,7 +76,7 @@ export const appRoutes: RouteRecord[] = [
         ),
         errorElement: (
           <Layout>
-            <PageErrorTemplate variant="down" />
+            <PageErrorTemplate variant="down" inApp />
           </Layout>
         ),
         children: [
@@ -141,7 +141,7 @@ export const appRoutes: RouteRecord[] = [
             path: '*',
             Component: () => (
               <Layout>
-                <PageErrorTemplate variant="404" />
+                <PageErrorTemplate variant="404" inApp />
               </Layout>
             ),
           },
