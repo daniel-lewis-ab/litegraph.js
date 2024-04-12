@@ -16,7 +16,7 @@ const LogoAnimation = lazy(() => import('./components/LogoAnimation'));
 
 export const HomePage = () => {
   // eslint-disable-next-line no-console
-  console.log('2');
+  console.log('4');
   return (
     <PublicLayout>
       <div className={s.homePage}>
