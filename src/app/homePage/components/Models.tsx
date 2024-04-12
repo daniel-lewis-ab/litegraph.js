@@ -1,9 +1,10 @@
 /* eslint-disable react/no-unknown-property */
-import { useAnimations, useGLTF } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
 import { useScroll } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import { MeshStandardMaterial } from 'three';
+import { motion } from 'framer-motion-3d';
+import { useRef } from 'react';
+import { Mesh, MeshStandardMaterial } from 'three';
 
 type ModelProps = React.PropsWithChildren<{
   className?: string;
@@ -12,51 +13,49 @@ type ModelProps = React.PropsWithChildren<{
 export const SaltLogo: React.FC<ModelProps> = () => {
   const { scrollY } = useScroll();
   const groupRef = useRef(null);
-  useThree(({ camera }) => {
-    camera.position.set(0, 5, 3);
-    camera.lookAt(0, 0, 0);
-  });
-  const { scene, animations } = useGLTF('/salt.glb');
-  const { actions, mixer } = useAnimations(animations, groupRef);
+  const { nodes } = useGLTF('/salt.glb');
 
   const material = new MeshStandardMaterial({
-    color: '0x134444',
-    metalness: 0.4,
-    roughness: 0.8,
+    color: '0xffffff',
+    metalness: 0.8,
+    roughness: 0.2,
   });
 
-  useEffect(() => {
-    actions?.spinAction?.play();
-  }, [mixer, actions, animations]);
+  useThree(({ camera }) => {
+    camera.position.set(0, 5, 5);
+    camera.lookAt(0, 0, 0);
+  });
 
-  /**
-   * Using scroll position to slow down and speed up the animation.
-   */
-  useFrame((_state, delta) => {
+  useFrame(() => {
     const scrollPosition = scrollY.get();
     const minScroll = 0;
     const maxScroll = 800;
-    const minTimeScale = 0.35;
-    const maxTimeScale = 0.05;
+    const minTimeScale = 0.5;
+    const maxTimeScale = 0.1;
 
     const timeScale =
       minTimeScale + ((scrollPosition - minScroll) / (maxScroll - minScroll)) * (maxTimeScale - minTimeScale);
 
-    // Clamp the timeScale between minTimeScale and maxTimeScale
     const clampedTimeScale = Math.max(maxTimeScale, Math.min(minTimeScale, timeScale));
 
-    actions?.spinAction?.setEffectiveTimeScale(clampedTimeScale);
-    mixer.update(delta);
+    if (groupRef.current) {
+      (groupRef.current as Mesh).rotation.x += 0.008 * clampedTimeScale;
+      (groupRef.current as Mesh).rotation.y += 0.01 * clampedTimeScale;
+    }
   });
 
   return (
-    <primitive
-      ref={groupRef}
-      scale={9}
-      object={scene}
-      material={material}
-      animations={[animations[0]]}
-      position={[0, 0, -1]}
-    />
+    <motion.group>
+      <ambientLight intensity={0.1} castShadow={false} />
+      <pointLight position={[0, 4, 5]} intensity={40} castShadow={false} />
+      <directionalLight position={[10, 10, 0]} intensity={1} castShadow={false} />
+      <mesh
+        ref={groupRef}
+        material={material}
+        geometry={(nodes.mark as Mesh).geometry}
+        position={[0, 0, 0]}
+        scale={7.5}
+      />
+    </motion.group>
   );
 };
