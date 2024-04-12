@@ -13,9 +13,8 @@
   position: absolute;
   top: var(--nav-height);
   left: 100%;
-  height: 100vh;
-  transform: translateX(0%);
-  height: calc(100vh - var(--nav-height));
+  height: calc(100dvh - var(--nav-height));
+  min-height: --webkit-fill-available;
   width: 100%;
   z-index: -1;
 }
