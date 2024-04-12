@@ -32,7 +32,7 @@ export const DeploymentsPage = ({
           <EmptyDeploymentsPage />
         </div>
       ) : (
-        <ul className="flex w-full flex-col *:mb-4 last:mb-0">
+        <ul className="mb-4 flex w-full flex-col *:mb-4">
           {deployments.map((deployment) => (
             <DeploymentListItem
               key={deployment.id}
