@@ -10,4 +10,8 @@ export const constants = {
   requestModelsUrl: 'https://discord.com/channels/1151592612525002822/1212167743206326272',
   discordFeedbackUrl: 'https://discord.com/channels/1151592612525002822/1212167743206326272',
   helpDocs: 'https://docs.getsalt.ai/',
+  validation: {
+    workflowNameMaxLength: 80,
+    deploymentNameMaxLength: 80,
+  },
 };

@@ -89,7 +89,9 @@ export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }
                 variant="secondary"
                 id="name"
                 placeholder="descriptive-workflow-name"
+                maxLength={constants.validation.workflowNameMaxLength}
                 {...register('name', {
+                  maxLength: constants.validation.deploymentNameMaxLength,
                   required: 'This field is required',
                   pattern: {
                     value: /^[A-Za-z0-9-]*$/,

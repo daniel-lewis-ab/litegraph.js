@@ -5,6 +5,7 @@ import { Input } from '@/shared/components/input/Input';
 import { Workflow } from '@/api/types';
 import { useNavigate } from 'react-router-dom';
 import { routes } from '@/routes/routes';
+import { constants } from '@/contants';
 
 export type NewWorkflowFormData = {
   name: string;
@@ -43,7 +44,8 @@ export const NewWorkflowPage = ({ onSubmit }: NewWorkflowPageProps) => {
           variant="secondary"
           placeholder="Write a name"
           className="my-6 w-full"
-          {...register('name', { required: true })}
+          maxLength={constants.validation.workflowNameMaxLength}
+          {...register('name', { required: true, maxLength: constants.validation.workflowNameMaxLength })}
         />
         <div className="flex w-full flex-row">
           <Button
