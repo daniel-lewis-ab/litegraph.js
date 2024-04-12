@@ -18,7 +18,7 @@ import { PublicContainer } from './PublicContainer';
 import { mainMenuLinks } from './PublicLinks';
 import s from './PublicMainNavigation.module.scss';
 
-export const PublicMobileMenu = ({ show }: { show: boolean }) => {
+const PublicMobileMenu = ({ show }: { show: boolean }) => {
   useEffect(() => {
     if (show) {
       document.body.classList.add('no-scroll');
@@ -36,7 +36,7 @@ export const PublicMobileMenu = ({ show }: { show: boolean }) => {
       transition={{ duration: 0.3, ease: 'easeInOut' }}
     >
       <div className={s.mobileMenuOverlay}>
-        <div className="flex flex-col content-center justify-center space-y-6 px-8 pt-8">
+        <div className="flex flex-col content-center justify-center space-y-6 px-6 pt-8">
           {mobileMenuLinks.map((item, i) => (
             <motion.div
               key={i}
