@@ -29,8 +29,10 @@ publish:
   image: docker:dind
   services:
     - docker:dind
+  before_script:
+    - if [ "$CI_COMMIT_REF_NAME" = "main" ]; then export BUILD_TYPE="main"; else export BUILD_TYPE="develop"; fi
   script:
-    - docker build --tag $IMAGE_TAG .
+    - docker build --build-arg BUILD_TYPE=$BUILD_TYPE --tag $IMAGE_TAG .
     - cat $GCP_SA_KEY | docker login -u _json_key --password-stdin https://gcr.io
     - docker push $IMAGE_TAG
   only:
