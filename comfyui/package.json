@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "bundle": "webpack",
+    "dev": "serve -l 0 -p 1218"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "webpack": "^5.90.0"
+  }
+}

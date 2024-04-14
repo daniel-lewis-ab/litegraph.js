@@ -1,0 +1,28 @@
+{
+  "name": "playground",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon -I --exec node --loader ts-node/esm src/mockApi.ts --watch './**/*.ts'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "express-ws": "^5.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.0",
+    "ts-node-dev": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/express-ws": "^3.0.4",
+    "@types/jsonwebtoken": "^9.0.6",
+    "node-dev": "^8.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  }
+}

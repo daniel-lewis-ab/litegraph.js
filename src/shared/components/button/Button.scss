@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button.button,
+a.button {
+  --base-color: var(--color-primary-10);
+  --second-base-color: var(--color-primaryA-5);
+  --text-color: var(--color-primary-1);
+  --text-color-muted: var(--color-primary-9);
+
+  background-color: var(--base-color);
+  color: var(--text-color);
+  transition:
+    opacity,
+    background-color,
+    color 0.15s ease-in-out;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
+
+  & > svg {
+    color: var(--text-color);
+  }
+
+  &--color-primary:not([disabled]) {
+    .dark & {
+      --base-color: var(--color-primary-10);
+      &.button--ghost {
+        --text-color: var(--color-primary-10);
+      }
+    }
+  }
+
+  &--color-secondary {
+    --base-color: var(--color-secondary-10);
+    --second-base-color: var(--color-secondaryA-3);
+    --text-color: white;
+    --text-color-muted: var(--color-secondary-9);
+
+    &.button--ghost,
+    &.button--soft,
+    &.button--glass {
+      --text-color: var(--color-secondaryA-11);
+    }
+    &.button--ringed {
+      --text-color: var(--color-secondary-11);
+    }
+
+    .dark & {
+      --text-color: var(--color-secondary-12);
+    }
+  }
+
+  &--color-success {
+    --base-color: var(--color-success-9);
+    --second-base-color: var(--color-success-4);
+    --text-color: var(--color-success-1);
+    --text-color-muted: var(--color-success-10);
+
+    &.button--ghost {
+      --text-color: var(--text-color-muted);
+    }
+
+    &.button--glass,
+    &.button--ringed {
+      --text-color: var(--color-success-10);
+    }
+  }
+
+  &--color-error {
+    --base-color: var(--color-error-10);
+    --second-base-color: var(--color-errorA-5);
+    --text-color: white;
+    --text-color-muted: var(--color-error-10);
+  }
+
+  &--color-warning {
+    --base-color: var(--color-warning-10);
+    --second-base-color: var(--color-warningA-3);
+    --text-color: black;
+    --text-color-muted: var(--color-warning-10);
+  }
+
+  &--color-disabled,
+  &[disabled] {
+    user-select: none !important;
+    pointer-events: none !important;
+    --base-color: var(--color-disabled-8);
+    --second-base-color: var(--color-disabled-4);
+    --text-color: var(--color-disabled-10);
+    --text-color-muted: var(--color-disabled-9);
+
+    &.button--filled {
+      --text-color: var(--color-disabled-2);
+    }
+  }
+
+  // Variants
+
+  &--ringed {
+    border: 1px solid var(--base-color);
+    background-color: transparent;
+    --text-color: var(--base-color);
+
+    &.button--color-secondary {
+      border: 1px solid var(--color-border-base);
+    }
+  }
+
+  &--ghost {
+    border: 1px solid var(--base-color);
+    background-color: var(--second-base-color);
+    --text-color: var(--text-color-muted);
+  }
+
+  &--soft {
+    background-color: var(--second-base-color);
+    --text-color: var(--text-color-muted);
+  }
+
+  &--glass {
+    background-color: var(--second-base-color);
+    --text-color: var(--text-color-muted);
+    backdrop-filter: blur(15px);
+  }
+}

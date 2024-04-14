@@ -19,9 +19,9 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'prettier',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'mockApi'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'unused-imports', 'prettier'],
+  plugins: ['react-refresh', 'import', 'unused-imports', 'prettier'],
   rules: {
     'prettier/prettier': 1,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
@@ -30,5 +30,23 @@ module.exports = {
     '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-misused-promises': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-return': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    'no-console': 'warn',
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    '@typescript-eslint/unbound-method': 'off',
+    '@typescript-eslint/no-floating-promises': 'off',
+    '@typescript-eslint/no-redundant-type-constituents': 'off',
   },
+  overrides: [
+    {
+      files: ['*'],
+      excludedFiles: ['*Page*.tsx', 'vite.config.ts'],
+      rules: {
+        'import/no-default-export': 'error',
+      },
+    },
+  ],
 };

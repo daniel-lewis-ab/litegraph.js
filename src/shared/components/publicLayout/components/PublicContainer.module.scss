@@ -1,0 +1,15 @@
+.publicContainer {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+
+  @screen md {
+  }
+  @screen lg {
+    max-width: calc(100% - 80px);
+  }
+
+  @screen 3xl {
+    max-width: 1500px;
+  }
+}

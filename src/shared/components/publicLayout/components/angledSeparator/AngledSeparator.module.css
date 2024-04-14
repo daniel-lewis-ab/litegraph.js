@@ -1,0 +1,30 @@
+.separator {
+  position: relative;
+  display: block;
+  overflow: visible;
+  border-top: 1px solid var(--color-surface-5);
+}
+
+.separator:before {
+  display: block;
+  content: ' ';
+  top: -1px;
+  height: 1px;
+  width: 50vw;
+  transform: translateX(-100%);
+  background: var(--color-surface-5);
+  position: absolute;
+}
+
+.separator:after {
+  transform-origin: 0 0;
+  display: block;
+  content: ' ';
+  background: var(--color-surface-5);
+  position: absolute;
+  right: 0;
+  height: 1px;
+  top: 0;
+  width: 40vw;
+  transform: translateX(100%) rotate(45deg);
+}

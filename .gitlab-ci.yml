@@ -1,21 +1,54 @@
 stages:
+  - lint
+  - test
   - build
   - deploy
 
 variables:
   INFRASTRUCTURE_URL: https://gitlab-ci-token:${GITLAB_ACCESS_TOKEN}@gitlab.com/plai-app/ai-studio/orchestra-infrastructure.git
   IMAGE_TAG: gcr.io/plaidev/plai-backend-registry-repository/salt-frontend:$CI_COMMIT_SHORT_SHA
+  IFRAME_TAG: gcr.io/plaidev/plai-backend-registry-repository/salt-frontend-comfy-iframe:$CI_COMMIT_SHORT_SHA
   SHORT_HASH: $CI_COMMIT_SHORT_SHA
+
+lint:
+  stage: lint
+  image: node:latest
+  script:
+    - npm install
+    - npm run lint
+
+test:
+  stage: test
+  image: node:latest
+  script:
+    - npm install
+    - npm run build-dev
 
 publish:
   stage: build
   image: docker:dind
   services:
     - docker:dind
+  before_script:
+    - if [ "$CI_COMMIT_REF_NAME" = "main" ]; then export BUILD_TYPE="main"; else export BUILD_TYPE="develop"; fi
   script:
-    - docker build --tag $IMAGE_TAG .
+    - docker build --build-arg BUILD_TYPE=$BUILD_TYPE --tag $IMAGE_TAG .
     - cat $GCP_SA_KEY | docker login -u _json_key --password-stdin https://gcr.io
     - docker push $IMAGE_TAG
+  only:
+    - develop
+    - main
+
+publish-iframe:
+  stage: build
+  image: docker:dind
+  services:
+    - docker:dind
+  script:
+    - cd comfyui
+    - docker build --tag $IFRAME_TAG .
+    - cat $GCP_SA_KEY | docker login -u _json_key --password-stdin https://gcr.io
+    - docker push $IFRAME_TAG
   only:
     - develop
     - main
@@ -34,8 +67,31 @@ deploy-dev:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git clone $INFRASTRUCTURE_URL infrastructure
-    - cd infrastructure/manifests/orchestra-backend/overlays/dev
+    - cd infrastructure/manifests/salt-frontend/overlays/dev
     - kustomize edit set image salt-frontend=$IMAGE_TAG
+    - kustomize edit set image comfy-iframe=$IFRAME_TAG
     - kustomize build > ../../kustomization/dev/dev.yaml
     - git commit -am "Set salt-frontend dev image tag to $SHORT_HASH"
+    - git push origin main
+
+deploy-prod:
+  stage: deploy
+  only:
+    - main
+  when: manual
+  environment:
+    name: prod
+  image:
+    name: alpine/git
+    entrypoint: [ "" ]
+  script:
+    - apk add kustomize yq nodejs npm --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git clone $INFRASTRUCTURE_URL infrastructure
+    - cd infrastructure/manifests/salt-frontend/overlays/prod
+    - kustomize edit set image salt-frontend=$IMAGE_TAG
+    - kustomize edit set image comfy-iframe=$IFRAME_TAG
+    - kustomize build > ../../kustomization/prod/prod.yaml
+    - git commit -am "Set salt-frontend prod image tag to $SHORT_HASH"
     - git push origin main

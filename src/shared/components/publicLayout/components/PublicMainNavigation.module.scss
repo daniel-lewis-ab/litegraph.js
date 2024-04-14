@@ -1,0 +1,44 @@
+.mainNavigation {
+  @apply sm:items-center;
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: var(--nav-height);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobileMenu {
+  @apply sm:hidden;
+  position: absolute;
+  top: var(--nav-height);
+  left: 100%;
+  height: calc(100dvh - var(--nav-height));
+  min-height: --webkit-fill-available;
+  width: 100%;
+  z-index: -1;
+}
+
+.mobileMenuOverlay {
+  transform: translate(none) scale(1) rotate(none);
+  opacity: 1;
+  translate: none;
+  scale: none;
+  rotate: none;
+  @apply relative flex h-full flex-col justify-between;
+}
+
+.backdrop {
+  @apply absolute h-full w-full;
+  top: -5rem;
+  left: -1.5rem;
+  width: calc(100vw + 3rem);
+  height: calc(100% + 5rem);
+  z-index: var(--z-minus);
+  backdrop-filter: blur(5rem) saturate(150%);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mobileMenuItemLink {
+  @apply text-2xl;
+}

@@ -1,16 +1,34 @@
 import { Navigate } from 'react-router-dom';
-import FullScreenLoader from '../fullScreenLoader/FullScreenLoader';
+import { CenteredLoader } from '../centeredLoader/CenteredLoader';
 import { useAuth } from '@/hooks/useAuth/useAuth';
+import { routes } from '@/routes/routes';
+import { Head } from 'vite-react-ssg';
 
 export const AuthorizedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { isAuthorizing, currentUser } = useAuth();
+  const {
+    state: { isAuthorized, isAuthorizing },
+  } = useAuth();
 
   if (isAuthorizing) {
-    return <FullScreenLoader />;
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex, nofollow" />
+        </Head>
+        <CenteredLoader isFullscreen />
+      </>
+    );
   }
 
-  if (!currentUser) {
-    return <Navigate to="/login" replace />;
+  if (!isAuthorized) {
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex, nofollow" />
+        </Head>
+        <Navigate to={routes.login} replace />
+      </>
+    );
   }
 
   return children;
