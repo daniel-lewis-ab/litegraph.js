@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  salt-frontend:
+    build:
+      args:
+        - BUILD_TYPE=dev
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5173:8080'
+    restart: always
+    volumes:
+      - .:/app
+    depends_on:
+      - comfyui-iframe
+
+  comfyui-iframe:
+    image: comfyui-iframe:latest
+    build:
+      context: ./comfyui/
+    ports:
+      - '8080:80'
+    volumes:
+      - ./comfyui:/usr/share/nginx/html
+    restart: always
