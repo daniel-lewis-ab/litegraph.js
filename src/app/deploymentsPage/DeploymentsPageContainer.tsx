@@ -7,15 +7,20 @@ import { DeploymentStatus } from '@/api/types';
 import { useFetchDeployment } from '@/api/hooks/useDeploymentQuery/useDeploymentQuery';
 import { saveJsonFile } from '@/shared/functions/saveJsonFile';
 import toast from 'react-hot-toast';
+import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
 
 export const DeploymentsPageContainer = () => {
   const { prefetchDeployment, fetchDeployment } = useFetchDeployment();
-  const { deployments, isLoading } = useDeploymentsQuery();
+  const { deployments, isLoading, isError } = useDeploymentsQuery();
   const { mutate: changeDeploymentState } = useChangeDeploymentStateMutation();
   const { mutateAsync: deleteDeployment } = useDeleteDeploymentMutation();
 
   if (isLoading) {
     return <CenteredLoader />;
+  }
+
+  if (isError) {
+    return <PageErrorTemplate variant="down" inApp />;
   }
 
   const handleDeploymentStatusChange = (id: string, status: DeploymentStatus) => {

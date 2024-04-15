@@ -5,14 +5,19 @@ import { useDeleteWorkflowMutation } from '@/api/hooks/useDeleteWorkflowMutation
 import { useFetchWorkflowDetails } from '@/api/hooks/useWorkflowDetailsQuery/useWorkflowDetailsQuery';
 import toast from 'react-hot-toast';
 import { saveJsonFile } from '@/shared/functions/saveJsonFile';
+import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
 
 export const WorkflowsPageContainer = () => {
   const { fetchWorkflowDetails: fetchWorkflow, prefetchWorkflowDetails: prefetchWorkflow } = useFetchWorkflowDetails();
-  const { workflows, isLoading } = useWorkflowsQuery();
+  const { workflows, isLoading, isError } = useWorkflowsQuery();
   const { mutateAsync: deleteWorkflow } = useDeleteWorkflowMutation();
 
   if (isLoading) {
     return <CenteredLoader />;
+  }
+
+  if (isError) {
+    return <PageErrorTemplate variant="down" inApp />;
   }
 
   const onDelete = async (id: string) => {
