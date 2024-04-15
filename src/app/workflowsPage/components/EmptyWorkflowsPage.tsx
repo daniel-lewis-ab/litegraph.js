@@ -7,13 +7,17 @@ export const EmptyWorkflowsPage = () => (
   <div className="flex w-full items-center justify-center">
     <div className="w-[34%] *:mb-3">
       <Link
-        className="border-border-default group flex w-full flex-row items-center rounded-3xl border px-6 py-4"
+        className="group flex w-full flex-row items-center rounded-xl border border-border-muted px-6 py-4"
         to={routes.newWorkflow}
       >
-        <Icon size={20} icon={faPlus} className="rounded-full bg-surface-3 p-[12px] group-hover:bg-surface-5" />
+        <Icon
+          size={20}
+          icon={faPlus}
+          className="rounded-full bg-surface-3 p-[13px] transition-all group-hover:bg-surface-5"
+        />
         <div className="flex flex-col items-start justify-start pl-2.5">
           <p className="font-bold">New Workflow</p>
-          <p className="font-light text-text-muted">Start with an empty project</p>
+          <p className="font-light text-text-muted">Start with an empty workflow</p>
         </div>
       </Link>
       {/* <button className="group flex w-full flex-row items-center rounded-3xl border border-border-default px-6 py-4">
