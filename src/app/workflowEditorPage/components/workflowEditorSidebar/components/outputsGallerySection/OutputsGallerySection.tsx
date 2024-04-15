@@ -73,6 +73,8 @@ export const OutputsGallerySection = ({
     setSelectedImageId((oldImgId) => (oldImgId === id ? null : id));
   };
 
+  const selectedImage = assets.find((i) => i.id === selectedImageId);
+
   return (
     <EditorSection icon={faImages} title="Outputs" onClose={onClose} className="relative">
       {assets.length === 0 ? <p className="text-text-subtle">No outputs yet</p> : null}
@@ -96,7 +98,7 @@ export const OutputsGallerySection = ({
       <div className="bottom-gradient pointer-events-none absolute bottom-0 left-0 right-0 h-[15%] opacity-80"></div>
       {selectedImageId !== null ? (
         <div className="absolute bottom-0 left-0 right-0 m-4 flex justify-between rounded-lg bg-primary-10 px-4 py-3 *:text-black">
-          <p className="font-medium">txt2img-optimized.png</p>
+          <p className="font-medium">{selectedImage?.name}</p>
           <div className="flex flex-row *:mr-2">
             <button className="h-6 w-6" onClick={() => onCopyAssetContent(selectedImageId)}>
               <Icon icon={faBracketsCurly} />
