@@ -15,7 +15,7 @@ import {
 } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { useQueryClient } from '@tanstack/react-query';
 import clsx from 'clsx';
-import { ReactNode } from 'react';
+import { HTMLAttributeAnchorTarget, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Logo } from '../icons/Logo';
 import { constants } from '@/contants';
@@ -52,7 +52,7 @@ export const SideMenu = () => {
           </div>
 
           <div className="flex flex-col">
-            <SideMenuButton tooltip="Docs">
+            <SideMenuButton to={constants.helpDocs} target="_blank" tooltip="Docs">
               <Icon size={ICON_SIZE} icon={faBookOpenCover} />
             </SideMenuButton>
 
@@ -79,7 +79,7 @@ type SideMenuButtonProps = {
   to?: string;
   tooltip?: string;
   tooltipIcon?: IconProps['icon'];
-  target?: string;
+  target?: HTMLAttributeAnchorTarget;
   onClick?: () => void;
 };
 
