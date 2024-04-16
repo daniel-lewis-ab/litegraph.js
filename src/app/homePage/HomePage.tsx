@@ -80,7 +80,7 @@ const Section = ({
 
 const DeploymentsSection = () => {
   return (
-    <Section name="deployments" id="deployments" className="lg:pt-0">
+    <Section name="deployments" id="deployments" className="pt-24">
       <div className="grid grid-cols-1 items-center gap-8 pb-12 lg:grid-cols-2">
         <div className="order-last md:order-first">
           <img src={img} alt={'Deploy to Discord and APIs with Salt'} />
