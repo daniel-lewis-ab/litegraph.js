@@ -88,8 +88,8 @@ class ComfyGraphPatcher extends EventTarget {
                 loadPrompt();
                 this.postMessageToParent('prompt_load_error');
               });
-            break;
           }
+          break;
         }
         case 'get_prompt': {
           this.app
@@ -110,8 +110,8 @@ class ComfyGraphPatcher extends EventTarget {
                 this.updateNodeDefinitions();
               });
             }))
-          )
-            break;
+          );
+          break;
         }
         case 'export': {
           this.app
