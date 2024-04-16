@@ -54,7 +54,7 @@ const PublicMobileMenu = ({ show }: { show: boolean }) => {
             animate={{ opacity: show ? 1 : 0, y: show ? 0 : 24 }}
             transition={{ delay: 0.64 }}
           >
-            <Button variant="filled" size="md" color="primary" className="block w-full" to={routes.workflows}>
+            <Button variant="filled" size="md" color="primary" className="block w-full" to={routes.workflows} asLink>
               <div className="py-1">Get started</div>
             </Button>
           </motion.div>

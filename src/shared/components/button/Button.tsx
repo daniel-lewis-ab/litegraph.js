@@ -45,7 +45,7 @@ export const Button = ({
   to,
   onMouseOver,
 }: ButtonProps) => {
-  const ButtonOrLink = asLink && to ? Link : 'button';
+  const ButtonOrLink = asLink ?? to ? Link : 'button';
 
   return (
     <ButtonOrLink
