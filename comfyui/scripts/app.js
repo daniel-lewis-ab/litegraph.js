@@ -1267,7 +1267,7 @@ export class ComfyApp {
       this.graph.setDirtyCanvas(true, false);
     });
 
-    window.addEventListener('executing', ({ detail }) => {
+    api.addEventListener('executing', ({ detail }) => {
       this.progress = null;
       this.runningNodeId = detail;
       this.graph.setDirtyCanvas(true, false);

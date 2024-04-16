@@ -171,31 +171,31 @@ class ComfyGraphPatcher extends EventTarget {
             this.clientId = internalMessage.data.sid;
             window.name = this.clientId;
           }
-          window.dispatchEvent(new CustomEvent('status', { detail: internalMessage.data.status }));
+          this.dispatchEvent(new CustomEvent('status', { detail: internalMessage.data.status }));
           break;
         }
         case 'progress': {
-          window.dispatchEvent(new CustomEvent('progress', { detail: internalMessage.data }));
+          this.dispatchEvent(new CustomEvent('progress', { detail: internalMessage.data }));
           break;
         }
         case 'executing': {
-          window.dispatchEvent(new CustomEvent('executing', { detail: internalMessage.data.node }));
+          this.dispatchEvent(new CustomEvent('executing', { detail: internalMessage.data.node }));
           break;
         }
         case 'executed': {
-          window.dispatchEvent(new CustomEvent('executed', { detail: internalMessage.data }));
+          this.dispatchEvent(new CustomEvent('executed', { detail: internalMessage.data }));
           break;
         }
         case 'execution_start': {
-          window.dispatchEvent(new CustomEvent('execution_start', { detail: internalMessage.data }));
+          this.dispatchEvent(new CustomEvent('execution_start', { detail: internalMessage.data }));
           break;
         }
         case 'execution_error': {
-          window.dispatchEvent(new CustomEvent('execution_error', { detail: internalMessage.data }));
+          this.dispatchEvent(new CustomEvent('execution_error', { detail: internalMessage.data }));
           break;
         }
         case 'execution_cached': {
-          window.dispatchEvent(new CustomEvent('execution_cached', { detail: internalMessage.data }));
+          this.dispatchEvent(new CustomEvent('execution_cached', { detail: internalMessage.data }));
           break;
         }
         default:
