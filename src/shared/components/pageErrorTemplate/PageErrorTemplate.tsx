@@ -23,7 +23,7 @@ export const PageErrorTemplate = ({ variant, className, inApp = false }: PageErr
           inApp ? (
             <Button onClick={() => navigate(routes.workflows)}>Go to workflows</Button>
           ) : (
-            <Button onClick={() => navigate(routes.workflows)}>Go to Homepage</Button>
+            <Button onClick={() => navigate(routes.home)}>Go to Homepage</Button>
           )
         ) : (
           <div className="flex flex-row *:first:mr-4">

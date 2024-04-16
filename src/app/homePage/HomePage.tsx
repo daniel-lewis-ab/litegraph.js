@@ -29,7 +29,7 @@ export const HomePage = () => {
         <div className={s.content}>
           <div className="relative">
             <PublicLayout.Container>
-              <div className="flex min-h-[70vh]  flex-col content-center items-center justify-end space-y-6 text-center md:min-h-[50vh] md:justify-center md:pt-[20vh] lg:mb-[-10vh] lg:min-h-[70vh] lg:pt-[33vh]">
+              <div className="flex min-h-[70vh]  flex-col content-center items-center justify-end space-y-6 text-center md:min-h-[50vh] md:justify-center md:pt-[20vh] lg:min-h-[70vh] lg:pt-[33vh]">
                 <h1 className="max-w-2xl text-5xl font-medium leading-[1] text-surface-12 md:text-8xl">
                   Workflows for the real world
                 </h1>
@@ -58,10 +58,20 @@ export const HomePage = () => {
 
 export default HomePage;
 
-const Section = ({ children, name, id }: { children: React.ReactNode; name: string; id: string }) => {
+const Section = ({
+  children,
+  name,
+  id,
+  className,
+}: {
+  children: React.ReactNode;
+  name: string;
+  id: string;
+  className?: string;
+}) => {
   return (
     <PublicLayout.Container>
-      <section id={id} className={clsx(s.section, s[`section--${name}`])}>
+      <section id={id} className={clsx(s.section, s[`section--${name}`], className)}>
         {children}
       </section>
     </PublicLayout.Container>
@@ -70,8 +80,8 @@ const Section = ({ children, name, id }: { children: React.ReactNode; name: stri
 
 const DeploymentsSection = () => {
   return (
-    <Section name="deployments" id="deployments">
-      <div className="grid grid-cols-1 items-center gap-8 py-12 lg:grid-cols-2">
+    <Section name="deployments" id="deployments" className="lg:pt-0">
+      <div className="grid grid-cols-1 items-center gap-8 pb-12 lg:grid-cols-2">
         <div className="order-last md:order-first">
           <img src={img} alt={'Deploy to Discord and APIs with Salt'} />
         </div>

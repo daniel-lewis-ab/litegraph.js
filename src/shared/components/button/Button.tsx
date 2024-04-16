@@ -45,7 +45,7 @@ export const Button = ({
   to,
   onMouseOver,
 }: ButtonProps) => {
-  const ButtonOrLink = asLink && to ? Link : 'button';
+  const ButtonOrLink = asLink ?? to ? Link : 'button';
 
   return (
     <ButtonOrLink
@@ -70,7 +70,7 @@ export const Button = ({
       onMouseOver={onMouseOver}
     >
       {leftIcon && <Icon icon={leftIcon} size={iconSize(size)} />}
-      {isLoading ? <LoaderIcon /> : <span>{children}</span>}
+      {isLoading ? <LoaderIcon size={20} /> : <span>{children}</span>}
       {rightIcon && <Icon icon={rightIcon} size={iconSize(size)} />}
     </ButtonOrLink>
   );
