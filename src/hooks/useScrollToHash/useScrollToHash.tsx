@@ -6,9 +6,8 @@ export const useScrollToHash = () => {
 
   useEffect(() => {
     if (location.hash) {
-      console.log('location.hash', location.hash);
       const element = document.getElementById(location.hash.substring(1));
-      console.log('element', element);
+
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
