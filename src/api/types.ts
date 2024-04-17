@@ -170,6 +170,15 @@ export type PreviewExecutionData = {
 
 type GeneralIframeMessageData = { data: object; type: string };
 
+export type ParsedComfyUIExecutionError = {
+  error: {
+    type: string;
+    message: string;
+    details: string;
+  };
+  node_errors: [];
+};
+
 // @TODO
 export type WebSocketMessage = {
   errors: object[];

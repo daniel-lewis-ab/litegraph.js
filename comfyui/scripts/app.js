@@ -2048,7 +2048,7 @@ export class ComfyApp {
       return '(unknown error)';
     }
 
-    const traceback = error.traceback.join('');
+    const traceback = error.traceback?.join('');
     const nodeId = error.node_id;
     const nodeType = error.node_type;
 

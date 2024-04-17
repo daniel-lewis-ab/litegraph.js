@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 import {
   ApiWorkflowOutputAsset,
   ExecutionFinishedData,
   GetWorkflowOutputAssetsResponse,
   GetWorkflowExecutionsResponse,
   WebSocketMessage,
+  ParsedComfyUIExecutionError,
 } from '@/api/types';
 
 import { useEffect } from 'react';
@@ -62,10 +64,22 @@ export const useUpdateWorkflowFromWebsocket = () => {
       if (message.data.type === 'send_response') {
         const data = (message.data as ExecutionFinishedData).data;
         if (data.error?.length) {
-          // eslint-disable-next-line no-console
           console.error('Workflow job failed, details:', data.error);
+          let specificErrorShown = false;
+          try {
+            const parsedError: ParsedComfyUIExecutionError = JSON.parse(data.error.replace(/'/g, '"'));
+            if (parsedError?.error?.message) {
+              toast.error('Workflow execution failed: ' + parsedError.error.message, { position: 'bottom-center' });
+              specificErrorShown = true;
+            }
+          } catch (e) {
+            console.error('Error parsing comfy error', e);
+          }
 
-          toast.error('Workflow execution failed', { position: 'bottom-center' });
+          if (!specificErrorShown) {
+            toast.error('Workflow execution failed', { position: 'bottom-center' });
+          }
+
           updateExecutionStatus({
             workflowId: data.workflow_id,
             executionId: data.execution_id,
@@ -90,3 +104,5 @@ export const useUpdateWorkflowFromWebsocket = () => {
     handleWebsocketMessage(lastMessage);
   }, [lastMessage, queryClient]);
 };
+
+("{'error': {'type': 'prompt_no_outputs', 'message': 'Prompt has no outputs', 'details': '', 'extra_info': {}}, 'node_errors': []}");

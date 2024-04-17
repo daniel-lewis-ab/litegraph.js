@@ -18,6 +18,9 @@ export const App = ({ children }: { children: ReactNode }) => {
           <meta name="robots" content="noindex, nofollow" />
         </Head>
       )}
+      <Head>
+        <title>Salt AI - Workflows for the real world</title>
+      </Head>
       {/* @TODO: Report to sentry */}
       <ErrorBoundary fallback={<PageErrorTemplate variant="down" className="h-screen" />}>
         <AuthContextProvider>
