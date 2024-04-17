@@ -11,10 +11,13 @@ import s from './HomePage.module.css';
 import img from './images/deploy-discord-min.png';
 import gpuPromoImg from './images/promo-gpu.svg';
 import ideImg from './images/promo-ide.jpg';
+import { useScrollToHash } from '@/hooks/useScrollToHash/useScrollToHash';
 
 const LogoAnimation = lazy(() => import('./components/LogoAnimation'));
 
 export const HomePage = () => {
+  useScrollToHash();
+
   return (
     <PublicLayout>
       <div className={s.homePage}>
@@ -124,7 +127,7 @@ const GPUSection = () => {
 
 const IDESection = () => {
   return (
-    <Section name="IDE" id="editor">
+    <Section name="IDE" id="ide">
       <div className="grid-cols-2 items-center space-y-4 py-12 md:space-y-0 lg:grid">
         <div>
           <img src={ideImg} className="rounded-lg border border-border-muted" />
