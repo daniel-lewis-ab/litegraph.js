@@ -68,14 +68,14 @@ export const OutputsGallerySection = ({
   prefetchAssetInfo,
   onClose,
 }: OutputsGalleryGridProps) => {
-  const [imageIdToDelete, setImageIdToDelete] = useState<string | null>(null);
-  const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
+  const [assetIdToDelete, setAssetIdToDelete] = useState<string | null>(null);
+  const [selectedAssetId, setSelectedAssetId] = useState<string | null>(null);
   const handleImageClick = (id: string) => {
     prefetchAssetInfo(id);
-    setSelectedImageId((oldImgId) => (oldImgId === id ? null : id));
+    setSelectedAssetId((oldImgId) => (oldImgId === id ? null : id));
   };
 
-  const selectedImage = assets.find((i) => i.id === selectedImageId);
+  const selectedAsset = assets.find((i) => i.id === selectedAssetId);
 
   return (
     <EditorSection icon={faImages} title="Outputs" onClose={onClose} className="relative">
@@ -90,7 +90,7 @@ export const OutputsGallerySection = ({
                 name={i.name}
                 created_at={i.created_at}
                 size={i.size}
-                isSelected={selectedImageId === i.id}
+                isSelected={selectedAssetId === i.id}
                 onClick={() => handleImageClick(i.id)}
               />
             ))}
@@ -98,37 +98,37 @@ export const OutputsGallerySection = ({
         </div>
       ) : null}
       <div className="bottom-gradient pointer-events-none absolute bottom-0 left-0 right-0 h-[15%] opacity-80"></div>
-      {selectedImageId !== null ? (
+      {selectedAssetId !== null ? (
         <div className="absolute bottom-0 left-0 right-0 m-4 flex justify-between rounded-lg bg-primary-10 px-4 py-3 *:text-black">
           <p className="font-medium">
-            {selectedImage?.name}.{getSelectedAssetExtension(selectedImage!.storage_path)}
+            {selectedAsset?.name}.{getSelectedAssetExtension(selectedAsset!.storage_path)}
           </p>
           <div className="flex flex-row *:mr-2">
-            <button className="h-6 w-6" onClick={() => onCopyAssetContent(selectedImageId)}>
+            <button className="h-6 w-6" onClick={() => onCopyAssetContent(selectedAssetId)}>
               <Icon icon={faBracketsCurly} />
             </button>
-            <button className="h-6 w-6" onClick={() => onDownloadAsset(selectedImageId)}>
+            <button className="h-6 w-6" onClick={() => onDownloadAsset(selectedAssetId)}>
               <Icon icon={faArrowDownToLine} />
             </button>
-            <button className="h-6 w-6" onClick={() => setImageIdToDelete(selectedImageId)}>
+            <button className="h-6 w-6" onClick={() => setAssetIdToDelete(selectedAssetId)}>
               <Icon icon={faTrash} />
             </button>
-            <button className="font-medium" onClick={() => setSelectedImageId(null)}>
+            <button className="font-medium" onClick={() => setSelectedAssetId(null)}>
               Cancel
             </button>
           </div>
         </div>
       ) : null}
       <DeleteAssetConfirmationDialog
-        isOpen={!!imageIdToDelete}
-        onClose={() => setImageIdToDelete(null)}
+        isOpen={!!assetIdToDelete}
+        onClose={() => setAssetIdToDelete(null)}
         onConfirm={async () => {
-          const imageToDelete = assets.find((i) => i.id === imageIdToDelete);
+          const imageToDelete = assets.find((i) => i.id === assetIdToDelete);
           const res = await onDeleteOutputAsset({
             assetId: imageToDelete!.id,
             executionId: imageToDelete!.workflow_execution_id,
           });
-          setSelectedImageId(null);
+          setSelectedAssetId(null);
           return res;
         }}
       />
