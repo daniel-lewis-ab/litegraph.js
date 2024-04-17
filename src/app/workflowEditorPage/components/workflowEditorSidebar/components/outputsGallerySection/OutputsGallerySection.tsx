@@ -58,6 +58,8 @@ const TILE_IMG_CONFIG = {
   height: 200,
 };
 
+const getSelectedAssetExtension = (assetPath: string) => assetPath.split('.')?.[1];
+
 export const OutputsGallerySection = ({
   assets,
   onCopyAssetContent,
@@ -98,7 +100,9 @@ export const OutputsGallerySection = ({
       <div className="bottom-gradient pointer-events-none absolute bottom-0 left-0 right-0 h-[15%] opacity-80"></div>
       {selectedImageId !== null ? (
         <div className="absolute bottom-0 left-0 right-0 m-4 flex justify-between rounded-lg bg-primary-10 px-4 py-3 *:text-black">
-          <p className="font-medium">{selectedImage?.name}</p>
+          <p className="font-medium">
+            {selectedImage?.name}.{getSelectedAssetExtension(selectedImage!.storage_path)}
+          </p>
           <div className="flex flex-row *:mr-2">
             <button className="h-6 w-6" onClick={() => onCopyAssetContent(selectedImageId)}>
               <Icon icon={faBracketsCurly} />
