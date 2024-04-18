@@ -15,7 +15,9 @@
     "generate-datocms-types": "graphql-codegen --config codegen.yml",
     "robots:prod": "cp robots/robots.prod.txt dist/robots.txt",
     "robots:dev": "cp robots/robots.dev.txt dist/robots.txt",
-    "bundle-analyze": "npx vite-bundle-visualizer -t sunburst"
+    "bundle-analyze": "npx vite-bundle-visualizer -t sunburst",
+    "e2e": "npx playwright test",
+    "e2e-ui": "npm run e2e -- --ui"
   },
   "dependencies": {
     "@awesome.me/kit-b6cda292ae": "^1.0.7",
@@ -37,9 +39,9 @@
     "axios": "^1.6.7",
     "axios-auth-refresh": "^3.3.6",
     "firebase": "^10.8.0",
-    "js-cookie": "^3.0.5",
     "framer-motion": "^11.0.25",
     "framer-motion-3d": "^11.0.25",
+    "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "lodash.throttle": "^4.1.1",
     "maath": "^0.10.7",
@@ -59,8 +61,9 @@
   },
   "devDependencies": {
     "@childrentime/devcert": "^1.2.8",
-    "@types/js-cookie": "^3.0.6",
     "@graphql-codegen/cli": "^5.0.2",
+    "@playwright/test": "^1.43.1",
+    "@types/js-cookie": "^3.0.6",
     "@types/lodash.throttle": "^4.1.9",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.55",

@@ -25,7 +25,7 @@
       ],
     }
   },
-  "include": ["src"],
+  "include": ["src", "tests/**/*.ts"],
   "exclude": ["comfyui", "mockApi"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
