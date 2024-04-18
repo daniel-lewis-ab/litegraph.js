@@ -69,7 +69,7 @@ export const links = {
   },
 };
 
-export const mainMenuLinks = [links.salt.examples, links.salt.docs, links.salt.blog];
+export const mainMenuLinks = [links.salt.examples, links.salt.docs, links.salt.blog, links.social.discord];
 export const mobileMenuLinks = [links.salt.examples, links.salt.docs, links.salt.blog, links.salt.about];
 
 export const socialLinks = [links.social.x, links.social.discord, links.social.github, links.social.linkedIn];

@@ -27,6 +27,12 @@ test.describe('Main Navigation Links', () => {
     expect(page.url()).toContain('https://blog.getsalt.ai/');
   });
 
+  test('Navigate to Discord', async ({ page }) => {
+    await page.getByLabel('Global').getByRole('link', { name: 'Discord' }).click();
+    await page.waitForURL('https://discord.com/invite/saltai');
+    expect(page.url()).toContain('https://discord.com/invite/saltai');
+  });
+
   test('Navigate to login page', async ({ page }) => {
     page.getByLabel('Global').getByRole('link', { name: 'Get started' }).click();
     await page.waitForURL('**/login');

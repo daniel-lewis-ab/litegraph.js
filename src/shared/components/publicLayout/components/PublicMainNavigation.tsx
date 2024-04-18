@@ -104,7 +104,7 @@ export const PublicMainNavigation = () => {
             <NavLink className="align dark:text-white md:min-w-[200px]" to={routes.home} title="Salt AI">
               <LogoFull className="w-16" />
             </NavLink>
-            <div className="hidden flex-1 items-center justify-center space-x-10 text-center sm:flex">
+            <div className="hidden flex-1 items-center justify-center space-x-5 text-center sm:flex md:space-x-10">
               {mainMenuLinks.map((item) => (
                 <NavLink
                   key={item.label}
