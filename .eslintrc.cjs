@@ -19,7 +19,7 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'prettier',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs', 'mockApi'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'mockApi', 'playwright.config.ts'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'import', 'unused-imports', 'prettier'],
   rules: {
