@@ -22,7 +22,7 @@ export const EmptyWorkflowsPage = () => (
           />
           <div className="flex flex-col items-start justify-start pl-2.5">
             <p className="font-bold">New Workflow</p>
-            <p className="font-light text-text-muted">Start with an empty workflow</p>
+            <p className="font-light text-text-muted">Start with default workflow</p>
           </div>
         </Link>
         {/* <button className="group flex w-full flex-row items-center rounded-3xl border border-border-default px-6 py-4">
