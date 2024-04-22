@@ -18,15 +18,13 @@ app.registerExtension({
             const onExecuted = nodeType.prototype.onExecuted;
             nodeType.prototype.onExecuted = function (message) {
                 onExecuted?.apply(this, arguments);
-                let m;
                 if(Array.isArray(message.text)){
-                    m = message.text.join("");
+                    this.showValueWidget.value = message.text.join("");
                 } else if(message.text) {
-                    m = JSON.stringify(message.text);
+                    JSON.stringify(message.text);
                 } else {
-                    m = JSON.stringify(message);
-                }
-                this.showValueWidget.value = m;
+                    JSON.stringify(message);
+                }   
             };
         }
     },

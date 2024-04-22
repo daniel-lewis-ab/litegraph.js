@@ -15,7 +15,6 @@ export const NodeTypesString = {
     NODE_COLLECTOR: addRgthree('Node Collector'),
     REROUTE: addRgthree('Reroute'),
     RANDOM_UNMUTER: addRgthree('Random Unmuter'),
-    SEED: addRgthree('Seed'),
     BOOKMARK: addRgthree('Bookmark'),
     IMAGE_COMPARER: addRgthree('Image Comparer'),
 };

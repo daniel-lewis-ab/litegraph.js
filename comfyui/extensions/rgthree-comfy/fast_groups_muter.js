@@ -1,14 +1,148 @@
 import { app } from "../../scripts/app.js";
 import { RgthreeBaseNode } from "./base_node.js";
 import { NodeTypesString } from "./constants.js";
-import { SERVICE as FAST_GROUPS_SERVICE } from "./fast_groups_service.js";
-import { drawNodeWidget, fitString } from "./utils_canvas.js";
+import { fitString } from "./utils_canvas.js";
 const PROPERTY_SORT = "sort";
 const PROPERTY_SORT_CUSTOM_ALPHA = "customSortAlphabet";
 const PROPERTY_MATCH_COLORS = "matchColors";
 const PROPERTY_MATCH_TITLE = "matchTitle";
 const PROPERTY_SHOW_NAV = "showNav";
 const PROPERTY_RESTRICTION = "toggleRestriction";
+class FastGroupsService {
+    constructor() {
+        this.msThreshold = 400;
+        this.msLastUnsorted = 0;
+        this.msLastAlpha = 0;
+        this.msLastPosition = 0;
+        this.groupsUnsorted = [];
+        this.groupsSortedAlpha = [];
+        this.groupsSortedPosition = [];
+        this.fastGroupNodes = [];
+        this.runScheduledForMs = null;
+        this.runScheduleTimeout = null;
+        this.runScheduleAnimation = null;
+        this.cachedNodeBoundings = null;
+    }
+    addFastGroupNode(node) {
+        this.fastGroupNodes.push(node);
+        this.scheduleRun(8);
+    }
+    removeFastGroupNode(node) {
+        var _a;
+        const index = this.fastGroupNodes.indexOf(node);
+        if (index > -1) {
+            this.fastGroupNodes.splice(index, 1);
+        }
+        if (!((_a = this.fastGroupNodes) === null || _a === void 0 ? void 0 : _a.length)) {
+            this.clearScheduledRun();
+            this.groupsUnsorted = [];
+            this.groupsSortedAlpha = [];
+            this.groupsSortedPosition = [];
+        }
+    }
+    run() {
+        if (!this.runScheduledForMs) {
+            return;
+        }
+        for (const node of this.fastGroupNodes) {
+            node.refreshWidgets();
+        }
+        this.clearScheduledRun();
+        this.scheduleRun();
+    }
+    scheduleRun(ms = 500) {
+        if (this.runScheduledForMs && ms < this.runScheduledForMs) {
+            this.clearScheduledRun();
+        }
+        if (!this.runScheduledForMs && this.fastGroupNodes.length) {
+            this.runScheduledForMs = ms;
+            this.runScheduleTimeout = setTimeout(() => {
+                this.runScheduleAnimation = requestAnimationFrame(() => this.run());
+            }, ms);
+        }
+    }
+    clearScheduledRun() {
+        this.runScheduleTimeout && clearTimeout(this.runScheduleTimeout);
+        this.runScheduleAnimation && cancelAnimationFrame(this.runScheduleAnimation);
+        this.runScheduleTimeout = null;
+        this.runScheduleAnimation = null;
+        this.runScheduledForMs = null;
+    }
+    getBoundingsForAllNodes() {
+        if (!this.cachedNodeBoundings) {
+            this.cachedNodeBoundings = {};
+            for (const node of app.graph._nodes) {
+                this.cachedNodeBoundings[node.id] = node.getBounding();
+            }
+            setTimeout(() => {
+                this.cachedNodeBoundings = null;
+            }, 50);
+        }
+        return this.cachedNodeBoundings;
+    }
+    recomputeInsideNodesForGroup(group) {
+        const cachedBoundings = this.getBoundingsForAllNodes();
+        const nodes = group.graph._nodes;
+        group._nodes.length = 0;
+        for (const node of nodes) {
+            const node_bounding = cachedBoundings[node.id];
+            if (!node_bounding || !LiteGraph.overlapBounding(group._bounding, node_bounding)) {
+                continue;
+            }
+            group._nodes.push(node);
+        }
+    }
+    getGroupsUnsorted(now) {
+        const graph = app.graph;
+        if (!this.groupsUnsorted.length || now - this.msLastUnsorted > this.msThreshold) {
+            this.groupsUnsorted = [...graph._groups];
+            for (const group of this.groupsUnsorted) {
+                this.recomputeInsideNodesForGroup(group);
+                group._rgthreeHasAnyActiveNode = group._nodes.some((n) => n.mode === LiteGraph.ALWAYS);
+            }
+            this.msLastUnsorted = now;
+        }
+        return this.groupsUnsorted;
+    }
+    getGroupsAlpha(now) {
+        const graph = app.graph;
+        if (!this.groupsSortedAlpha.length || now - this.msLastAlpha > this.msThreshold) {
+            this.groupsSortedAlpha = [...this.getGroupsUnsorted(now)].sort((a, b) => {
+                return a.title.localeCompare(b.title);
+            });
+            this.msLastAlpha = now;
+        }
+        return this.groupsSortedAlpha;
+    }
+    getGroupsPosition(now) {
+        const graph = app.graph;
+        if (!this.groupsSortedPosition.length || now - this.msLastPosition > this.msThreshold) {
+            this.groupsSortedPosition = [...this.getGroupsUnsorted(now)].sort((a, b) => {
+                const aY = Math.floor(a._pos[1] / 30);
+                const bY = Math.floor(b._pos[1] / 30);
+                if (aY == bY) {
+                    const aX = Math.floor(a._pos[0] / 30);
+                    const bX = Math.floor(b._pos[0] / 30);
+                    return aX - bX;
+                }
+                return aY - bY;
+            });
+            this.msLastPosition = now;
+        }
+        return this.groupsSortedPosition;
+    }
+    getGroups(sort) {
+        const now = +new Date();
+        if (sort === "alphanumeric") {
+            return this.getGroupsAlpha(now);
+        }
+        if (sort === "position") {
+            return this.getGroupsPosition(now);
+        }
+        return this.getGroupsUnsorted(now);
+    }
+}
+const SERVICE = new FastGroupsService();
 export class FastGroupsMuter extends RgthreeBaseNode {
     constructor(title = FastGroupsMuter.title) {
         super(title);
@@ -28,10 +162,10 @@ export class FastGroupsMuter extends RgthreeBaseNode {
         this.addOutput("OPT_CONNECTION", "*");
     }
     onAdded(graph) {
-        FAST_GROUPS_SERVICE.addFastGroupNode(this);
+        SERVICE.addFastGroupNode(this);
     }
     onRemoved() {
-        FAST_GROUPS_SERVICE.removeFastGroupNode(this);
+        SERVICE.removeFastGroupNode(this);
     }
     refreshWidgets() {
         var _a, _b, _c, _d, _e, _f, _g;
@@ -50,7 +184,7 @@ export class FastGroupsMuter extends RgthreeBaseNode {
                 customAlphabet = null;
             }
         }
-        const groups = [...FAST_GROUPS_SERVICE.getGroups(sort)];
+        const groups = [...SERVICE.getGroups(sort)];
         if (customAlphabet === null || customAlphabet === void 0 ? void 0 : customAlphabet.length) {
             groups.sort((a, b) => {
                 let aIndex = -1;
@@ -129,17 +263,26 @@ export class FastGroupsMuter extends RgthreeBaseNode {
                     disabled: false,
                     options: { on: "yes", off: "no" },
                     draw: function (ctx, node, width, posY, height) {
-                        var _a;
-                        const widgetData = drawNodeWidget(ctx, {
-                            width,
-                            height,
-                            posY,
-                        });
-                        const showNav = ((_a = node.properties) === null || _a === void 0 ? void 0 : _a[PROPERTY_SHOW_NAV]) !== false;
-                        let currentX = widgetData.width - widgetData.margin;
-                        if (!widgetData.lowQuality && showNav) {
+                        var _a, _b;
+                        const lowQuality = (((_a = canvas.ds) === null || _a === void 0 ? void 0 : _a.scale) || 1) <= 0.5;
+                        let margin = 15;
+                        let outline_color = LiteGraph.WIDGET_OUTLINE_COLOR;
+                        let background_color = LiteGraph.WIDGET_BGCOLOR;
+                        let text_color = LiteGraph.WIDGET_TEXT_COLOR;
+                        let secondary_text_color = LiteGraph.WIDGET_SECONDARY_TEXT_COLOR;
+                        const showNav = ((_b = node.properties) === null || _b === void 0 ? void 0 : _b[PROPERTY_SHOW_NAV]) !== false;
+                        ctx.strokeStyle = outline_color;
+                        ctx.fillStyle = background_color;
+                        ctx.beginPath();
+                        ctx.roundRect(margin, posY, width - margin * 2, height, lowQuality ? [0] : [height * 0.5]);
+                        ctx.fill();
+                        if (!lowQuality) {
+                            ctx.stroke();
+                        }
+                        let currentX = width - margin;
+                        if (!lowQuality && showNav) {
                             currentX -= 7;
-                            const midY = widgetData.posY + widgetData.height * 0.5;
+                            const midY = posY + height * 0.5;
                             ctx.fillStyle = ctx.strokeStyle = "#89A";
                             ctx.lineJoin = "round";
                             ctx.lineCap = "round";
@@ -148,10 +291,10 @@ export class FastGroupsMuter extends RgthreeBaseNode {
                             ctx.stroke(arrow);
                             currentX -= 14;
                             currentX -= 7;
-                            ctx.strokeStyle = widgetData.colorOutline;
-                            ctx.stroke(new Path2D(`M ${currentX} ${widgetData.posY} v ${widgetData.height}`));
+                            ctx.strokeStyle = outline_color;
+                            ctx.stroke(new Path2D(`M ${currentX} ${posY} v ${height}`));
                         }
-                        else if (widgetData.lowQuality && showNav) {
+                        else if (lowQuality && showNav) {
                             currentX -= 28;
                         }
                         currentX -= 7;
@@ -161,10 +304,10 @@ export class FastGroupsMuter extends RgthreeBaseNode {
                         ctx.arc(currentX - toggleRadius, posY + height * 0.5, toggleRadius, 0, Math.PI * 2);
                         ctx.fill();
                         currentX -= toggleRadius * 2;
-                        if (!widgetData.lowQuality) {
+                        if (!lowQuality) {
                             currentX -= 4;
                             ctx.textAlign = "right";
-                            ctx.fillStyle = this.value ? widgetData.colorText : widgetData.colorTextSecondary;
+                            ctx.fillStyle = this.value ? text_color : secondary_text_color;
                             const label = this.label || this.name;
                             const toggleLabelOn = this.options.on || "true";
                             const toggleLabelOff = this.options.off || "false";
@@ -172,9 +315,9 @@ export class FastGroupsMuter extends RgthreeBaseNode {
                             currentX -= Math.max(ctx.measureText(toggleLabelOn).width, ctx.measureText(toggleLabelOff).width);
                             currentX -= 7;
                             ctx.textAlign = "left";
-                            let maxLabelWidth = widgetData.width - widgetData.margin - 10 - (widgetData.width - currentX);
+                            let maxLabelWidth = width - margin - 10 - (width - currentX);
                             if (label != null) {
-                                ctx.fillText(fitString(ctx, label, maxLabelWidth), widgetData.margin + 10, posY + height * 0.7);
+                                ctx.fillText(fitString(ctx, label, maxLabelWidth), margin + 10, posY + height * 0.7);
                             }
                         }
                     },
@@ -217,13 +360,13 @@ export class FastGroupsMuter extends RgthreeBaseNode {
                     const hasAnyActiveNodes = group._nodes.some((n) => n.mode === LiteGraph.ALWAYS);
                     let newValue = force != null ? force : !hasAnyActiveNodes;
                     if (skipOtherNodeCheck !== true) {
-                        if (newValue && ((_b = (_a = this.properties) === null || _a === void 0 ? void 0 : _a[PROPERTY_RESTRICTION]) === null || _b === void 0 ? void 0 : _b.includes(" one"))) {
+                        if (newValue && ((_b = (_a = this.properties) === null || _a === void 0 ? void 0 : _a[PROPERTY_RESTRICTION]) === null || _b === void 0 ? void 0 : _b.includes(' one'))) {
                             for (const widget of this.widgets) {
                                 widget.doModeChange(false, true);
                             }
                         }
-                        else if (!newValue && ((_c = this.properties) === null || _c === void 0 ? void 0 : _c[PROPERTY_RESTRICTION]) === "always one") {
-                            newValue = this.widgets.every((w) => !w.value || w === widget);
+                        else if (!newValue && ((_c = this.properties) === null || _c === void 0 ? void 0 : _c[PROPERTY_RESTRICTION]) === 'always one') {
+                            newValue = this.widgets.every(w => !w.value || w === widget);
                         }
                     }
                     for (const node of group._nodes) {

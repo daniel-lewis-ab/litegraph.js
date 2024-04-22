@@ -8,18 +8,18 @@ const MODE_ALWAYS = 0;
 const MODE_MUTE = 2;
 const MODE_BYPASS = 4;
 const MODE_REPEATS = [MODE_MUTE, MODE_BYPASS];
-const MODE_NOTHING = -99;
+const MODE_IGNORE = -99;
 const MODE_TO_OPTION = new Map([
     [MODE_ALWAYS, 'ACTIVE'],
     [MODE_MUTE, 'MUTE'],
     [MODE_BYPASS, 'BYPASS'],
-    [MODE_NOTHING, 'NOTHING'],
+    [MODE_IGNORE, 'IGNORE'],
 ]);
 const OPTION_TO_MODE = new Map([
     ['ACTIVE', MODE_ALWAYS],
     ['MUTE', MODE_MUTE],
     ['BYPASS', MODE_BYPASS],
-    ['NOTHING', MODE_NOTHING],
+    ['IGNORE', MODE_IGNORE],
 ]);
 const MODE_TO_PROPERTY = new Map([
     [MODE_MUTE, 'on_muted_inputs'],
@@ -109,7 +109,7 @@ class NodeModeRelay extends BaseCollectorNode {
             const propertyVal = (_a = this.properties) === null || _a === void 0 ? void 0 : _a[MODE_TO_PROPERTY.get(mode) || ''];
             const newMode = OPTION_TO_MODE.get(propertyVal);
             mode = (newMode !== null ? newMode : mode);
-            if (mode !== null && mode !== MODE_NOTHING) {
+            if (mode !== null && mode !== MODE_IGNORE) {
                 if ((_b = this.outputs) === null || _b === void 0 ? void 0 : _b.length) {
                     const outputNodes = getConnectedOutputNodesAndFilterPassThroughs(this);
                     for (const outputNode of outputNodes) {

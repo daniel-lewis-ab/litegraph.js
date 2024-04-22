@@ -79,9 +79,6 @@ class LogSession {
     infoParts(message, ...args) {
         return this.logParts(LogLevel.INFO, message, ...args);
     }
-    warnParts(message, ...args) {
-        return this.logParts(LogLevel.WARN, message, ...args);
-    }
     error(message, ...args) {
         this.log(LogLevel.ERROR, message, ...args);
     }
@@ -108,10 +105,6 @@ class Rgthree extends EventTarget {
         this.processingQueue = false;
         this.loadingApiJson = false;
         this.replacingReroute = null;
-        this.processingMouseDown = false;
-        this.processingMouseUp = false;
-        this.processingMouseMove = false;
-        this.lastAdjustedMouseEvent = null;
         this.canvasCurrentlyCopyingToClipboard = false;
         this.canvasCurrentlyCopyingToClipboardWithMultipleNodes = false;
         this.initialGraphToPromptSerializedWorkflowBecauseComfyUIBrokeStuff = null;
@@ -196,46 +189,26 @@ class Rgthree extends EventTarget {
     }
     async initializeGraphAndCanvasHooks() {
         const rgthree = this;
-        const graphSerialize = LGraph.prototype.serialize;
-        LGraph.prototype.serialize = function () {
-            const response = graphSerialize.apply(this, [...arguments]);
-            rgthree.initialGraphToPromptSerializedWorkflowBecauseComfyUIBrokeStuff = response;
-            return response;
-        };
-        const processMouseDown = LGraphCanvas.prototype.processMouseDown;
-        LGraphCanvas.prototype.processMouseDown = function (e) {
-            rgthree.processingMouseDown = true;
-            const returnVal = processMouseDown.apply(this, [...arguments]);
-            rgthree.dispatchCustomEvent("on-process-mouse-down", { originalEvent: e });
-            rgthree.processingMouseDown = false;
-            return returnVal;
-        };
-        const adjustMouseEvent = LGraphCanvas.prototype.adjustMouseEvent;
-        LGraphCanvas.prototype.adjustMouseEvent = function (e) {
-            adjustMouseEvent.apply(this, [...arguments]);
-            rgthree.lastAdjustedMouseEvent = e;
+        const [canvas, graph] = await Promise.all([waitForCanvas(), waitForGraph()]);
+        const onSerialize = graph.onSerialize;
+        graph.onSerialize = (data) => {
+            this.initialGraphToPromptSerializedWorkflowBecauseComfyUIBrokeStuff = data;
+            onSerialize === null || onSerialize === void 0 ? void 0 : onSerialize.call(graph, data);
         };
         const copyToClipboard = LGraphCanvas.prototype.copyToClipboard;
         LGraphCanvas.prototype.copyToClipboard = function (nodes) {
             rgthree.canvasCurrentlyCopyingToClipboard = true;
             rgthree.canvasCurrentlyCopyingToClipboardWithMultipleNodes =
                 Object.values(nodes || this.selected_nodes || []).length > 1;
-            copyToClipboard.apply(this, [...arguments]);
+            copyToClipboard.apply(canvas, [...arguments]);
             rgthree.canvasCurrentlyCopyingToClipboard = false;
             rgthree.canvasCurrentlyCopyingToClipboardWithMultipleNodes = false;
         };
         const onGroupAdd = LGraphCanvas.onGroupAdd;
         LGraphCanvas.onGroupAdd = function (...args) {
-            const graph = app.graph;
-            onGroupAdd.apply(this, [...args]);
+            onGroupAdd.apply(canvas, [...args]);
             LGraphCanvas.onShowPropertyEditor({}, null, null, null, graph._groups[graph._groups.length - 1]);
         };
-    }
-    dispatchCustomEvent(event, detail) {
-        if (detail != null) {
-            return this.dispatchEvent(new CustomEvent(event, { detail }));
-        }
-        return this.dispatchEvent(new CustomEvent(event));
     }
     async initializeContextMenu() {
         const that = this;
@@ -349,14 +322,14 @@ class Rgthree extends EventTarget {
         const rgthree = this;
         const queuePrompt = app.queuePrompt;
         app.queuePrompt = async function () {
-            rgthree.dispatchCustomEvent("queue");
+            rgthree.dispatchEvent(new CustomEvent("queue"));
             rgthree.processingQueue = true;
             try {
                 await queuePrompt.apply(app, [...arguments]);
             }
             finally {
                 rgthree.processingQueue = false;
-                rgthree.dispatchCustomEvent("queue-end");
+                rgthree.dispatchEvent(new CustomEvent("queue-end"));
             }
         };
         const loadApiJson = app.loadApiJson;
@@ -371,10 +344,10 @@ class Rgthree extends EventTarget {
         };
         const graphToPrompt = app.graphToPrompt;
         app.graphToPrompt = async function () {
-            rgthree.dispatchCustomEvent("graph-to-prompt");
+            rgthree.dispatchEvent(new CustomEvent("graph-to-prompt"));
             let promise = graphToPrompt.apply(app, [...arguments]);
             await promise;
-            rgthree.dispatchCustomEvent("graph-to-prompt-end");
+            rgthree.dispatchEvent(new CustomEvent("graph-to-prompt-end"));
             return promise;
         };
         const apiQueuePrompt = api.queuePrompt;
@@ -388,89 +361,87 @@ class Rgthree extends EventTarget {
                 }
                 prompt.output = newOutput;
             }
-            const response = apiQueuePrompt.apply(app, [index, prompt]);
-            rgthree.dispatchCustomEvent("comfy-api-queue-prompt-end");
-            return response;
+            return apiQueuePrompt.apply(app, [index, prompt]);
         };
         const clean = app.clean;
         app.clean = function () {
             rgthree.clearAllMessages();
             clean && clean.call(app, ...arguments);
         };
-        // const loadGraphData = app.loadGraphData;
-        // app.loadGraphData = function (graph) {
-        //     if (rgthree.monitorLinkTimeout) {
-        //         clearTimeout(rgthree.monitorLinkTimeout);
-        //         rgthree.monitorLinkTimeout = null;
-        //     }
-        //     rgthree.clearAllMessages();
-        //     let graphCopy;
-        //     try {
-        //         graphCopy = JSON.parse(JSON.stringify(graph));
-        //     }
-        //     catch (e) {
-        //         graphCopy = null;
-        //     }
-        //     setTimeout(() => {
-        //         var _a, _b;
-        //         const wasLoadingAborted = (_b = (_a = document
-        //             .querySelector(".comfy-modal-content")) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.includes("Loading aborted due");
-        //         const graphToUse = wasLoadingAborted ? graphCopy || graph : app.graph;
-        //         const fixBadLinksResult = fixBadLinks(graphToUse);
-        //         if (fixBadLinksResult.hasBadLinks) {
-        //             rgthree.log(LogLevel.WARN, `The workflow you've loaded has corrupt linking data. Open ${new URL(location.href).origin}/rgthree/link_fixer to try to fix.`);
-        //             if (CONFIG_SERVICE.getConfigValue("features.show_alerts_for_corrupt_workflows")) {
-        //                 rgthree.showMessage({
-        //                     id: "bad-links",
-        //                     type: "warn",
-        //                     message: "The workflow you've loaded has corrupt linking data that may be able to be fixed.",
-        //                     actions: [
-        //                         {
-        //                             label: "Open fixer",
-        //                             href: "/rgthree/link_fixer",
-        //                         },
-        //                         {
-        //                             label: "Fix in place",
-        //                             href: "/rgthree/link_fixer",
-        //                             callback: (event) => {
-        //                                 event.stopPropagation();
-        //                                 event.preventDefault();
-        //                                 if (confirm("This will attempt to fix in place. Please make sure to have a saved copy of your workflow.")) {
-        //                                     try {
-        //                                         const fixBadLinksResult = fixBadLinks(graphToUse, true);
-        //                                         if (!fixBadLinksResult.hasBadLinks) {
-        //                                             rgthree.hideMessage("bad-links");
-        //                                             alert("Success! It's possible some valid links may have been affected. Please check and verify your workflow.");
-        //                                             wasLoadingAborted && app.loadGraphData(fixBadLinksResult.graph);
-        //                                             if (CONFIG_SERVICE.getConfigValue("features.monitor_for_corrupt_links") ||
-        //                                                 CONFIG_SERVICE.getConfigValue("features.monitor_bad_links")) {
-        //                                                 rgthree.monitorLinkTimeout = setTimeout(() => {
-        //                                                     rgthree.monitorBadLinks();
-        //                                                 }, 5000);
-        //                                             }
-        //                                         }
-        //                                     }
-        //                                     catch (e) {
-        //                                         console.error(e);
-        //                                         alert("Unsuccessful at fixing corrupt data. :(");
-        //                                         rgthree.hideMessage("bad-links");
-        //                                     }
-        //                                 }
-        //                             },
-        //                         },
-        //                     ],
-        //                 });
-        //             }
-        //         }
-        //         else if (CONFIG_SERVICE.getConfigValue("features.monitor_for_corrupt_links") ||
-        //             CONFIG_SERVICE.getConfigValue("features.monitor_bad_links")) {
-        //             rgthree.monitorLinkTimeout = setTimeout(() => {
-        //                 rgthree.monitorBadLinks();
-        //             }, 5000);
-        //         }
-        //     }, 100);
-        //     loadGraphData && loadGraphData.call(app, ...arguments);
-        // };
+        const loadGraphData = app.loadGraphData;
+        app.loadGraphData = function (graph) {
+            if (rgthree.monitorLinkTimeout) {
+                clearTimeout(rgthree.monitorLinkTimeout);
+                rgthree.monitorLinkTimeout = null;
+            }
+            rgthree.clearAllMessages();
+            let graphCopy;
+            try {
+                graphCopy = JSON.parse(JSON.stringify(graph));
+            }
+            catch (e) {
+                graphCopy = null;
+            }
+            setTimeout(() => {
+                var _a, _b;
+                const wasLoadingAborted = (_b = (_a = document
+                    .querySelector(".comfy-modal-content")) === null || _a === void 0 ? void 0 : _a.textContent) === null || _b === void 0 ? void 0 : _b.includes("Loading aborted due");
+                const graphToUse = wasLoadingAborted ? graphCopy || graph : app.graph;
+                const fixBadLinksResult = fixBadLinks(graphToUse);
+                if (fixBadLinksResult.hasBadLinks) {
+                    rgthree.log(LogLevel.WARN, `The workflow you've loaded has corrupt linking data. Open ${new URL(location.href).origin}/rgthree/link_fixer to try to fix.`);
+                    if (CONFIG_SERVICE.getConfigValue("features.show_alerts_for_corrupt_workflows")) {
+                        rgthree.showMessage({
+                            id: "bad-links",
+                            type: "warn",
+                            message: "The workflow you've loaded has corrupt linking data that may be able to be fixed.",
+                            actions: [
+                                {
+                                    label: "Open fixer",
+                                    href: "/rgthree/link_fixer",
+                                },
+                                {
+                                    label: "Fix in place",
+                                    href: "/rgthree/link_fixer",
+                                    callback: (event) => {
+                                        event.stopPropagation();
+                                        event.preventDefault();
+                                        if (confirm("This will attempt to fix in place. Please make sure to have a saved copy of your workflow.")) {
+                                            try {
+                                                const fixBadLinksResult = fixBadLinks(graphToUse, true);
+                                                if (!fixBadLinksResult.hasBadLinks) {
+                                                    rgthree.hideMessage("bad-links");
+                                                    alert("Success! It's possible some valid links may have been affected. Please check and verify your workflow.");
+                                                    wasLoadingAborted && app.loadGraphData(fixBadLinksResult.graph);
+                                                    if (CONFIG_SERVICE.getConfigValue("features.monitor_for_corrupt_links") ||
+                                                        CONFIG_SERVICE.getConfigValue("features.monitor_bad_links")) {
+                                                        rgthree.monitorLinkTimeout = setTimeout(() => {
+                                                            rgthree.monitorBadLinks();
+                                                        }, 5000);
+                                                    }
+                                                }
+                                            }
+                                            catch (e) {
+                                                console.error(e);
+                                                alert("Unsuccessful at fixing corrupt data. :(");
+                                                rgthree.hideMessage("bad-links");
+                                            }
+                                        }
+                                    },
+                                },
+                            ],
+                        });
+                    }
+                }
+                else if (CONFIG_SERVICE.getConfigValue("features.monitor_for_corrupt_links") ||
+                    CONFIG_SERVICE.getConfigValue("features.monitor_bad_links")) {
+                    rgthree.monitorLinkTimeout = setTimeout(() => {
+                        rgthree.monitorBadLinks();
+                    }, 5000);
+                }
+            }, 100);
+            loadGraphData && loadGraphData.call(app, ...arguments);
+        };
     }
     getNodeFromInitialGraphToPromptSerializedWorkflowBecauseComfyUIBrokeStuff(node) {
         var _a, _b, _c;
