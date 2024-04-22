@@ -18,7 +18,7 @@ export default defineConfig(({ mode }) => {
       VitePluginRadar({
         // Google Analytics tag injection
         analytics: {
-          id: JSON.stringify(env.VITE_GOOGLE_ANALYTICS_ID),
+          id: env.VITE_GOOGLE_ANALYTICS_ID,
         },
       }),
     ],
