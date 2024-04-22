@@ -52,6 +52,7 @@ publish-iframe:
   only:
     - develop
     - main
+    - staging
 
 deploy-dev:
   stage: deploy
@@ -72,6 +73,27 @@ deploy-dev:
     - kustomize edit set image comfy-iframe=$IFRAME_TAG
     - kustomize build > ../../kustomization/dev/dev.yaml
     - git commit -am "Set salt-frontend dev image tag to $SHORT_HASH"
+    - git push origin main
+
+deploy-stage:
+  stage: deploy
+  only:
+    - main
+  environment:
+    name: stage
+  image:
+    name: alpine/git
+    entrypoint: [ "" ]
+  script:
+    - apk add kustomize yq nodejs npm --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git clone $INFRASTRUCTURE_URL infrastructure
+    - cd infrastructure/manifests/salt-frontend/overlays/stage
+    - kustomize edit set image salt-frontend=$IMAGE_TAG
+    - kustomize edit set image comfy-iframe=$IFRAME_TAG
+    - kustomize build > ../../kustomization/stage/stage.yaml
+    - git commit -am "Set salt-frontend stage image tag to $SHORT_HASH"
     - git push origin main
 
 deploy-prod:
