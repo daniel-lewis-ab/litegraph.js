@@ -1,3 +1,7 @@
+# Status of fork
+
+Currently took employment with a software firm and haven't been given rights to update this yet since my initial push.
+
 # litegraph.js
 
 A library in Javascript to create flow graphs in the browser similar to Unreal Blueprints or Blender Nodes. Nodes can be programmed easily and it includes an editor to construct and tests the graphs.
