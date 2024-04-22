@@ -106,7 +106,44 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "ckpt_name": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ]
             }
         },
@@ -286,7 +323,15 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "vae_name": [
-                    []
+                    [
+                        "decoder.pt",
+                        "effnet_encoder.safetensors",
+                        "sdxl_vae.safetensors",
+                        "stage_a.safetensors",
+                        "vae-ft-mse-840000-ema-pruned.safetensors",
+                        "taesd",
+                        "taesdxl"
+                    ]
                 ]
             }
         },
@@ -1567,7 +1612,27 @@ export const nodeDefinitions = {
                     "CLIP"
                 ],
                 "lora_name": [
-                    []
+                    [
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
+                    ]
                 ],
                 "strength_model": [
                     "FLOAT",
@@ -1611,7 +1676,9 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "clip_name": [
-                    []
+                    [
+                        "model.safetensors"
+                    ]
                 ],
                 "type": [
                     [
@@ -1640,7 +1707,18 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "unet_name": [
-                    []
+                    [
+                        "diffusion_pytorch_model.fp16.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "stage_b.safetensors",
+                        "stage_b_bf16.safetensors",
+                        "stage_b_lite.safetensors",
+                        "stage_b_lite_bf16.safetensors",
+                        "stage_c.safetensors",
+                        "stage_c_bf16.safetensors",
+                        "stage_c_lite.safetensors",
+                        "stage_c_lite_bf16.safetensors"
+                    ]
                 ]
             }
         },
@@ -1663,10 +1741,14 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "clip_name1": [
-                    []
+                    [
+                        "model.safetensors"
+                    ]
                 ],
                 "clip_name2": [
-                    []
+                    [
+                        "model.safetensors"
+                    ]
                 ]
             }
         },
@@ -1888,7 +1970,77 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "control_net_name": [
-                    []
+                    [
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
+                    ]
                 ]
             }
         },
@@ -1914,7 +2066,77 @@ export const nodeDefinitions = {
                     "MODEL"
                 ],
                 "control_net_name": [
-                    []
+                    [
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
+                    ]
                 ]
             }
         },
@@ -1960,7 +2182,11 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "clip_name": [
-                    []
+                    [
+                        "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors",
+                        "CLIP-ViT-bigG-14-laion2B-39B-b160k.safetensors",
+                        "clip-vit-large-patch14.bin"
+                    ]
                 ]
             }
         },
@@ -2053,7 +2279,44 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "ckpt_name": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ]
             }
         },
@@ -2223,7 +2486,44 @@ export const nodeDefinitions = {
                     []
                 ],
                 "ckpt_name": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ]
             }
         },
@@ -2398,7 +2698,27 @@ export const nodeDefinitions = {
                     "MODEL"
                 ],
                 "lora_name": [
-                    []
+                    [
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
+                    ]
                 ],
                 "strength_model": [
                     "FLOAT",
@@ -2642,7 +2962,17 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "model_name": [
-                    []
+                    [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
+                    ]
                 ]
             }
         },
@@ -5266,7 +5596,44 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "ckpt_name": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ]
             }
         },
@@ -6098,27 +6465,207 @@ export const nodeDefinitions = {
             "required": {
                 "ckpt_name1": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "ckpt_name2": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "ckpt_name3": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "ckpt_name4": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "ckpt_name5": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "select_model": [
@@ -8102,7 +8649,76 @@ export const nodeDefinitions = {
                 ],
                 "controlnet_1": [
                     [
-                        "None"
+                        "None",
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
                     ]
                 ],
                 "controlnet_strength_1": [
@@ -8140,7 +8756,76 @@ export const nodeDefinitions = {
                 ],
                 "controlnet_2": [
                     [
-                        "None"
+                        "None",
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
                     ]
                 ],
                 "controlnet_strength_2": [
@@ -8178,7 +8863,76 @@ export const nodeDefinitions = {
                 ],
                 "controlnet_3": [
                     [
-                        "None"
+                        "None",
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
                     ]
                 ],
                 "controlnet_strength_3": [
@@ -8298,7 +9052,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "strength_model": [
@@ -8353,7 +9126,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name_1": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "model_weight_1": [
@@ -8382,7 +9174,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name_2": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "model_weight_2": [
@@ -8411,7 +9222,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name_3": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "model_weight_3": [
@@ -8482,7 +9312,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name_1": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "switch_1": [
@@ -8520,7 +9369,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name_2": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "switch_2": [
@@ -8558,7 +9426,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name_3": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "switch_3": [
@@ -8635,7 +9522,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "switch": [
@@ -8792,7 +9698,43 @@ export const nodeDefinitions = {
                 ],
                 "ckpt_name1": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "model_ratio1": [
@@ -8821,7 +9763,43 @@ export const nodeDefinitions = {
                 ],
                 "ckpt_name2": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "model_ratio2": [
@@ -8850,7 +9828,43 @@ export const nodeDefinitions = {
                 ],
                 "ckpt_name3": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "model_ratio3": [
@@ -9672,7 +10686,16 @@ export const nodeDefinitions = {
                 ],
                 "upscale_model_1": [
                     [
-                        "None"
+                        "None",
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
                     ]
                 ],
                 "rescale_factor_1": [
@@ -9692,7 +10715,16 @@ export const nodeDefinitions = {
                 ],
                 "upscale_model_2": [
                     [
-                        "None"
+                        "None",
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
                     ]
                 ],
                 "rescale_factor_2": [
@@ -9712,7 +10744,16 @@ export const nodeDefinitions = {
                 ],
                 "upscale_model_3": [
                     [
-                        "None"
+                        "None",
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
                     ]
                 ],
                 "rescale_factor_3": [
@@ -9756,7 +10797,17 @@ export const nodeDefinitions = {
                     "IMAGE"
                 ],
                 "upscale_model": [
-                    []
+                    [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
+                    ]
                 ],
                 "mode": [
                     [
@@ -10193,7 +11244,15 @@ export const nodeDefinitions = {
                     ]
                 ],
                 "output_folder": [
-                    []
+                    [
+                        "0b366dc4-57c8-48b5-8bfb-50f063ef7913",
+                        "4e3a0b14-5c27-499d-8e29-025f9c807dd5",
+                        "51ea127d-906b-4ac4-9abb-1678169bdf58",
+                        "59116e21-14e4-4ae6-a16a-4240ffac9731",
+                        "aef08d93-f965-4804-9556-1dd7d65b17fe",
+                        "d283d38e-ab48-474f-9353-a7184efe9510",
+                        "db830471-2f56-4a1d-bd6a-3913f672ca93"
+                    ]
                 ],
                 "image": [
                     "IMAGE"
@@ -18374,7 +19433,44 @@ export const nodeDefinitions = {
                     }
                 ],
                 "default_model": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ],
                 "schedule_format": [
                     [
@@ -18449,7 +19545,27 @@ export const nodeDefinitions = {
                     }
                 ],
                 "default_lora": [
-                    []
+                    [
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
+                    ]
                 ],
                 "strength_model": [
                     "FLOAT",
@@ -19243,7 +20359,15 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "output_folder": [
-                    []
+                    [
+                        "0b366dc4-57c8-48b5-8bfb-50f063ef7913",
+                        "4e3a0b14-5c27-499d-8e29-025f9c807dd5",
+                        "51ea127d-906b-4ac4-9abb-1678169bdf58",
+                        "59116e21-14e4-4ae6-a16a-4240ffac9731",
+                        "aef08d93-f965-4804-9556-1dd7d65b17fe",
+                        "d283d38e-ab48-474f-9353-a7184efe9510",
+                        "db830471-2f56-4a1d-bd6a-3913f672ca93"
+                    ]
                 ],
                 "current_image": [
                     "IMAGE"
@@ -19867,7 +20991,43 @@ export const nodeDefinitions = {
             "required": {
                 "ckpt_name1": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "alias1": [
@@ -19879,7 +21039,43 @@ export const nodeDefinitions = {
                 ],
                 "ckpt_name2": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "alias2": [
@@ -19891,7 +21087,43 @@ export const nodeDefinitions = {
                 ],
                 "ckpt_name3": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "alias3": [
@@ -19903,7 +21135,43 @@ export const nodeDefinitions = {
                 ],
                 "ckpt_name4": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "alias4": [
@@ -19915,7 +21183,43 @@ export const nodeDefinitions = {
                 ],
                 "ckpt_name5": [
                     [
-                        "None"
+                        "None",
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
                     ]
                 ],
                 "alias5": [
@@ -19955,7 +21259,26 @@ export const nodeDefinitions = {
             "required": {
                 "lora_name1": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "alias1": [
@@ -19985,7 +21308,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name2": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "alias2": [
@@ -20015,7 +21357,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name3": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "alias3": [
@@ -29774,21 +31135,21 @@ export const nodeDefinitions = {
                 "latent_suffix": [
                     "STRING",
                     {
-                        "default": "94363199_cache",
+                        "default": "11320017_cache",
                         "multiline": false
                     }
                 ],
                 "image_suffix": [
                     "STRING",
                     {
-                        "default": "90183450_cache",
+                        "default": "53723891_cache",
                         "multiline": false
                     }
                 ],
                 "conditioning_suffix": [
                     "STRING",
                     {
-                        "default": "92519966_cache",
+                        "default": "88758218_cache",
                         "multiline": false
                     }
                 ]
@@ -29840,7 +31201,44 @@ export const nodeDefinitions = {
                     []
                 ],
                 "ckpt_name": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ]
             }
         },
@@ -29872,7 +31270,44 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "ckpt_name": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ]
             }
         },
@@ -31210,7 +32645,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "strength_model": [
@@ -35475,7 +36929,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_name": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "strength_model": [
@@ -39052,7 +40525,44 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "ckpt_name": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ]
             }
         },
@@ -39087,7 +40597,17 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "model_name": [
-                    []
+                    [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
+                    ]
                 ]
             }
         },
@@ -48751,7 +50271,44 @@ export const nodeDefinitions = {
                     }
                 ],
                 "ckpt_name": [
-                    [],
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ],
                     {
                         "forceInput": true
                     }
@@ -48856,7 +50413,44 @@ export const nodeDefinitions = {
             "INT",
             "INT",
             "FLOAT",
-            [],
+            [
+                "DreamShaperXL_Lightning.safetensors",
+                "DreamShaper_8_pruned.safetensors",
+                "Realistic_Vision_V5.1-inpainting.safetensors",
+                "Realistic_Vision_V5.1.safetensors",
+                "SUPIR-v0F.ckpt",
+                "SUPIR-v0Q.ckpt",
+                "aamXLAnimeMix_v10.safetensors",
+                "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                "architectureinteriorsdlifechiasedammev80.safetensors",
+                "depthfm-v1_fp16.safetensors",
+                "depthfm-v1_fp32.safetensors",
+                "differentiaSet_v10DifferentiaBase.safetensors",
+                "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                "dreamshaper_8Inpainting.safetensors",
+                "dynamicrafter_1024_v1_bf16.safetensors",
+                "dynamicrafter_512_interp_v1_bf16.safetensors",
+                "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                "motionctrl.pth",
+                "sd_xl_base_1.0.safetensors",
+                "sd_xl_base_1.0_0.9vae.safetensors",
+                "sd_xl_refiner_1.0.safetensors",
+                "sd_xl_refiner_1.0_0.9vae.safetensors",
+                "sd_xl_turbo_1.0.safetensors",
+                "sd_xl_turbo_1.0_fp16.safetensors",
+                "segmind-vega.safetensors",
+                "stable_cascade_stage_b.safetensors",
+                "stable_cascade_stage_c.safetensors",
+                "stable_zero123.ckpt",
+                "svd.safetensors",
+                "svd_xt.safetensors",
+                "v1-5-pruned-emaonly.ckpt",
+                "v2-1_512-ema-pruned.safetensors",
+                "v2-1_768-ema-pruned.safetensors",
+                "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                "x4-upscaler-ema.safetensors"
+            ],
             [
                 "euler",
                 "euler_ancestral",
@@ -49126,7 +50720,44 @@ export const nodeDefinitions = {
             "INT",
             "INT",
             "FLOAT",
-            [],
+            [
+                "DreamShaperXL_Lightning.safetensors",
+                "DreamShaper_8_pruned.safetensors",
+                "Realistic_Vision_V5.1-inpainting.safetensors",
+                "Realistic_Vision_V5.1.safetensors",
+                "SUPIR-v0F.ckpt",
+                "SUPIR-v0Q.ckpt",
+                "aamXLAnimeMix_v10.safetensors",
+                "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                "architectureinteriorsdlifechiasedammev80.safetensors",
+                "depthfm-v1_fp16.safetensors",
+                "depthfm-v1_fp32.safetensors",
+                "differentiaSet_v10DifferentiaBase.safetensors",
+                "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                "dreamshaper_8Inpainting.safetensors",
+                "dynamicrafter_1024_v1_bf16.safetensors",
+                "dynamicrafter_512_interp_v1_bf16.safetensors",
+                "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                "motionctrl.pth",
+                "sd_xl_base_1.0.safetensors",
+                "sd_xl_base_1.0_0.9vae.safetensors",
+                "sd_xl_refiner_1.0.safetensors",
+                "sd_xl_refiner_1.0_0.9vae.safetensors",
+                "sd_xl_turbo_1.0.safetensors",
+                "sd_xl_turbo_1.0_fp16.safetensors",
+                "segmind-vega.safetensors",
+                "stable_cascade_stage_b.safetensors",
+                "stable_cascade_stage_c.safetensors",
+                "stable_zero123.ckpt",
+                "svd.safetensors",
+                "svd_xt.safetensors",
+                "v1-5-pruned-emaonly.ckpt",
+                "v2-1_512-ema-pruned.safetensors",
+                "v2-1_768-ema-pruned.safetensors",
+                "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                "x4-upscaler-ema.safetensors"
+            ],
             [
                 "euler",
                 "euler_ancestral",
@@ -49318,7 +50949,44 @@ export const nodeDefinitions = {
             "INT",
             "INT",
             "FLOAT",
-            [],
+            [
+                "DreamShaperXL_Lightning.safetensors",
+                "DreamShaper_8_pruned.safetensors",
+                "Realistic_Vision_V5.1-inpainting.safetensors",
+                "Realistic_Vision_V5.1.safetensors",
+                "SUPIR-v0F.ckpt",
+                "SUPIR-v0Q.ckpt",
+                "aamXLAnimeMix_v10.safetensors",
+                "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                "architectureinteriorsdlifechiasedammev80.safetensors",
+                "depthfm-v1_fp16.safetensors",
+                "depthfm-v1_fp32.safetensors",
+                "differentiaSet_v10DifferentiaBase.safetensors",
+                "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                "dreamshaper_8Inpainting.safetensors",
+                "dynamicrafter_1024_v1_bf16.safetensors",
+                "dynamicrafter_512_interp_v1_bf16.safetensors",
+                "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                "motionctrl.pth",
+                "sd_xl_base_1.0.safetensors",
+                "sd_xl_base_1.0_0.9vae.safetensors",
+                "sd_xl_refiner_1.0.safetensors",
+                "sd_xl_refiner_1.0_0.9vae.safetensors",
+                "sd_xl_turbo_1.0.safetensors",
+                "sd_xl_turbo_1.0_fp16.safetensors",
+                "segmind-vega.safetensors",
+                "stable_cascade_stage_b.safetensors",
+                "stable_cascade_stage_c.safetensors",
+                "stable_zero123.ckpt",
+                "svd.safetensors",
+                "svd_xt.safetensors",
+                "v1-5-pruned-emaonly.ckpt",
+                "v2-1_512-ema-pruned.safetensors",
+                "v2-1_768-ema-pruned.safetensors",
+                "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                "x4-upscaler-ema.safetensors"
+            ],
             [
                 "euler",
                 "euler_ancestral",
@@ -49465,7 +51133,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_01": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "strength_01": [
@@ -49479,7 +51166,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_02": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "strength_02": [
@@ -49493,7 +51199,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_03": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "strength_03": [
@@ -49507,7 +51232,26 @@ export const nodeDefinitions = {
                 ],
                 "lora_04": [
                     [
-                        "None"
+                        "None",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "strength_04": [
@@ -49652,12 +51396,35 @@ export const nodeDefinitions = {
                 "insert_lora": [
                     [
                         "CHOOSE",
-                        "DISABLE LORAS"
+                        "DISABLE LORAS",
+                        "AnimateLCM_sd15_i2v_lora",
+                        "AnimateLCM_sd15_t2v_lora",
+                        "SaltAI_Energy_ADV2_SpatialLora__light",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong",
+                        "ip-adapter-faceid-plus_sd15_lora",
+                        "ip-adapter-faceid-plusv2_sd15_lora",
+                        "ip-adapter-faceid-plusv2_sdxl_lora",
+                        "ip-adapter-faceid_sd15_lora",
+                        "ip-adapter-faceid_sdxl_lora",
+                        "pytorch_lora_weights",
+                        "sd_xl_offset_example-lora_1.0",
+                        "sdxl_lightning_2step_lora",
+                        "sdxl_lightning_4step_lora",
+                        "sdxl_lightning_8step_lora",
+                        "theovercomer8sContrastFix_sd15",
+                        "theovercomer8sContrastFix_sd21768",
+                        "v3_sd15_adapter"
                     ]
                 ],
                 "insert_embedding": [
                     [
-                        "CHOOSE"
+                        "CHOOSE",
+                        "bad_prompt_version2-neg",
+                        "easynegative",
+                        "negative_hand-neg",
+                        "ng_deepnegative_v1_75t"
                     ]
                 ],
                 "insert_saved": [
@@ -49714,7 +51481,11 @@ export const nodeDefinitions = {
                 ],
                 "insert_embedding": [
                     [
-                        "CHOOSE"
+                        "CHOOSE",
+                        "bad_prompt_version2-neg",
+                        "easynegative",
+                        "negative_hand-neg",
+                        "ng_deepnegative_v1_75t"
                     ]
                 ],
                 "insert_saved": [
@@ -49977,12 +51748,35 @@ export const nodeDefinitions = {
                 "insert_lora": [
                     [
                         "CHOOSE",
-                        "DISABLE LORAS"
+                        "DISABLE LORAS",
+                        "AnimateLCM_sd15_i2v_lora",
+                        "AnimateLCM_sd15_t2v_lora",
+                        "SaltAI_Energy_ADV2_SpatialLora__light",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong",
+                        "ip-adapter-faceid-plus_sd15_lora",
+                        "ip-adapter-faceid-plusv2_sd15_lora",
+                        "ip-adapter-faceid-plusv2_sdxl_lora",
+                        "ip-adapter-faceid_sd15_lora",
+                        "ip-adapter-faceid_sdxl_lora",
+                        "pytorch_lora_weights",
+                        "sd_xl_offset_example-lora_1.0",
+                        "sdxl_lightning_2step_lora",
+                        "sdxl_lightning_4step_lora",
+                        "sdxl_lightning_8step_lora",
+                        "theovercomer8sContrastFix_sd15",
+                        "theovercomer8sContrastFix_sd21768",
+                        "v3_sd15_adapter"
                     ]
                 ],
                 "insert_embedding": [
                     [
-                        "CHOOSE"
+                        "CHOOSE",
+                        "bad_prompt_version2-neg",
+                        "easynegative",
+                        "negative_hand-neg",
+                        "ng_deepnegative_v1_75t"
                     ]
                 ],
                 "insert_saved": [
@@ -50098,7 +51892,11 @@ export const nodeDefinitions = {
                 ],
                 "insert_embedding": [
                     [
-                        "CHOOSE"
+                        "CHOOSE",
+                        "bad_prompt_version2-neg",
+                        "easynegative",
+                        "negative_hand-neg",
+                        "ng_deepnegative_v1_75t"
                     ]
                 ],
                 "insert_saved": [
@@ -52712,7 +54510,7 @@ export const nodeDefinitions = {
                 "variation_seed": [
                     "INT:seed",
                     {
-                        "default": 11084911229573929176,
+                        "default": 8549364767584875870,
                         "min": 0,
                         "max": 18446744073709551615
                     }
@@ -57573,7 +59371,17 @@ export const nodeDefinitions = {
                     "CONDITIONING"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
+                    ]
                 ],
                 "seed": [
                     "INT",
@@ -57646,7 +59454,17 @@ export const nodeDefinitions = {
                     "CONDITIONING"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
+                    ]
                 ],
                 "seed": [
                     "INT",
@@ -57806,7 +59624,17 @@ export const nodeDefinitions = {
                     "CONDITIONING"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
+                    ]
                 ],
                 "seed": [
                     "INT",
@@ -57937,7 +59765,17 @@ export const nodeDefinitions = {
                     "VAE"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
+                    ]
                 ],
                 "seed": [
                     "INT",
@@ -58104,6 +59942,15 @@ export const nodeDefinitions = {
                 ],
                 "upscale_model": [
                     [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt",
                         "nearest-exact",
                         "bilinear",
                         "area",
@@ -58193,7 +60040,17 @@ export const nodeDefinitions = {
                     "CONDITIONING"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
+                    ]
                 ],
                 "seed": [
                     "INT",
@@ -58269,7 +60126,17 @@ export const nodeDefinitions = {
                     "VAE"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "4x-AnimeSharp.pth",
+                        "4x-UltraSharp.pth",
+                        "4x_NMKD-Siax_200k.pth",
+                        "4x_foolhardy_Remacri.pth",
+                        "8x_NMKD-Superscale_150000_G.pth",
+                        "ESRGAN_4x.pth",
+                        "RealESRGAN_x2.pth",
+                        "RealESRGAN_x4.pth",
+                        "last.ckpt"
+                    ]
                 ],
                 "seed": [
                     "INT",
@@ -59478,7 +61345,44 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "ckpt_name": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ]
             },
             "hidden": {
@@ -60260,7 +62164,77 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "control_net_name": [
-                    []
+                    [
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
+                    ]
                 ]
             },
             "optional": {
@@ -60291,7 +62265,77 @@ export const nodeDefinitions = {
                     "MODEL"
                 ],
                 "control_net_name": [
-                    []
+                    [
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
+                    ]
                 ]
             },
             "optional": {
@@ -60872,7 +62916,77 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "sparsectrl_name": [
-                    []
+                    [
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
+                    ]
                 ],
                 "use_motion": [
                     "BOOLEAN",
@@ -60927,10 +63041,150 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "sparsectrl_name": [
-                    []
+                    [
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
+                    ]
                 ],
                 "control_net_name": [
-                    []
+                    [
+                        "OpenPoseXL2.safetensors",
+                        "bdsqlsz_controlllite_xl_canny.safetensors",
+                        "bdsqlsz_controlllite_xl_depth.safetensors",
+                        "bdsqlsz_controlllite_xl_dw_openpose.safetensors",
+                        "bdsqlsz_controlllite_xl_lineart_anime_denoise.safetensors",
+                        "bdsqlsz_controlllite_xl_mlsd_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_normal.safetensors",
+                        "bdsqlsz_controlllite_xl_recolor_luminance.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface.safetensors",
+                        "bdsqlsz_controlllite_xl_segment_animeface_V2.safetensors",
+                        "bdsqlsz_controlllite_xl_sketch.safetensors",
+                        "bdsqlsz_controlllite_xl_softedge.safetensors",
+                        "bdsqlsz_controlllite_xl_t2i-adapter_color_shuffle.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b1.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_anime_\u03b2.safetensors",
+                        "bdsqlsz_controlllite_xl_tile_realistic.safetensors",
+                        "control-lora-canny-rank128.safetensors",
+                        "control-lora-canny-rank256.safetensors",
+                        "control-lora-depth-rank128.safetensors",
+                        "control-lora-depth-rank256.safetensors",
+                        "control-lora-recolor-rank128.safetensors",
+                        "control-lora-recolor-rank256.safetensors",
+                        "control-lora-sketch-rank128-metadata.safetensors",
+                        "control-lora-sketch-rank256.safetensors",
+                        "control_boxdepth_LooseControlfp16.safetensors",
+                        "control_sd15_inpaint_depth_hand_fp16.safetensors",
+                        "control_v11e_sd15_ip2p_fp16.safetensors",
+                        "control_v11e_sd15_shuffle_fp16.safetensors",
+                        "control_v11f1e_sd15_tile_fp16.safetensors",
+                        "control_v11f1p_sd15_depth_fp16.safetensors",
+                        "control_v11p_sd15_canny_fp16.safetensors",
+                        "control_v11p_sd15_inpaint_fp16.safetensors",
+                        "control_v11p_sd15_lineart_fp16.safetensors",
+                        "control_v11p_sd15_mlsd_fp16.safetensors",
+                        "control_v11p_sd15_normalbae_fp16.safetensors",
+                        "control_v11p_sd15_openpose_fp16.safetensors",
+                        "control_v11p_sd15_scribble_fp16.safetensors",
+                        "control_v11p_sd15_seg_fp16.safetensors",
+                        "control_v11p_sd15_softedge_fp16.safetensors",
+                        "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+                        "control_v11u_sd15_tile_fp16.safetensors",
+                        "control_v1p_sd15_qrcode_monster_v2.safetensors",
+                        "control_v1p_sdxl_qrcode_monster.safetensors",
+                        "controlnet-sd-xl-1.0-softedge-dexined.safetensors",
+                        "controlnet_checkpoint.ckpt",
+                        "depth-zoe-xl-v1.0-controlnet.safetensors",
+                        "diffusion_pytorch_model.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-canny-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-midas-sdxl-1.0.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-depth-zoe-sdxl-1.0.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-lineart-sdxl-1.0.safetensors",
+                        "t2i-adapter-openpose-sdxl-1.0.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.fp16.safetensors",
+                        "t2i-adapter-sketch-sdxl-1.0.safetensors",
+                        "t2iadapter_canny_sd14v1.pth",
+                        "t2iadapter_color_sd14v1.pth",
+                        "t2iadapter_depth_sd14v1.pth",
+                        "t2iadapter_keypose_sd14v1.pth",
+                        "t2iadapter_openpose_sd14v1.pth",
+                        "t2iadapter_seg_sd14v1.pth",
+                        "t2iadapter_sketch_sd14v1.pth",
+                        "t2iadapter_style_sd14v1.pth",
+                        "temporalnetversion2.safetensors",
+                        "v3_sd15_sparsectrl_rgb.ckpt",
+                        "v3_sd15_sparsectrl_scribble.ckpt"
+                    ]
                 ],
                 "use_motion": [
                     "BOOLEAN",
@@ -61354,7 +63608,84 @@ export const nodeDefinitions = {
                     "CLIP"
                 ],
                 "lora_name": [
-                    []
+                    [
+                        {
+                            "content": "AnimateLCM_sd15_i2v_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "AnimateLCM_sd15_t2v_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "ip-adapter-faceid_sd15_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "ip-adapter-faceid_sdxl_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "pytorch_lora_weights.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sd_xl_offset_example-lora_1.0.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sdxl_lightning_2step_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sdxl_lightning_4step_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sdxl_lightning_8step_lora.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "theovercomer8sContrastFix_sd15.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "theovercomer8sContrastFix_sd21768.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "v3_sd15_adapter.ckpt",
+                            "image": null
+                        }
+                    ]
                 ],
                 "strength_model": [
                     "FLOAT",
@@ -61398,7 +63729,152 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "ckpt_name": [
-                    []
+                    [
+                        {
+                            "content": "aamXLAnimeMix_v10.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "architectureinteriorsdlifechiasedammev80.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "depthfm-v1_fp16.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "depthfm-v1_fp32.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "differentiaSet_v10DifferentiaBase.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "DreamShaper_8_pruned.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "dreamshaper_8Inpainting.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "DreamShaperXL_Lightning.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "dynamicrafter_1024_v1_bf16.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "dynamicrafter_512_interp_v1_bf16.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "motionctrl.pth",
+                            "image": null
+                        },
+                        {
+                            "content": "Realistic_Vision_V5.1-inpainting.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "Realistic_Vision_V5.1.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sd_xl_base_1.0.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sd_xl_base_1.0_0.9vae.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sd_xl_refiner_1.0.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sd_xl_refiner_1.0_0.9vae.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sd_xl_turbo_1.0.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "sd_xl_turbo_1.0_fp16.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "segmind-vega.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "stable_cascade_stage_b.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "stable_cascade_stage_c.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "stable_zero123.ckpt",
+                            "image": null
+                        },
+                        {
+                            "content": "SUPIR-v0F.ckpt",
+                            "image": null
+                        },
+                        {
+                            "content": "SUPIR-v0Q.ckpt",
+                            "image": null
+                        },
+                        {
+                            "content": "svd.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "svd_xt.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "v1-5-pruned-emaonly.ckpt",
+                            "image": null
+                        },
+                        {
+                            "content": "v2-1_512-ema-pruned.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "v2-1_768-ema-pruned.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                            "image": null
+                        },
+                        {
+                            "content": "x4-upscaler-ema.safetensors",
+                            "image": null
+                        }
+                    ]
                 ]
             }
         },
@@ -61740,7 +64216,24 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "ipadapter_file": [
-                    []
+                    [
+                        "ip-adapter-faceid-plus_sd15.bin",
+                        "ip-adapter-faceid-plusv2_sd15.bin",
+                        "ip-adapter-faceid-plusv2_sdxl.bin",
+                        "ip-adapter-faceid-portrait_sd15.bin",
+                        "ip-adapter-faceid_sd15.bin",
+                        "ip-adapter-faceid_sdxl.bin",
+                        "ip-adapter-full-face_sd15.safetensors",
+                        "ip-adapter-plus-face_sd15.safetensors",
+                        "ip-adapter-plus-face_sdxl_vit-h.safetensors",
+                        "ip-adapter-plus_sd15.safetensors",
+                        "ip-adapter-plus_sdxl_vit-h.safetensors",
+                        "ip-adapter_sd15.safetensors",
+                        "ip-adapter_sd15_light.safetensors",
+                        "ip-adapter_sd15_vit-G.safetensors",
+                        "ip-adapter_sdxl.safetensors",
+                        "ip-adapter_sdxl_vit-h.safetensors"
+                    ]
                 ]
             }
         },
@@ -66511,7 +69004,10 @@ export const nodeDefinitions = {
                     "IMAGE"
                 ],
                 "swap_model": [
-                    []
+                    [
+                        "inswapper_128.onnx",
+                        "inswapper_128_fp16.onnx"
+                    ]
                 ],
                 "facedetection": [
                     [
@@ -66524,9 +69020,10 @@ export const nodeDefinitions = {
                 "face_restore_model": [
                     [
                         "none",
+                        "codeformer.pth",
                         "GFPGANv1.4.pth",
-                        "codeformer-v0.1.0.pth",
-                        "GFPGANv1.3.pth"
+                        "GFPGANv1.3.pth",
+                        "RestoreFormer.pth"
                     ]
                 ],
                 "face_restore_visibility": [
@@ -66702,9 +69199,10 @@ export const nodeDefinitions = {
                 "model": [
                     [
                         "none",
+                        "codeformer.pth",
                         "GFPGANv1.4.pth",
-                        "codeformer-v0.1.0.pth",
-                        "GFPGANv1.3.pth"
+                        "GFPGANv1.3.pth",
+                        "RestoreFormer.pth"
                     ]
                 ],
                 "visibility": [
@@ -68576,6 +71074,35 @@ export const nodeDefinitions = {
         "category": "mtb/facetools",
         "output_node": false
     },
+    "Load Face Swap Model (mtb)": {
+        "input": {
+            "required": {
+                "faceswap_model": [
+                    [
+                        "inswapper_128.onnx",
+                        "inswapper_128_fp16.onnx"
+                    ],
+                    {
+                        "default": "None"
+                    }
+                ]
+            }
+        },
+        "output": [
+            "FACESWAP_MODEL"
+        ],
+        "output_is_list": [
+            false
+        ],
+        "output_name": [
+            "FACESWAP_MODEL"
+        ],
+        "name": "Load Face Swap Model (mtb)",
+        "display_name": "Load Face Swap Model (mtb)",
+        "description": "",
+        "category": "mtb/facetools",
+        "output_node": false
+    },
     "Load Face Analysis Model (mtb)": {
         "input": {
             "required": {
@@ -70120,7 +72647,20 @@ export const nodeDefinitions = {
                     }
                 ],
                 "font": [
-                    []
+                    [
+                        "AlumniSansCollegiateOne-Regular",
+                        "Caveat-VariableFont_wght",
+                        "NotoSansArabic-Regular",
+                        "Oswald-Bold",
+                        "PixelifySans-Bold",
+                        "Quicksand-Bold",
+                        "Roboto-Regular",
+                        "TTNorms-Black",
+                        "YoungSerif-Regular",
+                        "comic",
+                        "font",
+                        "impact"
+                    ]
                 ],
                 "wrap": [
                     "INT",
@@ -80711,7 +83251,10 @@ export const nodeDefinitions = {
             "required": {
                 "model_name": [
                     [
-                        "sam_vit_b_01ec64.pth"
+                        "mobile_sam.pt",
+                        "sam_vit_b_01ec64.pth",
+                        "sam_vit_h_4b8939.pth",
+                        "sam_vit_l_0b3195.pth"
                     ]
                 ],
                 "device_mode": [
@@ -82880,7 +85423,26 @@ export const nodeDefinitions = {
                 ],
                 "Select to add LoRA": [
                     [
-                        "Select the LoRA to add to the text"
+                        "Select the LoRA to add to the text",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "Select to add Wildcard": [
@@ -82958,7 +85520,26 @@ export const nodeDefinitions = {
                 ],
                 "Select to add LoRA": [
                     [
-                        "Select the LoRA to add to the text"
+                        "Select the LoRA to add to the text",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "Select to add Wildcard": [
@@ -83279,7 +85860,26 @@ export const nodeDefinitions = {
                 ],
                 "Select to add LoRA": [
                     [
-                        "Select the LoRA to add to the text"
+                        "Select the LoRA to add to the text",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "Select to add Wildcard": [
@@ -83336,7 +85936,26 @@ export const nodeDefinitions = {
                 ],
                 "Select to add LoRA": [
                     [
-                        "Select the LoRA to add to the text"
+                        "Select the LoRA to add to the text",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "Select to add Wildcard": [
@@ -83453,7 +86072,26 @@ export const nodeDefinitions = {
                 ],
                 "Select to add LoRA": [
                     [
-                        "Select the LoRA to add to the text"
+                        "Select the LoRA to add to the text",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "Select to add Wildcard": [
@@ -83522,7 +86160,26 @@ export const nodeDefinitions = {
                 ],
                 "Select to add LoRA": [
                     [
-                        "Select the LoRA to add to the text"
+                        "Select the LoRA to add to the text",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "Select to add Wildcard": [
@@ -87941,7 +90598,26 @@ export const nodeDefinitions = {
                 ],
                 "Select to add LoRA": [
                     [
-                        "Select the LoRA to add to the text"
+                        "Select the LoRA to add to the text",
+                        "AnimateLCM_sd15_i2v_lora.safetensors",
+                        "AnimateLCM_sd15_t2v_lora.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_Energy_ADV2_SpatialLora__strong.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__light.safetensors",
+                        "SaltAI_PulsatingCore_ADV2_SpatialLora__strong.safetensors",
+                        "ip-adapter-faceid-plus_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sd15_lora.safetensors",
+                        "ip-adapter-faceid-plusv2_sdxl_lora.safetensors",
+                        "ip-adapter-faceid_sd15_lora.safetensors",
+                        "ip-adapter-faceid_sdxl_lora.safetensors",
+                        "pytorch_lora_weights.safetensors",
+                        "sd_xl_offset_example-lora_1.0.safetensors",
+                        "sdxl_lightning_2step_lora.safetensors",
+                        "sdxl_lightning_4step_lora.safetensors",
+                        "sdxl_lightning_8step_lora.safetensors",
+                        "theovercomer8sContrastFix_sd15.safetensors",
+                        "theovercomer8sContrastFix_sd21768.safetensors",
+                        "v3_sd15_adapter.ckpt"
                     ]
                 ],
                 "Select to add Wildcard": [
@@ -92109,7 +94785,44 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "ckpt_name": [
-                    []
+                    [
+                        "DreamShaperXL_Lightning.safetensors",
+                        "DreamShaper_8_pruned.safetensors",
+                        "Realistic_Vision_V5.1-inpainting.safetensors",
+                        "Realistic_Vision_V5.1.safetensors",
+                        "SUPIR-v0F.ckpt",
+                        "SUPIR-v0Q.ckpt",
+                        "aamXLAnimeMix_v10.safetensors",
+                        "aamXLAnimeMix_v10HalfturboEulera.safetensors",
+                        "architectureinteriorsdlifechiasedammev80.safetensors",
+                        "depthfm-v1_fp16.safetensors",
+                        "depthfm-v1_fp32.safetensors",
+                        "differentiaSet_v10DifferentiaBase.safetensors",
+                        "dreamshaperXL_v21TurboDPMSDE.safetensors",
+                        "dreamshaper_8Inpainting.safetensors",
+                        "dynamicrafter_1024_v1_bf16.safetensors",
+                        "dynamicrafter_512_interp_v1_bf16.safetensors",
+                        "illuminatiDiffusionV1_v11-unclip-h-fp16.safetensors",
+                        "juggernautXL_v9Rdphoto2Lightning.safetensors",
+                        "motionctrl.pth",
+                        "sd_xl_base_1.0.safetensors",
+                        "sd_xl_base_1.0_0.9vae.safetensors",
+                        "sd_xl_refiner_1.0.safetensors",
+                        "sd_xl_refiner_1.0_0.9vae.safetensors",
+                        "sd_xl_turbo_1.0.safetensors",
+                        "sd_xl_turbo_1.0_fp16.safetensors",
+                        "segmind-vega.safetensors",
+                        "stable_cascade_stage_b.safetensors",
+                        "stable_cascade_stage_c.safetensors",
+                        "stable_zero123.ckpt",
+                        "svd.safetensors",
+                        "svd_xt.safetensors",
+                        "v1-5-pruned-emaonly.ckpt",
+                        "v2-1_512-ema-pruned.safetensors",
+                        "v2-1_768-ema-pruned.safetensors",
+                        "wd-1-5-beta2-aesthetic-unclip-h-fp16.safetensors",
+                        "x4-upscaler-ema.safetensors"
+                    ]
                 ],
                 "beta_schedule": [
                     [
@@ -92173,7 +94886,25 @@ export const nodeDefinitions = {
                     "MODEL"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "AnimateLCM_sd15_i2v.ckpt",
+                        "AnimateLCM_sd15_t2v.ckpt",
+                        "animatediff_lightning_1step_comfyui.safetensors",
+                        "animatediff_lightning_2step_comfyui.safetensors",
+                        "animatediff_lightning_4step_comfyui.safetensors",
+                        "animatediff_lightning_8step_comfyui.safetensors",
+                        "lt_long_mm_16_64_frames.ckpt",
+                        "lt_long_mm_16_64_frames_v1.1.ckpt",
+                        "lt_long_mm_32_frames.ckpt",
+                        "mm-Stabilized_high.pth",
+                        "mm-Stabilized_mid.pth",
+                        "mm_sd_v14.ckpt",
+                        "mm_sd_v15.ckpt",
+                        "mm_sd_v15_v2.ckpt",
+                        "mm_sdxl_v10_beta.ckpt",
+                        "temporaldiff-v1-animatediff.ckpt",
+                        "v3_sd15_mm.ckpt"
+                    ]
                 ],
                 "beta_schedule": [
                     [
@@ -92237,7 +94968,25 @@ export const nodeDefinitions = {
                     "MODEL"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "AnimateLCM_sd15_i2v.ckpt",
+                        "AnimateLCM_sd15_t2v.ckpt",
+                        "animatediff_lightning_1step_comfyui.safetensors",
+                        "animatediff_lightning_2step_comfyui.safetensors",
+                        "animatediff_lightning_4step_comfyui.safetensors",
+                        "animatediff_lightning_8step_comfyui.safetensors",
+                        "lt_long_mm_16_64_frames.ckpt",
+                        "lt_long_mm_16_64_frames_v1.1.ckpt",
+                        "lt_long_mm_32_frames.ckpt",
+                        "mm-Stabilized_high.pth",
+                        "mm-Stabilized_mid.pth",
+                        "mm_sd_v14.ckpt",
+                        "mm_sd_v15.ckpt",
+                        "mm_sd_v15_v2.ckpt",
+                        "mm_sdxl_v10_beta.ckpt",
+                        "temporaldiff-v1-animatediff.ckpt",
+                        "v3_sd15_mm.ckpt"
+                    ]
                 ],
                 "beta_schedule": [
                     [
@@ -92801,7 +95550,25 @@ export const nodeDefinitions = {
         "input": {
             "required": {
                 "model_name": [
-                    []
+                    [
+                        "AnimateLCM_sd15_i2v.ckpt",
+                        "AnimateLCM_sd15_t2v.ckpt",
+                        "animatediff_lightning_1step_comfyui.safetensors",
+                        "animatediff_lightning_2step_comfyui.safetensors",
+                        "animatediff_lightning_4step_comfyui.safetensors",
+                        "animatediff_lightning_8step_comfyui.safetensors",
+                        "lt_long_mm_16_64_frames.ckpt",
+                        "lt_long_mm_16_64_frames_v1.1.ckpt",
+                        "lt_long_mm_32_frames.ckpt",
+                        "mm-Stabilized_high.pth",
+                        "mm-Stabilized_mid.pth",
+                        "mm_sd_v14.ckpt",
+                        "mm_sd_v15.ckpt",
+                        "mm_sd_v15_v2.ckpt",
+                        "mm_sdxl_v10_beta.ckpt",
+                        "temporaldiff-v1-animatediff.ckpt",
+                        "v3_sd15_mm.ckpt"
+                    ]
                 ]
             },
             "optional": {
@@ -92835,7 +95602,25 @@ export const nodeDefinitions = {
                     "LATENT"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "AnimateLCM_sd15_i2v.ckpt",
+                        "AnimateLCM_sd15_t2v.ckpt",
+                        "animatediff_lightning_1step_comfyui.safetensors",
+                        "animatediff_lightning_2step_comfyui.safetensors",
+                        "animatediff_lightning_4step_comfyui.safetensors",
+                        "animatediff_lightning_8step_comfyui.safetensors",
+                        "lt_long_mm_16_64_frames.ckpt",
+                        "lt_long_mm_16_64_frames_v1.1.ckpt",
+                        "lt_long_mm_32_frames.ckpt",
+                        "mm-Stabilized_high.pth",
+                        "mm-Stabilized_mid.pth",
+                        "mm_sd_v14.ckpt",
+                        "mm_sd_v15.ckpt",
+                        "mm_sd_v15_v2.ckpt",
+                        "mm_sdxl_v10_beta.ckpt",
+                        "temporaldiff-v1-animatediff.ckpt",
+                        "v3_sd15_mm.ckpt"
+                    ]
                 ],
                 "unlimited_area_hack": [
                     "BOOLEAN",
@@ -92885,7 +95670,25 @@ export const nodeDefinitions = {
                     "LATENT"
                 ],
                 "model_name": [
-                    []
+                    [
+                        "AnimateLCM_sd15_i2v.ckpt",
+                        "AnimateLCM_sd15_t2v.ckpt",
+                        "animatediff_lightning_1step_comfyui.safetensors",
+                        "animatediff_lightning_2step_comfyui.safetensors",
+                        "animatediff_lightning_4step_comfyui.safetensors",
+                        "animatediff_lightning_8step_comfyui.safetensors",
+                        "lt_long_mm_16_64_frames.ckpt",
+                        "lt_long_mm_16_64_frames_v1.1.ckpt",
+                        "lt_long_mm_32_frames.ckpt",
+                        "mm-Stabilized_high.pth",
+                        "mm-Stabilized_mid.pth",
+                        "mm_sd_v14.ckpt",
+                        "mm_sd_v15.ckpt",
+                        "mm_sd_v15_v2.ckpt",
+                        "mm_sdxl_v10_beta.ckpt",
+                        "temporaldiff-v1-animatediff.ckpt",
+                        "v3_sd15_mm.ckpt"
+                    ]
                 ],
                 "unlimited_area_hack": [
                     "BOOLEAN",
@@ -93306,7 +96109,9 @@ export const nodeDefinitions = {
                     [
                         "GFPGANv1.3.pth",
                         "GFPGANv1.4.pth",
-                        "codeformer-v0.1.0.pth"
+                        "RestoreFormer.pth",
+                        "codeformer.pth",
+                        "gligen_sd14_textbox_pruned_fp16.safetensors"
                     ]
                 ]
             }
