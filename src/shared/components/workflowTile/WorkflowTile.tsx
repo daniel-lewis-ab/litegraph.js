@@ -43,7 +43,8 @@ export const WorkflowTile = ({
             <Icon className="h-[45%] w-full pt-[20%] opacity-5" icon={faDiagramProject} />
           </div>
           <div className="flex flex-row justify-end">
-            <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+            {/* Removed onOpenChange={setIsPopoverOpen} as it's not working correctly on firefox with this */}
+            <Popover open={isPopoverOpen}>
               <PopoverTrigger
                 asChild
                 onClick={(e) => {
