@@ -9,7 +9,7 @@ import { routes } from '@/routes/routes';
 import { useCallback, useEffect, useState } from 'react';
 import { useUpdateWorkflowMutation } from '@/api/hooks/useUpdateWorkflowMutation/useUpdateWorkflowMutation';
 import throttle from 'lodash.throttle';
-import { saveJsonFile } from '@/shared/functions/saveJsonFile';
+import { saveWorkflowContentToFile } from '@/shared/functions/saveToFile';
 import { constants } from '@/contants';
 import { useWorkflowExecutionsQuery } from '@/api/hooks/useWorkflowExecutionsQuery/useWorkflowExecutionsQuery';
 import { usePrefetchWorkflowOutputAssets } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
@@ -73,7 +73,7 @@ export const WorkflowEditorPageContainer = () => {
     return Promise.resolve();
   };
 
-  const handleSaveWorkflow = () => saveJsonFile(JSON.stringify(currentWorkflow?.content), `${workflow!.name}.json`);
+  const handleSaveWorkflow = () => saveWorkflowContentToFile(workflow?.content, `${workflow!.name}.json`);
 
   if (isLoadingWorkflow) {
     return <CenteredLoader isFullscreen />;

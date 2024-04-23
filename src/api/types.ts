@@ -25,13 +25,14 @@ export type Workflow = {
 type NodeInfo = {
   id: number;
   type: string;
+  widgets_values?: string[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };
 
 // TODO: Define this type more explicitly
 export type WorkflowContent = {
-  nodes?: NodeInfo[];
+  nodes: NodeInfo[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 };

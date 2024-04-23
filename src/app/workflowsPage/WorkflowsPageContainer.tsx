@@ -4,7 +4,7 @@ import { CenteredLoader } from '@/shared/components/centeredLoader/CenteredLoade
 import { useDeleteWorkflowMutation } from '@/api/hooks/useDeleteWorkflowMutation/useDeleteWorkflowMutation';
 import { useFetchWorkflowDetails } from '@/api/hooks/useWorkflowDetailsQuery/useWorkflowDetailsQuery';
 import toast from 'react-hot-toast';
-import { saveJsonFile } from '@/shared/functions/saveJsonFile';
+import { saveWorkflowContentToFile } from '@/shared/functions/saveToFile';
 import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
 
 export const WorkflowsPageContainer = () => {
@@ -27,7 +27,7 @@ export const WorkflowsPageContainer = () => {
   const handleExport = async (id: string) => {
     try {
       const res = await fetchWorkflow(id);
-      saveJsonFile(JSON.stringify(res.content), `${res.name}.json`);
+      saveWorkflowContentToFile(res.content, `${res.name}.json`);
       toast.success('Workflow exported successfully');
     } catch (e) {
       toast.error('Failed to export workflow');

@@ -5,7 +5,7 @@ import { useChangeDeploymentStateMutation } from '@/api/hooks/useChangeDeploymen
 import { useDeleteDeploymentMutation } from '@/api/hooks/useDeleteDeploymentMutation/useDeleteDeploymentMutation';
 import { DeploymentStatus } from '@/api/types';
 import { useFetchDeployment } from '@/api/hooks/useDeploymentQuery/useDeploymentQuery';
-import { saveJsonFile } from '@/shared/functions/saveJsonFile';
+import { saveStringToFile } from '@/shared/functions/saveToFile';
 import toast from 'react-hot-toast';
 import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
 
@@ -34,7 +34,7 @@ export const DeploymentsPageContainer = () => {
   const handleDownloadDeployment = async (id: string) => {
     try {
       const res = await fetchDeployment(id);
-      saveJsonFile(JSON.stringify(res.workflow_json), `${res.name}.json`);
+      saveStringToFile(JSON.stringify(res.workflow_json), `${res.name}.json`);
       toast.success('Deployment JSON downloaded');
     } catch (error) {
       toast.error('Failed to download deployment JSON');
