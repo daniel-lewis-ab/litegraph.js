@@ -369,7 +369,7 @@ class Rgthree extends EventTarget {
             clean && clean.call(app, ...arguments);
         };
         const loadGraphData = app.loadGraphData;
-        app.loadGraphData = function (graph) {
+        app.loadGraphData = async function (graph) {
             if (rgthree.monitorLinkTimeout) {
                 clearTimeout(rgthree.monitorLinkTimeout);
                 rgthree.monitorLinkTimeout = null;
