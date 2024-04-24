@@ -11,9 +11,9 @@ const ext = {
 		LGraphCanvas.prototype.drawNodeShape = function (
 			node, ctx, size, fgcolor, bgcolor, selected, mouse_over
 		) {
-			const result = origDrawNodeShape.apply(this, arguments);
+			const result = origDrawNodeShape?.apply(this, arguments);
 			
-			if(!node || !node.title.startsWith('∞'))
+			if(! node?.title?.startsWith('∞') || !ctx) 
 				return result;
 			
 			const icon = document.createElement('img');
