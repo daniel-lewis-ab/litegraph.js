@@ -22,7 +22,7 @@ async function uploadFile(file) {
         });
 
         if (resp.status === 200) {
-            return resp.status
+            return resp
         } else {
             alert(resp.status + " - " + resp.statusText);
         }
@@ -66,7 +66,7 @@ app.registerExtension({
                         }
                         let successes = 0;
                         for(const file of fileInput.files) {
-                            if (await uploadFile(file) == 200) {
+                            if (await uploadFile(file).status == 200) {
                                 successes++;
                             } else {
                                 //Upload failed, but some prior uploads may have succeeded
@@ -94,15 +94,17 @@ app.registerExtension({
                     style: "display: none",
                     onchange: async () => {
                         if (fileInput.files.length) {
-                            if (await uploadFile(fileInput.files[0]) != 200) {
+                            const response = await uploadFile(fileInput.files[0])
+                            if (response.status != 200) {
                                 //upload failed and file can not be added to options
                                 return;
                             }
+                            data = await response.json();
                             const inputTypeWidget = this.widgets.find((w) => w.name === 'input_type');
                             inputTypeWidget.value = 'FILE';
 
                         //  const path = fileInput.files[0].webkitRelativePath;
-                            const filename = fileInput.files[0].name;
+                            const filename = (data.subfolder ? `${data.subfolder}/` : '') + data.name;
                         //  pathWidget.options.values.push(filename); // for multiple files
                             pathWidget.value = filename;
                             pathWidget.callback?.(filename);
