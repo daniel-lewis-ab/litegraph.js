@@ -99,7 +99,7 @@ app.registerExtension({
                                 //upload failed and file can not be added to options
                                 return;
                             }
-                            data = await response.json();
+                            const data = await response.json();
                             const inputTypeWidget = this.widgets.find((w) => w.name === 'input_type');
                             inputTypeWidget.value = 'FILE';
 
