@@ -58,7 +58,11 @@ export const OutputsGalleryGridContainer = ({
     try {
       const asset = assets!.find((a) => a.id === assetId)!;
       const imgUrl = getImageUrl(asset.storage_path);
-      await saveImage(imgUrl, `${workflowName} - ${asset.name}`);
+      const timeString = new Date(asset.created_at).toLocaleTimeString();
+      const dateString = new Date(asset.created_at).toLocaleDateString();
+      const fileName = `${workflowName} - ${dateString} ${timeString}`;
+
+      await saveImage(imgUrl, fileName);
       toast.success('Asset downloaded', { position: 'bottom-center' });
     } catch (error) {
       toast.error('Failed to download asset', { position: 'bottom-center' });

@@ -13,7 +13,6 @@ import { getImageUrl } from '@/shared/functions/getImageUrl';
 
 type ImageTileProps = {
   imgUrl: string;
-  name: string;
   created_at: string;
   size: number;
   isSelected?: boolean;
@@ -21,8 +20,10 @@ type ImageTileProps = {
   onClick(): void;
 };
 
-const ImageTile = ({ imgUrl, name, created_at, size, isSelected, onClick }: ImageTileProps) => {
+const ImageTile = ({ imgUrl, created_at, size, isSelected, onClick }: ImageTileProps) => {
   const sizeInkB = Math.round(size / 1024);
+
+  const name = new Date(created_at).toLocaleTimeString();
 
   return (
     <div
@@ -87,7 +88,6 @@ export const OutputsGallerySection = ({
               <ImageTile
                 key={i.id}
                 imgUrl={getImageUrl(i.storage_path, TILE_IMG_CONFIG)}
-                name={i.name}
                 created_at={i.created_at}
                 size={i.size}
                 isSelected={selectedAssetId === i.id}
