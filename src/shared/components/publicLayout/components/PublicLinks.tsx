@@ -76,7 +76,7 @@ export const socialLinks = [links.social.x, links.social.discord, links.social.g
 
 export const footerLinks = [
   {
-    product: [links.product.deployments, links.product.editor, links.product.infra],
+    product: [links.product.deployments, links.product.infra, links.product.editor],
     resources: [links.salt.examples, links.salt.docs, links.social.github],
     company: [links.product.team, links.salt.about, links.salt.blog],
   },
