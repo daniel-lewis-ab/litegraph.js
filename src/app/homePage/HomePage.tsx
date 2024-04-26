@@ -12,11 +12,15 @@ import img from './images/deploy-discord-min.png';
 import gpuPromoImg from './images/promo-gpu.svg';
 import ideImg from './images/promo-ide.jpg';
 import { useScrollToHash } from '@/hooks/useScrollToHash/useScrollToHash';
+import { useAuth } from '@/hooks/useAuth/useAuth';
 
 const LogoAnimation = lazy(() => import('./components/LogoAnimation'));
 
 export const HomePage = () => {
   useScrollToHash();
+  const {
+    state: { isAuthorized },
+  } = useAuth();
 
   return (
     <PublicLayout>
@@ -38,7 +42,7 @@ export const HomePage = () => {
                 </h1>
                 <h2 className={s.sectionBody}>Build faster in an open ecosystem designed for scale</h2>
                 <Button size="lg" className="" color="primary" asLink to={routes.login}>
-                  <span className="block px-4">Start for free</span>
+                  <span className="block px-4">{isAuthorized ? `Start building` : `Start for free`}</span>
                 </Button>
               </div>
             </PublicLayout.Container>
