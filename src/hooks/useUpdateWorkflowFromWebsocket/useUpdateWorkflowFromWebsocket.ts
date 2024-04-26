@@ -6,6 +6,7 @@ import {
   GetWorkflowExecutionsResponse,
   WebSocketMessage,
   ParsedComfyUIExecutionError,
+  ExecutionStartData,
 } from '@/api/types';
 
 import { useEffect } from 'react';
@@ -27,8 +28,8 @@ export const useUpdateWorkflowFromWebsocket = () => {
     }: {
       workflowId: string;
       executionId: string;
-      completionDuration: number;
-      status: 'COMPLETED' | 'FAILED';
+      completionDuration?: number;
+      status: 'COMPLETED' | 'FAILED' | 'RUNNING';
     }) => {
       const currentData = queryClient.getQueryData<GetWorkflowExecutionsResponse>([
         QueryKeys.workflowExecutions,
@@ -38,7 +39,7 @@ export const useUpdateWorkflowFromWebsocket = () => {
       if (currentData) {
         const updatedResults = currentData.results.map((execution) => {
           if (execution.id === executionId) {
-            return { ...execution, status, completion_duration: completionDuration };
+            return { ...execution, status, ...(completionDuration ? { completion_duration: completionDuration } : {}) };
           }
           return execution;
         });
@@ -61,8 +62,18 @@ export const useUpdateWorkflowFromWebsocket = () => {
     const handleWebsocketMessage = (message: WebSocketMessage | null) => {
       if (!message?.data) return;
 
+      if (message.data.type === 'execution_start') {
+        const data = (message.data as ExecutionStartData).data;
+        updateExecutionStatus({
+          workflowId: data.workflow_id,
+          executionId: data.execution_id,
+          status: 'RUNNING',
+        });
+      }
+
       if (message.data.type === 'send_response') {
         const data = (message.data as ExecutionFinishedData).data;
+
         if (data.error?.length) {
           console.error('Workflow job failed, details:', data.error);
           let specificErrorShown = false;
@@ -89,6 +100,8 @@ export const useUpdateWorkflowFromWebsocket = () => {
 
           return;
         }
+
+        console.log('UPDATING WORKFLOW STATUS', data);
 
         updateExecutionStatus({
           workflowId: data.workflow_id,

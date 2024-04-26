@@ -60,7 +60,7 @@ const ExecutionItem = ({
       <div
         className={clsx(
           'flex flex-row items-center justify-between rounded-xl *:text-sm',
-          isRunningOrPending ? 'execution-item-bg' : 'bg-surface-3',
+          isRunningOrPending ? 'execution-item-bg' : 'border border-surface-2 bg-surface-3',
         )}
       >
         <div
@@ -74,7 +74,8 @@ const ExecutionItem = ({
           {status === 'COMPLETED' && <p className="ml-3">{completionDuration ?? 0}s</p>}
           {/* @TODO: Display error */}
           {status === 'FAILED' && <p className="ml-3 !text-error-9">Error occurred</p>}
-          {isRunningOrPending && <p className="ml-3">Running...</p>}
+          {status === 'RUNNING' && <p className="ml-3">Running...</p>}
+          {status === 'PENDING' && <p className="ml-3">Pending...</p>}
         </div>
         <div className="flex flex-row items-center">
           {!isRunningOrPending && (
