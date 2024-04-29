@@ -11,6 +11,8 @@ import './OutputsGallerySection.scss';
 import { TimeSince } from '@/shared/components/timeSince/TimeSince';
 import { getImageUrl } from '@/shared/functions/getImageUrl';
 
+const getImageNameFromTimestamp = (timestamp: string) => new Date(timestamp).toLocaleTimeString();
+
 type ImageTileProps = {
   imgUrl: string;
   created_at: string;
@@ -23,7 +25,7 @@ type ImageTileProps = {
 const ImageTile = ({ imgUrl, created_at, size, isSelected, onClick }: ImageTileProps) => {
   const sizeInkB = Math.round(size / 1024);
 
-  const name = new Date(created_at).toLocaleTimeString();
+  const name = getImageNameFromTimestamp(created_at);
 
   return (
     <div
@@ -101,7 +103,8 @@ export const OutputsGallerySection = ({
       {selectedAssetId !== null ? (
         <div className="absolute bottom-0 left-0 right-0 m-4 flex justify-between rounded-lg bg-primary-10 px-4 py-3 *:text-black">
           <p className="font-medium">
-            {selectedAsset?.name}.{getSelectedAssetExtension(selectedAsset!.storage_path)}
+            {getImageNameFromTimestamp(selectedAsset!.created_at)}.
+            {getSelectedAssetExtension(selectedAsset!.storage_path)}
           </p>
           <div className="flex flex-row *:mr-2">
             <button className="h-6 w-6" onClick={() => onCopyAssetContent(selectedAssetId)}>
