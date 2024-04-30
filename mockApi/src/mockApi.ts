@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import expressWs from 'express-ws';
-import { ApiWorkflowOutputAsset, ApiWorkflowOutputAssetDetails, Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowOutputAssetsResponse, GetWorkflowsResponse, PostLoginResponse, WorkflowDetails, WorkflowExecutionDetails } from '../../src/api/types';
+import { ApiWorkflowOutputAsset, ApiWorkflowOutputAssetDetails, Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowOutputAssetsResponse, GetWorkflowsResponse, PostLoginResponse, WorkflowContent, WorkflowDetails, WorkflowExecutionDetails } from '../../src/api/types';
 import { initWebsocket } from './mockWebsocket';
 import { examplePrompt1, examplePrompt2, examplePrompt3, workflowExecutions } from './workflowExecutions';
 
@@ -67,28 +67,28 @@ const baseWorkflows: WorkflowDetails[] = [
     name: 'comfyui_Title01af___a1',
     updated_at: new Date().toISOString(), // Current timestamp
     content: examplePrompt1,
-    api_content: {},
+    api_content: {} as WorkflowContent,
   },
   {
     id: '2',
     name: 'comfyui_Title01af___a2',
     updated_at: new Date(Date.now() - 3600 * 1000).toISOString(), // 1 hour ago
     content: examplePrompt2,
-    api_content: {},
+    api_content: {}  as WorkflowContent,
   },
   {
     id: '3',
     name: '(Video Tutorial Resources) Picture in Picture Goodness + Canvas Pose',
     updated_at: new Date(Date.now() - 24 * 3600 * 1000).toISOString(), // 1 day ago
     content: examplePrompt3,
-    api_content: {},
+    api_content: {} as WorkflowContent,
   },
   {
     id: '4',
     name: 'comfyui_Title01af___aEMPTY',
     updated_at: new Date(Date.now() - 7 * 24 * 3600 * 1000).toISOString(), // 1 week ago
-    content: {},
-    api_content: {},
+    content: {} as WorkflowContent,
+    api_content: {}  as WorkflowContent,
   },
 ];
 const workflows = baseWorkflows;
@@ -112,8 +112,8 @@ app.post('/v1/workflows/', (req: Request, res: Response) => {
   const newWorkflow: WorkflowDetails = {
     id: generateUUID(),
     name,
-    content: {},
-    api_content: {},
+    content: {} as WorkflowContent,
+    api_content: {} as WorkflowContent,
     updated_at: new Date().toISOString(),
   };
   workflows.unshift(newWorkflow);
@@ -305,8 +305,8 @@ app.post('/v1/workflows/:workflowId/executions', (req: Request, res: Response) =
     workflow_id: workflowId,
     status: 'PENDING',
     operation_id: 'xd',
-    workflow_content: {},
-    workflow_api_content: {},
+    workflow_content: {} as WorkflowContent,
+    workflow_api_content: {} as WorkflowContent,
     completion_duration: 16,
     created_at: new Date().toISOString(),
   };

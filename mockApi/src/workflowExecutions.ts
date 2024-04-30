@@ -1,6 +1,6 @@
-import { WorkflowExecution, WorkflowExecutionDetails } from "../../src/api/types";
+import { WorkflowContent, WorkflowExecution, WorkflowExecutionDetails } from "../../src/api/types";
 
-export const examplePrompt1 = {
+export const examplePrompt1: WorkflowContent = {
   last_node_id: 14,
   last_link_id: 10,
   nodes: [
@@ -105,7 +105,7 @@ export const examplePrompt1 = {
         'comfy',
         0,
         0,
-      ],
+      ] as any,
     },
     {
       id: 2,
@@ -142,7 +142,7 @@ export const examplePrompt1 = {
       properties: {
         'Node name for S&R': 'SDXL Empty Latent Image (rgthree)',
       },
-      widgets_values: [' 896 x 1152  (portrait xD 1one!)', 2, 1],
+      widgets_values: [' 896 x 1152  (portrait xD 1one!)', 2, 1] as any,
     },
     {
       id: 1,
@@ -297,7 +297,7 @@ export const examplePrompt1 = {
 };
 
 
-export const examplePrompt2 = {
+export const examplePrompt2: WorkflowContent = {
   last_node_id: 14,
   last_link_id: 10,
   nodes: [
@@ -402,7 +402,7 @@ export const examplePrompt2 = {
         'comfy',
         0,
         0,
-      ],
+      ] as any,
     },
     {
       id: 2,
@@ -439,7 +439,7 @@ export const examplePrompt2 = {
       properties: {
         'Node name for S&R': 'SDXL Empty Latent Image (rgthree)',
       },
-      widgets_values: [' 896 x 1152  (portrait xD 2!!)', 2, 1],
+      widgets_values: [' 896 x 1152  (portrait xD 2!!)', 2, 1] as any,
     },
     {
       id: 1,
@@ -594,7 +594,7 @@ export const examplePrompt2 = {
 };
 
 
-export const examplePrompt3 = {
+export const examplePrompt3: WorkflowContent = {
   last_node_id: 14,
   last_link_id: 10,
   nodes: [
@@ -699,7 +699,7 @@ export const examplePrompt3 = {
         'comfy',
         0,
         0,
-      ],
+      ] as any,
     },
     {
       id: 2,
@@ -736,7 +736,7 @@ export const examplePrompt3 = {
       properties: {
         'Node name for S&R': 'SDXL Empty Latent Image (rgthree)',
       },
-      widgets_values: [' 896 x 1152  (portrait xD 3)', 2, 1],
+      widgets_values: [' 896 x 1152  (portrait xD 3)', 2, 1] as any,
     },
     {
       id: 1,
@@ -897,7 +897,7 @@ export const workflowExecutions: WorkflowExecutionDetails[] = [
     status: 'COMPLETED',
     workflow_id: '1',
     workflow_content: examplePrompt1,
-    workflow_api_content: {},
+    workflow_api_content: {} as WorkflowContent,
     completion_duration: 16,
     created_at: '2021-10-01T12:00:00Z',
   },
@@ -907,7 +907,7 @@ export const workflowExecutions: WorkflowExecutionDetails[] = [
     status: 'FAILED',
     workflow_id: '2',
     workflow_content: examplePrompt2,
-    workflow_api_content: {},
+    workflow_api_content: {} as WorkflowContent,
     completion_duration: 12,
     created_at: '2021-10-01T12:00:00Z',
   },
@@ -917,7 +917,7 @@ export const workflowExecutions: WorkflowExecutionDetails[] = [
     status: 'COMPLETED',
     workflow_id: '3',
     workflow_content: examplePrompt3,
-    workflow_api_content: {},
+    workflow_api_content: {} as WorkflowContent,
     completion_duration: 14,
     created_at: '2021-10-01T12:00:00Z',
   },
