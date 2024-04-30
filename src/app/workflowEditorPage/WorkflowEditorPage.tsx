@@ -37,20 +37,18 @@ export const WorkflowEditorPage = ({
               onSaveClick={onSaveWorkflow}
               onDeployClick={() => setShowDeploymentDialog(true)}
             />
-            <div className="flex h-full flex-row">
-              <EditorIframe />
-              <EditorSideActionsBar
-                activeSection={activeSidebarSection}
-                workflowsRunningCount={workflowsRunningCount}
-                onOpenSidebarSectionClick={setActiveSidebarSection}
-              />
-            </div>
+            <EditorIframe />
             <EditorFooter />
           </div>
         </Panel>
         <PanelResizeHandle />
+        <EditorSideActionsBar
+          activeSection={activeSidebarSection}
+          workflowsRunningCount={workflowsRunningCount}
+          onOpenSidebarSectionClick={setActiveSidebarSection}
+        />
         {activeSidebarSection !== null && (
-          <Panel defaultSize={10}>
+          <Panel minSize={15}>
             <div className="flex h-full overflow-hidden">
               <WorkflowEditorSidebar
                 workflowId={workflowId}
