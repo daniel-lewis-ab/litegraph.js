@@ -12,7 +12,7 @@ type EditorSectionProps = {
 };
 
 export const EditorSection = ({ children, title, icon, className, onClose }: EditorSectionProps) => (
-  <div className={clsx('flex h-full flex-col p-4', className)}>
+  <div className={clsx('flex h-full flex-col p-2', className)}>
     <div className="mb-4 flex flex-row items-center justify-between">
       <div className="flex flex-row items-center">
         <Icon icon={icon} size={20} />

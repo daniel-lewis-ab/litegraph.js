@@ -1,14 +1,14 @@
-import { faImages } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
-import { EditorSection } from '../EditorSection';
-import './OutputsGallerySection.scss';
-import { useWorkflowOutputAssetsQuery } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
-import { OutputsGallerySection } from './OutputsGallerySection';
-import { CenteredLoader } from '@/shared/components/centeredLoader/CenteredLoader';
 import { useDeleteAssetMutation } from '@/api/hooks/useDeleteAssetMutation/useDeleteAssetMutation';
-import toast from 'react-hot-toast';
-import { saveImage } from '@/shared/functions/saveImage';
 import { useFetchExecutionDetailsQuery } from '@/api/hooks/useWorkflowExecutionDetailsQuery/useWorkflowExecutionDetailsQuery';
+import { useWorkflowOutputAssetsQuery } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
+import { CenteredLoader } from '@/shared/components/centeredLoader/CenteredLoader';
 import { getImageUrl } from '@/shared/functions/getImageUrl';
+import { saveImage } from '@/shared/functions/saveImage';
+import { faImages } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
+import toast from 'react-hot-toast';
+import { EditorSection } from '../EditorSection';
+import { OutputsGallerySection } from './OutputsGallerySection';
+import './OutputsGallerySection.scss';
 
 type OutputsGalleryGridContainerProps = {
   workflowId: string;
@@ -69,6 +69,11 @@ export const OutputsGalleryGridContainer = ({
     }
   };
 
+  const handleOpenAsset = (assetId: string) => {
+    const asset = assets!.find((a) => a.id === assetId)!;
+    open(getImageUrl(asset.storage_path), '_blank');
+  };
+
   if (isLoading) {
     return (
       <EditorSection icon={faImages} title="Outputs" onClose={onClose}>
@@ -93,6 +98,7 @@ export const OutputsGalleryGridContainer = ({
       onCopyAssetContent={onCopyAssetContent}
       onDeleteOutputAsset={handleDeleteAsset}
       prefetchAssetInfo={handlePrefetchAssetInfo}
+      onOpenAsset={handleOpenAsset}
     />
   );
 };

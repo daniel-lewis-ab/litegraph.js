@@ -5,7 +5,7 @@
 button.button,
 a.button {
   --base-color: var(--color-primary-10);
-  --second-base-color: var(--color-primaryA-5);
+  --second-base-color: var(--color-primaryA-4);
   --text-color: var(--color-primary-1);
   --text-color-muted: var(--color-primary-9);
 
@@ -63,9 +63,9 @@ a.button {
 
   &--color-success {
     --base-color: var(--color-success-9);
-    --second-base-color: var(--color-success-4);
+    --second-base-color: var(--color-successA-3);
     --text-color: var(--color-success-1);
-    --text-color-muted: var(--color-success-10);
+    --text-color-muted: var(--color-success-11);
 
     &.button--ghost {
       --text-color: var(--text-color-muted);
@@ -82,6 +82,10 @@ a.button {
     --second-base-color: var(--color-errorA-5);
     --text-color: white;
     --text-color-muted: var(--color-error-10);
+
+    &.button--ghost {
+      --second-base-color: var(--color-errorA-3);
+    }
   }
 
   &--color-warning {

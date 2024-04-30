@@ -1,14 +1,14 @@
 import { WorkflowExecution, WorkflowStatus } from '@/api/types';
-import { Icon } from '@/shared/components/icon/Icon';
-import { faList, faCheck, faExclamation } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
-import { faXmark } from '@awesome.me/kit-b6cda292ae/icons/classic/regular';
 import { Button } from '@/shared/components/button/Button';
+import { GradientFrame } from '@/shared/components/gradientFrame/GradientFrame';
+import { Icon } from '@/shared/components/icon/Icon';
+import { LoaderIcon } from '@/shared/components/loaderIcon/LoaderIcon';
+import { faXmark } from '@awesome.me/kit-b6cda292ae/icons/classic/regular';
+import { faCheck, faExclamation, faList } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import clsx from 'clsx';
-import { EditorSection } from '../EditorSection';
 import { Fragment, useState } from 'react';
 import toast from 'react-hot-toast';
-import { LoaderIcon } from '@/shared/components/loaderIcon/LoaderIcon';
-import { GradientFrame } from '@/shared/components/gradientFrame/GradientFrame';
+import { EditorSection } from '../EditorSection';
 import './ExecutionsSection.scss';
 
 const StatusIcon = ({ className, status }: { className?: string; status: WorkflowStatus }) => (
@@ -86,7 +86,7 @@ const ExecutionItem = ({
           <Button
             variant="ringed"
             color="secondary"
-            size="sm"
+            size="xs"
             className={clsx('m-1 w-[60px]', isRunningOrPending && 'pointer-events-none invisible')}
             onClick={handleLoadClick}
             onMouseOver={onMouseOverLoadBtn}
@@ -141,8 +141,8 @@ export const ExecutionsSection = ({
               History
             </button>
           </div>
-          <p className="mb-2 text-sm font-medium text-text-muted">Latest</p>
-          <div className=" no-scrollbar flex h-full flex-col overflow-auto *:mb-2">
+          <p className="mb-1 text-sm font-medium text-text-muted">Latest</p>
+          <div className=" no-scrollbar flex h-full flex-col overflow-auto *:mb-1">
             {executionsToDisplay.map((ex, i) => (
               <ExecutionItem
                 key={ex.id}

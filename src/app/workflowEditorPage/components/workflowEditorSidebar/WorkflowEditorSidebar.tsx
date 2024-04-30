@@ -9,7 +9,7 @@ type WorkflowSidebarProps = {
 };
 
 export const WorkflowEditorSidebar = ({ workflowId, workflowName, section, onClose }: WorkflowSidebarProps) => (
-  <div className="ml-2 flex-1 rounded-lg bg-surface-2">
+  <div className="ml-1 h-full flex-1 rounded-lg bg-surface-2">
     {section === 'images' && (
       <OutputsGalleryGridContainer workflowName={workflowName} workflowId={workflowId} onClose={onClose} />
     )}
