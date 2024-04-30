@@ -6,6 +6,7 @@ import { EditorIframe } from './components/EditorIframe/EditorIframe';
 import { WorkflowEditorHeader } from './components/WorkflowEditorHeader';
 import { EditorFooter } from './components/EditorFooter';
 import { WorkflowEditorSidebar } from './components/workflowEditorSidebar/WorkflowEditorSidebar';
+import { EditorSideActionsBar } from './components/workflowEditorSidebar/components/EditorSideActionsBar';
 
 export const WorkflowEditorPage = ({
   workflowId,
@@ -32,18 +33,22 @@ export const WorkflowEditorPage = ({
           >
             <WorkflowEditorHeader
               workflowName={workflowName}
-              activeSection={activeSidebarSection}
-              onOpenSidebarSectionClick={setActiveSidebarSection}
               onRunWorkflowClick={onCreateNewWorkflowExecution}
               onSaveClick={onSaveWorkflow}
               onDeployClick={() => setShowDeploymentDialog(true)}
-              workflowsRunningCount={workflowsRunningCount}
             />
-            <EditorIframe />
+            <div className="flex h-full flex-row">
+              <EditorIframe />
+              <EditorSideActionsBar
+                activeSection={activeSidebarSection}
+                workflowsRunningCount={workflowsRunningCount}
+                onOpenSidebarSectionClick={setActiveSidebarSection}
+              />
+            </div>
             <EditorFooter />
           </div>
         </Panel>
-        <PanelResizeHandle className="" />
+        <PanelResizeHandle />
         {activeSidebarSection !== null && (
           <Panel defaultSize={10}>
             <div className="flex h-full overflow-hidden">
