@@ -127,7 +127,7 @@ export const appRoutes: RouteRecord[] = [
                 </WorkflowEditorContextProvider>
               </WebSocketProvider>
             ),
-            errorElement: <PageErrorTemplate variant="down" inApp />,
+            errorElement: <PageErrorTemplate variant="down" inApp className="h-screen" />,
             children: [
               {
                 index: true,
