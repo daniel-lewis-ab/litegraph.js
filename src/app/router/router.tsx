@@ -2,7 +2,6 @@ import { WorkflowEditorContextProvider } from '@/context/workflowEditorContext/W
 import { routes } from '@/routes/routes';
 import { Layout } from '@/shared/components/Layout/Layout';
 import { AuthorizedRoute } from '@/shared/components/authorizedRoute/AuthorizedRoute';
-import { ErrorPage } from '@/shared/components/errorPage/ErrorPage';
 import { Navigate, Outlet } from 'react-router-dom';
 import AboutPage, { aboutPageLoader } from '../aboutPage/AboutPage';
 import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageContainer';
@@ -128,7 +127,7 @@ export const appRoutes: RouteRecord[] = [
                 </WorkflowEditorContextProvider>
               </WebSocketProvider>
             ),
-            errorElement: <ErrorPage />,
+            errorElement: <PageErrorTemplate variant="down" inApp />,
             children: [
               {
                 index: true,

@@ -4,11 +4,12 @@ import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
 import { useLoaderData } from 'react-router-dom';
 import { fetchDatoCmsData } from '@/shared/functions/fetchDatoCmsData';
 import Markdown from 'react-markdown';
+import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
 
 const AboutPage = () => {
   const data = useLoaderData() as { page: AboutPageRecord } | undefined;
 
-  if (!data) return <div>Error occurred</div>;
+  if (!data) return <PageErrorTemplate inApp variant="down" />;
 
   const page = data.page;
 
