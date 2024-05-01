@@ -1305,8 +1305,8 @@ export class ComfyApp {
     api.addEventListener('execution_error', ({ detail }) => {
       this.lastExecutionError = detail;
       const formattedError = this.#formatExecutionError(detail);
-      this.ui.dialog.show(formattedError);
-      this.canvas.draw(true, true);
+      // this.ui.dialog.show(formattedError);
+      // this.canvas.draw(true, true);
     });
 
     api.addEventListener('b_preview', ({ detail }) => {
