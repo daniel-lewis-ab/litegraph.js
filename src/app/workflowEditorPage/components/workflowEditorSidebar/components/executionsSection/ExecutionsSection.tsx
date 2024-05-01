@@ -4,7 +4,7 @@ import { GradientFrame } from '@/shared/components/gradientFrame/GradientFrame';
 import { Icon } from '@/shared/components/icon/Icon';
 import { LoaderIcon } from '@/shared/components/loaderIcon/LoaderIcon';
 import { faXmark } from '@awesome.me/kit-b6cda292ae/icons/classic/regular';
-import { faCheck, faExclamation, faList } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
+import { faCheck, faExclamation } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import clsx from 'clsx';
 import { Fragment, useState } from 'react';
 import toast from 'react-hot-toast';
@@ -117,7 +117,7 @@ export const ExecutionsSection = ({
   const executionsToDisplay = activeTab === 'queue' ? executions.slice(0, 5) : executions;
 
   return (
-    <EditorSection icon={faList} title="Jobs" onClose={onClose}>
+    <EditorSection title="Jobs" onClose={onClose}>
       {executions.length === 0 ? <p className="text-text-subtle">Jobs queue is empty</p> : null}
       {executions.length > 0 ? (
         <>

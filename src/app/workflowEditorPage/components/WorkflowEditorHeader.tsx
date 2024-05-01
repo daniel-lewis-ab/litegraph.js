@@ -1,15 +1,15 @@
+import { constants } from '@/contants';
+import { routes } from '@/routes/routes';
 import { Button } from '@/shared/components/button/Button';
 import { Icon } from '@/shared/components/icon/Icon';
 import { Logo } from '@/shared/components/icons/Logo';
 import { OptionsList } from '@/shared/components/optionsList/OptionsList';
-import { faAngleLeft } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { faDownload, faPlay } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
+import { faAngleLeft } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import clsx from 'clsx';
-import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
-import { routes } from '@/routes/routes';
-import { constants } from '@/contants';
+import { useNavigate } from 'react-router-dom';
 
 type WorkflowHeaderProps = {
   workflowName: string;
@@ -74,7 +74,7 @@ export const WorkflowEditorHeader = ({
           >
             <OptionsList onClick={() => setOptionsSectionOpen(null)}>
               <OptionsList.Item icon={faDownload} onClick={onSaveClick}>
-                Export as...
+                Export JSON
               </OptionsList.Item>
             </OptionsList>
           </PopoverContent>

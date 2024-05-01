@@ -1,6 +1,5 @@
 import { ApiWorkflowOutputAsset } from '@/api/types';
 import { Icon } from '@/shared/components/icon/Icon';
-import { faImages } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import {
   faArrowDownToLine,
   faBracketsCurly,
@@ -27,6 +26,33 @@ type ImageTileProps = {
   isSelected?: boolean;
   className?: string;
   onClick(): void;
+};
+
+type VideoTileProps = {
+  videoUrl: string;
+  size: number;
+  created_at: string;
+  onClick?(): void;
+  className?: string;
+  isSelected?: boolean;
+};
+
+const VideoTile = ({ videoUrl, onClick, className, isSelected }: VideoTileProps) => {
+  return (
+    <div
+      className={clsx(
+        'group relative aspect-square cursor-pointer overflow-hidden rounded-lg border bg-surface-1 transition-colors',
+        isSelected ? 'border border-primary-10' : 'border-surface-5 group-hover:border-surface-7',
+        className,
+      )}
+      onClick={onClick}
+    >
+      <video className="h-full w-full object-contain" controls>
+        <source src={videoUrl} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  );
 };
 
 const ImageTile = ({ imgUrl, created_at, isSelected, onClick }: ImageTileProps) => {
@@ -81,29 +107,29 @@ export const OutputsGallerySection = ({
 }: OutputsGalleryGridProps) => {
   const [assetIdToDelete, setAssetIdToDelete] = useState<string | null>(null);
   const [selectedAssetId, setSelectedAssetId] = useState<string | null>(null);
-  const [colSize, setColSize] = useState(2);
+  const [colSize, setColSize] = useState(4);
 
   const onSliderChange = (value: number[]) => setColSize(value[0]);
   const onClickSmaller = () => setColSize((old) => Math.max(1, old - 1));
   const onClickLarger = () => setColSize((old) => Math.min(4, old + 1));
 
-  const handleImageClick = (id: string) => {
+  const handleAssetClick = (id: string) => {
     prefetchAssetInfo(id);
-    setSelectedAssetId((oldImgId) => (oldImgId === id ? null : id));
+    setSelectedAssetId((oldId) => (oldId === id ? null : id));
   };
 
   const selectedAsset = assets.find((i) => i.id === selectedAssetId);
 
   return (
-    <EditorSection icon={faImages} title="Outputs" onClose={onClose} className="relative">
+    <EditorSection title="Outputs" onClose={onClose} className="relative">
       {assets.length === 0 ? <p className="text-text-subtle">No outputs yet</p> : null}
       {assets.length > 0 ? (
         <div className="no-scrollbar relative h-full overflow-auto">
-          <div className="sticky top-0 z-10 mb-4 flex h-12 flex-col content-center items-center justify-center rounded-lg bg-[rgba(24,24,24,0.8)] bg-opacity-40 px-3 shadow-lg backdrop-blur-md">
+          <div className="sticky top-0 z-10 mb-2 flex flex-col content-center items-center justify-center rounded-lg bg-surface-2 px-2 py-2">
             <div className="flex w-full flex-row gap-4">
               <Icon
                 icon={faMagnifyingGlassMinus}
-                size={20}
+                size={16}
                 onClick={onClickSmaller}
                 className="cursor-pointer text-icon-muted hover:text-text-base"
               />
@@ -117,7 +143,7 @@ export const OutputsGallerySection = ({
                 onValueChange={onSliderChange}
               />
               <Icon
-                size={20}
+                size={16}
                 icon={faMagnifyingGlassPlus}
                 onClick={onClickLarger}
                 className="w cursor-pointer text-icon-muted hover:text-text-base"
@@ -134,16 +160,28 @@ export const OutputsGallerySection = ({
               colSize == 5 && `grid-cols-1`,
             )}
           >
-            {assets.map((i) => (
-              <ImageTile
-                key={i.id}
-                imgUrl={getImageUrl(i.storage_path, TILE_IMG_CONFIG)}
-                created_at={i.created_at}
-                size={i.size}
-                isSelected={selectedAssetId === i.id}
-                onClick={() => handleImageClick(i.id)}
-              />
-            ))}
+            {assets.map((i) => {
+              const isVideo = i.storage_path.includes('.mp4');
+              return !isVideo ? (
+                <ImageTile
+                  key={i.id}
+                  imgUrl={getImageUrl(i.storage_path, TILE_IMG_CONFIG)}
+                  created_at={i.created_at}
+                  size={i.size}
+                  isSelected={selectedAssetId === i.id}
+                  onClick={() => handleAssetClick(i.id)}
+                />
+              ) : (
+                <VideoTile
+                  created_at={i.created_at}
+                  videoUrl={i.asset_url}
+                  key={i.id}
+                  size={i.size}
+                  isSelected={selectedAssetId == i.id}
+                  onClick={() => handleAssetClick(i.id)}
+                />
+              );
+            })}
           </div>
         </div>
       ) : null}

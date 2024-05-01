@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { ReactNode } from 'react';
 
 type EditorSectionProps = {
-  icon: IconProps['icon'];
+  icon?: IconProps['icon'];
   title: string;
   children: ReactNode;
   className?: string;
@@ -15,7 +15,7 @@ export const EditorSection = ({ children, title, icon, className, onClose }: Edi
   <div className={clsx('flex h-full flex-col p-2', className)}>
     <div className="mb-4 flex flex-row items-center justify-between">
       <div className="flex flex-row items-center">
-        <Icon icon={icon} size={20} />
+        {icon && <Icon icon={icon} size={20} />}
         <p className="ml-2 font-medium">{title}</p>
       </div>
       <button onClick={onClose}>
