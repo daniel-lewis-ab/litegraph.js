@@ -16,7 +16,7 @@ export const useWorkflowExecutionWsLogs = () => {
 
       if (message.data.type === 'execution_error') {
         const data = (message.data as ExecutionErrorData).data;
-        if (data && data.error_message.length > 0) {
+        if (data && data.error_message?.length > 0) {
           setLogs([data.error_message]);
         }
       }
