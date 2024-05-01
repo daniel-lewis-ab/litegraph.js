@@ -5,17 +5,15 @@ import {
   GetWorkflowOutputAssetsResponse,
   GetWorkflowExecutionsResponse,
   WebSocketMessage,
-  ParsedComfyUIExecutionError,
   ExecutionStartData,
 } from '@/api/types';
-
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { QueryKeys } from '@/api/queryKeys';
 import toast from 'react-hot-toast';
 import { useWebSocket } from '@/hooks/useWebsocket/useWebsocket';
 
-export const useUpdateWorkflowFromWebsocket = () => {
+export const useWorkflowExecutionWsUpdates = () => {
   const { lastMessage } = useWebSocket();
   const queryClient = useQueryClient();
 
@@ -64,6 +62,7 @@ export const useUpdateWorkflowFromWebsocket = () => {
 
       if (message.data.type === 'execution_start') {
         const data = (message.data as ExecutionStartData).data;
+
         updateExecutionStatus({
           workflowId: data.workflow_id,
           executionId: data.execution_id,
@@ -76,20 +75,6 @@ export const useUpdateWorkflowFromWebsocket = () => {
 
         if (data.error?.length) {
           console.error('Workflow job failed, details:', data.error);
-          let specificErrorShown = false;
-          try {
-            const parsedError: ParsedComfyUIExecutionError = JSON.parse(data.error.replace(/'/g, '"'));
-            if (parsedError?.error?.message) {
-              toast.error('Workflow execution failed: ' + parsedError.error.message, { position: 'bottom-center' });
-              specificErrorShown = true;
-            }
-          } catch (e) {
-            console.error('Error parsing comfy error', e);
-          }
-
-          if (!specificErrorShown) {
-            toast.error('Workflow execution failed', { position: 'bottom-center' });
-          }
 
           updateExecutionStatus({
             workflowId: data.workflow_id,
@@ -100,8 +85,6 @@ export const useUpdateWorkflowFromWebsocket = () => {
 
           return;
         }
-
-        console.log('UPDATING WORKFLOW STATUS', data);
 
         updateExecutionStatus({
           workflowId: data.workflow_id,
@@ -117,5 +100,3 @@ export const useUpdateWorkflowFromWebsocket = () => {
     handleWebsocketMessage(lastMessage);
   }, [lastMessage, queryClient]);
 };
-
-("{'error': {'type': 'prompt_no_outputs', 'message': 'Prompt has no outputs', 'details': '', 'extra_info': {}}, 'node_errors': []}");

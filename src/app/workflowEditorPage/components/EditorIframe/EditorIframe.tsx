@@ -92,7 +92,8 @@ export const EditorIframe = () => {
         internal: {
           type: 'refresh_defs',
           data: {
-            inputs: (inputAssets as GetWorkflowInputAssetsResponse).results.map((asset) => asset.comfy_file_path),
+            inputs:
+              (inputAssets as GetWorkflowInputAssetsResponse)?.results.map((asset) => asset.comfy_file_path) ?? [],
           },
         },
       });

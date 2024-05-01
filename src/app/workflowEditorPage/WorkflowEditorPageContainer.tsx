@@ -13,7 +13,8 @@ import { saveWorkflowContentToFile } from '@/shared/functions/saveToFile';
 import { constants } from '@/contants';
 import { useWorkflowExecutionsQuery } from '@/api/hooks/useWorkflowExecutionsQuery/useWorkflowExecutionsQuery';
 import { usePrefetchWorkflowOutputAssets } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
-import { useUpdateWorkflowFromWebsocket } from '@/hooks/useUpdateWorkflowFromWebsocket/useUpdateWorkflowFromWebsocket';
+import { useWorkflowExecutionWsUpdates } from '@/hooks/useWorkflowExecutionWsUpdates/useWorkflowExecutionWsUpdates';
+import { useWorkflowExecutionWsLogs } from '@/hooks/useWorkflowExecutionWsLogs/useWorkflowExecutionWsLogs';
 
 export const WorkflowEditorPageContainer = () => {
   // We want to keep it to only send the update once
@@ -25,9 +26,10 @@ export const WorkflowEditorPageContainer = () => {
   const { mutateAsync: updateWorkflow } = useUpdateWorkflowMutation();
   const { currentWorkflow, setCurrentWorkflow } = useWorkflowEditor();
   const { prefetchWorkflowOutputAssets } = usePrefetchWorkflowOutputAssets();
+  const logs = useWorkflowExecutionWsLogs();
   const workflowsRunningCount = workflowExecutions?.results.filter((w) => w.status === 'PENDING').length;
 
-  useUpdateWorkflowFromWebsocket();
+  useWorkflowExecutionWsUpdates();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const throttledUpdateWorkflow = useCallback(throttle(updateWorkflow, constants.updateWorkflowThrottleTime), [
@@ -86,10 +88,11 @@ export const WorkflowEditorPageContainer = () => {
 
   return (
     <WorkflowEditorPage
+      logs={logs}
       workflowId={id!}
       workflowName={workflow!.name}
-      onCreateNewWorkflowExecution={handleExecuteWorkflow}
       workflowsRunningCount={workflowsRunningCount}
+      onCreateNewWorkflowExecution={handleExecuteWorkflow}
       onSaveWorkflow={handleSaveWorkflow}
     />
   );

@@ -1,15 +1,19 @@
-import { faList, faGrid } from '@awesome.me/kit-b6cda292ae/icons/classic/light';
 import clsx from 'clsx';
 import { Icon } from '@/shared/components/icon/Icon';
+import { faList, faGrid, faTerminal } from '@awesome.me/kit-b6cda292ae/icons/classic/light';
 
 export const EditorSideActionsBar = ({
+  areLogsOpen,
   activeSection,
   workflowsRunningCount,
   onOpenSidebarSectionClick,
+  onLogsClick,
 }: {
   workflowsRunningCount?: number;
+  areLogsOpen: boolean;
   activeSection?: null | 'images' | 'executions';
   onOpenSidebarSectionClick(section: 'images' | 'executions' | null): void;
+  onLogsClick(): void;
 }) => (
   <div className="ml-1 rounded-lg bg-surface-2 p-1 *:mb-3">
     <button
@@ -31,11 +35,20 @@ export const EditorSideActionsBar = ({
     <button
       onClick={() => onOpenSidebarSectionClick(activeSection === 'images' ? null : 'images')}
       className={clsx(
-        'relative flex h-10 w-10 items-center justify-center rounded-md *:text-icon-muted',
+        'flex h-10 w-10 items-center justify-center rounded-md *:text-icon-muted',
         activeSection === 'images' && 'bg-surface-4 *:text-text-base',
       )}
     >
       <Icon icon={faGrid} className="p-1" size={18} />
+    </button>
+    <button
+      onClick={onLogsClick}
+      className={clsx(
+        'flex h-10 w-10 items-center justify-center rounded-md *:text-icon-muted',
+        areLogsOpen && 'bg-surface-4 *:text-text-base',
+      )}
+    >
+      <Icon icon={faTerminal} className="p-1" size={18} />
     </button>
   </div>
 );

@@ -159,6 +159,16 @@ export type ExecutionFinishedData = {
   };
 };
 
+export type ExecutionErrorData = {
+  type: 'execution_error';
+  data: {
+    processing_metadata: string;
+    error_message: string;
+    execution_id: string;
+    workflow_id: string;
+  };
+};
+
 export type ExecutionStartData = {
   type: 'execution_start';
   data: {
@@ -192,7 +202,12 @@ export type ParsedComfyUIExecutionError = {
 export type WebSocketMessage = {
   errors: object[];
   // We might want to define this more explicitly, but we just send it to iframe for now (it includes type and data - https://gitlab.com/plai-app/ai-studio/orchestra-backend/-/blob/develop/docs/socket_message.md?ref_type=heads)
-  data: GeneralIframeMessageData | ExecutionFinishedData | PreviewExecutionData | ExecutionStartData;
+  data:
+    | GeneralIframeMessageData
+    | ExecutionFinishedData
+    | PreviewExecutionData
+    | ExecutionStartData
+    | ExecutionErrorData;
   action: 'artcraft_status' | 'send_response';
   response_status: number;
 };
