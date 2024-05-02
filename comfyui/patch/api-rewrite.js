@@ -437,7 +437,6 @@ class ComfyGraphPatcher extends EventTarget {
 
   getExtensions = async () => {
     const ext = extensions.filter((path) => !path.endsWith('impact-sam-editor.js')).map((path) => path);
-    ext.push('/patch/ext.js');
     return ext;
   };
 

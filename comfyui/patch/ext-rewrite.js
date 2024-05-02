@@ -101,5 +101,3 @@ const extendComboWidget = () => {
     return originalWidget;
   };
 };
-
-comfyApp.registerExtension({ name: "flowt.combos", init: extendComboWidget });
