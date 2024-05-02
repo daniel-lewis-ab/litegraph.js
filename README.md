@@ -1,6 +1,6 @@
 # Status of fork
 
-Currently took employment with a software firm and haven't been given rights to update this yet since my initial push.
+Shrunk down from 502.9kb of code to 384kb so far, converted to ES6 classes and modules.
 
 # litegraph.js
 
