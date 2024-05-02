@@ -1,6 +1,8 @@
 
 import LiteGraph from "./LiteGraph.js";
 import LGraphCanvas from "./LGraphCanvas.js";
+import LGraphGroup from "./LGraphGroup.js";
+import LLink from "./LLink.js";
 
 /**
  * LGraph is the class that contain a full graph. We instantiate one and add nodes to it, and then we can run the execution loop.
@@ -1455,7 +1457,7 @@ export default class LGraph {
 					console.warn("serialized graph link data contains errors, skipping.");
 					continue;
 				}
-				var link = new LiteGraph.LLink();
+				var link = new LLink();
 				link.configure(link_data);
 				links[link.id] = link;
 			}
@@ -1511,7 +1513,7 @@ export default class LGraph {
 		this._groups.length = 0;
 		if (data.groups) {
 			for (var i = 0; i < data.groups.length; ++i) {
-				var group = new LiteGraph.LGraphGroup();
+				var group = new LGraphGroup();
 				group.configure(data.groups[i]);
 				this.add(group);
 			}

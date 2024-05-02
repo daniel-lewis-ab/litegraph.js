@@ -2,6 +2,7 @@
 
 import LiteGraph from "./LiteGraph.js";
 import LGraphNode from "./LGraphNode.js";
+import LGraphCanvas from "./LGraphCanvas.js";
 
 
 export default class LGraphGroup {

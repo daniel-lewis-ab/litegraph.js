@@ -1,6 +1,8 @@
 
 import LiteGraph from "./LiteGraph.js";
 import DragAndScale from "./DragAndScale.js";
+import ContextMenu from "./ContextMenu.js";
+import LLink from "./LLink.js";
 
 // LGraphCanvas: LGraph renderer CLASS
 
@@ -659,7 +661,7 @@ if(this.rendering_timer_id)
 
 		this.canvas.focus();
 
-		LiteGraph.ContextMenu.closeAll(ref_window);
+		ContextMenu.closeAll(ref_window);
 
 		if (this.onMouse) {
 			if (this.onMouse(e) == true)
