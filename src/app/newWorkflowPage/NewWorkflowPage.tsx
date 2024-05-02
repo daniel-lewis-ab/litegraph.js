@@ -1,11 +1,11 @@
-import { useForm } from 'react-hook-form';
-import { toast } from 'react-hot-toast';
+import { Workflow } from '@/api/types';
+import { constants } from '@/contants';
+import { routes } from '@/routes/routes';
 import { Button } from '@/shared/components/button/Button';
 import { Input } from '@/shared/components/input/Input';
-import { Workflow } from '@/api/types';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { routes } from '@/routes/routes';
-import { constants } from '@/contants';
 
 export type NewWorkflowFormData = {
   name: string;
@@ -33,7 +33,7 @@ export const NewWorkflowPage = ({ onSubmit }: NewWorkflowPageProps) => {
   };
 
   return (
-    <div className="flex w-full items-center justify-center p-6">
+    <div className="flex h-full w-full items-center justify-center p-6">
       <form
         onSubmit={handleSubmit(handleFormSubmit)}
         className="flex w-full max-w-[340px] flex-col  items-center justify-center lg:w-[30%]"
