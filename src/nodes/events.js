@@ -199,7 +199,7 @@ class Stepper {
 		var index = this.getInputData(0);
 		if (index != null) {
 			index = Math.floor(index);
-			index = clamp(index, 0, this.outputs ? (this.outputs.length - 2) : 0);
+			index = Math.clamp(index, 0, this.outputs ? (this.outputs.length - 2) : 0);
 			if (index != this.properties.index) {
 				this.properties.index = index;
 				this.triggerSlot(index + 1);

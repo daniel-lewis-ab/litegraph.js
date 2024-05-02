@@ -593,7 +593,7 @@ if (glMatrix) {
 
 				var n = (this._value[i] - range_min[i]) / r;
 				if (this.properties.clamp)
-					n = clamp(n, 0, 1);
+					n = Math.clamp(n, 0, 1);
 				var t = target_max[i] - target_min[i];
 				this._value[i] = target_min[i] + n * t;
 			}

@@ -175,7 +175,7 @@ class MathRange {
 
 		this._last_v = ((v - in_min) / (in_max - in_min)) * (out_max - out_min) + out_min;
 		this.setOutputData(0, this._last_v);
-		this.setOutputData(1, clamp(this._last_v, out_min, out_max));
+		this.setOutputData(1, Math.clamp(this._last_v, out_min, out_max));
 	}
 
 	onDrawBackground(ctx) {

@@ -10,6 +10,8 @@
  * @constructor
  */
 
+Math.clamp = (n, min, max) => { return Math.min(Math.max(n, min), max); }
+
 var LiteGraph = {
 	VERSION: 0.4,
 
@@ -971,10 +973,6 @@ LiteGraph.getParameterNames = function(func) {
 		.replace(/=[^,]+/g, "") // strip any ES6 defaults
 		.split(",")
 		.filter(Boolean); // split & filter [""]
-};
-
-function clamp(v, a, b) {
-	return a > v ? a : b < v ? b : v;
 };
 
 if (typeof window != "undefined" && !window["requestAnimationFrame"]) {
