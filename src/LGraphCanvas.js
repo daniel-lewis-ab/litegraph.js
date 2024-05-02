@@ -5023,7 +5023,7 @@ this.offset[1] += delta_offset[1];
 						else { //combo clicked 
 							var text_values = values != values_list ? Object.values(values) :
 								values;
-							var menu = new LiteGraph.ContextMenu(text_values, {
+							var menu = new ContextMenu(text_values, {
 									scale: Math.max(1, this.ds.scale),
 									event: event,
 									className: "dark",
@@ -5401,7 +5401,7 @@ this.offset[1] += delta_offset[1];
 	}
 
 	static onNodeAlign(value, options, event, prev_menu, node) {
-		new LiteGraph.ContextMenu(["Top", "Bottom", "Left", "Right"], {
+		new ContextMenu(["Top", "Bottom", "Left", "Right"], {
 			event: event,
 			callback: inner_clicked,
 			parentMenu: prev_menu,
@@ -5414,7 +5414,7 @@ this.offset[1] += delta_offset[1];
 	}
 
 	static onGroupAlign(value, options, event, prev_menu) {
-		new LiteGraph.ContextMenu(["Top", "Bottom", "Left", "Right"], {
+		new ContextMenu(["Top", "Bottom", "Left", "Right"], {
 			event: event,
 			callback: inner_clicked,
 			parentMenu: prev_menu,
@@ -5507,7 +5507,7 @@ this.offset[1] += delta_offset[1];
 
 			});
 
-			new LiteGraph.ContextMenu(entries, {
+			new ContextMenu(entries, {
 				event: e,
 				parentMenu: prev_menu
 			}, ref_window);
@@ -5581,7 +5581,7 @@ this.offset[1] += delta_offset[1];
 			return;
 		}
 
-		var menu = new LiteGraph.ContextMenu(
+		var menu = new ContextMenu(
 			entries, {
 				event: e,
 				callback: inner_clicked,
@@ -5694,7 +5694,7 @@ this.offset[1] += delta_offset[1];
 			return;
 		}
 
-		var menu = new LiteGraph.ContextMenu(
+		var menu = new ContextMenu(
 			entries, {
 				event: e,
 				callback: inner_clicked,
@@ -5731,7 +5731,7 @@ this.offset[1] += delta_offset[1];
 						value: value[i]
 					});
 				}
-				new LiteGraph.ContextMenu(entries, {
+				new ContextMenu(entries, {
 					event: e,
 					callback: inner_clicked,
 					parentMenu: prev_menu,
@@ -5794,7 +5794,7 @@ this.offset[1] += delta_offset[1];
 			return;
 		}
 
-		var menu = new LiteGraph.ContextMenu(
+		var menu = new ContextMenu(
 			entries, {
 				event: e,
 				callback: inner_clicked,
@@ -5862,7 +5862,7 @@ this.offset[1] += delta_offset[1];
 
 		var options = ["Add Node", null, "Delete", null];
 
-		var menu = new LiteGraph.ContextMenu(options, {
+		var menu = new ContextMenu(options, {
 			event: e,
 			title: link.data != null ? link.data.constructor.name : null,
 			callback: inner_clicked
@@ -6148,7 +6148,7 @@ this.offset[1] += delta_offset[1];
 		}
 
 		// build menu
-		var menu = new LiteGraph.ContextMenu(options, {
+		var menu = new ContextMenu(options, {
 			event: opts.e,
 			title: (slotX && slotX.name != "" ? (slotX.name + (fromSlotType ? " | " :
 				"")) : "") + (slotX && fromSlotType ? fromSlotType : ""),
@@ -7458,7 +7458,7 @@ this.offset[1] += delta_offset[1];
 					var values = options.values || [];
 					var propname = this.parentNode.dataset["property"];
 					var elem_that = this;
-					var menu = new LiteGraph.ContextMenu(values, {
+					var menu = new ContextMenu(values, {
 							event: event,
 							className: "dark",
 							callback: inner_clicked
@@ -7940,7 +7940,7 @@ this.offset[1] += delta_offset[1];
 	}
 
 	static onMenuNodeMode(value, options, e, menu, node) {
-		new LiteGraph.ContextMenu(
+		new ContextMenu(
 			LiteGraph.NODE_MODES, {
 				event: e,
 				callback: inner_clicked,
@@ -8003,7 +8003,7 @@ this.offset[1] += delta_offset[1];
 			};
 			values.push(value);
 		}
-		new LiteGraph.ContextMenu(values, {
+		new ContextMenu(values, {
 			event: e,
 			callback: inner_clicked,
 			parentMenu: menu,
@@ -8054,7 +8054,7 @@ this.offset[1] += delta_offset[1];
 			throw "no node passed";
 		}
 
-		new LiteGraph.ContextMenu(LiteGraph.VALID_SHAPES, {
+		new ContextMenu(LiteGraph.VALID_SHAPES, {
 			event: e,
 			callback: inner_clicked,
 			parentMenu: menu,
@@ -8516,7 +8516,7 @@ this.offset[1] += delta_offset[1];
 			return;
 		}
 
-		var menu = new LiteGraph.ContextMenu(menu_info, options, ref_window);
+		var menu = new ContextMenu(menu_info, options, ref_window);
 
 		function inner_option_clicked(v, options, e) {
 			if (!v) {
