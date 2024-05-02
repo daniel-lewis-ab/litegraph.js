@@ -46,7 +46,7 @@ const PageBannerContent = () => (
 
 const EditorBannerContent = () => (
   <>
-    <div>Something missing? We currently supports 330 models and 140 node packs</div>
+    <div>Something missing? We currently support over 300 models and 150 node packs</div>
     <Button
       variant="filled"
       color="secondary"

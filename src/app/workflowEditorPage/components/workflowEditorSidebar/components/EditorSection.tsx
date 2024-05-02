@@ -16,7 +16,7 @@ export const EditorSection = ({ children, title, icon, className, onClose }: Edi
     <div className="mb-4 flex flex-row items-center justify-between">
       <div className="flex flex-row items-center">
         {icon && <Icon icon={icon} size={20} />}
-        <p className="ml-2 font-medium">{title}</p>
+        <p className="font-medium">{title}</p>
       </div>
       <button onClick={onClose}>
         <Icon icon={faXmark} size={20} className="*:text-icon-muted" />

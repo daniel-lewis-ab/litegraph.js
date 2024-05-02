@@ -18,7 +18,7 @@ export const PageTemplate = ({
 }) => (
   <>
     {banner}
-    <div className={clsx(styles.pageTemplateContainer, 'flex w-full flex-col px-3', className)}>{children}</div>
+    <div className={clsx(styles.pageTemplateContainer, 'flex h-full w-full flex-col px-3', className)}>{children}</div>
   </>
 );
 

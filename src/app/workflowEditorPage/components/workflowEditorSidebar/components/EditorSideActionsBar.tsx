@@ -1,6 +1,6 @@
-import clsx from 'clsx';
 import { Icon } from '@/shared/components/icon/Icon';
-import { faList, faGrid, faTerminal } from '@awesome.me/kit-b6cda292ae/icons/classic/light';
+import { faGrid, faList, faTerminal } from '@awesome.me/kit-b6cda292ae/icons/classic/light';
+import clsx from 'clsx';
 
 export const EditorSideActionsBar = ({
   areLogsOpen,
@@ -19,7 +19,7 @@ export const EditorSideActionsBar = ({
     <button
       onClick={() => onOpenSidebarSectionClick(activeSection === 'executions' ? null : 'executions')}
       className={clsx(
-        'relative flex h-10 w-10 items-center justify-center rounded-md *:text-icon-muted',
+        'relative flex h-10 w-10 items-center justify-center rounded-md *:text-icon-muted hover:*:text-icon-base',
         activeSection === 'executions' && 'bg-surface-4 *:text-text-base',
       )}
     >
@@ -35,7 +35,7 @@ export const EditorSideActionsBar = ({
     <button
       onClick={() => onOpenSidebarSectionClick(activeSection === 'images' ? null : 'images')}
       className={clsx(
-        'flex h-10 w-10 items-center justify-center rounded-md *:text-icon-muted',
+        'flex h-10 w-10 items-center justify-center rounded-md *:text-icon-muted hover:*:text-icon-base',
         activeSection === 'images' && 'bg-surface-4 *:text-text-base',
       )}
     >
@@ -44,7 +44,7 @@ export const EditorSideActionsBar = ({
     <button
       onClick={onLogsClick}
       className={clsx(
-        'flex h-10 w-10 items-center justify-center rounded-md *:text-icon-muted',
+        'flex h-10 w-10 items-center justify-center rounded-md *:text-icon-muted hover:*:text-icon-base',
         areLogsOpen && 'bg-surface-4 *:text-text-base',
       )}
     >

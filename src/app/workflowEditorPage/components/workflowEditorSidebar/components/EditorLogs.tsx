@@ -1,5 +1,5 @@
 import { Icon } from '@/shared/components/icon/Icon';
-import { faClose, faAngleUp } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
+import { faAngleUp, faClose } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import clsx from 'clsx';
 
 export type EditorLogsProps = {
@@ -15,11 +15,11 @@ export const EditorLogs = ({ logs, isExpanded, onToggleExpand, onCloseClick }: E
       <div className="flex flex-row justify-between">
         <p className="mb-3 text-sm font-medium">Error logs</p>
         <div>
-          <button className="mr-2" onClick={onToggleExpand}>
-            <Icon icon={faAngleUp} size={20} className={clsx('text-icon-muted', isExpanded && 'rotate-180')} />
+          <button className="mr-2 hover:*:text-icon-base" onClick={onToggleExpand}>
+            <Icon icon={faAngleUp} size={16} className={clsx('text-icon-muted', isExpanded && 'rotate-180')} />
           </button>
-          <button onClick={onCloseClick}>
-            <Icon icon={faClose} size={20} className="text-icon-muted" />
+          <button onClick={onCloseClick} className="hover:*:text-icon-base">
+            <Icon icon={faClose} size={16} className="text-icon-muted" />
           </button>
         </div>
       </div>
