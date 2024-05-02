@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 //Constant
 class Time {
 	constructor() {

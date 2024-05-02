@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 //Show value inside the debug console
 class LogEvent {
 	constructor() {

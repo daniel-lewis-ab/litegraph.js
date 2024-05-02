@@ -1,4 +1,7 @@
 
+
+import LGraphNode from "./LGraphNode.js";
+
 // *************************************************************
 //   LiteGraph CLASS                                     *******
 // *************************************************************
@@ -12,7 +15,7 @@
 
 Math.clamp = (n, min, max) => { return Math.min(Math.max(n, min), max); }
 
-var LiteGraph = {
+const LiteGraph = {
 	VERSION: 0.4,
 
 	CANVAS_GRID_SIZE: 10,
@@ -177,8 +180,7 @@ var LiteGraph = {
 		}
 
 		// Improved means to extend class from LGraphNode.
-		const propertyDescriptors = Object.getOwnPropertyDescriptors(LiteGraph.LGraphNode
-			.prototype);
+		const propertyDescriptors = Object.getOwnPropertyDescriptors(LGraphNode.prototype);
 
 		// Iterate over each property descriptor
 		Object.keys(propertyDescriptors).forEach(propertyName => {
@@ -983,3 +985,5 @@ if (typeof window != "undefined" && !window["requestAnimationFrame"]) {
 			window.setTimeout(callback, 1000 / 60);
 		};
 }
+
+export default LiteGraph;

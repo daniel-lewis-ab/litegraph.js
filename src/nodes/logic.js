@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 class Selector {
 	constructor() {
 		this.addInput("sel", "number");

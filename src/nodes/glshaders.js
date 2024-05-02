@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 if (typeof GL == "undefined")
 	return;
 

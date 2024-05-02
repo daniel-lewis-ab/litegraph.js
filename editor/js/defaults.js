@@ -1,4 +1,6 @@
 
+import LiteGraph from "../../src/LiteGraph.js";
+
 LiteGraph.debug = false;
 LiteGraph.catch_exceptions = true;
 LiteGraph.throw_errors = true;

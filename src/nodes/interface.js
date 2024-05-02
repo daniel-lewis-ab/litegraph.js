@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 /* Button ****************/
 
 class WidgetButton {

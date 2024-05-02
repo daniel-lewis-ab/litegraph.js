@@ -1,5 +1,10 @@
 
-class LGraphGroup {
+
+import LiteGraph from "./LiteGraph.js";
+import LGraphNode from "./LGraphNode.js";
+
+
+export default class LGraphGroup {
 	
 	constructor(title) {
 		this.title = title || "Group";
@@ -89,6 +94,5 @@ class LGraphGroup {
 	}
 }
 
-LiteGraph.LGraphGroup = LGraphGroup;
 LGraphGroup.prototype.isPointInside = LGraphNode.prototype.isPointInside;
 LGraphGroup.prototype.setDirtyCanvas = LGraphNode.prototype.setDirtyCanvas;

@@ -43,4 +43,3 @@ class LLink {
 		];
 	}
 }
-LiteGraph.LLink = LLink;

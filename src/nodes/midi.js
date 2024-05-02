@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 var MIDI_COLOR = "#243";
 
 class MIDIEvent {

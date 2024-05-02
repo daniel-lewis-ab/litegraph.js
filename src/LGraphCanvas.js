@@ -1,4 +1,7 @@
 
+import LiteGraph from "./LiteGraph.js";
+import DragAndScale from "./DragAndScale.js";
+
 // LGraphCanvas: LGraph renderer CLASS
 
 /**
@@ -11,7 +14,7 @@
  * @param {LGraph} graph [optional]
  * @param {Object} options [optional] { skip_rendering, autoresize, viewport }
  */
-class LGraphCanvas {
+export default class LGraphCanvas {
 	constructor(canvas, graph, options) {
 		this.options = options = options || {};
 
@@ -23,7 +26,7 @@ class LGraphCanvas {
 			canvas = document.querySelector(canvas);
 		}
 
-		this.ds = new LiteGraph.DragAndScale();
+		this.ds = new DragAndScale();
 		this.zoom_modify_alpha =
 		true; //otherwise it generates ugly patterns when scaling down too much
 
@@ -8598,5 +8601,3 @@ var link_bounding = new Float32Array(4);
 var temp_vec2 = new Float32Array(2);
 var tempA = new Float32Array(2);
 var tempB = new Float32Array(2);
-
-LiteGraph.LGraphCanvas = LGraphCanvas;

@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 function toString(a) {
 	if (a && a.constructor === Object) {
 		try {

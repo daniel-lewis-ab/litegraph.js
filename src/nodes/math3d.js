@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 class Math3DMat4 {
 	constructor() {
 		this.addInput("T", "vec3");

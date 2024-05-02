@@ -1,6 +1,6 @@
 
 //Scale and Offset
-class DragAndScale {
+export default class DragAndScale {
 	constructor(element, skip_events) {
 		this.offset = new Float32Array([0, 0]);
 		this.scale = 1;
@@ -207,5 +207,3 @@ class DragAndScale {
 		this.offset[1] = 0;
 	}
 }
-
-LiteGraph.DragAndScale = DragAndScale;

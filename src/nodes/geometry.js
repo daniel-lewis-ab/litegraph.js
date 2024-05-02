@@ -1,4 +1,5 @@
 
+import LiteGraph from "../LiteGraph.js";
 
 var view_matrix = new Float32Array(16);
 var projection_matrix = new Float32Array(16);

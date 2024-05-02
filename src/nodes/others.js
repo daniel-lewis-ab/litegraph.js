@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 /* in types :: run in console :: var s=""; LiteGraph.slot_types_in.forEach(function(el){s+=el+"\n";}); console.log(s); */
 
 if(typeof LiteGraph.slot_types_default_in == "undefined") 

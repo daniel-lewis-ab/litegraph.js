@@ -1,4 +1,6 @@
 
+import LiteGraph from "../../src/LiteGraph.js";
+
 function demo()
 {
 	multiConnection();

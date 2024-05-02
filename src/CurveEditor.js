@@ -167,5 +167,3 @@ class CurveEditor {
 		return closest;
 	}
 }
-
-LiteGraph.CurveEditor = CurveEditor;

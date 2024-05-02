@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 class LGWebSocket {
 	constructor() {
 		this.size = [60, 20];

@@ -11,7 +11,7 @@
  * - ignore_item_callbacks: ignores the callback inside the item, it just calls the options.callback
  * - event: you can pass a MouseEvent, this way the ContextMenu appears in that position
  */
-class ContextMenu {
+export default class ContextMenu {
 	constructor(values, options) {
 		options = options || {};
 		this.options = options;
@@ -386,5 +386,3 @@ class ContextMenu {
 		}
 	}
 }
-
-LiteGraph.ContextMenu = ContextMenu;

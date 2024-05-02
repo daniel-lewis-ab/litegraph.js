@@ -1,4 +1,7 @@
 
+import LiteGraph from "./LiteGraph.js";
+import LGraphCanvas from "./LGraphCanvas.js";
+
 /**
  * LGraph is the class that contain a full graph. We instantiate one and add nodes to it, and then we can run the execution loop.
  * supported callbacks:
@@ -11,7 +14,7 @@
 	* @param {Object} o data from previous serialization [optional]
 	*/
 
-class LGraph {
+export default class LGraph {
 	constructor(o) {
 		if (LiteGraph.debug) {
 			console.log("Graph created");
@@ -1566,5 +1569,3 @@ class LGraph {
 		//TODO
 	}
 }
-
-LiteGraph.LGraph = LGraph;

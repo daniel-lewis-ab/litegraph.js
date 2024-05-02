@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 class GraphicsPlot {
 	constructor() {
 		this.addInput("A", "Number");

@@ -1,4 +1,6 @@
 
+import LiteGraph from "./LiteGraph.js";
+
 // LGraphNode class
 /*
 title: string
@@ -57,7 +59,7 @@ supported callbacks:
  * @param {String} name a name for the node
  */
 
-class LGraphNode {
+export default class LGraphNode {
 	
 	constructor(title) {
 		this.title = title || "Unnamed";
@@ -2639,5 +2641,3 @@ return true;
 		];
 	}
 }
-
-LiteGraph.LGraphNode = LGraphNode;

@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 //Works with Litegl.js to create WebGL nodes
 LGraphTexture = null;
 

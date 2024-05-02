@@ -1,4 +1,6 @@
 
+import LiteGraph from "../LiteGraph.js";
+
 class GamepadInput {
 	constructor() {
 		this.addOutput("left_x_axis", "number");
