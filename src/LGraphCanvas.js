@@ -1,6 +1,7 @@
 
 import LiteGraph from "./LiteGraph.js";
 import DragAndScale from "./DragAndScale.js";
+import LGraphGroup from "./LGraphGroup.js";
 import ContextMenu from "./ContextMenu.js";
 import LLink from "./LLink.js";
 
@@ -5303,7 +5304,7 @@ this.offset[1] += delta_offset[1];
 		var canvas = LGraphCanvas.active_canvas;
 		var ref_window = canvas.getCanvasWindow();
 
-		var group = new LiteGraph.LGraphGroup();
+		var group = new LGraphGroup();
 		group.pos = canvas.convertEventToCanvasOffset(mouse_event);
 		canvas.graph.add(group);
 	}
@@ -8019,7 +8020,7 @@ this.offset[1] += delta_offset[1];
 
 			var fApplyColor = function(node) {
 				if (color) {
-					if (node.constructor === LiteGraph.LGraphGroup) {
+					if (node.constructor === LGraphGroup) {
 						node.color = color.groupcolor;
 					}
 					else {

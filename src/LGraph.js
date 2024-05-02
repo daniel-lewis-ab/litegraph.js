@@ -737,7 +737,7 @@ export default class LGraph {
 	 */
 
 	remove(node) {
-		if (node.constructor === LiteGraph.LGraphGroup) {
+		if (node.constructor === LGraphGroup) {
 			var index = this._groups.indexOf(node);
 			if (index != -1) {
 				this._groups.splice(index, 1);
