@@ -16,7 +16,7 @@ import LGraphNode from "./LGraphNode.js";
 Math.clamp = (n, min, max) => { return Math.min(Math.max(n, min), max); }
 
 const LiteGraph = {
-	VERSION: 0.4,
+	VERSION: '0.5.0',
 
 	CANVAS_GRID_SIZE: 10,
 
