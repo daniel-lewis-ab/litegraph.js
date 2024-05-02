@@ -11,7 +11,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <SideMenu />
       </div>
       <div className="flex flex-grow flex-col">
-        <main className="flex w-full grow">{children}</main>
+        <main className="flex w-full grow flex-col">{children}</main>
       </div>
     </div>
   );

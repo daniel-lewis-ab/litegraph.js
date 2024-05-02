@@ -1,13 +1,16 @@
 import { Workflow } from '@/api/types';
 import { PageActions } from '@/app/workflowsPage/components/PageActions';
+import { constants } from '@/contants';
 import { routes } from '@/routes/routes';
+import { Banner, PageBannerContent } from '@/shared/components/banner/Banner';
+import { useBannerVisibility } from '@/shared/components/banner/useBannerVisibility';
+import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
 import { WorkflowTile } from '@/shared/components/workflowTile/WorkflowTile';
 import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { useState } from 'react';
+import { CreateDeploymentDialogContainer } from '../../shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
 import { DeleteConfirmationDialog } from './components/DeleteConfirmationDialog';
 import { EmptyWorkflowsPage } from './components/EmptyWorkflowsPage';
-import { CreateDeploymentDialogContainer } from '../../shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
-import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
 
 type WorkflowsPageProps = {
   workflows: Workflow[];
@@ -25,13 +28,33 @@ export const WorkflowsPage = ({
   const [workflowIdToDelete, setWorkflowIdToDelete] = useState<null | string>(null);
   const [workflowIdToDeploy, setWorkflowIdToDeploy] = useState<null | string>(null);
 
+  const { isBannerVisible, closeBanner } = useBannerVisibility(constants.ftueBannerPageKey);
+
   if (workflows.length === 0) {
-    return <EmptyWorkflowsPage />;
+    return (
+      <EmptyWorkflowsPage
+        banner={
+          isBannerVisible && (
+            <Banner onClickClose={closeBanner}>
+              <PageBannerContent />
+            </Banner>
+          )
+        }
+      />
+    );
   }
 
   return (
-    <PageTemplate>
-      <PageTemplate.Header>
+    <PageTemplate
+      banner={
+        isBannerVisible && (
+          <Banner onClickClose={closeBanner}>
+            <PageBannerContent />
+          </Banner>
+        )
+      }
+    >
+      <PageTemplate.Header showFeedback={!isBannerVisible}>
         <PageTemplate.Title>Workflows</PageTemplate.Title>
       </PageTemplate.Header>
       <PageActions>

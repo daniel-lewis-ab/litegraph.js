@@ -4,8 +4,7 @@ import { Button } from '@/shared/components/button/Button';
 import { Icon } from '@/shared/components/icon/Icon';
 import { Logo } from '@/shared/components/icons/Logo';
 import { OptionsList } from '@/shared/components/optionsList/OptionsList';
-import { faDownload, faPlay } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
-import { faAngleLeft } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
+import { faAngleLeft, faDownload, faPlay } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
@@ -46,14 +45,21 @@ export const WorkflowEditorHeader = ({
   return (
     <header
       className={clsx(
-        'relative mb-1.5 flex flex-row items-center justify-between rounded-xl bg-surface-2 px-3 py-1.5',
+        'relative mb-1.5 flex flex-row items-center justify-between rounded-xl bg-surface-2 py-1.5 text-sm font-medium',
         className,
       )}
     >
-      <div className="z-10 flex flex-row items-center">
-        <button className="flex flex-row" onClick={() => navigate(routes.workflows)}>
-          <Icon icon={faAngleLeft} className="mr-1" />
-          <Logo className="mr-4 fill-text-base" />
+      <div className="z-10 flex flex-row items-center gap-4">
+        <button
+          className="group flex flex-row items-center px-3"
+          onClick={() => navigate(routes.workflows)}
+          title="Workflows"
+        >
+          <Icon
+            icon={faAngleLeft}
+            className="mr-1 transition-all duration-300 ease-in-out group-hover:-translate-x-1 group-hover:opacity-80"
+          />
+          <Logo className="ml-2 fill-text-base group-hover:opacity-80" />
         </button>
         <Popover
           modal
@@ -61,7 +67,7 @@ export const WorkflowEditorHeader = ({
           onOpenChange={(isOpen) => setOptionsSectionOpen(isOpen ? 'file' : null)}
         >
           <PopoverTrigger onClick={() => setOptionsSectionOpen('file')}>
-            <div className="mr-1.5 rounded-lg px-1.5 py-1 font-medium text-text-muted hover:bg-surface-1 dark:hover:bg-surface-4">
+            <div className="rounded-lg px-1.5 py-1 font-medium text-text-muted hover:bg-surface-1 dark:hover:bg-surface-4">
               File
             </div>
           </PopoverTrigger>
@@ -85,7 +91,7 @@ export const WorkflowEditorHeader = ({
           onOpenChange={(isOpen) => setOptionsSectionOpen(isOpen ? 'help' : null)}
         >
           <PopoverTrigger onClick={() => setOptionsSectionOpen('help')}>
-            <div className="mr-1.5 rounded-lg px-1.5 py-1 font-medium text-text-muted hover:bg-surface-1 dark:hover:bg-surface-4">
+            <div className="rounded-lg px-1.5 py-1 font-medium text-text-muted hover:bg-surface-1 dark:hover:bg-surface-4">
               Help
             </div>
           </PopoverTrigger>

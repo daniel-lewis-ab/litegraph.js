@@ -2,10 +2,11 @@ import { routes } from '@/routes/routes';
 import { Icon } from '@/shared/components/icon/Icon';
 import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
 import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
+import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-export const EmptyWorkflowsPage = () => (
-  <PageTemplate>
+export const EmptyWorkflowsPage = ({ banner }: { banner?: ReactNode }) => (
+  <PageTemplate banner={banner}>
     <PageTemplate.Header>
       <PageTemplate.Title>Workflows</PageTemplate.Title>
     </PageTemplate.Header>

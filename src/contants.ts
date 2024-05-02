@@ -14,4 +14,6 @@ export const constants = {
     workflowNameMaxLength: 80,
     deploymentNameMaxLength: 80,
   },
+  ftueBannerPageKey: 'ftue-banner',
+  ftueBannerEditorKey: 'ftue-editor',
 };
