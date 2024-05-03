@@ -45,9 +45,13 @@ app.registerExtension({
 
             const pathWidget = this.widgets.find((w) => w.name === widgetName);
             const fileInput = document.createElement("input");
+
+            const oldRemoved = this.onRemoved;
             this.onRemoved = () => {
+                oldRemoved.apply(this);
                 fileInput?.remove();
             };
+
             if (type == "folder") {
                 Object.assign(fileInput, {
                     type: "file",
@@ -60,7 +64,7 @@ app.registerExtension({
                             throw "No directory found";
                         }
                         const path = directory.slice(0,directory.lastIndexOf('/'))
-                        if (pathWidget.options.values.includes(path)) {
+                        if (pathWidget?.options.values.includes(path)) {
                             alert("A folder of the same name already exists");
                             return;
                         }
