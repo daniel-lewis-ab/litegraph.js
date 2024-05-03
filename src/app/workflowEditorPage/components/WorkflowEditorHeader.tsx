@@ -4,8 +4,8 @@ import { Button } from '@/shared/components/button/Button';
 import { Icon } from '@/shared/components/icon/Icon';
 import { Logo } from '@/shared/components/icons/Logo';
 import { OptionsList } from '@/shared/components/optionsList/OptionsList';
+import { faPlay } from '@awesome.me/kit-b6cda292ae/icons/classic/light';
 import { faAngleLeft, faDownload } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
-import { faPlay } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
@@ -118,8 +118,6 @@ export const WorkflowEditorHeader = ({
       <div className="z-10 mr-2 flex flex-row items-center gap-2">
         <Button
           disabled={isCreatingWorkflow}
-          color="primary"
-          variant="filled"
           size="sm"
           onClick={handleRunWorkflowClick}
           leftIcon={faPlay}

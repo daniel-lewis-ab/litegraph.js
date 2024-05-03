@@ -47,7 +47,7 @@ export const ExampleTile = ({ example }: ExampleTileProps) => {
               className="rounded-lg transition-opacity group-hover:opacity-50"
             />
             <div className="inline-block translate-y-2 rounded-lg bg-primary-10 px-3 py-2 font-medium text-surface-1 opacity-0 backdrop-blur-lg transition-all group-hover:translate-y-0 group-hover:opacity-100">
-              Start from example
+              Open example
             </div>
           </Link>
         )}
