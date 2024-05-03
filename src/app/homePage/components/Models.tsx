@@ -16,7 +16,7 @@ export const SaltLogo: React.FC<ModelProps> = () => {
   const { nodes } = useGLTF('/salt.glb');
 
   const material = new MeshStandardMaterial({
-    color: '0xffffff',
+    color: '#ffffff',
     metalness: 0.8,
     roughness: 0.2,
   });

@@ -1,22 +1,26 @@
+import { WebSocketProvider } from '@/context/websocketContext/WebsocketContextProvider';
 import { WorkflowEditorContextProvider } from '@/context/workflowEditorContext/WorkflowEditorContext';
 import { routes } from '@/routes/routes';
 import { Layout } from '@/shared/components/Layout/Layout';
 import { AuthorizedRoute } from '@/shared/components/authorizedRoute/AuthorizedRoute';
+import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
+import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
 import { Navigate, Outlet } from 'react-router-dom';
+import { RouteRecord } from 'vite-react-ssg';
+import { App } from '../App';
 import AboutPage, { aboutPageLoader } from '../aboutPage/AboutPage';
 import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageContainer';
 import ExamplesPage, { examplesPageLoader } from '../examplesPage/ExamplesPage';
 import { HomePage } from '../homePage/HomePage';
+import LoginPageContainer from '../loginPage/LoginPageContainer';
+import {
+  NewWorkflowFromExamplePageContainer,
+  newWorkflowFromExamplePageLoader,
+} from '../newWorkflowFromExamplePage/NewWorkflowFromExamplePageContainer';
 import { NewWorkflowPageContainer } from '../newWorkflowPage/NewWorkflowPageContainer';
 import { StorybookPage } from '../storybookPage/StorybookPage';
 import { WorkflowEditorPageContainer } from '../workflowEditorPage/WorkflowEditorPageContainer';
 import { WorkflowsPageContainer } from '../workflowsPage/WorkflowsPageContainer';
-import { RouteRecord } from 'vite-react-ssg';
-import LoginPageContainer from '../loginPage/LoginPageContainer';
-import { App } from '../App';
-import { WebSocketProvider } from '@/context/websocketContext/WebsocketContextProvider';
-import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
-import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
 
 export const appRoutes: RouteRecord[] = [
   {
@@ -32,7 +36,6 @@ export const appRoutes: RouteRecord[] = [
         index: true,
         Component: HomePage,
         entry: 'src/app/homePage/HomePage.tsx',
-        // loader: homePageLoader,
       },
       {
         path: routes.about,
@@ -66,6 +69,7 @@ export const appRoutes: RouteRecord[] = [
             }
           : {}),
       },
+
       {
         path: '/app',
         element: (
@@ -100,6 +104,11 @@ export const appRoutes: RouteRecord[] = [
                 path: routes.newWorkflow.replace('/app/workflows/', ''),
                 element: <NewWorkflowPageContainer />,
                 entry: 'src/app/newWorkflowPage/NewWorkflowPageContainer.tsx',
+              },
+              {
+                path: routes.newWorkflowFromExample(':slug'),
+                element: <NewWorkflowFromExamplePageContainer />,
+                loader: newWorkflowFromExamplePageLoader,
               },
             ],
           },

@@ -1,7 +1,9 @@
 import { ExampleRecord } from '@/generated/graphql';
+import { routes } from '@/routes/routes';
+import { Image } from 'react-datocms';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
-
+import { Link } from 'react-router-dom';
 type Asset = {
   filename: string;
   full: {
@@ -26,49 +28,42 @@ export const ExampleTile = ({ example }: ExampleTileProps) => {
     thumb: {
       src: asset.responsiveImage?.src ?? asset.url,
     },
-    alt: asset.alt ?? undefined,
+    alt: asset.alt ?? 'Example thumbnail',
   }));
 
   const firstAsset = assets[0];
-  const tags = example.tags?.split(',') ?? [];
-
-  const isGif = (filename: string) => filename.toLowerCase().endsWith('.gif');
-
-  const getImageSrc = (asset: Asset) => {
-    return isGif(asset.filename) ? asset.full.src : asset.full.src;
-  };
 
   return (
-    <li className="exampleTile relative flex flex-col space-y-3 rounded-md">
+    <li className="exampleTile  relative flex flex-col space-y-3 rounded-md">
       <div className="">
-        <Zoom zoomImg={{ width: 1500, src: firstAsset.full.src }}>
-          <div className="relative w-full">
-            {firstAsset && (
-              <div>
-                <img
-                  src={getImageSrc(firstAsset)}
-                  className="block w-full rounded-lg border border-border-base"
-                  alt={firstAsset.alt}
-                />
-                <ul className="tags absolute bottom-3 left-3 flex gap-3">
-                  {tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className="tag bg-blur-2xl block rounded-[8px] bg-[rgba(0,0,0,.7)] px-3 text-xs text-text-subtle"
-                    >
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-        </Zoom>
+        {firstAsset && (
+          <Link
+            className="group relative flex aspect-video w-full content-center items-center justify-center rounded-lg border border-border-muted transition-all hover:border-primary-10"
+            to={routes.newWorkflowFromExample(example.slug)}
+          >
+            <Image
+              data={{ ...assets[0].full, width: 1920 }} // Add the missing width property
+              layout="fill"
+              className="rounded-lg transition-opacity group-hover:opacity-50"
+            />
+            <div className="inline-block translate-y-2 rounded-lg bg-primary-10 px-3 py-2 font-medium text-surface-1 opacity-0 backdrop-blur-lg transition-all group-hover:translate-y-0 group-hover:opacity-100">
+              Start from example
+            </div>
+          </Link>
+        )}
       </div>
-      <div className="space-y-2">
+      <div className="py-2">
         <h2 className="text-xl font-medium md:text-xl lg:text-2xl">{example.title}</h2>
-        <div className="flex flex-row gap-3">
-          <p className="text-gray-300 text-sm text-text-muted">by {example.author}</p>
+        <div className="flex flex-row gap-3 *:text-sm">
+          {example.author && example.link && (
+            <span>
+              by&nbsp;
+              <a className="text-gray-300 text-text-subtle underline hover:text-text-base" href={example.link}>
+                {example.author}
+              </a>
+            </span>
+          )}
+          {example.author && !example.link && <span>by {example.author}</span>}
         </div>
       </div>
       <div className="flex flex-row gap-2">

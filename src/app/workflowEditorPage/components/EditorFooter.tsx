@@ -17,9 +17,9 @@ export const EditorFooter = () => {
         </Button>
       </div> */}
       <div className="flex">
-        <p className="mx-3 font-medium text-text-muted">{nodes} nodes</p>
-        <p className="mx-3 font-medium text-text-muted">{inputs} inputs</p>
-        <p className="mx-3 font-medium text-text-muted">{outputs} outputs</p>
+        <p className="mx-3 text-text-subtle">{nodes} nodes</p>
+        <p className="mx-3 text-text-subtle">{inputs} inputs</p>
+        <p className="mx-3 text-text-subtle">{outputs} outputs</p>
       </div>
       <div></div>
     </div>

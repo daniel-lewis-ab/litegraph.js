@@ -7,7 +7,7 @@ import {
   faTrash,
 } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DeleteAssetConfirmationDialog } from '../DeleteAssetConfirmationDialog';
 import { EditorSection } from '../EditorSection';
 
@@ -107,8 +107,11 @@ export const OutputsGallerySection = ({
 }: OutputsGalleryGridProps) => {
   const [assetIdToDelete, setAssetIdToDelete] = useState<string | null>(null);
   const [selectedAssetId, setSelectedAssetId] = useState<string | null>(null);
-  const [colSize, setColSize] = useState(4);
+  const [colSize, setColSize] = useState(Number(localStorage.getItem('outputsCols')) ?? 4);
 
+  useEffect(() => {
+    localStorage.setItem('outputsCols', colSize.toString());
+  }, [colSize]);
   const onSliderChange = (value: number[]) => setColSize(value[0]);
   const onClickSmaller = () => setColSize((old) => Math.max(1, old - 1));
   const onClickLarger = () => setColSize((old) => Math.min(4, old + 1));

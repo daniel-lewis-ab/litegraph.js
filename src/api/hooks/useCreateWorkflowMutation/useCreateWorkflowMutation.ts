@@ -1,11 +1,12 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { axiosClient } from '@/api/axiosClient';
 import { apiEndpoints } from '@/api/apiEndpoints';
+import { axiosClient } from '@/api/axiosClient';
 import { QueryKeys } from '@/api/queryKeys';
 import { GetWorkflowsResponse, Workflow } from '@/api/types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 type CreateWorkflowData = {
   name: string;
+  content?: string | object;
 };
 
 const DEFAULT_WORKFLOW_DATA = {

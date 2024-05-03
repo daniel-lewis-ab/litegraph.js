@@ -1,13 +1,14 @@
-import { Navigate } from 'react-router-dom';
-import { CenteredLoader } from '../centeredLoader/CenteredLoader';
 import { useAuth } from '@/hooks/useAuth/useAuth';
 import { routes } from '@/routes/routes';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Head } from 'vite-react-ssg';
+import { CenteredLoader } from '../centeredLoader/CenteredLoader';
 
 export const AuthorizedRoute = ({ children }: { children: React.ReactNode }) => {
   const {
     state: { isAuthorized, isAuthorizing },
   } = useAuth();
+  const location = useLocation();
 
   if (isAuthorizing) {
     return (
@@ -26,7 +27,7 @@ export const AuthorizedRoute = ({ children }: { children: React.ReactNode }) => 
         <Head>
           <meta name="robots" content="noindex, nofollow" />
         </Head>
-        <Navigate to={routes.login} replace />
+        <Navigate to={routes.login} state={{ from: location }} replace />
       </>
     );
   }

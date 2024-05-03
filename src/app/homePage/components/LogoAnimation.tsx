@@ -12,8 +12,8 @@ export const LogoAnimation = () => {
   const opacity = useTransform(scrollY, [0, 1024], [1, 0]);
 
   return (
-    <motion.div style={{ opacity }} className="relative h-full w-full">
-      <Canvas className={s.canvas} onCreated={(state) => state.gl.setClearColor('midnight-blue')}>
+    <motion.div style={{ opacity }} className="relative h-full w-full" ref={ref}>
+      <Canvas className={s.canvas} onCreated={(state) => state.gl.setClearColor(0x000000)}>
         <SaltLogo />
         <AsciiRenderer fgColor={'var(--color-surface-11)'} characters={' ˚.+salt%∆'} resolution={0.12} />
       </Canvas>

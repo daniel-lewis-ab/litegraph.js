@@ -6,6 +6,7 @@ import { Banner, PageBannerContent } from '@/shared/components/banner/Banner';
 import { useBannerVisibility } from '@/shared/components/banner/useBannerVisibility';
 import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
 import { WorkflowTile } from '@/shared/components/workflowTile/WorkflowTile';
+import { faSparkles } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { useState } from 'react';
 import { CreateDeploymentDialogContainer } from '../../shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
@@ -57,12 +58,13 @@ export const WorkflowsPage = ({
       <PageTemplate.Header showFeedback={!isBannerVisible}>
         <PageTemplate.Title>Workflows</PageTemplate.Title>
       </PageTemplate.Header>
+
       <PageActions>
         <PageActions.Action to={routes.newWorkflow} icon={faPlus} text="New workflow" />
-        {/* <PageActions.Action to={routes.newWorkflow} icon={faUpload} text="Import" /> */}
+        <PageActions.Action to={routes.examples} icon={faSparkles} text="Explore examples" />
       </PageActions>
 
-      <div className="mb-8 grid grid-cols-1 content-start gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
+      <div className="mb-8 grid grid-cols-1 content-start gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {workflows.map((workflow) => (
           <WorkflowTile
             key={workflow.id}

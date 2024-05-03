@@ -12,14 +12,14 @@ function Action({ to, icon, text, onClick }: PageActionProps) {
   return to ? (
     <Link
       to={to}
-      className="group flex flex-row items-center rounded-xl border border-surface-6 px-3 py-2 hover:border-surface-7"
+      className="group flex flex-row items-center rounded-xl border border-surface-4 px-4 py-2 font-medium hover:border-surface-6"
     >
-      <Icon icon={icon} size={16} className="mr-3 rounded-full bg-surface-2 p-4 group-hover:bg-surface-3" />
+      <Icon icon={icon} size={20} className="mr-3 rounded-full bg-surface-3 p-4 group-hover:bg-surface-4" />
       {text}
     </Link>
   ) : (
-    <button className="bg-surface-3 p-4 group-hover:bg-surface-5" onClick={onClick} type="button">
-      <Icon icon={icon} size={16} />
+    <button className="bg-surface-3 p-4 text-icon-muted group-hover:bg-surface-5" onClick={onClick} type="button">
+      <Icon icon={icon} size={20} />
       {text}
     </button>
   );

@@ -4,7 +4,8 @@ import { Button } from '@/shared/components/button/Button';
 import { Icon } from '@/shared/components/icon/Icon';
 import { Logo } from '@/shared/components/icons/Logo';
 import { OptionsList } from '@/shared/components/optionsList/OptionsList';
-import { faAngleLeft, faDownload, faPlay } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
+import { faAngleLeft, faDownload } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
+import { faPlay } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
@@ -61,77 +62,72 @@ export const WorkflowEditorHeader = ({
           />
           <Logo className="ml-2 fill-text-base group-hover:opacity-80" />
         </button>
-        <Popover
-          modal
-          open={optionsSectionOpen === 'file'}
-          onOpenChange={(isOpen) => setOptionsSectionOpen(isOpen ? 'file' : null)}
-        >
-          <PopoverTrigger onClick={() => setOptionsSectionOpen('file')}>
-            <div className="rounded-lg px-1.5 py-1 font-medium text-text-muted hover:bg-surface-1 dark:hover:bg-surface-4">
-              File
-            </div>
-          </PopoverTrigger>
-          <PopoverContent
-            ref={popoverRef}
-            side="bottom"
-            sideOffset={2}
-            align="start"
-            onClick={(e) => e.preventDefault()}
+        <div className="flex gap-2">
+          <Popover
+            modal
+            open={optionsSectionOpen === 'file'}
+            onOpenChange={(isOpen) => setOptionsSectionOpen(isOpen ? 'file' : null)}
           >
-            <OptionsList onClick={() => setOptionsSectionOpen(null)}>
-              <OptionsList.Item icon={faDownload} onClick={onSaveClick}>
-                Export JSON
-              </OptionsList.Item>
-            </OptionsList>
-          </PopoverContent>
-        </Popover>
-        <Popover
-          modal
-          open={optionsSectionOpen === 'help'}
-          onOpenChange={(isOpen) => setOptionsSectionOpen(isOpen ? 'help' : null)}
-        >
-          <PopoverTrigger onClick={() => setOptionsSectionOpen('help')}>
-            <div className="rounded-lg px-1.5 py-1 font-medium text-text-muted hover:bg-surface-1 dark:hover:bg-surface-4">
-              Help
-            </div>
-          </PopoverTrigger>
-          <PopoverContent ref={popoverRef} side="bottom" sideOffset={2} align="start">
-            <OptionsList>
-              <OptionsList.Item asLink to={constants.helpDocs} onClick={closeOptions}>
-                Help docs
-              </OptionsList.Item>
-              <OptionsList.Item asLink to={constants.supportUrl} onClick={closeOptions}>
-                Salt support
-              </OptionsList.Item>
-              <OptionsList.Item asLink to={constants.requestModelsUrl} onClick={closeOptions} className="pr-12">
-                Request nodes/models
-              </OptionsList.Item>
-              <OptionsList.Item asLink to={constants.discordFeedbackUrl} onClick={closeOptions}>
-                Feedback
-              </OptionsList.Item>
-            </OptionsList>
-          </PopoverContent>
-        </Popover>
+            <PopoverTrigger onClick={() => setOptionsSectionOpen('file')}>
+              <div className="rounded-lg px-2 py-1 text-text-subtle hover:text-text-base">File</div>
+            </PopoverTrigger>
+            <PopoverContent
+              ref={popoverRef}
+              side="bottom"
+              sideOffset={2}
+              align="start"
+              onClick={(e) => e.preventDefault()}
+            >
+              <OptionsList onClick={() => setOptionsSectionOpen(null)}>
+                <OptionsList.Item icon={faDownload} onClick={onSaveClick}>
+                  Export JSON
+                </OptionsList.Item>
+              </OptionsList>
+            </PopoverContent>
+          </Popover>
+          <Popover
+            modal
+            open={optionsSectionOpen === 'help'}
+            onOpenChange={(isOpen) => setOptionsSectionOpen(isOpen ? 'help' : null)}
+          >
+            <PopoverTrigger onClick={() => setOptionsSectionOpen('help')}>
+              <div className="rounded-lg px-2 py-1 text-text-subtle hover:text-text-base">Help</div>
+            </PopoverTrigger>
+            <PopoverContent ref={popoverRef} side="bottom" sideOffset={2} align="start">
+              <OptionsList>
+                <OptionsList.Item asLink to={constants.helpDocs} onClick={closeOptions}>
+                  Help docs
+                </OptionsList.Item>
+                <OptionsList.Item asLink to={constants.supportUrl} onClick={closeOptions}>
+                  Salt support
+                </OptionsList.Item>
+                <OptionsList.Item asLink to={constants.requestModelsUrl} onClick={closeOptions} className="pr-12">
+                  Request nodes/models
+                </OptionsList.Item>
+                <OptionsList.Item asLink to={constants.discordFeedbackUrl} onClick={closeOptions}>
+                  Feedback
+                </OptionsList.Item>
+              </OptionsList>
+            </PopoverContent>
+          </Popover>
+        </div>
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
         <p className="text-sm font-medium text-surface-12">{workflowName}</p>
       </div>
-      <div className="z-10 flex flex-row items-center">
-        <button
+      <div className="z-10 mr-2 flex flex-row items-center gap-2">
+        <Button
           disabled={isCreatingWorkflow}
+          color="primary"
+          variant="filled"
+          size="sm"
           onClick={handleRunWorkflowClick}
-          className="mr-3 flex h-8 w-8 items-center justify-center *:text-icon-muted"
+          leftIcon={faPlay}
+          className="px-4"
         >
-          <Icon
-            icon={faPlay}
-            className={clsx(
-              'mr-2 p-1 transition-opacity *:text-success-10 hover:opacity-95 active:opacity-85',
-              isCreatingWorkflow && '!opacity-50',
-            )}
-            size={20}
-          />
-        </button>
-        <Button variant="filled" size="sm" onClick={onDeployClick}>
+          Run
+        </Button>
+        <Button color="secondary" variant="ringed" size="sm" onClick={onDeployClick} className="px-4">
           Deploy
         </Button>
       </div>

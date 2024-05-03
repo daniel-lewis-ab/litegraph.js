@@ -18,6 +18,7 @@ export type Scalars = {
   FloatType: { input: any; output: any; }
   IntType: { input: any; output: any; }
   ItemId: { input: any; output: any; }
+  JsonField: { input: any; output: any; }
   MetaTagAttributes: { input: any; output: any; }
   UploadId: { input: any; output: any; }
 };
@@ -126,7 +127,10 @@ export type ExampleModelFilter = {
   author?: InputMaybe<StringFilter>;
   description?: InputMaybe<TextFilter>;
   id?: InputMaybe<ItemIdFilter>;
+  json?: InputMaybe<JsonFilter>;
   link?: InputMaybe<StringFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
   tags?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
@@ -180,7 +184,10 @@ export type ExampleRecord = RecordInterface & {
   author?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
+  json?: Maybe<Scalars['JsonField']['output']>;
   link?: Maybe<Scalars['String']['output']>;
+  seo?: Maybe<SeoField>;
+  slug: Scalars['String']['output'];
   tags?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
@@ -1887,6 +1894,12 @@ export enum ItemStatus {
   Updated = 'updated'
 }
 
+/** Specifies how to filter JSON fields */
+export type JsonFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
 export enum MuxThumbnailFormatType {
   Gif = 'gif',
   Jpg = 'jpg',
@@ -2196,6 +2209,12 @@ export type SeoField = {
   twitterCard?: Maybe<Scalars['String']['output']>;
 };
 
+/** Specifies how to filter SEO meta tags fields */
+export type SeoFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
 export type Site = {
   __typename?: 'Site';
   favicon?: Maybe<FileField>;
@@ -2219,6 +2238,18 @@ export type SiteGlobalSeoArgs = {
 export enum SiteLocale {
   En = 'en'
 }
+
+/** Specifies how to filter Slug fields */
+export type SlugFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars['String']['input']>;
+  /** Filter records that have one of the specified slugs */
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars['String']['input']>;
+  /** Filter records that do have one of the specified slugs */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
 
 /** Specifies how to filter by status */
 export type StatusFilter = {
