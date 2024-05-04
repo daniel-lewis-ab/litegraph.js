@@ -23,7 +23,7 @@ export const EditorLogs = ({ logs, isExpanded, onToggleExpand, onCloseClick }: E
           </button>
         </div>
       </div>
-      <div className="h-full overflow-scroll">
+      <div className="no-scrollbar h-full overflow-scroll">
         <div
           className={clsx(
             'max-w-[700px] pb-10 font-mono text-sm',

@@ -26,6 +26,7 @@ type ImageTileProps = {
   isSelected?: boolean;
   className?: string;
   onClick(): void;
+  sliderVal?: number;
 };
 
 type VideoTileProps = {
@@ -35,6 +36,16 @@ type VideoTileProps = {
   onClick?(): void;
   className?: string;
   isSelected?: boolean;
+  sliderVal?: number;
+};
+
+type TextTileProps = {
+  fileUrl: string;
+  created_at: string;
+  onClick?(): void;
+  className?: string;
+  isSelected?: boolean;
+  sliderVal?: number;
 };
 
 const VideoTile = ({ videoUrl, onClick, className, isSelected }: VideoTileProps) => {
@@ -51,6 +62,43 @@ const VideoTile = ({ videoUrl, onClick, className, isSelected }: VideoTileProps)
         <source src={videoUrl} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+    </div>
+  );
+};
+
+const TextTile = ({ fileUrl, sliderVal, onClick, className, isSelected, created_at }: TextTileProps) => {
+  const [text, setText] = useState<string | null>(null);
+  const [textSize, setTextSize] = useState(16);
+
+  useEffect(() => {
+    // set the text size to be a range of 12-24 based on the value of sliderVal
+    setTextSize(12 + 2 * Number(sliderVal));
+  }, [sliderVal]);
+
+  useEffect(() => {
+    fetch(fileUrl)
+      .then((res) => res.text())
+      .then((text) => setText(text));
+  }, [fileUrl]);
+  return (
+    <div
+      className={clsx(
+        'group relative cursor-pointer overflow-hidden rounded-lg border border-surface-5 bg-surface-2 text-text-subtle transition-colors group-hover:border-surface-8',
+        isSelected
+          ? 'border-surface-12 group-hover:border-surface-12'
+          : 'border-surface-5 group-hover:border-surface-7',
+        className,
+      )}
+      onClick={onClick}
+    >
+      <div className="p-3 text-sm">
+        <p className="p-2 leading-[150%]" style={{ fontSize: textSize }}>
+          {text}
+        </p>
+        <p className="relative px-2 py-1 text-xs text-text-muted">
+          <TimeSince format="ago" time={created_at} />
+        </p>
+      </div>
     </div>
   );
 };
@@ -107,14 +155,14 @@ export const OutputsGallerySection = ({
 }: OutputsGalleryGridProps) => {
   const [assetIdToDelete, setAssetIdToDelete] = useState<string | null>(null);
   const [selectedAssetId, setSelectedAssetId] = useState<string | null>(null);
-  const [colSize, setColSize] = useState(Number(localStorage.getItem('outputsCols')) ?? 4);
+  const [sliderVal, setSliderVal] = useState(Number(localStorage.getItem('outputsSliderVal')) ?? 4);
 
   useEffect(() => {
-    localStorage.setItem('outputsCols', colSize.toString());
-  }, [colSize]);
-  const onSliderChange = (value: number[]) => setColSize(value[0]);
-  const onClickSmaller = () => setColSize((old) => Math.max(1, old - 1));
-  const onClickLarger = () => setColSize((old) => Math.min(4, old + 1));
+    localStorage.setItem('outputsSliderVal', sliderVal.toString());
+  }, [sliderVal]);
+  const onSliderChange = (value: number[]) => setSliderVal(value[0]);
+  const onClickSmaller = () => setSliderVal((old) => Math.max(1, old - 1));
+  const onClickLarger = () => setSliderVal((old) => Math.min(4, old + 1));
 
   const handleAssetClick = (id: string) => {
     prefetchAssetInfo(id);
@@ -128,8 +176,8 @@ export const OutputsGallerySection = ({
       {assets.length === 0 ? <p className="text-text-subtle">No outputs yet</p> : null}
       {assets.length > 0 ? (
         <div className="no-scrollbar relative h-full overflow-auto">
-          <div className="sticky top-0 z-10 mb-2 flex flex-col content-center items-center justify-center rounded-lg bg-surface-2 px-2 py-2">
-            <div className="flex w-full flex-row gap-4">
+          <div className="group sticky top-0 z-10 mb-2 flex flex-col content-center items-center justify-center bg-surface-2 px-2 py-2 shadow-lg">
+            <div className=" flex w-full flex-row gap-4">
               <Icon
                 icon={faMagnifyingGlassMinus}
                 size={16}
@@ -139,10 +187,10 @@ export const OutputsGallerySection = ({
               <Slider
                 defaultValue={[2]}
                 max={MAX_COLS_COUNT}
-                value={[colSize]}
+                value={[sliderVal]}
                 step={1}
                 min={1}
-                className="z-10"
+                className="z-10 opacity-50 transition-opacity duration-200 group-hover:opacity-100"
                 onValueChange={onSliderChange}
               />
               <Icon
@@ -156,31 +204,52 @@ export const OutputsGallerySection = ({
           <div
             className={clsx(
               'mb-14 grid gap-3',
-              colSize == 1 && `grid-cols-5`,
-              colSize == 2 && 'grid-cols-4',
-              colSize == 3 && `grid-cols-3`,
-              colSize == 4 && `grid-cols-2`,
-              colSize == 5 && `grid-cols-1`,
+              sliderVal == 1 && `grid-cols-5`,
+              sliderVal == 2 && 'grid-cols-4',
+              sliderVal == 3 && `grid-cols-3`,
+              sliderVal == 4 && `grid-cols-2`,
+              sliderVal == 5 && `grid-cols-1`,
             )}
           >
             {assets.map((i) => {
               const isVideo = i.storage_path.includes('.mp4');
-              return !isVideo ? (
+              const isText = i.storage_path.includes('.txt');
+
+              if (isVideo) {
+                return (
+                  <VideoTile
+                    sliderVal={sliderVal}
+                    created_at={i.created_at}
+                    videoUrl={i.asset_url}
+                    key={i.id}
+                    size={i.size}
+                    isSelected={selectedAssetId == i.id}
+                    onClick={() => handleAssetClick(i.id)}
+                  />
+                );
+              }
+
+              if (isText) {
+                return (
+                  <TextTile
+                    sliderVal={sliderVal}
+                    className="col-span-12"
+                    key={i.id}
+                    fileUrl={getImageUrl(i.storage_path, TILE_IMG_CONFIG)}
+                    created_at={i.created_at}
+                    isSelected={selectedAssetId === i.id}
+                    onClick={() => handleAssetClick(i.id)}
+                  />
+                );
+              }
+
+              return (
                 <ImageTile
                   key={i.id}
                   imgUrl={getImageUrl(i.storage_path, TILE_IMG_CONFIG)}
                   created_at={i.created_at}
                   size={i.size}
                   isSelected={selectedAssetId === i.id}
-                  onClick={() => handleAssetClick(i.id)}
-                />
-              ) : (
-                <VideoTile
-                  created_at={i.created_at}
-                  videoUrl={i.asset_url}
-                  key={i.id}
-                  size={i.size}
-                  isSelected={selectedAssetId == i.id}
                   onClick={() => handleAssetClick(i.id)}
                 />
               );
