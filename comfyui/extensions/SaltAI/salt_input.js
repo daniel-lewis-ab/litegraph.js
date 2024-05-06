@@ -55,12 +55,19 @@ app.registerExtension({
             if (type == "folder") {
                 Object.assign(fileInput, {
                     type: "file",
+                    style: "display:none",
+                    webkitdirectory: true,
+                    onchange: async () => {
+                        const directory = fileInput.files[0].webkitRelativePath;
+                        const i = directory.lastIndexOf('/');
+                        if(i <= 0) {
                             throw "No directory found";
                         }
                         const path = directory.slice(0,directory.lastIndexOf('/'))
                         if (pathWidget?.options.values.includes(path)) {
                             alert("A folder of the same name already exists");
                             return;
+                        }
 
                         let successes = 0;
                         for(const file of fileInput.files) {
