@@ -82,7 +82,7 @@ function node_in_loop(live_nodes, links_added) {
         recursive_follow(node_id, node_id, links_added, [], nodes_cleared, [], count);
         nodes_to_check = nodes_to_check.filter((nid)=>!nodes_cleared.has(nid.toString()));
     }
-    console.log(`node_in_loop made ${count} checks`)
+    // console.log(`node_in_loop made ${count} checks`)
 }
 
 /*
