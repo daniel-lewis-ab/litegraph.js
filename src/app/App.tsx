@@ -10,6 +10,8 @@ import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErr
 
 export const App = ({ children }: { children: ReactNode }) => {
   useScrollToTopOnPathChange();
+  // eslint-disable-next-line no-console
+  console.log('1');
 
   return (
     <React.StrictMode>

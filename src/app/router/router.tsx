@@ -13,10 +13,7 @@ import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageCont
 import ExamplesPage, { examplesPageLoader } from '../examplesPage/ExamplesPage';
 import { HomePage } from '../homePage/HomePage';
 import LoginPageContainer from '../loginPage/LoginPageContainer';
-import {
-  NewWorkflowFromExamplePageContainer,
-  newWorkflowFromExamplePageLoader,
-} from '../newWorkflowFromExamplePage/NewWorkflowFromExamplePageContainer';
+import { NewWorkflowFromExamplePageContainer } from '../newWorkflowFromExamplePage/NewWorkflowFromExamplePageContainer';
 import { NewWorkflowPageContainer } from '../newWorkflowPage/NewWorkflowPageContainer';
 import { StorybookPage } from '../storybookPage/StorybookPage';
 import { WorkflowEditorPageContainer } from '../workflowEditorPage/WorkflowEditorPageContainer';
@@ -108,7 +105,7 @@ export const appRoutes: RouteRecord[] = [
               {
                 path: routes.newWorkflowFromExample(':slug'),
                 element: <NewWorkflowFromExamplePageContainer />,
-                loader: newWorkflowFromExamplePageLoader,
+                // loader: newWorkflowFromExamplePageLoader,
               },
             ],
           },

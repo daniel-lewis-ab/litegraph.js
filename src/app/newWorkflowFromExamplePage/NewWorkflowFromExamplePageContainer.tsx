@@ -1,48 +1,47 @@
 import { useCreateWorkflowMutation } from '@/api/hooks/useCreateWorkflowMutation/useCreateWorkflowMutation';
 import { ExampleRecord } from '@/generated/graphql';
-import { fetchDatoCmsData } from '@/shared/functions/fetchDatoCmsData';
-import { useLoaderData } from 'react-router-dom';
+import { useClientFetchDatoCms } from '@/hooks/useClientFetchDatoCms/useClientFetchDatoCms';
+import { useParams } from 'react-router-dom';
 import { NewWorkflowFromExamplePage } from './NewWorkflowFromExamplePage';
+import { CenteredLoader } from '@/shared/components/centeredLoader/CenteredLoader';
+import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
 
 export type NewWorkflowFromExampleFormData = {
   name: string;
   content: string;
 };
 
-export const NewWorkflowFromExamplePageContainer = () => {
-  const { data } = useLoaderData() as { data: { data: { example: ExampleRecord } } };
-  const { example } = data.data;
+const query = `
+  query cloneExampleQuery($slug: String) {
+    example(filter: {slug: {eq: $slug}}) {
+      json
+      title
+      slug
+      id
+    }
+  }
+`;
 
+type DatoCmsData = { example: ExampleRecord };
+
+export const NewWorkflowFromExamplePageContainer = () => {
+  const { slug } = useParams();
+  const { data, status } = useClientFetchDatoCms<DatoCmsData>(query, { slug: slug! });
   const { mutateAsync } = useCreateWorkflowMutation();
 
   const handleSubmit = async (data: NewWorkflowFromExampleFormData) => {
     return await mutateAsync({ name: data.name, content: JSON.parse(data.content) });
   };
 
-  return <NewWorkflowFromExamplePage content={example.json} name={example.title!} onSubmit={handleSubmit} />;
-};
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const newWorkflowFromExamplePageLoader = async ({ params }: { params: { slug?: string } }) => {
-  if (params.slug === undefined) {
-    return { status: 'error', error: new Error('Slug is undefined') };
+  if (status === 'loading') {
+    return <CenteredLoader isFullscreen />;
   }
 
-  try {
-    const query = `
-        query cloneExampleQuery($slug: String) {
-          example(filter: {slug: {eq: $slug}}) {
-            json
-            title
-            slug
-            id
-          }
-        }
-      `;
-    const variables = { slug: params.slug };
-    const data = await fetchDatoCmsData(query, variables);
-    return { status: 'success', data };
-  } catch (error) {
-    return { status: 'error', error };
+  if (status === 'error' || !data) {
+    <PageErrorTemplate variant="down" inApp />;
   }
+
+  return (
+    <NewWorkflowFromExamplePage content={data!.example.json} name={data!.example.title!} onSubmit={handleSubmit} />
+  );
 };
