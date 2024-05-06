@@ -127,8 +127,9 @@ Does this input connect upstream to a live node?
 */
 function is_connected(input) {
     const link_id = input.link;
-    if (link_id === null) return false;                                    // no connection
-    var the_link = app.graph.links[link_id];            
+    if (!link_id) return false;                                    // no connection
+    var the_link = app.graph.links[link_id]; 
+    if (!the_link) return false;           
     the_link = handle_bypass(the_link, the_link.type);                       // find the link upstream of bypasses
     if (!the_link) return false;                                           // no source for data.
     return true;
