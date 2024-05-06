@@ -11,7 +11,7 @@ export type EditorLogsProps = {
 
 export const EditorLogs = ({ logs, isExpanded, onToggleExpand, onCloseClick }: EditorLogsProps) => {
   return (
-    <div className="mt-1 h-full rounded-lg bg-surface-2 px-2 py-2.5">
+    <div className=" mt-1 flex h-full flex-col rounded-lg bg-surface-2 px-2 py-2.5">
       <div className="flex flex-row justify-between">
         <p className="mb-3 text-sm font-medium">Error logs</p>
         <div>
@@ -23,7 +23,7 @@ export const EditorLogs = ({ logs, isExpanded, onToggleExpand, onCloseClick }: E
           </button>
         </div>
       </div>
-      <div className="no-scrollbar h-full overflow-scroll">
+      <div className="flex-1 overflow-scroll">
         <div
           className={clsx(
             'max-w-[700px] pb-10 font-mono text-sm',
