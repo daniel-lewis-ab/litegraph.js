@@ -12,6 +12,8 @@ interface ImportMetaEnv {
   VITE_SHOW_WEBSOCKET_LOGS: string;
   VITE_COOKIE_DOMAIN: string;
   VITE_DATOCMS_API_TOKEN: string;
+  VITE_DD_APPLICATION_ID: string;
+  VITE_DD_CLIENT_TOKEN: string;
   MODE: 'development' | 'production';
 }
 

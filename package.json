@@ -22,6 +22,7 @@
   "dependencies": {
     "@awesome.me/kit-b6cda292ae": "^1.0.7",
     "@childrentime/devcert": "^1.2.8",
+    "@datadog/browser-rum": "^5.16.0",
     "@datocms/cma-client-browser": "^3.1.6",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
