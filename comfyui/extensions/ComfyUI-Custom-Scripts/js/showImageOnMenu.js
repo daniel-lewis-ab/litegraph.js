@@ -59,10 +59,11 @@ const ext = {
 			show(src, detail.node);
 		});
 
-		api.addEventListener("b_preview", ({ detail }) => {
-			if (!enabled) return;
-			show(URL.createObjectURL(detail), app.runningNodeId);
-		});
+		// SALT MODIFICATION - Disabled for now
+		// api.addEventListener("b_preview", ({ detail }) => {
+		// 	if (!enabled) return;
+		// 	show(URL.createObjectURL(detail), app.runningNodeId);
+		// });
 
 		app.ui.settings.addSetting({
 			id,

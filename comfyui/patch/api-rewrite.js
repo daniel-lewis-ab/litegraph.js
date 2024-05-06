@@ -59,7 +59,7 @@ class ComfyGraphPatcher extends EventTarget {
     if (message.internal) {
       const internalMessage = message.internal;
       if (internalMessage.data.previews) {
-        this.handlePreviewData(internalMessage.data.previews);
+        this.handlePreviewData(internalMessage.data);
       }
       switch (internalMessage.type) {
         case 'load_prompt': {

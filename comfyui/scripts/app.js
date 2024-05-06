@@ -534,7 +534,11 @@ export class ComfyApp {
           this.preview = preview;
           imagesChanged = true;
           if (preview != null) {
-            imgURLs.push(preview);
+            // SALT MODIFICATION - START
+            preview.forEach(element => {
+              imgURLs.push(element);
+            });
+            // SALT MODIFICATION - END
           }
         }
 
@@ -1310,12 +1314,18 @@ export class ComfyApp {
     });
 
     api.addEventListener('b_preview', ({ detail }) => {
-      const id = this.runningNodeId;
+      // SALT MODIFICATION START
+      const id = detail.node;
       if (id == null) return;
 
-      const blob = detail;
+      const blob = detail.previews;
       const blobUrl = URL.createObjectURL(blob);
-      this.nodePreviewImages[id] = [blobUrl];
+      if (this.nodePreviewImages[id]) {
+        this.nodePreviewImages[id].push(blobUrl);
+      } else {
+          this.nodePreviewImages[id] = [blobUrl];
+      }
+      // SALT MODIFICATION END
     });
 
     api.init();

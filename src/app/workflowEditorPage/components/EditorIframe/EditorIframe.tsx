@@ -42,18 +42,22 @@ export const EditorIframe = () => {
         const previewData = message.data as PreviewExecutionData;
         if (previewData.data.previews) {
           try {
-            const response = await getWorkflowPreviewAsset(previewData.data.previews.images[0]);
-            sendMessageToIframe({
-              internal: {
-                type: message.data.type,
-                data: {
-                  previews: response,
-                  execution_id: previewData.data.execution_id,
-                  workflow_id: previewData.data.workflow_id,
-                  node: previewData.data.node,
+            const responses = await Promise.all(
+              previewData.data.previews.images.map((image) => getWorkflowPreviewAsset(image)),
+            );
+            for (const response of responses) {
+              sendMessageToIframe({
+                internal: {
+                  type: message.data.type,
+                  data: {
+                    previews: response,
+                    execution_id: previewData.data.execution_id,
+                    workflow_id: previewData.data.workflow_id,
+                    node: previewData.data.node,
+                  },
                 },
-              },
-            });
+              });
+            }
           } catch (e) {
             console.error('Error:', e);
           }
