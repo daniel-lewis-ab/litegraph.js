@@ -1,3 +1,5 @@
+import { useAuth } from '@/hooks/useAuth/useAuth';
+import { useScrollToHash } from '@/hooks/useScrollToHash/useScrollToHash';
 import { routes } from '@/routes/routes';
 import { Button } from '@/shared/components/button/Button';
 import { Icon } from '@/shared/components/icon/Icon';
@@ -11,8 +13,6 @@ import s from './HomePage.module.css';
 import img from './images/deploy-discord-min.png';
 import gpuPromoImg from './images/promo-gpu.svg';
 import ideImg from './images/promo-ide.jpg';
-import { useScrollToHash } from '@/hooks/useScrollToHash/useScrollToHash';
-import { useAuth } from '@/hooks/useAuth/useAuth';
 
 const LogoAnimation = lazy(() => import('./components/LogoAnimation'));
 
@@ -37,10 +37,13 @@ export const HomePage = () => {
           <div className="relative">
             <PublicLayout.Container>
               <div className="flex min-h-[70vh]  flex-col content-center items-center justify-end space-y-6 text-center md:min-h-[50vh] md:justify-center md:pt-[20vh] lg:min-h-[70vh] lg:pt-[33vh]">
+                <div className="rounded-full bg-surfaceA-3 px-6 py-2 text-xl text-surface-11 backdrop-blur-sm">
+                  Salt AI Public Beta
+                </div>
                 <h1 className="max-w-2xl text-5xl font-medium leading-[1] text-surface-12 md:text-8xl">
-                  Workflows for the real world
+                  Workflows for the builders
                 </h1>
-                <h2 className={s.sectionBody}>Build faster in an open ecosystem designed for scale</h2>
+                <h2 className={s.sectionBody}>Build AI faster in an open ecosystem designed for scale</h2>
                 <Button size="lg" className="" color="primary" asLink to={routes.login}>
                   <span className="block px-4">{isAuthorized ? `Start building` : `Start for free`}</span>
                 </Button>
@@ -139,10 +142,10 @@ const IDESection = () => {
         <div className="grid-cols-6 flex-col space-y-3 md:grid">
           <div className="col-span-4 col-start-2 space-y-4">
             <div className="font-mono text-xs tracking-wide text-text-subtle">03</div>
-            <h2 className={s.sectionTitle}>An IDE designed with function in mind</h2>
+            <h2 className={s.sectionTitle}>Engineered for speed with zero startup time</h2>
             <p className={s.sectionBody}>
-              With Salt&apos;s IDE, you have access to thousands of nodes and a web-based environment built for power
-              users.
+              There&apos;s no need to wait for machines to spin up. Salt is ready to go, so you can start building right
+              away.
             </p>
           </div>
         </div>
