@@ -7,8 +7,6 @@ import { GetWorkflowOutputAssetsResponse } from '@/api/types';
 const deleteAsset = async ({ assetId, executionId }: { assetId: string; executionId: string; workflowId: string }) => {
   const response = await axiosClient.delete(apiEndpoints.asset({ assetId, executionId }));
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   if (response.status !== 200) {
     throw new Error('Failed to delete asset');
   }

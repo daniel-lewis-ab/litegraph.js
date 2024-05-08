@@ -16,8 +16,6 @@ type ExecuteWorkflowRequestParams = {
 };
 
 const executeWorkflow = async (request: ExecuteWorkflowRequestParams) => {
-  await new Promise((r) => setTimeout(r, 2000));
-
   const response = await axiosClient.post<PostWorkflowExecutionsResponse>(
     apiEndpoints.workflowExecutions(request.workflow.id),
     {

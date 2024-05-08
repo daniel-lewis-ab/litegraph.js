@@ -7,8 +7,6 @@ import { apiEndpoints } from '@/api/apiEndpoints';
 const deleteDeployment = async (deploymentId: string) => {
   const response = await axiosClient.delete(apiEndpoints.deployment(deploymentId));
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   if (response.status !== 200) {
     throw new Error('Failed to delete deployment');
   }

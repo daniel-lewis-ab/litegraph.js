@@ -258,11 +258,11 @@ export const OutputsGallerySection = ({
         </div>
       ) : null}
       <div className="bottom-gradient pointer-events-none absolute bottom-0 left-0 right-0 h-[15%] opacity-80"></div>
-      {selectedAssetId !== null ? (
+      {selectedAssetId && selectedAsset ? (
         <div className="absolute bottom-0 left-0 right-0 m-4 flex justify-between rounded-lg bg-primary-10 px-4 py-3 *:text-black">
           <p className="font-medium">
-            {getImageNameFromTimestamp(selectedAsset!.created_at)}.
-            {getSelectedAssetExtension(selectedAsset!.storage_path)}
+            {getImageNameFromTimestamp(selectedAsset.created_at)}.
+            {getSelectedAssetExtension(selectedAsset.storage_path)}
           </p>
           <div className="flex flex-row *:mr-2">
             <button className="h-6 w-6" onClick={() => onCopyAssetContent(selectedAssetId)}>
