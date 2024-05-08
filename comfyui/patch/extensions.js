@@ -107,7 +107,6 @@ export const extensions = [
     "/extensions/ComfyUI-KJNodes/js/contextmenu.js",
     "/extensions/ComfyUI-KJNodes/js/setgetnodes.js",
     "/extensions/ComfyUI-KJNodes/js/browserstatus.js",
-    "/extensions/SaltAI/help_button.js",
     "/extensions/SaltAI_LlamaIndex/icon.js",
     "/extensions/comfy_mtb/debug.js",
     "/extensions/comfy_mtb/imageFeed.js",
