@@ -186,6 +186,10 @@ class ComfyGraphPatcher extends EventTarget {
           this.dispatchEvent(new CustomEvent('executed', { detail: internalMessage.data }));
           break;
         }
+        case 'queued': {
+          this.dispatchEvent(new CustomEvent('queued', { detail: internalMessage.data }));
+          break;
+        }
         case 'execution_start': {
           this.dispatchEvent(new CustomEvent('execution_start', { detail: internalMessage.data }));
           break;

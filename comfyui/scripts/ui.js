@@ -394,6 +394,29 @@ export class ComfyUI {
 			}
 		});
 
+		api.addEventListener("executed", async () => {
+			console.log("Identified execution complete");
+			try {
+				const p = await app.graphToPrompt(); // Wait for app.graphToPrompt() to finish
+				
+				for (const n of p.workflow.nodes) {
+					const node = graph.getNodeById(n.id);
+				
+					if (node.widgets) {
+						for (const widget of node.widgets) {
+							// Allow widgets to run callbacks after a prompt has been queued
+							// e.g. random seed after every gen
+							if (widget.afterQueued) {
+								widget.afterQueued();
+							}
+						}
+					}
+				}
+			} catch(error) {
+				console.error(error);
+			}
+		});
+
 		this.menuHamburger = $el(
 			"div.comfy-menu-hamburger",
 			{
