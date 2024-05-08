@@ -20,6 +20,10 @@ export const links = {
       label: 'About',
       href: routes.about,
     },
+    status: {
+      label: 'Status',
+      href: 'https://salt-ai.statuspage.io/',
+    },
   },
   product: {
     deployments: {
@@ -77,7 +81,7 @@ export const socialLinks = [links.social.x, links.social.discord, links.social.g
 export const footerLinks = [
   {
     product: [links.product.deployments, links.product.infra, links.product.editor],
-    resources: [links.salt.examples, links.salt.docs, links.social.github],
+    resources: [links.salt.examples, links.salt.status, links.salt.docs, links.social.github],
     company: [links.product.team, links.salt.about, links.salt.blog],
   },
 ];
