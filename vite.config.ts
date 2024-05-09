@@ -3,9 +3,6 @@ import react from '@vitejs/plugin-react';
 import checker from 'vite-plugin-checker';
 import { fileURLToPath } from 'url';
 import { VitePluginRadar } from 'vite-plugin-radar';
-import child_process from 'child_process';
-
-const commitHash = child_process.execSync('git rev-parse --short HEAD').toString().trim();
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -13,7 +10,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     define: {
-      __COMMIT_HASH__: JSON.stringify(commitHash),
+      __COMMIT_HASH__: JSON.stringify(process.env.CI_COMMIT_SHORT_SHA ?? 'local'),
     },
     plugins: [
       react(),
