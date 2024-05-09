@@ -11,6 +11,7 @@ import { GitHubIcon } from '@/shared/components/icons/GithubIcon';
 import { GoogleIcon } from '@/shared/components/icons/GoogleIcon';
 import { LogoFull } from '@/shared/components/icons/LogoFull';
 import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
+import { links } from '@/shared/components/publicLayout/components/PublicLinks';
 import img from './promo.jpg';
 
 type LoginPageProps = {
@@ -90,9 +91,13 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
                 </div>
               </Button>
               <p className="text-sm leading-[150%] text-text-subtle">
-                By creating an account, you agree to our{' '}
-                <a href="/saltai-terms-of-service.pdf" className="underline" target="_blank">
+                By creating an account, you agree to the{' '}
+                <a href={links.legal.terms.href} className="underline">
                   Terms of Service
+                </a>{' '}
+                and acknowledge that you have read and understood our{' '}
+                <a href={links.legal.privacy.href} className="underline">
+                  Privacy Policy
                 </a>
                 .
               </p>

@@ -48,6 +48,10 @@ export const links = {
       label: 'Terms of Service',
       href: '/saltai-terms-of-service.pdf',
     },
+    privacy: {
+      label: 'Privacy Policy',
+      href: '/saltai-privacy-policy.pdf',
+    },
   },
   social: {
     x: {
@@ -89,6 +93,6 @@ export const footerLinks = [
     product: [links.product.deployments, links.product.infra, links.product.editor],
     resources: [links.salt.examples, links.salt.status, links.salt.docs, links.social.github],
     company: [links.product.team, links.salt.about, links.salt.blog],
-    legal: [links.legal.terms],
+    legal: [links.legal.terms, links.legal.privacy],
   },
 ];
