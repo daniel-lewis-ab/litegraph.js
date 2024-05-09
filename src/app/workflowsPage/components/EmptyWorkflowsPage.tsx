@@ -22,28 +22,24 @@ export const EmptyWorkflowsPage = ({ banner }: { banner?: ReactNode }) => (
             className="rounded-full bg-surface-3 p-[13px] transition-all group-hover:bg-surface-5"
           />
           <div className="flex flex-col items-start justify-start pl-2.5">
-            <p className="font-bold">New Workflow</p>
+            <p className="font-bold">New workflow</p>
             <p className="font-light text-text-muted">Start with default workflow</p>
           </div>
         </Link>
-        {/* <button className="group flex w-full flex-row items-center rounded-3xl border border-border-default px-6 py-4">
-        <Icon
-          size={20}
-          icon={faRectangleHistory}
-          className="rounded-full bg-surface-3 p-[12px] group-hover:bg-surface-5"
-        />
-        <div className="flex flex-col items-start justify-start pl-2.5">
-          <p className="font-bold">From Template</p>
-          <p className="font-light text-text-muted">Explore powerful templates</p>
-        </div>
-      </button> */}
-        {/* <button className="!mb-0 flex w-full flex-row items-center rounded-3xl border border-border-default px-6 py-4">
-        <Icon size={20} icon={faFileImport} className="bg-surface-100 rounded-full p-[12px]" />
-        <div className="flex flex-col items-start justify-start pl-2.5">
-          <p className="font-bold">Import</p>
-          <p className="font-light text-text-muted">Import JSON</p>
-        </div>
-      </button> */}
+        <Link
+          className="group flex w-full flex-row items-center rounded-xl border border-border-muted px-6 py-4"
+          to={routes.examples}
+        >
+          <Icon
+            size={20}
+            icon={faPlus}
+            className="rounded-full bg-surface-3 p-[13px] transition-all group-hover:bg-surface-5"
+          />
+          <div className="flex flex-col items-start justify-start pl-2.5">
+            <p className="font-bold">Explore examples</p>
+            <p className="font-light text-text-muted">Start from a example workflow</p>
+          </div>
+        </Link>
       </div>
     </div>
   </PageTemplate>

@@ -43,6 +43,12 @@ export const links = {
       href: '/#team',
     },
   },
+  legal: {
+    terms: {
+      label: 'Terms of Service',
+      href: '/saltai-terms-of-service.pdf',
+    },
+  },
   social: {
     x: {
       label: 'X',
@@ -83,5 +89,6 @@ export const footerLinks = [
     product: [links.product.deployments, links.product.infra, links.product.editor],
     resources: [links.salt.examples, links.salt.status, links.salt.docs, links.social.github],
     company: [links.product.team, links.salt.about, links.salt.blog],
+    legal: [links.legal.terms],
   },
 ];

@@ -89,6 +89,13 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
                   <span>Continue with Github</span>
                 </div>
               </Button>
+              <p className="text-sm leading-[150%] text-text-subtle">
+                By creating an account, you agree to our{' '}
+                <a href="/saltai-terms-of-service.pdf" className="underline" target="_blank">
+                  Terms of Service
+                </a>
+                .
+              </p>
             </div>
           </div>
         </div>

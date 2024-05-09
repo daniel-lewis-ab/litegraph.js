@@ -14,16 +14,22 @@ export const PublicFooter = () => {
         <footer className={clsx('space-y-8 overflow-x-hidden py-10 xl:py-20')}>
           <div className="flex flex-col justify-between gap-8 md:flex-row">
             {footerLinks.map((section, i) => (
-              <div key={i} className="grid w-full grid-cols-2 gap-12 md:grid-cols-3 xl:w-1/2">
+              <div key={i} className="grid w-full grid-cols-2 gap-8 md:grid-cols-4 xl:w-1/2">
                 {Object.entries(section).map(([key, value]) => (
                   <div key={key} className="flex flex-col gap-8">
                     <h4 className="font-mono text-sm uppercase text-text-muted">{key}</h4>
                     <ul className="flex flex-col gap-2">
                       {value.map((item, i) => (
                         <li key={i}>
-                          <Link to={item.href} className="text-base font-medium hover:opacity-80" title={item.label}>
-                            {item.label}
-                          </Link>
+                          {item.href.endsWith('pdf') ? (
+                            <a href={item.href} className="text-base font-medium hover:opacity-80" title={item.label}>
+                              {item.label}
+                            </a>
+                          ) : (
+                            <Link to={item.href} className="text-base font-medium hover:opacity-80" title={item.label}>
+                              {item.label}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
