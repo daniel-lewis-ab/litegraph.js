@@ -1,5 +1,9 @@
 import { ApiWorkflowOutputAsset } from '@/api/types';
 import { Icon } from '@/shared/components/icon/Icon';
+import { Slider } from '@/shared/components/slider/Slider';
+import { TimeSince } from '@/shared/components/timeSince/TimeSince';
+import { getImageUrl } from '@/shared/functions/getImageUrl';
+import { faMagnifyingGlassMinus, faMagnifyingGlassPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import {
   faArrowDownToLine,
   faBracketsCurly,
@@ -10,11 +14,6 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { DeleteAssetConfirmationDialog } from '../DeleteAssetConfirmationDialog';
 import { EditorSection } from '../EditorSection';
-
-import { Slider } from '@/shared/components/slider/Slider';
-import { TimeSince } from '@/shared/components/timeSince/TimeSince';
-import { getImageUrl } from '@/shared/functions/getImageUrl';
-import { faMagnifyingGlassMinus, faMagnifyingGlassPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import './OutputsGallerySection.scss';
 
 const getImageNameFromTimestamp = (timestamp: string) => new Date(timestamp).toLocaleTimeString();
@@ -66,13 +65,28 @@ const VideoTile = ({ videoUrl, onClick, className, isSelected }: VideoTileProps)
   );
 };
 
+function FormatTextForDisplay({ text }: { text: string }) {
+  const paragraphs = text.split('\n\n');
+
+  if (!paragraphs.length) {
+    return text;
+  }
+
+  return (
+    <div className="flex flex-col space-y-3">
+      {paragraphs.map((paragraph, i) => (
+        <p key={i}>{paragraph}</p>
+      ))}
+    </div>
+  );
+}
+
 const TextTile = ({ fileUrl, sliderVal, onClick, className, isSelected, created_at }: TextTileProps) => {
   const [text, setText] = useState<string | null>(null);
   const [textSize, setTextSize] = useState(16);
 
   useEffect(() => {
-    // set the text size to be a range of 12-24 based on the value of sliderVal
-    setTextSize(12 + 2 * Number(sliderVal));
+    setTextSize(12 + 1.25 * Number(sliderVal));
   }, [sliderVal]);
 
   useEffect(() => {
@@ -80,24 +94,23 @@ const TextTile = ({ fileUrl, sliderVal, onClick, className, isSelected, created_
       .then((res) => res.text())
       .then((text) => setText(text));
   }, [fileUrl]);
+
   return (
     <div
       className={clsx(
-        'group relative cursor-pointer overflow-hidden rounded-lg border border-surface-5 bg-surface-2 text-text-subtle transition-colors group-hover:border-surface-8',
-        isSelected
-          ? 'border-surface-12 group-hover:border-surface-12'
-          : 'border-surface-5 group-hover:border-surface-7',
+        'group relative cursor-pointer overflow-hidden rounded-lg border bg-surface-2 text-text-subtle transition-colors group-hover:border-surface-8',
+        isSelected ? 'border-surface-12 hover:border-surface-12' : 'border-surface-5 hover:border-surface-7',
         className,
       )}
       onClick={onClick}
     >
-      <div className="p-3 text-sm">
-        <p className="p-2 leading-[150%]" style={{ fontSize: textSize }}>
-          {text}
-        </p>
-        <p className="relative px-2 py-1 text-xs text-text-muted">
+      <div className="space-y-3 p-3">
+        <div className="leading-[150%]" style={{ fontSize: textSize }}>
+          {text && <FormatTextForDisplay text={text} />}
+        </div>
+        <div className="relative pt-2 text-xs text-text-muted">
           <TimeSince format="ago" time={created_at} />
-        </p>
+        </div>
       </div>
     </div>
   );
@@ -114,11 +127,11 @@ const ImageTile = ({ imgUrl, created_at, isSelected, onClick }: ImageTileProps) 
       <div
         className={clsx(
           'absolute inset-0 rounded-md border transition-all group-hover:border-surface-7',
-          isSelected ? 'border-primary-10' : 'border-surfaceA-2',
+          isSelected ? 'border-primary-12 group-hover:border-primary-12' : 'border-surfaceA-2',
         )}
       />
-      <div className="up group absolute inset-0 flex flex-col justify-end text-xs opacity-10 transition-opacity group-hover:opacity-100">
-        <p className="relative px-2 py-2 text-xs text-text-subtle">
+      <div className="up group absolute inset-0 flex flex-col justify-end text-xs opacity-50 transition-opacity group-hover:opacity-100">
+        <p className="relative px-2 py-1.5 text-xs text-text-subtle">
           <TimeSince format="ago" time={created_at} />
         </p>
       </div>
