@@ -2033,24 +2033,32 @@ export class ComfyApp {
   }
 
   #formatPromptError(error) {
-    if (error == null) {
-      return '(unknown error)';
-    } else if (typeof error === 'string') {
-      return error;
-    } else if (error.stack && error.message) {
-      return error.toString();
-    } else if (error.response) {
-      let message = error.response.error.message;
-      if (error.response.error.details) message += ': ' + error.response.error.details;
-      for (const [nodeID, nodeError] of Object.entries(error.response.node_errors)) {
-        message += '\n' + nodeError.class_type + ':';
-        for (const errorReason of nodeError.errors) {
-          message += '\n    - ' + errorReason.message + ': ' + errorReason.details;
+    let result;
+    try {
+      if (error == null) {
+        result = '(Unknown Error #2039)';
+      } else if (typeof error === 'string') {
+        result = error;
+      } else if (error.stack && error.message && error.toString) {
+        result =  error.toString();
+      } else if (error.response) {
+        let message = error.response.error.message;
+        if (error.response.error.details) message += ': ' + error.response.error.details;
+        for (const [nodeID, nodeError] of Object.entries(error.response.node_errors)) {
+          message += '\n' + nodeError.class_type + ':';
+          for (const errorReason of nodeError.errors) {
+            message += '\n    - ' + errorReason.message + ': ' + errorReason.details;
+          }
         }
+        result = message;
       }
-      return message;
+    } catch(err2) {
+      result = `Error: ${error}`;
     }
-    return '(unknown error)';
+    finally {
+      console.error(result);
+      return result;
+    }
   }
 
   #formatExecutionError(error) {
