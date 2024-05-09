@@ -990,7 +990,7 @@ export var LiteGraph = new class {
     closeAllContextMenus = (ref_window) => {
         console.log(`
             LiteGraph.closeAllContextMenus is deprecated 
-            and will be removed after 2024-07-01.  
+            and will be removed in the next version upgrade!  
             Please use ContextMenu.closeAll`);
         ContextMenu.closeAll(ref_window);
     }
@@ -1000,8 +1000,8 @@ export var LiteGraph = new class {
     pointerListenerAdd = (oDOM, sEvIn, fCall, capture=false) => {
         console.log(
             `LiteGraph.pointerListenerAdd is deprecated
-            and will be removed any time after 2024-07-01
-            Please use EventTarget.prototype.addEventListener`
+            and will be removed in the next version upgrade!
+            Please use Element.prototype.addEventListener()`
         );
     
         if (!oDOM || !oDOM.addEventListener || !sEvIn || typeof fCall!=="function"){
@@ -1071,8 +1071,8 @@ export var LiteGraph = new class {
     pointerListenerRemove = (oDOM, sEvent, fCall, capture=false) => {
         console.log(
             `LiteGraph.pointerListenerRemove is deprecated
-            and will be removed any time after 2024-07-01.
-            Please use EventTarget.prototype.removeEventListener`
+            and will be removed in the next version upgrade!
+            Please use Element.prototype.removeEventListener`
         );
     
         if (!oDOM || !oDOM.removeEventListener || !sEvent || typeof fCall!=="function"){
