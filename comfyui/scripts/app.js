@@ -2057,12 +2057,19 @@ export class ComfyApp {
     if (error == null) {
       return '(unknown error)';
     }
-
-    const traceback = error.traceback?.join('');
-    const nodeId = error.node_id;
-    const nodeType = error.node_type;
-
-    return `Error occurred when executing ${nodeType}:\n\n${error.exception_message}\n\n${traceback}`;
+    let result;
+    try {
+      const traceback = error.traceback?.join('');
+      const nodeId = error.node_id;
+      const nodeType = error.node_type;
+      result = `Error occurred when executing ${nodeType}:\n\n${error.exception_message}\n\n${traceback}`;
+    } catch(err2) {
+      result = `Error: ${error}`;
+    }
+    finally {
+      console.error(result);
+      return result;
+    }
   }
 
   async queuePrompt(number, batchCount = 1) {
