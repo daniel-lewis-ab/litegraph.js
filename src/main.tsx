@@ -17,6 +17,7 @@ if (import.meta.env.MODE === 'production') {
     trackResources: true,
     trackLongTasks: true,
     defaultPrivacyLevel: 'mask-user-input',
+    version: __COMMIT_HASH__,
   });
 }
 

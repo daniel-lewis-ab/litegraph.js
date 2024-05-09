@@ -20,3 +20,6 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+// Globals
+declare const __COMMIT_HASH__: string;
