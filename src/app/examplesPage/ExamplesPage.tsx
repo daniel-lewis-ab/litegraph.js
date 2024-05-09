@@ -18,7 +18,7 @@ const ExamplesPage = () => {
             <h1 className="text-5xl font-medium">{page.h1}</h1>
             <h2 className="text-xl text-text-muted">{page.h2}</h2>
           </div>
-          <ul className="gap-4 *:mb-2 md:grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 xl:gap-12">
+          <ul className="gap-4 *:mb-2  md:grid md:grid-cols-2 md:*:mb-0 lg:grid-cols-2 xl:grid-cols-4">
             {page.examples?.map((example) => {
               return <ExampleTile key={example.title} example={example} />;
             })}
@@ -55,18 +55,17 @@ const examplesPageQuery = `
           author
           id
           slug
-          seo: _seoMetaTags {
-            attributes
-            content
-            tag
+          nodeCount
+          categories {
+            title
+            id
           }
-          tags
           assets {
             title
             alt
             filename
             url
-            thumb: responsiveImage(imgixParams: { fit: crop, w: 240, h: 135, fit: crop, auto: format, fm: jpg }) {
+            thumb: responsiveImage(imgixParams: { w: 1024, fit: crop, auto: format, fm: jpg }) {
               srcSet
               webpSrcSet
               sizes
@@ -77,19 +76,8 @@ const examplesPageQuery = `
               alt
               title
               base64
-            }
-            full: responsiveImage(imgixParams: { w: 1920, h: 1080, fit: crop, auto: format, fm: jpg }) {
-              srcSet
-              webpSrcSet
-              sizes
-              src
-              width
-              height
-              aspectRatio
-              alt
-              title
-              base64
-          }
+         
+          }           
         }
       }
     }

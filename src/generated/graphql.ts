@@ -125,13 +125,14 @@ export type ExampleModelFilter = {
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
   assets?: InputMaybe<GalleryFilter>;
   author?: InputMaybe<StringFilter>;
+  categories?: InputMaybe<LinksFilter>;
   description?: InputMaybe<TextFilter>;
   id?: InputMaybe<ItemIdFilter>;
   json?: InputMaybe<JsonFilter>;
   link?: InputMaybe<StringFilter>;
+  nodeCount?: InputMaybe<IntegerFilter>;
   seo?: InputMaybe<SeoFilter>;
   slug?: InputMaybe<SlugFilter>;
-  tags?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
@@ -158,13 +159,13 @@ export enum ExampleModelOrderBy {
   IdDesc = 'id_DESC',
   LinkAsc = 'link_ASC',
   LinkDesc = 'link_DESC',
-  TagsAsc = 'tags_ASC',
-  TagsDesc = 'tags_DESC',
+  NodeCountAsc = 'nodeCount_ASC',
+  NodeCountDesc = 'nodeCount_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC'
 }
 
-/** Record of type Example (example) */
+/** Record of type Example Workflow (example) */
 export type ExampleRecord = RecordInterface & {
   __typename?: 'ExampleRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -182,24 +183,25 @@ export type ExampleRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   assets: Array<FileField>;
   author?: Maybe<Scalars['String']['output']>;
+  categories: Array<WorkflowCategoryRecord>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   json?: Maybe<Scalars['JsonField']['output']>;
   link?: Maybe<Scalars['String']['output']>;
+  nodeCount?: Maybe<Scalars['IntType']['output']>;
   seo?: Maybe<SeoField>;
   slug: Scalars['String']['output'];
-  tags?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
 };
 
 
-/** Record of type Example (example) */
+/** Record of type Example Workflow (example) */
 export type ExampleRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
 
-/** Record of type Example (example) */
+/** Record of type Example Workflow (example) */
 export type ExampleRecordDescriptionArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -1876,6 +1878,24 @@ export type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
+/** Specifies how to filter Integer fields */
+export type IntegerFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars['IntType']['input']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records with a value that's strictly greater than the one specified */
+  gt?: InputMaybe<Scalars['IntType']['input']>;
+  /** Filter records with a value that's greater than or equal to the one specified */
+  gte?: InputMaybe<Scalars['IntType']['input']>;
+  /** Filter records with a value that's less than the one specified */
+  lt?: InputMaybe<Scalars['IntType']['input']>;
+  /** Filter records with a value that's less or equal than the one specified */
+  lte?: InputMaybe<Scalars['IntType']['input']>;
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars['IntType']['input']>;
+};
+
 /** Specifies how to filter by ID */
 export type ItemIdFilter = {
   /** Search the record with the specified ID */
@@ -1898,6 +1918,20 @@ export enum ItemStatus {
 export type JsonFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
+/** Specifies how to filter Multiple-links fields */
+export type LinksFilter = {
+  /** Filter records linked to all of the specified records. The specified values must be Record IDs */
+  allIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
+  /** Filter records linked to at least one of the specified records. The specified values must be Record IDs */
+  anyIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
+  /** Search for records with an exact match. The specified values must be Record IDs */
+  eq?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records not linked to any of the specified records. The specified values must be Record IDs */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
 };
 
 export enum MuxThumbnailFormatType {
@@ -1941,6 +1975,8 @@ export type Query = {
   _allRtbsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allWorkflowCategoriesMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
   /** Returns the single instance record */
@@ -1951,6 +1987,8 @@ export type Query = {
   allRtbs: Array<RtbRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
+  /** Returns a collection of records */
+  allWorkflowCategories: Array<WorkflowCategoryRecord>;
   /** Returns a specific record */
   example?: Maybe<ExampleRecord>;
   /** Returns the single instance record */
@@ -1961,6 +1999,8 @@ export type Query = {
   rtb?: Maybe<RtbRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
+  /** Returns a specific record */
+  workflowCategory?: Maybe<WorkflowCategoryRecord>;
 };
 
 
@@ -1981,6 +2021,13 @@ export type Query_AllRtbsMetaArgs = {
 /** The query root for this schema */
 export type Query_AllUploadsMetaArgs = {
   filter?: InputMaybe<UploadFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllWorkflowCategoriesMetaArgs = {
+  filter?: InputMaybe<WorkflowCategoryModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -2033,6 +2080,17 @@ export type QueryAllUploadsArgs = {
 
 
 /** The query root for this schema */
+export type QueryAllWorkflowCategoriesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<WorkflowCategoryModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<WorkflowCategoryModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
 export type QueryExampleArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<ExampleModelFilter>;
@@ -2070,6 +2128,15 @@ export type QueryUploadArgs = {
   filter?: InputMaybe<UploadFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryWorkflowCategoryArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<WorkflowCategoryModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<WorkflowCategoryModelOrderBy>>>;
 };
 
 export type RecordInterface = {
@@ -2704,6 +2771,70 @@ export enum VideoMp4Res {
   Low = 'low',
   Medium = 'medium'
 }
+
+export type WorkflowCategoryModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<WorkflowCategoryModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<WorkflowCategoryModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export enum WorkflowCategoryModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+/** Record of type Workflow Category (workflow_category) */
+export type WorkflowCategoryRecord = RecordInterface & {
+  __typename?: 'WorkflowCategoryRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** Record of type Workflow Category (workflow_category) */
+export type WorkflowCategoryRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
 
 export type FocalPoint = {
   __typename?: 'focalPoint';

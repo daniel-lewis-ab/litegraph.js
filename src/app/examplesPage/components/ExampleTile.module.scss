@@ -1,0 +1,7 @@
+.cardDetail {
+  background: rgba(43, 41, 41, 0.5);
+  backdrop-filter: blur(4px);
+  @apply rounded-full px-2 py-1;
+  @apply font-mono text-xs uppercase tracking-tighter;
+  z-index: 1;
+}
