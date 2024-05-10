@@ -53,7 +53,7 @@ export const NewWorkflowPage = ({ onSubmit }: NewWorkflowPageProps) => {
             color="secondary"
             variant="ringed"
             className="mr-4 flex-1"
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(routes.workflows)}
           >
             Cancel
           </Button>

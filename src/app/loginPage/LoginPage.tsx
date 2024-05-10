@@ -1,7 +1,7 @@
 import { useAuth } from '@/hooks/useAuth/useAuth';
 import { FirebaseError } from '@firebase/util';
 import { toast } from 'react-hot-toast';
-import { NavLink, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Navigate, useLocation } from 'react-router-dom';
 
 import { PostLoginResponse } from '@/api/types';
 import { CLEAR_TOKENS, SET_TOKENS } from '@/context/authContext/authReducer';
@@ -23,18 +23,11 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
     state: { isAuthorized },
     dispatch,
   } = useAuth();
-  const navigate = useNavigate();
-
   const location = useLocation();
-  let redirect = routes.workflows;
-
-  const from = location.state?.from || '/default-path';
-  if (from.pathname?.includes('/app/workflows/new/')) {
-    redirect = routes.examples;
-  }
 
   if (isAuthorized) {
-    return <Navigate to={redirect} />;
+    const redirectPath = location.state?.from || routes.workflows;
+    return <Navigate to={redirectPath} />;
   }
 
   const handleLogin = async (source: 'github' | 'google') => {
@@ -42,7 +35,6 @@ export const LoginPage = ({ onLogin }: LoginPageProps) => {
       const tokens = await onLogin(source);
 
       dispatch({ type: SET_TOKENS, accessToken: tokens?.access, refreshToken: tokens?.refresh });
-      navigate(redirect, { replace: true });
     } catch (error) {
       if (error instanceof FirebaseError) {
         if (error.code === 'auth/account-exists-with-different-credential') {

@@ -8,7 +8,7 @@ export const AuthorizedRoute = ({ children }: { children: React.ReactNode }) => 
   const {
     state: { isAuthorized, isAuthorizing },
   } = useAuth();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   if (isAuthorizing) {
     return (
@@ -27,7 +27,7 @@ export const AuthorizedRoute = ({ children }: { children: React.ReactNode }) => 
         <Head>
           <meta name="robots" content="noindex, nofollow" />
         </Head>
-        <Navigate to={routes.login} state={{ from: location }} replace />
+        <Navigate to={routes.login} state={{ from: pathname }} replace />
       </>
     );
   }
