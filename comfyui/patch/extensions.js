@@ -132,5 +132,10 @@ export const extensions = [
     "/extensions/cg-use-everywhere/use_everywhere_utilities.js",
     "/extensions/cg-use-everywhere/use_everywhere_classes.js",
     "/extensions/cg-use-everywhere/use_everywhere_autocreate.js",
-    "/extensions/cg-use-everywhere/use_everywhere_nodes.js"
+    "/extensions/cg-use-everywhere/use_everywhere_nodes.js",
+    "/extensions/ComfyUI-N-Sidebar/js/sidebar_node.js", 
+    "/extensions/ComfyUI-N-Sidebar/js/fts_fuzzy_match.js", 
+    "/extensions/ComfyUI-N-Sidebar/js/functions/utils.js", 
+    "/extensions/ComfyUI-N-Sidebar/js/functions/sb_fn.js", 
+    "/extensions/ComfyUI-N-Sidebar/js/functions/settings.js"
 ]

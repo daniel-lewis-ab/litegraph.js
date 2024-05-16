@@ -1,0 +1,11 @@
+[
+    {
+        "id": "custom_view",
+        "icon": "⧉",
+        "description": "Custom Node Categories",
+        "panels": [
+            "custom_categories"
+        ]
+    }
+   
+]
