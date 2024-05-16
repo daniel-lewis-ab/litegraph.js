@@ -1,5 +1,6 @@
 'use strict';
 import { extensions } from './extensions.js';
+import { devExtensions } from './dev-extensions.js';
 import { nodeDefinitions } from './object_info.js';
 import { opaque } from './opaque.js';
 
@@ -440,7 +441,10 @@ class ComfyGraphPatcher extends EventTarget {
   };
 
   getExtensions = async () => {
-    const ext = extensions.filter((path) => !path.endsWith('impact-sam-editor.js')).map((path) => path);
+    let ext = extensions.filter((path) => !path.endsWith('impact-sam-editor.js')).map((path) => path);
+    if (!this.isProduction()) {
+      ext = ext.concat(devExtensions);
+    }
     return ext;
   };
 
@@ -568,6 +572,10 @@ class ComfyGraphPatcher extends EventTarget {
   getUserConfig = async () => ({ storage: 'browser', migrated: true });
 
   storeSetting = async () => this.createResponse({});
+
+  isProduction = () => {
+    return window.location.host === 'iframe.getsalt.ai';
+  };
 
   createIFrameCommunication = (isReconnect) => {
     let opened = false;

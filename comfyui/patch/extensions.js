@@ -125,6 +125,7 @@ export const extensions = [
     "/extensions/ComfyUI-Impact-Pack/common.js",
     "/extensions/ComfyUI-Impact-Pack/impact-image-util.js",
     "/extensions/saltai_displayany/display_any.js",
+    "/extensions/SaltAI/help_button.js",
     "/extensions/ComfyUI-AnimateDiff-Evolved/js/gif_preview.js",
     "/extensions/cg-use-everywhere/use_everywhere_apply.js",
     "/extensions/cg-use-everywhere/use_everywhere_ui.js",
@@ -133,9 +134,4 @@ export const extensions = [
     "/extensions/cg-use-everywhere/use_everywhere_classes.js",
     "/extensions/cg-use-everywhere/use_everywhere_autocreate.js",
     "/extensions/cg-use-everywhere/use_everywhere_nodes.js",
-    "/extensions/ComfyUI-N-Sidebar/js/sidebar_node.js", 
-    "/extensions/ComfyUI-N-Sidebar/js/fts_fuzzy_match.js", 
-    "/extensions/ComfyUI-N-Sidebar/js/functions/utils.js", 
-    "/extensions/ComfyUI-N-Sidebar/js/functions/sb_fn.js", 
-    "/extensions/ComfyUI-N-Sidebar/js/functions/settings.js"
 ]
