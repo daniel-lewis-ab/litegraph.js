@@ -1,12 +1,16 @@
-import { ExecutionErrorData, WebSocketMessage } from '@/api/types';
+import { ExecutionErrorData, WebSocketLoggingData, LogData, WebSocketMessage } from '@/api/types';
 import { useEffect, useState } from 'react';
 import { useWebSocket } from '../useWebsocket/useWebsocket';
 
 export const useWorkflowExecutionWsLogs = () => {
   const { lastMessage } = useWebSocket();
-  const [logs, setLogs] = useState<string[]>([]);
+  const [logs, setLogs] = useState<LogData[]>([]);
 
   useEffect(() => {
+    const addLog = (log: LogData) => {
+      setLogs((prevLogs) => [...prevLogs, log]);
+    };
+
     const handleWebsocketMessage = (message: WebSocketMessage | null) => {
       if (!message?.data) return;
 
@@ -17,7 +21,21 @@ export const useWorkflowExecutionWsLogs = () => {
       if (message.data.type === 'execution_error') {
         const data = (message.data as ExecutionErrorData).data;
         if (data && data.error_message?.length > 0) {
-          setLogs([data.error_message]);
+          const log: LogData = {
+            message: data.error_message,
+            logger_name: 'salt',
+            level: 'ERROR',
+            filename: 'salt',
+            module: 'salt',
+          };
+          addLog(log);
+        }
+      }
+
+      if (message.data.type === 'salt.logging') {
+        const data = (message.data as WebSocketLoggingData).data;
+        if (data && data.message?.length > 0) {
+          addLog(data);
         }
       }
     };

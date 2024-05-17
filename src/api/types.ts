@@ -187,6 +187,19 @@ export type PreviewExecutionData = {
   };
 };
 
+export type WebSocketLoggingData = {
+  type: 'salt.logging';
+  data: LogData;
+};
+
+export type LogData = {
+  message: string;
+  logger_name: string;
+  level: string;
+  filename: string;
+  module: string;
+};
+
 type GeneralIframeMessageData = { data: object; type: string };
 
 export type ParsedComfyUIExecutionError = {
@@ -207,7 +220,8 @@ export type WebSocketMessage = {
     | ExecutionFinishedData
     | PreviewExecutionData
     | ExecutionStartData
-    | ExecutionErrorData;
+    | ExecutionErrorData
+    | WebSocketLoggingData;
   action: 'artcraft_status' | 'send_response';
   response_status: number;
 };

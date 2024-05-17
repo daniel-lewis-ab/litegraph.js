@@ -12,12 +12,13 @@ import { WorkflowEditorSidebar } from './components/workflowEditorSidebar/Workfl
 import { EditorErrorNotification } from './components/workflowEditorSidebar/components/EditorErrorNotification';
 import { EditorLogs } from './components/workflowEditorSidebar/components/EditorLogs';
 import { EditorSideActionsBar } from './components/workflowEditorSidebar/components/EditorSideActionsBar';
+import { LogData } from '@/api/types';
 
 type WorkflowEditorPageProps = {
   workflowId: string;
   workflowName: string;
   workflowsRunningCount?: number;
-  logs: string[];
+  logs: LogData[];
   onCreateNewWorkflowExecution(): Promise<void>;
   onSaveWorkflow(): void;
 };
@@ -45,8 +46,7 @@ export const WorkflowEditorPage = ({
   };
 
   useEffect(() => {
-    // @TODO: Update to filter only specific error logs when we have them
-    const hasErrors = logs.length > 0;
+    const hasErrors = logs.some((log) => log.level.toUpperCase() === 'ERROR');
     setIsErrorNotificationVisible(hasErrors);
   }, [logs]);
 
