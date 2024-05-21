@@ -134,6 +134,7 @@ export type ExampleModelFilter = {
   seo?: InputMaybe<SeoFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
+  workflow?: InputMaybe<FileFilter>;
 };
 
 export enum ExampleModelOrderBy {
@@ -192,6 +193,7 @@ export type ExampleRecord = RecordInterface & {
   seo?: Maybe<SeoField>;
   slug: Scalars['String']['output'];
   title?: Maybe<Scalars['String']['output']>;
+  workflow: FileField;
 };
 
 
@@ -398,6 +400,20 @@ export type FileFieldInterfaceUrlArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
 };
 
+/** Specifies how to filter Single-file/image fields */
+export type FileFilter = {
+  /** Search for records with an exact match. The specified value must be an Upload ID */
+  eq?: InputMaybe<Scalars['UploadId']['input']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']['input']>;
+  /** Filter records that have one of the specified uploads */
+  in?: InputMaybe<Array<InputMaybe<Scalars['UploadId']['input']>>>;
+  /** Exclude records with an exact match. The specified value must be an Upload ID */
+  neq?: InputMaybe<Scalars['UploadId']['input']>;
+  /** Filter records that do not have one of the specified uploads */
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']['input']>>>;
+};
+
 /** Specifies how to filter Multiple files/images field */
 export type GalleryFilter = {
   /** Filter records that have all of the specified uploads. The specified values must be Upload IDs */
@@ -438,7 +454,7 @@ export type HomePageRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   callToAction: Scalars['String']['output'];
-  callToActionLink: Scalars['String']['output'];
+  examples: Array<ExampleRecord>;
   h1: Scalars['String']['output'];
   h2: Scalars['String']['output'];
   id: Scalars['ItemId']['output'];

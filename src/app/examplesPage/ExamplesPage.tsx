@@ -1,8 +1,9 @@
 import { ExamplesPageRecord } from '@/generated/graphql';
+import { ExampleTile } from '@/shared/components/exampleTile/ExampleTile';
 import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
 import { fetchDatoCmsData } from '@/shared/functions/fetchDatoCmsData';
 import { useLoaderData } from 'react-router-dom';
-import { ExampleTile } from './components/ExampleTile';
+import './ExamplesPage.css';
 
 const ExamplesPage = () => {
   const data = useLoaderData() as { page: ExamplesPageRecord } | undefined;
@@ -56,6 +57,9 @@ const examplesPageQuery = `
           id
           slug
           nodeCount
+          workflow {
+            url
+          }
           categories {
             title
             id
@@ -65,6 +69,13 @@ const examplesPageQuery = `
             alt
             filename
             url
+            video {
+              muxPlaybackId
+              title
+              width
+              height
+              blurUpThumb
+            }
             thumb: responsiveImage(imgixParams: { w: 1024, fit: crop, auto: format, fm: jpg }) {
               srcSet
               webpSrcSet

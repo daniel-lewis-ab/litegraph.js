@@ -3,7 +3,13 @@
   position: relative;
   overflow-x: hidden;
 }
-
+.betaBadge {
+  @apply rounded-full;
+  background: rgba(42, 42, 50, 0.5);
+  @apply backdrop-blur-sm;
+  @apply px-4 py-1.5;
+  font-size: 14px;
+}
 .canvas {
   display: block;
   position: fixed !important;

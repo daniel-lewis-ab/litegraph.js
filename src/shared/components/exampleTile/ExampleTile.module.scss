@@ -1,0 +1,24 @@
+.videoPlayer {
+  --media-object-fit: cover;
+  --controls: none;
+  @apply rounded-lg;
+  @apply h-full w-full;
+}
+
+.cardDetail {
+  background: rgba(43, 41, 41, 0.5);
+  backdrop-filter: blur(4px);
+  @apply rounded-full px-2 py-1;
+  @apply font-mono text-xs uppercase tracking-tighter;
+  z-index: 1;
+}
+
+.exampleCta {
+  position: relative;
+  z-index: 1;
+  @apply bg-primaryA-10;
+  padding: 12px 24px;
+  @apply rounded-lg;
+  @apply backdrop-blur-md;
+  @apply font-medium;
+}

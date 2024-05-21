@@ -11,7 +11,7 @@ import { App } from '../App';
 import AboutPage, { aboutPageLoader } from '../aboutPage/AboutPage';
 import { DeploymentsPageContainer } from '../deploymentsPage/DeploymentsPageContainer';
 import ExamplesPage, { examplesPageLoader } from '../examplesPage/ExamplesPage';
-import { HomePage } from '../homePage/HomePage';
+import { HomePage, homePageLoader } from '../homePage/HomePage';
 import LoginPageContainer from '../loginPage/LoginPageContainer';
 import { NewWorkflowFromExamplePageContainer } from '../newWorkflowFromExamplePage/NewWorkflowFromExamplePageContainer';
 import { NewWorkflowPageContainer } from '../newWorkflowPage/NewWorkflowPageContainer';
@@ -33,6 +33,7 @@ export const appRoutes: RouteRecord[] = [
         index: true,
         Component: HomePage,
         entry: 'src/app/homePage/HomePage.tsx',
+        loader: homePageLoader,
       },
       {
         path: routes.about,

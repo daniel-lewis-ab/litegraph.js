@@ -3,6 +3,7 @@ schema: "https://graphql.datocms.com/"
 headers:
        Authorization: "Bearer ecb4ceebb269c475b374eec6e8b3ce"
        X-Exclude-Invalid: true
+       X-Environment: "staging"
 documents: null
 generates:
   src/generated/graphql.ts:

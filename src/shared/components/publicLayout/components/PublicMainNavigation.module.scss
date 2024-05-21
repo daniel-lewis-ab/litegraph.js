@@ -35,8 +35,8 @@
   width: calc(100vw + 3rem);
   height: calc(100% + 5rem);
   z-index: var(--z-minus);
-  backdrop-filter: blur(5rem) saturate(150%);
-  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(1rem);
+  background-color: rgba(0, 0, 0, 0.66);
 }
 
 .mobileMenuItemLink {

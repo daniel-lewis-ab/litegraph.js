@@ -1,13 +1,16 @@
+import { ExampleRecord, HomePageRecord } from '@/generated/graphql';
 import { useAuth } from '@/hooks/useAuth/useAuth';
 import { useScrollToHash } from '@/hooks/useScrollToHash/useScrollToHash';
 import { routes } from '@/routes/routes';
 import { Button } from '@/shared/components/button/Button';
+import { ExampleTile } from '@/shared/components/exampleTile/ExampleTile';
 import { Icon } from '@/shared/components/icon/Icon';
 import { PublicLayout } from '@/shared/components/publicLayout/PublicLayout';
+import { fetchDatoCmsData } from '@/shared/functions/fetchDatoCmsData';
 import { faArrowUpRight } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import clsx from 'clsx';
 import { Suspense, lazy } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { ClientOnly } from 'vite-react-ssg';
 import s from './HomePage.module.css';
 import img from './images/deploy-discord-min.png';
@@ -17,10 +20,14 @@ import ideImg from './images/promo-ide.jpg';
 const LogoAnimation = lazy(() => import('./components/LogoAnimation'));
 
 export const HomePage = () => {
+  const data = useLoaderData() as { page: HomePageRecord } | undefined;
+
   useScrollToHash();
   const {
     state: { isAuthorized },
   } = useAuth();
+
+  if (!data) return <div>Error occurred</div>;
 
   return (
     <PublicLayout>
@@ -37,15 +44,13 @@ export const HomePage = () => {
           <div className="relative">
             <PublicLayout.Container>
               <div className="flex min-h-[70vh]  flex-col content-center items-center justify-end space-y-6 text-center md:min-h-[50vh] md:justify-center md:pt-[20vh] lg:min-h-[70vh] lg:pt-[33vh]">
-                <div className="rounded-full bg-surfaceA-3 px-6 py-2 text-xl text-surface-11 backdrop-blur-sm">
-                  Salt AI Public Beta
-                </div>
+                <div className={s.betaBadge}>Salt AI Open Beta</div>
                 <h1 className="max-w-2xl text-5xl font-medium leading-[1] text-surface-12 md:text-8xl">
-                  Workflows for the builders
+                  {data.page.h1}
                 </h1>
-                <h2 className={s.sectionBody}>Build AI faster in an open ecosystem designed for scale</h2>
+                <h2 className={s.sectionBody}>{data.page.h2}</h2>
                 <Button size="lg" className="" color="primary" asLink to={routes.login}>
-                  <span className="block px-4">{isAuthorized ? `Start building` : `Start for free`}</span>
+                  <span className="block px-4">{isAuthorized ? data.page.callToAction : `Start for free`}</span>
                 </Button>
               </div>
             </PublicLayout.Container>
@@ -57,6 +62,8 @@ export const HomePage = () => {
           <PublicLayout.AngledSeparator />
           <IDESection />
           <PublicLayout.AngledSeparator />
+          <ExamplesSection examples={data.page.examples} />
+          <PublicLayout.AngledSeparator />
           <TeamSection />
           <BigCardSection />
           <CTASection />
@@ -67,6 +74,28 @@ export const HomePage = () => {
 };
 
 export default HomePage;
+
+const ExamplesSection = ({ examples }: { examples: ExampleRecord[] }) => {
+  return (
+    <Section name="examples" id="examples" className="hidden flex-col space-y-12 md:block">
+      <div className="flex content-center items-center justify-between">
+        <div className="flex flex-col space-y-8">
+          <h2 className={s.sectionTitle}>Start with an example</h2>
+        </div>
+      </div>
+      <div className="gap-4 md:grid md:grid-cols-2 lg:grid-cols-4">
+        {examples.map((example) => {
+          return <ExampleTile key={example.title} example={example} />;
+        })}
+      </div>
+      <div className="text-center">
+        <Button asLink to={routes.examples} color="secondary" variant="ringed" size="lg" className="px-8">
+          Explore examples
+        </Button>
+      </div>
+    </Section>
+  );
+};
 
 const Section = ({
   children,
@@ -220,4 +249,77 @@ const CTASection = () => {
       </div>
     </Section>
   );
+};
+
+export const homePageQuery = `
+  query homePageQuery {
+    site: _site {
+      favicon: faviconMetaTags {
+        attributes
+        content
+        tag
+      }
+    }
+    page: homePage {
+      h1
+      h2
+      callToAction
+      rtbs {
+        title
+        text
+      }
+      seo: _seoMetaTags {
+        attributes
+        content
+        tag
+      }
+      examples {
+        link
+        title
+        description
+        author
+        id
+        slug
+        nodeCount
+        workflow {
+          url
+        }
+        categories {
+          title
+          id
+        }
+        assets {
+          title
+          alt
+          filename
+          url
+          video {
+            muxPlaybackId
+            title
+            width
+            height
+            blurUpThumb
+          }
+          thumb: responsiveImage(imgixParams: { w: 1024, fit: crop, auto: format, fm: jpg }) {
+            srcSet
+            webpSrcSet
+            sizes
+            src
+            width
+            height
+            aspectRatio
+            alt
+            title
+            base64
+          }           
+        }
+      }
+    }
+  }`;
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const homePageLoader = async () => {
+  const res = await fetchDatoCmsData(homePageQuery);
+
+  return res.data;
 };
