@@ -106,7 +106,7 @@ const ImageTile = ({ imgUrl, created_at, onDoubleClick }: ImageTileProps) => {
 const VideoTile = ({ videoUrl, onDoubleClick }: VideoTileProps) => {
   return (
     <div onDoubleClick={onDoubleClick} className="aspect-square">
-      <video className="h-full object-contain">
+      <video className="h-full object-contain" controls={true} loop={true}>
         <source src={videoUrl} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
