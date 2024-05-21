@@ -1,0 +1,20 @@
+.tileGradient {
+  background-image: linear-gradient(to bottom, transparent, #101014 100%);
+}
+
+.outputGalleryTile {
+  @apply rounded-lg bg-surface-1;
+  @apply rounded-lg border border-border-muted;
+  display: block;
+  cursor: pointer;
+  transition: 0.3s border;
+  img,
+  video {
+    @apply rounded-lg;
+  }
+
+  &:hover,
+  &Selected {
+    @apply border-border-bright;
+  }
+}

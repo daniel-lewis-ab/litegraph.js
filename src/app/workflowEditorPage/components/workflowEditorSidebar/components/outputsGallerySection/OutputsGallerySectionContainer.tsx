@@ -8,7 +8,6 @@ import { faImages } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import toast from 'react-hot-toast';
 import { EditorSection } from '../EditorSection';
 import { OutputsGallerySection } from './OutputsGallerySection';
-import './OutputsGallerySection.scss';
 
 type OutputsGalleryGridContainerProps = {
   workflowId: string;

@@ -1,0 +1,17 @@
+.ContextMenuContent {
+  @apply bg-surface-3 transition-all;
+  transform-origin: var(--radix-content-menu-content-transform-origin);
+  animation: scaleIn 0.32s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
