@@ -23,9 +23,16 @@ export type CreateDeploymentDialogProps = {
   onClose: () => void;
 };
 
+const errorMessage: Record<string, string> = {
+  deployment_validation_error: 'The most recent job execution must be successful in order to proceed with deployment',
+  deployment_workflow_version_exists_error: 'This workflow version is already deployed, please choose another one',
+};
+
 export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }: CreateDeploymentDialogProps) => {
   const [operationStatus, setOperationStatus] = useState<null | 'success' | 'error'>('success');
-  const [errorCode, setErrorCode] = useState<'deployment_validation_error' | string | null>(null);
+  const [errorCode, setErrorCode] = useState<
+    'deployment_validation_error' | 'deployment_workflow_version_exists_error' | string | null
+  >(null);
   const {
     register,
     handleSubmit,
@@ -142,9 +149,8 @@ export const CreateDeploymentDialog = ({ isOpen, workflowId, onSubmit, onClose }
     <WarningDialogContent
       title="Deployment Failed"
       desc={
-        errorCode === 'deployment_validation_error'
-          ? 'The most recent job execution must be successful in order to proceed with deployment'
-          : 'Ensure that all models/checkpoints are accessible and your workflow is stable.'
+        (errorCode && errorMessage[errorCode]) ??
+        'Ensure that all models/checkpoints are accessible and your workflow is stable.'
       }
     >
       <Button variant="filled" color="error" className="w-full" onClick={onClose}>
