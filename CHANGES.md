@@ -45,3 +45,21 @@ This fork takes the 2011-2014 code for LiteGraph and renews it.
 ## Breaking
 
 * Integrated Atlasan's fork
+* Shifted classes and file structure to:
+
+```
+Lite
+    .Graph
+    .Node
+    .Link
+    .ContextMenu
+```
+
+Can now import just Lite to get above
+
+```
+Editor
+CurveEditor
+```
+
+Have also had their files renamed.
