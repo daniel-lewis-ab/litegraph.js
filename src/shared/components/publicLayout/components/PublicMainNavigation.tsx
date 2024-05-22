@@ -44,7 +44,9 @@ const PublicMobileMenu = ({ show }: { show: boolean }) => {
               animate={{ opacity: show ? 1 : 0, x: show ? 0 : 24 }}
               transition={{ delay: 0.3 + i * 0.06 }}
             >
-              <NavLink to={item.href}>{item.label}</NavLink>
+              <NavLink to={item.href} target={item.href.startsWith('http') ? '_blank' : undefined}>
+                {item.label}
+              </NavLink>
             </motion.div>
           ))}
         </div>
@@ -69,6 +71,8 @@ const PublicMobileMenu = ({ show }: { show: boolean }) => {
                   href={item.href}
                   className="flex aspect-square h-12 w-12 content-center items-center justify-center rounded-lg border border-border-base hover:border-border-bright hover:bg-surface-3 lg:h-10 lg:w-10"
                   title={item.title}
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
+                  rel="noreferrer"
                 >
                   <Icon size={24} icon={item.icon} />
                 </a>
@@ -109,6 +113,7 @@ export const PublicMainNavigation = () => {
                 <NavLink
                   key={item.label}
                   to={item.href}
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
                   className={({ isActive }) => (isActive ? 'active' : 'text-text-muted hover:text-text-base')}
                 >
                   {item.label}

@@ -22,11 +22,22 @@ export const PublicFooter = () => {
                       {value.map((item, i) => (
                         <li key={i}>
                           {item.href.endsWith('pdf') ? (
-                            <a href={item.href} className="text-base font-medium hover:opacity-80" title={item.label}>
+                            <a
+                              href={item.href}
+                              target="_blank"
+                              className="text-base font-medium hover:opacity-80"
+                              title={item.label}
+                              rel="noreferrer"
+                            >
                               {item.label}
                             </a>
                           ) : (
-                            <Link to={item.href} className="text-base font-medium hover:opacity-80" title={item.label}>
+                            <Link
+                              to={item.href}
+                              target={item.href.startsWith('http') ? '_blank' : undefined}
+                              className="text-base font-medium hover:opacity-80"
+                              title={item.label}
+                            >
                               {item.label}
                             </Link>
                           )}
