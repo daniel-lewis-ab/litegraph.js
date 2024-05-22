@@ -922,6 +922,9 @@ export class Node {
                     // -- wrapping node.onExecute(param); --
                     node.doExecute(param, options); // @BUG: Possible misname here
                 }
+            /*} else if (node.mode === LiteGraph.ON_EVENT) {
+                // this expect to have onAction be SET, so we check that
+			*/
             } else if (node.onAction) {
                 // generate unique action ID if not present
                 if (!options.action_call) options.action_call = `${this.id}_act_${Math.floor(Math.random()*9999)}`;
@@ -2492,7 +2495,7 @@ export class Node {
             typesOnly: [],
         };
         var aAncestors = this.graph.getAncestors(this,optsAncestors);
-        for(iN in aAncestors) {
+        for(var iN in aAncestors) {
             aAncestors[iN].doExecute(opts.param, opts.options);
             this.graph.node_ancestorsCalculated[aAncestors[iN].id] = true;
         }

@@ -327,6 +327,8 @@ export class Canvas {
             return;
         }
 
+        canvas.lgraphcanvas = this; // place a reference to the Lite.GraphCanvas in the correpsonding DOM object 
+
         // this.canvas.tabindex = "1000";
         canvas.className += " lgraphcanvas";
         canvas.data = this;
@@ -444,15 +446,7 @@ export class Canvas {
     }
 
     static getFileExtension(url) {
-        const urlObj = new URL(url);
-        const path = urlObj.pathname;
-        const lastDotIndex = path.lastIndexOf(".");
-
-        if (lastDotIndex === -1) {
-            return "";
-        }
-
-        return path.slice(lastDotIndex + 1).toLowerCase();
+        return (url+"").slice(((url+"").lastIndexOf(".") - 1 >>> 0) + 2).toLowerCase();
     }
 
     /**
@@ -7201,7 +7195,7 @@ export class Canvas {
         let graphcanvas;
         if(this.constructor && this.constructor.name == "HTMLDivElement") {
             // assume coming from the menu event click
-            if (! obEv?.event?.target?.lgraphcanvas) {
+            if (! obEv?.event?.target?.lgraphcanvas ) {
                 console.warn("References not found to add optionPanel",refOpts, obEv); // need a ref to canvas obj
                 if (Lite.debug)
                     console.debug("!obEv || !obEv.event || !obEv.event.target || !obEv.event.target.lgraphcanvas",obEv,obEv.event,obEv.event.target,obEv.event.target.lgraphcanvas);
@@ -7214,7 +7208,7 @@ export class Canvas {
         }
         graphcanvas.closePanels();
         var ref_window = graphcanvas.getCanvasWindow();
-        panel = graphcanvas.createPanel("Options",{
+        var panel = graphcanvas.createPanel("Options",{
             closable: true,
             window: ref_window,
             onOpen: function() {

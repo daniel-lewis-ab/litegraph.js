@@ -236,6 +236,7 @@ class logicFor {
         // this.addInput("reset", Lite.ACTION);
         this.addOutput("do", Lite.EVENT);
         this.addOutput("index", "number");
+        this.mode = Lite.ON_EVENT;
         this.started = false;
         this.stopped = false;
     }
@@ -247,14 +248,16 @@ class logicFor {
         if (!this.started) return;
         var iI = this.getInputData(0);
         var num = this.getInputData(1);
+        // WIP :: TESTING :: cycling is HERE ? TO ALLOW (CAREFUL) cycling FOR every FRAME or onTrigger
+        // -- (or move in onAction) check cycle WHILE
         for (var k=iI;k<iI+num;k++) {
             console.debug("for cycle "+k);
+            this.setOutputData(1, k);
             this.triggerSlot(0, param);
             if (this.stopped) {
                 console.debug("for cycle stopped on index "+k);
                 break;
             }
-            this.setOutputData(1, k);
         }
         this.started = false;
         this.stopped = true;
@@ -267,15 +270,16 @@ class logicFor {
         switch(action) {
             case "break":
                 this.stopped = true;
-                break;
+            break;
             /* case "reset":
                 this.stopped = false;
             break;*/
             case "do":
                 this.started = true;
                 this.stopped = false;
-                this.execute();
-                break;
+                this.doExecute(param); // old .execute
+                // WIP :: TESTING :: COULD MOVE EXECUTE HERE, or LEAVE THERE TO ALLOW (CAREFUL) cycling FOR every FRAME or onTrigger
+            break;
         }
     }
 }
@@ -284,15 +288,18 @@ Lite.registerNodeType("logic/CycleFOR", logicFor);
 
 class logicWhile {
     constructor() {
-        this.properties = { cycleLimit: 999, checkOnStart: true };
+        // this.properties = { cycleLimit: 999, checkOnStart: true };
         this.addInput("do", Lite.ACTION);
         this.addInput("condition", "boolean");
         this.addInput("break", Lite.ACTION);
         this.addOutput("do", Lite.EVENT);
         this.addOutput("index", "number");
+        this.addProperty("cycleLimit", 999, "number");
+        this.addProperty("checkOnStart", true, "bool");
         this.started = false;
         this.stopped = false;
         this.k = 0;
+        this.setOutputData(1, this.k);
         this.cond = false;
         this.addWidget("toggle","checkOnStart",this.properties.checkOnStart,"checkOnStart");
     }
@@ -303,6 +310,8 @@ class logicWhile {
     onExecute(param) {
         this.setOutputData(1, this.k);
         this.cond = this.getInputData(1);
+        // WIP :: TESTING :: EXECUTION IS ONLY onAction (cant cycle onExecution or onTrigger, just on DO action)
+        // -- check cycle FOR
     }
     onAction(action, param) {
         switch(action) {
@@ -316,12 +325,13 @@ class logicWhile {
                 this.started = true;
                 this.stopped = false;
                 var checkOnStart = this.getInputOrProperty("checkOnStart");
-                this.cond = !checkOnStart || this.getInputData(1);
                 this.k = 0;
-                cycleLimit = this.properties.cycleLimit || 999;
+                this.setOutputData(1, this.k);
+                this.cond = !checkOnStart || this.getInputData(1);
+                var cycleLimit = this.properties.cycleLimit || 999;
+                console.debug(this,"Checking",this.cond,this.getInputData(1));
                 while (this.cond && this.k<cycleLimit) {
                     console.debug("while cycle "+this.k);
-                    this.setOutputData(1, this.k);
                     this.triggerSlot(0, param);
                     // done
                     if (this.stopped) {
@@ -329,6 +339,7 @@ class logicWhile {
                         break;
                     }
                     this.k++;
+                    this.setOutputData(1, this.k);
                     this.cond = this.getInputData(1,true,true);
                 }
                 this.k = 0;

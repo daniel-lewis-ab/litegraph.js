@@ -45,9 +45,9 @@ Lite.use_uuids = false; // why not? maybe not good for comparison?
 /* -- EVENTS PROCESSING METHODS -- */
 
 /* METHOD 1 ANCESTORS : EXECUTING ACTIONS BEFORE THE NEXT FRAME, AFFECTING INPUT NODES WILL BE REPROCESSED */
-Lite.refreshAncestorsOnTriggers = false; //[true!]
-Lite.refreshAncestorsOnActions = false; //[true!]
-Lite.ensureUniqueExecutionAndActionCall = false; //[true!]
+Lite.refreshAncestorsOnTriggers = true; //[true!]
+Lite.refreshAncestorsOnActions = true; //[true!]
+Lite.ensureUniqueExecutionAndActionCall = true; //[true!]
 
 /* METHOD 2 DEFERRED ACTIONS */
-Lite.use_deferred_actions = true; //
+Lite.use_deferred_actions = false; //

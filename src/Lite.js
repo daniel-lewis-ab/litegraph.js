@@ -108,7 +108,7 @@ export var Lite = new class {
         this.catch_exceptions = true;
         this.throw_errors = true;
         this.allow_scripts = false; // if set to true some nodes like Formula would be allowed to evaluate code that comes from unsafe sources (like node configuration), which could lead to exploits
-        this.use_deferred_actions = true; // executes actions during the graph execution flow
+        this.use_deferred_actions = false; // [false if using ancestors execution] executes actions during the graph execution flow
         this.registered_node_types = {}; // nodetypes by string
         this.node_types_by_file_extension = {}; // used for dropping files in the canvas
         this.Nodes = {}; // node types by classname
@@ -136,8 +136,8 @@ export var Lite = new class {
         this.auto_load_slot_types = false; // [if want false, use true, run, get vars values to be statically set, than disable] nodes types and nodeclass association with node types need to be calculated, if dont want this, calculate once and set registered_slot_[in/out]_types and slot_types_[in/out]
 
         // set these values if not using auto_load_slot_types
-        this.registered_slot_in_types = {}; // slot types for nodeclass
-        this.registered_slot_out_types = {}; // slot types for nodeclass
+        this.registered_slot_in_types = {}; // slot types by nodeclass
+        this.registered_slot_out_types = {}; // slot types by nodeclass
         this.slot_types_in = []; // slot types IN
         this.slot_types_out = []; // slot types OUT
         this.slot_types_default_in = []; // specify for each IN slot type a(/many) default node(s), use single string, array, or object (with node, title, parameters, ..) like for search
@@ -168,9 +168,9 @@ export var Lite = new class {
         this.actionHistoryMaxSave = 40;
 
         /* EXECUTING ACTIONS AFTER UPDATING VALUES - ANCESTORS */
-        this.refreshAncestorsOnTriggers = false; // [true!]
-        this.refreshAncestorsOnActions = false; // [true!]
-      	this.ensureUniqueExecutionAndActionCall = false; // [true!] the new tecnique.. let's make it working best of
+        this.refreshAncestorsOnTriggers = true; // [true!]
+        this.refreshAncestorsOnActions = true; // [true!]
+      	this.ensureUniqueExecutionAndActionCall = true; // [true!] the new tecnique.. let's make it working best of
 
         // if true, all newly created nodes/links will use string UUIDs for their id fields instead of integers.
         // use this if you must have node IDs that are unique across all graphs and subgraphs.
