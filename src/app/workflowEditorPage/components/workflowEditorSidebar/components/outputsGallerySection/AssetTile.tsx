@@ -1,6 +1,6 @@
 import { ApiWorkflowOutputAsset } from '@/api/types';
 import { TimeSince } from '@/shared/components/timeSince/TimeSince';
-import { getImageUrl } from '@/shared/functions/getImageUrl';
+import { getAssetUrl } from '@/shared/functions/getImageUrl';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 
@@ -142,7 +142,7 @@ export const AssetTile = ({
     <TextTile
       sliderVal={sliderVal}
       key={asset.id}
-      fileUrl={getImageUrl(asset.storage_path, TILE_IMG_CONFIG)}
+      fileUrl={getAssetUrl(asset.storage_path, TILE_IMG_CONFIG)}
       created_at={asset.created_at}
       isSelected={selectedAssetId === asset.id}
       onDoubleClick={() => onOpenAsset(asset.id)}
@@ -150,7 +150,7 @@ export const AssetTile = ({
   ) : (
     <ImageTile
       key={asset.id}
-      imgUrl={getImageUrl(asset.storage_path, TILE_IMG_CONFIG)}
+      imgUrl={getAssetUrl(asset.storage_path, TILE_IMG_CONFIG)}
       created_at={asset.created_at}
       size={asset.size}
       isSelected={selectedAssetId === asset.id}

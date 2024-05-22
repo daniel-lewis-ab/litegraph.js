@@ -2,8 +2,8 @@ import { useDeleteAssetMutation } from '@/api/hooks/useDeleteAssetMutation/useDe
 import { useFetchExecutionDetailsQuery } from '@/api/hooks/useWorkflowExecutionDetailsQuery/useWorkflowExecutionDetailsQuery';
 import { useWorkflowOutputAssetsQuery } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
 import { CenteredLoader } from '@/shared/components/centeredLoader/CenteredLoader';
-import { getImageUrl } from '@/shared/functions/getImageUrl';
-import { saveImage } from '@/shared/functions/saveImage';
+import { getAssetUrl } from '@/shared/functions/getImageUrl';
+import { saveAsset } from '@/shared/functions/saveImage';
 import { faImages } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import toast from 'react-hot-toast';
 import { EditorSection } from '../EditorSection';
@@ -56,12 +56,14 @@ export const OutputsGalleryGridContainer = ({
   const handleDownloadAsset = async (assetId: string) => {
     try {
       const asset = assets!.find((a) => a.id === assetId)!;
-      const imgUrl = getImageUrl(asset.storage_path);
+      const isVideo = asset.storage_path.includes('.mp4');
+      const assetUrl = isVideo ? asset.asset_url : getAssetUrl(asset.storage_path);
+
       const timeString = new Date(asset.created_at).toLocaleTimeString();
       const dateString = new Date(asset.created_at).toLocaleDateString();
       const fileName = `${workflowName} - ${dateString} ${timeString}`;
 
-      await saveImage(imgUrl, fileName);
+      await saveAsset(assetUrl, fileName);
       toast.success('Asset downloaded', { position: 'bottom-center' });
     } catch (error) {
       toast.error('Failed to download asset', { position: 'bottom-center' });
@@ -70,7 +72,7 @@ export const OutputsGalleryGridContainer = ({
 
   const handleOpenAsset = (assetId: string) => {
     const asset = assets!.find((a) => a.id === assetId)!;
-    open(getImageUrl(asset.storage_path), '_blank');
+    open(getAssetUrl(asset.storage_path), '_blank');
   };
 
   if (isLoading) {

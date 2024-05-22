@@ -3,7 +3,7 @@ type ImgOptions = {
   height?: number;
 };
 
-export const getImageUrl = (filePath: string, { width, height }: ImgOptions = {}) => {
+export const getAssetUrl = (filePath: string, { width, height }: ImgOptions = {}) => {
   const widthParam = width ? `w-${width}` : '';
   const heightParam = height ? `,h-${height}` : '';
 
