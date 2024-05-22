@@ -1,4 +1,4 @@
-import { Lite } from "../litegraph.js";
+import { Lite } from "../Lite.js";
 
 /* in types :: run in console :: var s=""; Lite.slot_types_in.forEach(function(el){s+=el+"\n";}); console.log(s); */
 

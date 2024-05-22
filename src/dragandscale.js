@@ -1,4 +1,4 @@
-import { Lite } from "./litegraph.js";
+import { Lite } from "./Lite.js";
 
 /**
  * Class responsible for handling scale and offset transformations for an HTML element,

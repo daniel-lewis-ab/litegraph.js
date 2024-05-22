@@ -1,4 +1,4 @@
-import { Lite } from "../litegraph.js";
+import { Lite } from "../Lite.js";
 
 const DEG2RAD = 0.0174532925;
 

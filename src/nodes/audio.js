@@ -1,4 +1,4 @@
-import { Lite } from "../litegraph.js";
+import { Lite } from "../Lite.js";
 import { LGraph } from "../lgraph.js";
 
 class LGAudio {

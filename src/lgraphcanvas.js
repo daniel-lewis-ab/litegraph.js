@@ -1,4 +1,4 @@
-import { Lite } from "./litegraph.js";
+import { Lite } from "./Lite.js";
 import { ContextMenu } from "./contextmenu.js";
 import { DragAndScale } from "./dragandscale.js";
 import { LGraphGroup } from "./lgraphgroup.js";

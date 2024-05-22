@@ -1,5 +1,5 @@
 
-import { Lite } from "../litegraph.js";
+import { Lite } from "../Lite.js";
 
 class DOMSelector {
 

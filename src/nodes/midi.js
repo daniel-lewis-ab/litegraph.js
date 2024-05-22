@@ -1,4 +1,4 @@
-import { Lite } from "../litegraph.js";
+import { Lite } from "../Lite.js";
 
 var MIDI_COLOR = "#243";
 

@@ -1,4 +1,4 @@
-import { Lite } from "./litegraph.js";
+import { Lite } from "./Lite.js";
 
 // used by some widgets to render a curve editor
 export class CurveEditor {

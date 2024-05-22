@@ -1,4 +1,4 @@
-import { Lite } from "./litegraph.js";
+import { Lite } from "./Lite.js";
 import { LGraphCanvas } from "./lgraphcanvas.js";
 import { LGraphNode } from "./lgraphnode.js";
 

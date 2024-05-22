@@ -1,5 +1,5 @@
-// Type definitions for litegraph.js 0.7.0
-// Project: litegraph.js
+// Type definitions for Lite.js 0.7.0
+// Project: Lite.js
 // Definitions by: NateScarlet <https://github.com/NateScarlet>
 
 export type Vector2 = [number, number];
@@ -18,7 +18,7 @@ export type SlotShape =
     | typeof Lite.SQUARE_SHAPE
     | number; // For custom shapes
 
-/** https://github.com/jagenjo/litegraph.js/tree/master/guides#node-slots */
+/** https://github.com/jagenjo/Lite.js/tree/master/guides#node-slots */
 export interface INodeSlot {
     name: string;
     type: string | -1;
@@ -72,7 +72,7 @@ export interface IWidget<TValue = any, TOptions = any> {
     ): void;
     /**
      * Called by `LGraphCanvas.processNodeWidgets`
-     * https://github.com/jagenjo/litegraph.js/issues/76
+     * https://github.com/jagenjo/Lite.js/issues/76
      */
     mouse?(
         event: MouseEvent,
@@ -332,7 +332,7 @@ export const Lite: {
 
 export type serializedLGraph<
     TNode = ReturnType<LGraphNode["serialize"]>,
-    // https://github.com/jagenjo/litegraph.js/issues/74
+    // https://github.com/jagenjo/Lite.js/issues/74
     TLink = [number, number, number, number, number, string],
     TGroup = ReturnType<LGraphGroup["serialize"]>
 > = {
@@ -592,7 +592,7 @@ export type SerializedLGraphNode<T extends LGraphNode = LGraphNode> = {
     widgets_values?: IWidget["value"][];
 };
 
-/** https://github.com/jagenjo/litegraph.js/blob/master/guides/README.md#lgraphnode */
+/** https://github.com/jagenjo/Lite.js/blob/master/guides/README.md#lgraphnode */
 export declare class LGraphNode {
     static title_color: string;
     static title: string;
@@ -811,7 +811,7 @@ export declare class LGraphNode {
     /** returns all the info available about a property of this node */
     getPropertyInfo(property: string): object;
     /**
-     * https://github.com/jagenjo/litegraph.js/blob/master/guides/README.md#node-widgets
+     * https://github.com/jagenjo/Lite.js/blob/master/guides/README.md#node-widgets
      * @return created widget
      */
     addWidget<T extends IWidget>(
@@ -913,7 +913,7 @@ export declare class LGraphNode {
     pin(v?: boolean): void;
     localToScreen(x: number, y: number, graphCanvas: LGraphCanvas): Vector2;
 
-    // https://github.com/jagenjo/litegraph.js/blob/master/guides/README.md#custom-node-appearance
+    // https://github.com/jagenjo/Lite.js/blob/master/guides/README.md#custom-node-appearance
     onDrawBackground?(
         ctx: CanvasRenderingContext2D,
         canvas: HTMLCanvasElement
@@ -923,7 +923,7 @@ export declare class LGraphNode {
         canvas: HTMLCanvasElement
     ): void;
 
-    // https://github.com/jagenjo/litegraph.js/blob/master/guides/README.md#custom-node-behaviour
+    // https://github.com/jagenjo/Lite.js/blob/master/guides/README.md#custom-node-behaviour
     onMouseDown?(
         event: MouseEvent,
         pos: Vector2,
@@ -1195,7 +1195,7 @@ export declare class LGraphCanvas {
     last_mouse: Vector2;
     /**
      * Possible duplicated with `last_mouse`
-     * https://github.com/jagenjo/litegraph.js/issues/70
+     * https://github.com/jagenjo/Lite.js/issues/70
      */
     last_mouse_position: Vector2;
     /** Timestamp of last mouse click, defaults to 0 */

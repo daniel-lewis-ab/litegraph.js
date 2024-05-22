@@ -1,4 +1,4 @@
-import { Lite } from "../litegraph.js";
+import { Lite } from "../Lite.js";
 import { LGraphTexture } from "./gltextures.js";
 import { GL } from "../../editor/js/libs/litegl.js";
 import { gl } from "../../editor/js/code.js";

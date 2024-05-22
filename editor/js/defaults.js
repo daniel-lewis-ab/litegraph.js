@@ -1,5 +1,5 @@
 
-import { Lite } from "../../src/litegraph.js";
+import { Lite } from "../../src/Lite.js";
 
 Lite.debug = false;
 Lite.catch_exceptions = true;

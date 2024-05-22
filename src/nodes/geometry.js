@@ -1,4 +1,4 @@
-import { Lite } from "../litegraph.js";
+import { Lite } from "../Lite.js";
 
 // @BUG: Gotta finish cleaning the file up so this doesn't cause the whole thing to crash
 // import { GL } from "../../editor/js/libs/litegl.js";
