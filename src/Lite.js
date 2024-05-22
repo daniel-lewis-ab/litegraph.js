@@ -2,7 +2,7 @@
 import { LGraphNode } from "./lgraphnode.js";
 import { Link } from "./Link.js";
 import { Graph } from "./Graph.js";
-import { Group } from "./lgraphgroup.js";
+import { Group } from "./Group.js";
 
 /**
  * @class Lite
