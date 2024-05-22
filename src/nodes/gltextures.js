@@ -1,9 +1,9 @@
 import { Lite } from "../Lite.js";
-import { LGraphCanvas } from "../renderers/canvas.js";
+import { Canvas } from "../renderers/canvas.js";
 import { GL, Shader } from "../../editor/js/libs/litegl.js";
 import { gl } from "../../editor/js/code.js";
 
-LGraphCanvas.link_type_colors["Texture"] = "#987";
+Canvas.link_type_colors["Texture"] = "#987";
 
 const DEG2RAD = 0.0174532925;
 

@@ -1,5 +1,5 @@
 import { Lite } from "./Lite.js";
-import { LGraphCanvas } from "./renderers/canvas.js";
+import { Canvas } from "./renderers/canvas.js";
 
 /**
  * Graph is the class that contain a full graph. We instantiate one and add nodes to it, and then we can run the execution loop.
@@ -142,8 +142,8 @@ export class Graph {
      * @param {GraphCanvas} graph_canvas
      */
     attachCanvas(graphcanvas) {
-        if (! graphcanvas instanceof LGraphCanvas) {
-            throw new Error("attachCanvas expects a LGraphCanvas instance");
+        if (! graphcanvas instanceof Canvas) {
+            throw new Error("attachCanvas expects a Canvas instance");
         }
         if (graphcanvas.graph && graphcanvas.graph != this) {
             graphcanvas.graph.detachCanvas(graphcanvas);

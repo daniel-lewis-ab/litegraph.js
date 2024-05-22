@@ -11,7 +11,7 @@ import { DragAndScale } from "../dragandscale.js";
  * @param {Lite.Graph} graph [optional]
  * @param {Object} options [optional] { skip_rendering, autoresize, viewport }
  */
-export class LGraphCanvas {
+export class Canvas {
     constructor(canvas, graph, options) {
         options ??= {
             skip_render: false,
@@ -22,7 +22,7 @@ export class LGraphCanvas {
 
         // if(graph === undefined)
         //	throw new Error("No graph assigned");
-        this.background_image = LGraphCanvas.DEFAULT_BACKGROUND_IMAGE;
+        this.background_image = Canvas.DEFAULT_BACKGROUND_IMAGE;
 
         if (canvas && canvas.constructor === String) {
             canvas = document.querySelector(canvas);
@@ -627,7 +627,7 @@ export class LGraphCanvas {
         this.adjustMouseEvent(e);
 
         var ref_window = this.getCanvasWindow();
-        LGraphCanvas.active_canvas = this;
+        Canvas.active_canvas = this;
 
         var x = e.clientX;
         var y = e.clientY;
@@ -1140,7 +1140,7 @@ export class LGraphCanvas {
             return;
         }
 
-        LGraphCanvas.active_canvas = this;
+        Canvas.active_canvas = this;
         this.adjustMouseEvent(e);
         var mouse = [e.clientX, e.clientY];
         this.mouse[0] = mouse[0];
@@ -1393,7 +1393,7 @@ export class LGraphCanvas {
 
         var window = this.getCanvasWindow();
         var document = window.document;
-        LGraphCanvas.active_canvas = this;
+        Canvas.active_canvas = this;
 
         // restore the mousemove event back to the canvas
         if(!this.options.skip_events) {
@@ -2135,7 +2135,7 @@ export class LGraphCanvas {
     checkDropItem(e) {
         if (e.dataTransfer.files.length) {
             var file = e.dataTransfer.files[0];
-            var ext = LGraphCanvas.getFileExtension(file.name).toLowerCase();
+            var ext = Canvas.getFileExtension(file.name).toLowerCase();
             var nodetype = Lite.node_types_by_file_extension[ext];
             if (nodetype) {
                 this.graph.beforeChange();
@@ -3786,9 +3786,9 @@ export class LGraphCanvas {
 
                 //* gradient test
                 if (this.use_gradients) {
-                    var grad = LGraphCanvas.gradients[title_color];
+                    var grad = Canvas.gradients[title_color];
                     if (!grad) {
-                        grad = LGraphCanvas.gradients[title_color] = ctx.createLinearGradient(0, 0, 400, 0);
+                        grad = Canvas.gradients[title_color] = ctx.createLinearGradient(0, 0, 400, 0);
                         grad.addColorStop(0, title_color); // TODO refactor: validate color !! prevent DOMException
                         grad.addColorStop(1, "#000");
                     }
@@ -4162,7 +4162,7 @@ export class LGraphCanvas {
 
         // choose color
         if (!color && link) {
-            color = link.color || LGraphCanvas.link_type_colors[link.type];
+            color = link.color || Canvas.link_type_colors[link.type];
         }
         if (!color) {
             color = this.default_link_color;
@@ -5113,7 +5113,7 @@ export class LGraphCanvas {
     /* CONTEXT MENU ********************/
 
     static onGroupAdd(info, entry, mouse_event) {
-        var canvas = LGraphCanvas.active_canvas;
+        var canvas = Canvas.active_canvas;
         var group = new Lite.Group();
         group.pos = canvas.convertEventToCanvasOffset(mouse_event);
         canvas.graph.add(group);
@@ -5161,7 +5161,7 @@ export class LGraphCanvas {
      * @return {{left: LGraphNode, top: LGraphNode, right: LGraphNode, bottom: LGraphNode}}
      */
     boundaryNodesForSelection() {
-        return LGraphCanvas.getBoundaryNodes(Object.values(this.selected_nodes));
+        return Canvas.getBoundaryNodes(Object.values(this.selected_nodes));
     }
 
     /**
@@ -5175,10 +5175,10 @@ export class LGraphCanvas {
             return;
         }
 
-        const canvas = LGraphCanvas.active_canvas;
+        const canvas = Canvas.active_canvas;
         let boundaryNodes = []
         if (align_to === undefined) {
-            boundaryNodes = LGraphCanvas.getBoundaryNodes(nodes)
+            boundaryNodes = Canvas.getBoundaryNodes(nodes)
         } else {
             boundaryNodes = {
                 "top": align_to,
@@ -5217,7 +5217,7 @@ export class LGraphCanvas {
         });
 
         function inner_clicked(value) {
-            LGraphCanvas.alignNodes(LGraphCanvas.active_canvas.selected_nodes, value.toLowerCase(), node);
+            Canvas.alignNodes(Canvas.active_canvas.selected_nodes, value.toLowerCase(), node);
         }
     }
 
@@ -5229,13 +5229,13 @@ export class LGraphCanvas {
         });
 
         function inner_clicked(value) {
-            LGraphCanvas.alignNodes(LGraphCanvas.active_canvas.selected_nodes, value.toLowerCase());
+            Canvas.alignNodes(Canvas.active_canvas.selected_nodes, value.toLowerCase());
         }
     }
 
     static onMenuAdd(node, options, e, prev_menu, callback) {
 
-        var canvas = LGraphCanvas.active_canvas;
+        var canvas = Canvas.active_canvas;
         var ref_window = canvas.getCanvasWindow();
         var graph = canvas.graph;
         if (!graph)
@@ -5323,7 +5323,7 @@ export class LGraphCanvas {
         }
 
         var that = this;
-        var canvas = LGraphCanvas.active_canvas;
+        var canvas = Canvas.active_canvas;
         var ref_window = canvas.getCanvasWindow();
 
         options = node.optional_inputs;
@@ -5415,7 +5415,7 @@ export class LGraphCanvas {
         }
 
         var that = this;
-        var canvas = LGraphCanvas.active_canvas;
+        var canvas = Canvas.active_canvas;
         var ref_window = canvas.getCanvasWindow();
 
         options = node.optional_outputs;
@@ -5547,7 +5547,7 @@ export class LGraphCanvas {
             return;
         }
 
-        var canvas = LGraphCanvas.active_canvas;
+        var canvas = Canvas.active_canvas;
         var ref_window = canvas.getCanvasWindow();
 
         var entries = [];
@@ -5557,10 +5557,10 @@ export class LGraphCanvas {
                 value = JSON.stringify(value);
             var info = node.getPropertyInfo(i);
             if(info.type == "enum" || info.type == "combo")
-                value = LGraphCanvas.getPropertyPrintableValue( value, info.values );
+                value = Canvas.getPropertyPrintableValue( value, info.values );
 
             // value could contain invalid html characters, clean that
-            value = LGraphCanvas.decodeHTML(value);
+            value = Canvas.decodeHTML(value);
             entries.push({
                 content:
                     "<span class='property_name'>" +
@@ -5616,7 +5616,7 @@ export class LGraphCanvas {
                 node.onResize(node.size);
         }
 
-        var graphcanvas = LGraphCanvas.active_canvas;
+        var graphcanvas = Canvas.active_canvas;
         if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
             fApplyMultiNode(node);
         }else{
@@ -5651,7 +5651,7 @@ export class LGraphCanvas {
         function inner_clicked(v,options,e) {
             switch (v) {
                 case "Add Node":
-                    LGraphCanvas.onMenuAdd(null, null, e, menu, function(node) {
+                    Canvas.onMenuAdd(null, null, e, menu, function(node) {
                         if(Lite.debug)
                             console.debug("node autoconnect");
                         if(!node.inputs || !node.inputs.length || !node.outputs || !node.outputs.length) {
@@ -5905,7 +5905,7 @@ export class LGraphCanvas {
             callback: (v, options, e) => {
                 const cases = {
                     "Add Node": () => {
-                        LGraphCanvas.onMenuAdd(null, null, e, menu, (node) => {
+                        Canvas.onMenuAdd(null, null, e, menu, (node) => {
                             isFrom ? opts.nodeFrom.connectByType(iSlotConn, node, fromSlotType) : opts.nodeTo.connectByTypeOutput(iSlotConn, node, fromSlotType);
                         });
                     },
@@ -5970,7 +5970,7 @@ export class LGraphCanvas {
             });
         }
 
-        var graphcanvas = LGraphCanvas.active_canvas;
+        var graphcanvas = Canvas.active_canvas;
         var canvas = graphcanvas.canvas;
 
         var rect = canvas.getBoundingClientRect();
@@ -6041,7 +6041,7 @@ export class LGraphCanvas {
             dialog.parentNode?.removeChild(dialog);
         };
 
-        var graphcanvas = LGraphCanvas.active_canvas;
+        var graphcanvas = Canvas.active_canvas;
         var canvas = graphcanvas.canvas;
         canvas.parentNode.appendChild(dialog);
 
@@ -6170,7 +6170,7 @@ export class LGraphCanvas {
         // console.log(options);
 
         var that = this;
-        var graphcanvas = LGraphCanvas.active_canvas;
+        var graphcanvas = Canvas.active_canvas;
         var canvas = graphcanvas.canvas;
         var root_document = canvas.ownerDocument || document;
 
@@ -6589,7 +6589,7 @@ export class LGraphCanvas {
                     if( ! inner_test_filter(extra.type) )
                         continue;
                     addResult( extra.desc, "searchbox_extra" );
-                    if ( LGraphCanvas.search_limit !== -1 && c++ > LGraphCanvas.search_limit ) {
+                    if ( Canvas.search_limit !== -1 && c++ > Canvas.search_limit ) {
                         break;
                     }
                 }
@@ -6608,7 +6608,7 @@ export class LGraphCanvas {
 
                 for (let i = 0; i < filtered.length; i++) {
                     addResult(filtered[i]);
-                    if ( LGraphCanvas.search_limit !== -1 && c++ > LGraphCanvas.search_limit ) {
+                    if ( Canvas.search_limit !== -1 && c++ > Canvas.search_limit ) {
                         break;
                     }
                 }
@@ -6624,7 +6624,7 @@ export class LGraphCanvas {
                     }
                     for (let i = 0; i < filtered_extra.length; i++) {
                         addResult(filtered_extra[i], "generic_type");
-                        if ( LGraphCanvas.search_limit !== -1 && c++ > LGraphCanvas.search_limit ) {
+                        if ( Canvas.search_limit !== -1 && c++ > Canvas.search_limit ) {
                             break;
                         }
                     }
@@ -6641,7 +6641,7 @@ export class LGraphCanvas {
                     }
                     for (let i = 0; i < filtered_extra.length; i++) {
                         addResult(filtered_extra[i], "not_in_filter");
-                        if ( LGraphCanvas.search_limit !== -1 && c++ > LGraphCanvas.search_limit ) {
+                        if ( Canvas.search_limit !== -1 && c++ > Canvas.search_limit ) {
                             break;
                         }
                     }
@@ -7120,7 +7120,7 @@ export class LGraphCanvas {
                     innerChange(propname, v);
                 });
             } else if (type == "enum" || type == "combo") {
-                str_value = LGraphCanvas.getPropertyPrintableValue( value, options.values );
+                str_value = Canvas.getPropertyPrintableValue( value, options.values );
                 value_element.innerText = str_value;
 
                 if(Lite.debug)
@@ -7329,9 +7329,9 @@ export class LGraphCanvas {
                         }
                         break;
                     case "Color":
-                        if (LGraphCanvas.node_colors[value]) {
-                            node.color = LGraphCanvas.node_colors[value].color;
-                            node.bgcolor = LGraphCanvas.node_colors[value].bgcolor;
+                        if (Canvas.node_colors[value]) {
+                            node.color = Canvas.node_colors[value].color;
+                            node.bgcolor = Canvas.node_colors[value].bgcolor;
                         }else{
                             console.warn("unexpected color: "+value);
                         }
@@ -7350,12 +7350,12 @@ export class LGraphCanvas {
 
             var nodeCol = "";
             if (node.color !== undefined) {
-                nodeCol = Object.keys(LGraphCanvas.node_colors).filter(function(nK) {
-                    return LGraphCanvas.node_colors[nK].color == node.color;
+                nodeCol = Object.keys(Canvas.node_colors).filter(function(nK) {
+                    return Canvas.node_colors[nK].color == node.color;
                 });
             }
 
-            panel.addWidget( "combo", "Color", nodeCol, {values: Object.keys(LGraphCanvas.node_colors)}, fUpdate);
+            panel.addWidget( "combo", "Color", nodeCol, {values: Object.keys(Canvas.node_colors)}, fUpdate);
 
             for(var pName in node.properties) {
                 var value = node.properties[pName];
@@ -7572,7 +7572,7 @@ export class LGraphCanvas {
             node.collapse();
         }
 
-        var graphcanvas = LGraphCanvas.active_canvas;
+        var graphcanvas = Canvas.active_canvas;
         if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
             fApplyMultiNode(node);
         }else{
@@ -7608,7 +7608,7 @@ export class LGraphCanvas {
                 }
             }
 
-            var graphcanvas = LGraphCanvas.active_canvas;
+            var graphcanvas = Canvas.active_canvas;
             if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
                 fApplyMultiNode(node);
             }else{
@@ -7633,8 +7633,8 @@ export class LGraphCanvas {
                 "<span style='display: block; padding-left: 4px;'>No color</span>",
         });
 
-        for (let i in LGraphCanvas.node_colors) {
-            let color = LGraphCanvas.node_colors[i];
+        for (let i in Canvas.node_colors) {
+            let color = Canvas.node_colors[i];
             value = {
                 value: i,
                 content:
@@ -7660,7 +7660,7 @@ export class LGraphCanvas {
                 return;
             }
 
-            let color = v.value ? LGraphCanvas.node_colors[v.value] : null;
+            let color = v.value ? Canvas.node_colors[v.value] : null;
 
             const fApplyColor = (node) => {
                 if (color) {
@@ -7676,7 +7676,7 @@ export class LGraphCanvas {
                 }
             }
 
-            var graphcanvas = LGraphCanvas.active_canvas;
+            var graphcanvas = Canvas.active_canvas;
             if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
                 fApplyColor(node);
             }else{
@@ -7712,7 +7712,7 @@ export class LGraphCanvas {
                 node.shape = v;
             }
 
-            var graphcanvas = LGraphCanvas.active_canvas;
+            var graphcanvas = Canvas.active_canvas;
             if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
                 fApplyMultiNode(node);
             }else{
@@ -7744,7 +7744,7 @@ export class LGraphCanvas {
             graph.remove(node);
         }
 
-        var graphcanvas = LGraphCanvas.active_canvas;
+        var graphcanvas = Canvas.active_canvas;
         if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
             fApplyMultiNode(node);
         }else{
@@ -7759,7 +7759,7 @@ export class LGraphCanvas {
 
     static onMenuNodeToSubgraph(value, options, e, menu, node) {
         var graph = node.graph;
-        var graphcanvas = LGraphCanvas.active_canvas;
+        var graphcanvas = Canvas.active_canvas;
         if(!graphcanvas) // ??
             return;
 
@@ -7796,7 +7796,7 @@ export class LGraphCanvas {
             newSelected[newnode.id] = newnode;
         }
 
-        var graphcanvas = LGraphCanvas.active_canvas;
+        var graphcanvas = Canvas.active_canvas;
         if (!graphcanvas.selected_nodes || Object.keys(graphcanvas.selected_nodes).length <= 1) {
             fApplyMultiNode(node);
         }else{
@@ -7823,9 +7823,9 @@ export class LGraphCanvas {
                 {
                     content: "Add Node",
                     has_submenu: true,
-                    callback: LGraphCanvas.onMenuAdd,
+                    callback: Canvas.onMenuAdd,
                 },
-                { content: "Add Group", callback: LGraphCanvas.onGroupAdd },
+                { content: "Add Group", callback: Canvas.onGroupAdd },
                 // { content: "Arrange", callback: that.graph.arrange },
                 // {content:"Collapse All", callback: LGraphCanvas.onMenuCollapseAll }
             ];
@@ -7837,7 +7837,7 @@ export class LGraphCanvas {
                 options.push({
                     content: "Align",
                     has_submenu: true,
-                    callback: LGraphCanvas.onGroupAlign,
+                    callback: Canvas.onGroupAlign,
                 })
             }
 
@@ -7871,51 +7871,51 @@ export class LGraphCanvas {
                     content: "Inputs",
                     has_submenu: true,
                     disabled: true,
-                    callback: LGraphCanvas.showMenuNodeOptionalInputs,
+                    callback: Canvas.showMenuNodeOptionalInputs,
                 },
                 {
                     content: "Outputs",
                     has_submenu: true,
                     disabled: true,
-                    callback: LGraphCanvas.showMenuNodeOptionalOutputs,
+                    callback: Canvas.showMenuNodeOptionalOutputs,
                 },
                 null,
                 {
                     content: "Properties",
                     has_submenu: true,
-                    callback: LGraphCanvas.onShowMenuNodeProperties,
+                    callback: Canvas.onShowMenuNodeProperties,
                 },
                 null,
                 {
                     content: "Title",
-                    callback: LGraphCanvas.onShowPropertyEditor,
+                    callback: Canvas.onShowPropertyEditor,
                 },
                 {
                     content: "Mode",
                     has_submenu: true,
-                    callback: LGraphCanvas.onMenuNodeMode,
+                    callback: Canvas.onMenuNodeMode,
                 }];
             if(node.resizable !== false) {
                 options.push({
                     content: "Resize",
-                    callback: LGraphCanvas.onMenuResizeNode,
+                    callback: Canvas.onMenuResizeNode,
                 });
             }
             options.push(
                 {
                     content: "Collapse",
-                    callback: LGraphCanvas.onMenuNodeCollapse,
+                    callback: Canvas.onMenuNodeCollapse,
                 },
-                { content: "Pin", callback: LGraphCanvas.onMenuNodePin },
+                { content: "Pin", callback: Canvas.onMenuNodePin },
                 {
                     content: "Colors",
                     has_submenu: true,
-                    callback: LGraphCanvas.onMenuNodeColors,
+                    callback: Canvas.onMenuNodeColors,
                 },
                 {
                     content: "Shapes",
                     has_submenu: true,
-                    callback: LGraphCanvas.onMenuNodeShapes,
+                    callback: Canvas.onMenuNodeShapes,
                 },
                 null,
             );
@@ -7949,7 +7949,7 @@ export class LGraphCanvas {
         if (node.clonable !== false) {
             options.push({
                 content: "Clone",
-                callback: LGraphCanvas.onMenuNodeClone,
+                callback: Canvas.onMenuNodeClone,
             });
         }
         /*
@@ -7963,14 +7963,14 @@ export class LGraphCanvas {
             options.push({
                 content: "Align Selected To",
                 has_submenu: true,
-                callback: LGraphCanvas.onNodeAlign,
+                callback: Canvas.onNodeAlign,
             })
         }
 
         options.push(null, {
             content: "Remove",
             disabled: !(node.removable !== false && !node.block_delete ),
-            callback: LGraphCanvas.onMenuNodeRemove,
+            callback: Canvas.onMenuNodeRemove,
         });
 
         if (node.graph && node.graph.onGetNodeMenuOptions) {
@@ -7982,20 +7982,20 @@ export class LGraphCanvas {
 
     getGroupMenuOptions() {
         var o = [
-            { content: "Title", callback: LGraphCanvas.onShowPropertyEditor },
+            { content: "Title", callback: Canvas.onShowPropertyEditor },
             {
                 content: "Color",
                 has_submenu: true,
-                callback: LGraphCanvas.onMenuNodeColors,
+                callback: Canvas.onMenuNodeColors,
             },
             {
                 content: "Font size",
                 property: "font_size",
                 type: "Number",
-                callback: LGraphCanvas.onShowPropertyEditor,
+                callback: Canvas.onShowPropertyEditor,
             },
             null,
-            { content: "Remove", callback: LGraphCanvas.onMenuNodeRemove },
+            { content: "Remove", callback: Canvas.onMenuNodeRemove },
         ];
 
         return o;
@@ -8003,7 +8003,7 @@ export class LGraphCanvas {
 
     processContextMenu(node, event) {
         var that = this;
-        var canvas = LGraphCanvas.active_canvas;
+        var canvas = Canvas.active_canvas;
         var ref_window = canvas.getCanvasWindow();
 
         var menu_info = null;
@@ -8020,7 +8020,7 @@ export class LGraphCanvas {
         var slot = null;
         if (node) {
             slot = node.getSlotInPosition(event.canvasX, event.canvasY);
-            LGraphCanvas.active_node = node;
+            Canvas.active_node = node;
         }
 
         if (slot) {

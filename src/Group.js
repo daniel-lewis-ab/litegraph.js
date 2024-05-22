@@ -1,5 +1,5 @@
 import { Lite } from "./Lite.js";
-import { LGraphCanvas } from "./renderers/canvas.js";
+import { Canvas } from "./renderers/canvas.js";
 
 export class Group {
 
@@ -11,7 +11,7 @@ export class Group {
 
         this.title = title;
         this.font_size = 24;
-        this.color = LGraphCanvas.node_colors.pale_blue?.groupcolor ?? "#AAA";
+        this.color = Canvas.node_colors.pale_blue?.groupcolor ?? "#AAA";
         this._bounding = new Float32Array([10, 10, 140, 80]);
         this._pos = this._bounding.subarray(0, 2);
         this._size = this._bounding.subarray(2, 4);
