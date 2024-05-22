@@ -1,5 +1,5 @@
 
-import { LGraphNode } from "./lgraphnode.js";
+import { Node } from "./lgraphnode.js";
 import { Link } from "./Link.js";
 import { Graph } from "./Graph.js";
 import { Group } from "./Group.js";
@@ -251,7 +251,7 @@ export var Lite = new class {
             base_class.title = classname;
         }
 
-        const propertyDescriptors = Object.getOwnPropertyDescriptors(LGraphNode.prototype);
+        const propertyDescriptors = Object.getOwnPropertyDescriptors(Node.prototype);
 
         // Iterate over each property descriptor
         Object.keys(propertyDescriptors).forEach((propertyName) => {
@@ -516,7 +516,7 @@ export var Lite = new class {
      * @param {Function} func
      */
     addNodeMethod(name, func) {
-        LGraphNode.prototype[name] = func;
+        Node.prototype[name] = func;
         for (var i in this.registered_node_types) {
             var type = this.registered_node_types[i];
             if (type.prototype[name]) {
@@ -1014,6 +1014,7 @@ export var Lite = new class {
 
 Lite.Link = Link;
 Lite.Graph = Graph;
+Lite.Node = Node;
 Lite.Group = Group;
 
 

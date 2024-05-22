@@ -1,5 +1,4 @@
 import { Lite } from "../Lite.js";
-import { LGraphNode } from "../lgraphnode.js";
 
 // Constant
 class Time {
@@ -324,7 +323,7 @@ class Subgraph {
     }
 
     serialize() {
-        var data = LGraphNode.prototype.serialize.call(this);
+        var data = Lite.Node.prototype.serialize.call(this);
         data.subgraph = this.subgraph.serialize();
         return data;
     }

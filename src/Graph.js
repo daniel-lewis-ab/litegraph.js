@@ -893,7 +893,7 @@ export class Graph {
      * Returns the first node that matches a name in its title
      * @method findNodeByTitle
      * @param {String} name the name of the node to search
-     * @return {Node} the node or null
+     * @return {Lite.Node} the node or null
      */
     findNodeByTitle(title) {
         return this._nodes.find((node) => node.title === title) ?? null;

@@ -57,7 +57,7 @@ supported callbacks:
  * @param {String} name a name for the node
  */
 
-export class LGraphNode {
+export class Node {
 
     constructor(title = "Unnamed") {
 
@@ -190,7 +190,7 @@ export class LGraphNode {
         };
 
         // special case for when there were errors
-        if (this.constructor === LGraphNode && this.last_serialization) {
+        if (this.constructor === Node && this.last_serialization) {
             return this.last_serialization;
         }
 
@@ -531,7 +531,7 @@ export class LGraphNode {
      * returns the node connected in the input slot
      * @method getInputNode
      * @param {number} slot
-     * @return {LGraphNode} node or null
+     * @return {Node} node or null
      */
     getInputNode(slot) {
         if (!this.inputs) {
@@ -1660,7 +1660,7 @@ export class LGraphNode {
      * connect this node output to the input of another node BY TYPE
      * @method connectByType
      * @param {number_or_string} slot (could be the number of the slot or the string with the name of the slot)
-     * @param {LGraphNode} node the target node
+     * @param {Node} node the target node
      * @param {string} target_type the input slot type of the target node
      * @return {Object} the link_info is created, otherwise null
      */
@@ -1717,7 +1717,7 @@ export class LGraphNode {
      * connect this node input to the output of another node BY TYPE
      * @method connectByType
      * @param {number_or_string} slot (could be the number of the slot or the string with the name of the slot)
-     * @param {LGraphNode} node the target node
+     * @param {Node} node the target node
      * @param {string} target_type the output slot type of the target node
      * @return {Object} the link_info is created, otherwise null
      */
@@ -1774,7 +1774,7 @@ export class LGraphNode {
      * connect this node output to the input of another node
      * @method connect
      * @param {number_or_string} slot (could be the number of the slot or the string with the name of the slot)
-     * @param {LGraphNode} node the target node
+     * @param {Node} node the target node
      * @param {number_or_string} target_slot the input slot of the target node (could be the number of the slot or the string with the name of the slot, or -1 to connect a trigger)
      * @return {Object} the link_info is created, otherwise null
      */
@@ -1977,7 +1977,7 @@ export class LGraphNode {
      * disconnect one output to an specific node
      * @method disconnectOutput
      * @param {number_or_string} slot (could be the number of the slot or the string with the name of the slot)
-     * @param {LGraphNode} target_node the target node to which this slot is connected [Optional, if not target_node is specified all nodes will be disconnected]
+     * @param {Node} target_node the target node to which this slot is connected [Optional, if not target_node is specified all nodes will be disconnected]
      * @return {boolean} if it was disconnected successfully
      */
     disconnectOutput(slot, target_node, optsIn = {}) {
@@ -2324,7 +2324,7 @@ export class LGraphNode {
         }
 
         this.console.push(msg);
-        if (this.console.length > LGraphNode.MAX_CONSOLE) {
+        if (this.console.length > Node.MAX_CONSOLE) {
             this.console.shift();
         }
 

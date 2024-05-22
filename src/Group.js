@@ -1,6 +1,5 @@
 import { Lite } from "./Lite.js";
 import { LGraphCanvas } from "./lgraphcanvas.js";
-import { LGraphNode } from "./lgraphnode.js";
 
 export class Group {
 
@@ -115,6 +114,6 @@ export class Group {
         });
     }
 
-    isPointInside = LGraphNode.prototype.isPointInside;
-    setDirtyCanvas = LGraphNode.prototype.setDirtyCanvas;
+    isPointInside = Lite.Node.prototype.isPointInside;
+    setDirtyCanvas = Lite.Node.prototype.setDirtyCanvas;
 }
