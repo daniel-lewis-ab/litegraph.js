@@ -1,5 +1,4 @@
 import { Lite } from "./Lite.js";
-import { LLink } from "./llink.js";
 
 /*
 title: string
@@ -515,7 +514,7 @@ export class LGraphNode {
      * Returns the link info in the connection of an input slot
      * @method getInputLink
      * @param {number} slot
-     * @return {LLink} object or null
+     * @return {Lite.Link} object or null
      */
     getInputLink(slot) {
         if (!this.inputs) {
@@ -1911,7 +1910,7 @@ export class LGraphNode {
             nextId = ++this.graph.last_link_id;
 
         // create link class
-        link_info = new LLink(
+        link_info = new Lite.Link(
             nextId,
             input.type || output.type,
             this.id,

@@ -1,5 +1,6 @@
 
 import { LGraphNode } from "./lgraphnode.js";
+import { Link } from "./Link.js";
 
 /**
  * @class Lite
@@ -1008,6 +1009,16 @@ export var Lite = new class {
         return a > v ? a : b < v ? b : v;
     }
 }
+
+Lite.Link = Link;
+
+
+
+
+
+
+
+
 
 // timer that works everywhere
 if (typeof performance != "undefined") {

@@ -1,6 +1,7 @@
+import { Lite } from "./Lite.js";
 
 // this is the class in charge of storing link information
-export class LLink {
+export class Link {
     constructor(id, type, origin_id, origin_slot, target_id, target_slot) {
         this.id = id;
         this.type = type;

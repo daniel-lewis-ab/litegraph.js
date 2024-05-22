@@ -1,7 +1,6 @@
 import { Lite } from "./Lite.js";
 import { LGraphCanvas } from "./lgraphcanvas.js";
 import { LGraphGroup } from "./lgraphgroup.js";
-import { LLink } from "./llink.js";
 
 /**
  * LGraph is the class that contain a full graph. We instantiate one and add nodes to it, and then we can run the execution loop.
@@ -1357,8 +1356,8 @@ export class LGraph {
             var link = this.links[i];
             if (!link.serialize) {
                 // weird bug I havent solved yet
-                console.warn("weird LLink bug, link info is not a LLink but a regular object");
-                var link2 = new LLink();
+                console.warn("weird Link bug, link info is not a Link but a regular object");
+                var link2 = new Lite.Link();
                 for (var j in link) {
                     link2[j] = link[j];
                 }
@@ -1411,7 +1410,7 @@ export class LGraph {
                     console.warn("serialized graph link data contains errors, skipping.");
                     continue;
                 }
-                var link = new LLink();
+                var link = new Lite.Link();
                 link.configure(link_data);
                 links[link.id] = link;
             }
