@@ -3,6 +3,7 @@ import { Node } from "./Node.js";
 import { Link } from "./Link.js";
 import { Graph } from "./Graph.js";
 import { Group } from "./Group.js";
+import { ContextMenu } from "./contextmenu.js";
 
 /**
  * @class Lite
@@ -1016,6 +1017,7 @@ Lite.Link = Link;
 Lite.Graph = Graph;
 Lite.Node = Node;
 Lite.Group = Group;
+Lite.ContextMenu = ContextMenu;
 
 
 
