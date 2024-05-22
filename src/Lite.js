@@ -3,7 +3,7 @@ import { Node } from "./Node.js";
 import { Link } from "./Link.js";
 import { Graph } from "./Graph.js";
 import { Group } from "./Group.js";
-import { ContextMenu } from "./contextmenu.js";
+import { ContextMenu } from "./ContextMenu.js";
 
 /**
  * @class Lite

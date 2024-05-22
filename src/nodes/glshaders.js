@@ -1,5 +1,4 @@
 import { Lite } from "../Lite.js";
-import { LGraph } from "../lgraph.js";
 import { GL } from "../../editor/js/libs/litegl.js";
 import { gl } from "../../editor/js/code.js";
 import { LGraphTexture } from "./gltextures.js";
@@ -511,7 +510,7 @@ export class LGShaderContext {
 class LGraphShaderGraph {
     constructor() {
         // before inputs
-        this.subgraph = new LGraph();
+        this.subgraph = new Lite.Graph();
         this.subgraph._subgraph_node = this;
         this.subgraph._is_subgraph = true;
         this.subgraph.filter = "shader";
