@@ -1,6 +1,6 @@
 
 import { Lite } from "../../src/Lite.js";
-import { Editor } from "../../src/litegraph-editor.js";
+import { Editor } from "../../src/Editor.js";
 
 export var gl;
 
