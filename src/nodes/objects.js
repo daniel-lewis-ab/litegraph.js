@@ -1,14 +1,14 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 // EG METHOD
 
 // function mMETHOD(){
 //     this.properties = { };
-//     // this.addInput("onTrigger", LiteGraph.ACTION);
+//     // this.addInput("onTrigger", Lite.ACTION);
 //     // this.addInput("condition", "boolean");
-//     // this.addOutput("true", LiteGraph.EVENT);
-//     // this.addOutput("false", LiteGraph.EVENT);
-//     this.mode = LiteGraph.ON_TRIGGER;
+//     // this.addOutput("true", Lite.EVENT);
+//     // this.addOutput("false", Lite.EVENT);
+//     this.mode = Lite.ON_TRIGGER;
 // }
 // mMETHOD.title = "Branch";
 // mMETHOD.desc = "Branch execution on condition";
@@ -23,7 +23,7 @@ import { LiteGraph } from "../litegraph.js";
 // mMETHOD.prototype.onGetOutputs = function() {
 //     //return [["optional slot out", 0]];
 // };
-// LiteGraph.registerNodeType("basic/egnode", mMETHOD);
+// Lite.registerNodeType("basic/egnode", mMETHOD);
 
 // --------------------------
 
@@ -38,9 +38,9 @@ class objProperties {
         // this.addInput("condition", "boolean");
 
         this.addOutput("properties", "array");
-        // this.addOutput("false", LiteGraph.EVENT);
+        // this.addOutput("false", Lite.EVENT);
 
-        // this.mode = LiteGraph.ON_TRIGGER;
+        // this.mode = Lite.ON_TRIGGER;
         // this.widget = this.addWidget("text","prop.","",this.setValue.bind(this) );
         // this.widgets_up = true;
         // this.size = [140, 30];
@@ -77,7 +77,7 @@ class objProperties {
         // this.widget.value = value;
     }
 }
-LiteGraph.registerNodeType("objects/properties", objProperties);
+Lite.registerNodeType("objects/properties", objProperties);
 
 // --------------------------
 
@@ -135,11 +135,11 @@ class objPropertyWidget {
         // this.addInput("condition", "boolean");
 
         this.addOutput("value", "*");
-        // this.addOutput("false", LiteGraph.EVENT);
+        // this.addOutput("false", Lite.EVENT);
 
         this.addProperty("prop", 0);
 
-        // this.mode = LiteGraph.ON_REQUEST; // to be optimized, could run always
+        // this.mode = Lite.ON_REQUEST; // to be optimized, could run always
         // this.widg_prop = this.addWidget("property","prop.","",this.setValue.bind(this) );
         this.widg_prop = this.addWidget("combo","prop.",this.properties.prop,{ property: "prop", values: [] }); // ,this.setValue.bind(this) );
         // this.widgets_up = true;
@@ -226,7 +226,7 @@ class objPropertyWidget {
         }];
     }
 }
-LiteGraph.registerNodeType("objects/property_widget", objPropertyWidget);
+Lite.registerNodeType("objects/property_widget", objPropertyWidget);
 
 
 class objMethodWidget {
@@ -236,14 +236,14 @@ class objMethodWidget {
     
     constructor() {
         this.addInput("obj", "object");
-        // this.addInput("onTrigger", LiteGraph.ACTION);
-        this.addInput("refresh", LiteGraph.ACTION);
-        this.addInput("execute", LiteGraph.ACTION);
-        this.addOutput("executed", LiteGraph.EVENT);
+        // this.addInput("onTrigger", Lite.ACTION);
+        this.addInput("refresh", Lite.ACTION);
+        this.addInput("execute", Lite.ACTION);
+        this.addOutput("executed", Lite.EVENT);
         this.addOutput("method", "function");
         this.addOutput("return", "*");
         this.addProperty("method", null);
-        // this.mode = LiteGraph.ON_REQUEST; // to be optimized, could run always
+        // this.mode = Lite.ON_REQUEST; // to be optimized, could run always
         this.widg_prop = this.addWidget("combo","method",this.properties.method,{ property: "method", values: [] }); // ,this.setValue.bind(this) );
         this._obin = null;
         this._function = null;
@@ -308,7 +308,7 @@ class objMethodWidget {
             this._function = this._obin[actVal];
 
             var params = Array(this._function.length);
-            var names = LiteGraph.getParameterNames(this._function);
+            var names = Lite.getParameterNames(this._function);
             for (var i = 0; i < names.length; ++i) {
                 var exs = this.findInputSlot(names[i]);
                 if(exs == -1) {
@@ -401,7 +401,7 @@ class objMethodWidget {
         }];
     }
 }
-LiteGraph.registerNodeType("objects/method_widget", objMethodWidget);
+Lite.registerNodeType("objects/method_widget", objMethodWidget);
 
 
 // eval a Global object
@@ -420,19 +420,19 @@ class objEvalGlo {
 
     // SINGLE object EVAL
     onConfigure(o) {
-        if (o.properties.obj_eval && LiteGraph.allow_scripts)
+        if (o.properties.obj_eval && Lite.allow_scripts)
             this.compileCode(o.properties.obj_eval);
         else
-            console.warn("Obj string not evaluated, LiteGraph.allow_scripts is false");
+            console.warn("Obj string not evaluated, Lite.allow_scripts is false");
     }
 
     static widgets_info = {obj_eval: { type: "code" }};
 
     onPropertyChanged(name, value) {
-        if (name == "obj_eval" && LiteGraph.allow_scripts)
+        if (name == "obj_eval" && Lite.allow_scripts)
             this.compileCode(value);
         else
-            console.warn("Obj string not evaluated, LiteGraph.allow_scripts is false");
+            console.warn("Obj string not evaluated, Lite.allow_scripts is false");
     }
 
     compileCode(code) {
@@ -480,4 +480,4 @@ class objEvalGlo {
     //     return [["C", ""]];
     // };
 }
-LiteGraph.registerNodeType("objects/evaluate", objEvalGlo);
+Lite.registerNodeType("objects/evaluate", objEvalGlo);

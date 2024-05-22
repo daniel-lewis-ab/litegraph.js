@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 class Selector {
 
@@ -21,11 +21,11 @@ class Selector {
             return;
         }
         ctx.fillStyle = "#AFB";
-        var y = (this.selected + 1) * LiteGraph.NODE_SLOT_HEIGHT + 6;
+        var y = (this.selected + 1) * Lite.NODE_SLOT_HEIGHT + 6;
         ctx.beginPath();
         ctx.moveTo(50, y);
-        ctx.lineTo(50, y + LiteGraph.NODE_SLOT_HEIGHT);
-        ctx.lineTo(34, y + LiteGraph.NODE_SLOT_HEIGHT * 0.5);
+        ctx.lineTo(50, y + Lite.NODE_SLOT_HEIGHT);
+        ctx.lineTo(34, y + Lite.NODE_SLOT_HEIGHT * 0.5);
         ctx.fill();
     }
 
@@ -48,7 +48,7 @@ class Selector {
         ];
     }
 }
-LiteGraph.registerNodeType("logic/selector", Selector);
+Lite.registerNodeType("logic/selector", Selector);
 
 
 class Sequence {
@@ -87,7 +87,7 @@ class Sequence {
         this.setOutputData(0, this.values[index]);
     }
 }
-LiteGraph.registerNodeType("logic/sequence", Sequence);
+Lite.registerNodeType("logic/sequence", Sequence);
 
 
 class logicAnd {
@@ -117,7 +117,7 @@ class logicAnd {
         return [["and", "boolean"]];
     }
 }
-LiteGraph.registerNodeType("logic/AND", logicAnd);
+Lite.registerNodeType("logic/AND", logicAnd);
 
 
 class logicOr {
@@ -147,7 +147,7 @@ class logicOr {
         return [["or", "boolean"]];
     }
 }
-LiteGraph.registerNodeType("logic/OR", logicOr);
+Lite.registerNodeType("logic/OR", logicOr);
 
 
 class logicNot {
@@ -164,7 +164,7 @@ class logicNot {
         this.setOutputData(0, ret);
     }
 }
-LiteGraph.registerNodeType("logic/NOT", logicNot);
+Lite.registerNodeType("logic/NOT", logicNot);
 
 
 class logicCompare {
@@ -196,7 +196,7 @@ class logicCompare {
         return [["bool", "boolean"]];
     }
 }
-LiteGraph.registerNodeType("logic/CompareBool", logicCompare);
+Lite.registerNodeType("logic/CompareBool", logicCompare);
 
 
 class logicBranch {
@@ -207,11 +207,11 @@ class logicBranch {
 
     constructor() {
         this.properties = {};
-        this.addInput("onTrigger", LiteGraph.ACTION);
+        this.addInput("onTrigger", Lite.ACTION);
         this.addInput("condition", "boolean");
-        this.addOutput("true", LiteGraph.EVENT);
-        this.addOutput("false", LiteGraph.EVENT);
-        this.mode = LiteGraph.ON_TRIGGER;
+        this.addOutput("true", Lite.EVENT);
+        this.addOutput("false", Lite.EVENT);
+        this.mode = Lite.ON_TRIGGER;
     }
 
     onExecute(_param, _options) {
@@ -223,7 +223,7 @@ class logicBranch {
         }
     }
 }
-LiteGraph.registerNodeType("logic/IF", logicBranch);
+Lite.registerNodeType("logic/IF", logicBranch);
 
 
 class logicFor {
@@ -231,10 +231,10 @@ class logicFor {
         this.properties = { };
         this.addInput("start", "number");
         this.addInput("nElements", "number");
-        this.addInput("do", LiteGraph.ACTION);
-        this.addInput("break", LiteGraph.ACTION);
-        // this.addInput("reset", LiteGraph.ACTION);
-        this.addOutput("do", LiteGraph.EVENT);
+        this.addInput("do", Lite.ACTION);
+        this.addInput("break", Lite.ACTION);
+        // this.addInput("reset", Lite.ACTION);
+        this.addOutput("do", Lite.EVENT);
         this.addOutput("index", "number");
         this.started = false;
         this.stopped = false;
@@ -279,16 +279,16 @@ class logicFor {
         }
     }
 }
-LiteGraph.registerNodeType("logic/CycleFOR", logicFor);
+Lite.registerNodeType("logic/CycleFOR", logicFor);
 
 
 class logicWhile {
     constructor() {
         this.properties = { cycleLimit: 999, checkOnStart: true };
-        this.addInput("do", LiteGraph.ACTION);
+        this.addInput("do", Lite.ACTION);
         this.addInput("condition", "boolean");
-        this.addInput("break", LiteGraph.ACTION);
-        this.addOutput("do", LiteGraph.EVENT);
+        this.addInput("break", Lite.ACTION);
+        this.addOutput("do", Lite.EVENT);
         this.addOutput("index", "number");
         this.started = false;
         this.stopped = false;
@@ -340,4 +340,4 @@ class logicWhile {
         }
     }
 }
-LiteGraph.registerNodeType("logic/CycleWHILE", logicWhile);
+Lite.registerNodeType("logic/CycleWHILE", logicWhile);

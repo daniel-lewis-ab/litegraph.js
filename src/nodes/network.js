@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 
 class LGWebSocket {
@@ -8,8 +8,8 @@ class LGWebSocket {
 
     constructor() {
         this.size = [60, 20];
-        this.addInput("send", LiteGraph.ACTION);
-        this.addOutput("received", LiteGraph.EVENT);
+        this.addInput("send", Lite.ACTION);
+        this.addOutput("received", Lite.EVENT);
         this.addInput("in", 0);
         this.addOutput("out", 0);
         this.properties = {
@@ -91,10 +91,10 @@ class LGWebSocket {
                 return;
             }
             if (data.type == 1) {
-                if (data.data.object_class && LiteGraph[data.data.object_class]) {
+                if (data.data.object_class && Lite[data.data.object_class]) {
                     var obj = null;
                     try {
-                        obj = new LiteGraph[data.data.object_class](data.data);
+                        obj = new Lite[data.data.object_class](data.data);
                         that.triggerSlot(0, obj);
                     } catch (err) {
                         return;
@@ -143,7 +143,7 @@ class LGWebSocket {
         return [["out", 0]];
     }
 }
-LiteGraph.registerNodeType("network/websocket", LGWebSocket);
+Lite.registerNodeType("network/websocket", LGWebSocket);
 
 
 // HTTP Request
@@ -153,10 +153,10 @@ class HTTPRequestNode {
     static desc = "Fetch data through HTTP";
 
     constructor() {
-        this.addInput("request", LiteGraph.ACTION);
+        this.addInput("request", Lite.ACTION);
         this.addInput("url", "string");
         this.addProperty("url", "");
-        this.addOutput("ready", LiteGraph.EVENT);
+        this.addOutput("ready", Lite.EVENT);
         this.addOutput("data", "string");
         this.addWidget("button", "Fetch", null, this.fetch.bind(this));
         this._data = null;
@@ -197,7 +197,7 @@ class HTTPRequestNode {
     }
 
     onGetOutputs() {
-        return [["error", LiteGraph.EVENT]];
+        return [["error", Lite.EVENT]];
     }
 }
-LiteGraph.registerNodeType("network/httprequest", HTTPRequestNode);
+Lite.registerNodeType("network/httprequest", HTTPRequestNode);

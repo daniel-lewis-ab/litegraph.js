@@ -1,5 +1,5 @@
 
-import { LiteGraph } from "../../src/litegraph.js";
+import { Lite } from "../../src/litegraph.js";
 
 function demo()
 {
@@ -8,34 +8,34 @@ function demo()
 
 function multiConnection()
 {
-	var node_button = LiteGraph.createNode("widget/button");
+	var node_button = Lite.createNode("widget/button");
 	node_button.pos = [100,400];
 	graph.add(node_button);
 
-	var node_console = LiteGraph.createNode("basic/console");
+	var node_console = Lite.createNode("basic/console");
 	node_console.pos = [400,400];
 	graph.add(node_console);
 	node_button.connect(0, node_console );
 
-	var node_const_A = LiteGraph.createNode("basic/const");
+	var node_const_A = Lite.createNode("basic/const");
 	node_const_A.pos = [200,200];
 	graph.add(node_const_A);
 	node_const_A.setValue(4.5);
 
-	var node_const_B = LiteGraph.createNode("basic/const");
+	var node_const_B = Lite.createNode("basic/const");
 	node_const_B.pos = [200,300];
 	graph.add(node_const_B);
 	node_const_B.setValue(10);
 
-	var node_math = LiteGraph.createNode("math/operation");
+	var node_math = Lite.createNode("math/operation");
 	node_math.pos = [400,200];
 	graph.add(node_math);
 
-	var node_watch = LiteGraph.createNode("basic/watch");
+	var node_watch = Lite.createNode("basic/watch");
 	node_watch.pos = [700,200];
 	graph.add(node_watch);
 
-	var node_watch2 = LiteGraph.createNode("basic/watch");
+	var node_watch2 = Lite.createNode("basic/watch");
 	node_watch2.pos = [700,300];
 	graph.add(node_watch2);
 
@@ -48,19 +48,19 @@ function multiConnection()
 function CopyPasteWithConnectionToUnselectedOutputTest()
 {
 	// number
-	var nodeConstA = LiteGraph.createNode("basic/const");
+	var nodeConstA = Lite.createNode("basic/const");
 	nodeConstA.pos = [200,200];
 	graph.add(nodeConstA);
 	nodeConstA.setValue(4.5);
 
 	// number
-	var nodeConstB = LiteGraph.createNode("basic/const");
+	var nodeConstB = Lite.createNode("basic/const");
 	nodeConstB.pos = [200,300];
 	graph.add(nodeConstB);
 	nodeConstB.setValue(10);
 
 	// math
-	var nodeMath = LiteGraph.createNode("math/operation");
+	var nodeMath = Lite.createNode("math/operation");
 	nodeMath.pos = [400,200];
 	graph.add(nodeMath);
 
@@ -92,13 +92,13 @@ function CopyPasteWithConnectionToUnselectedOutputTest()
 
 function sortTest()
 {
-	var rand = LiteGraph.createNode("math/rand",null, {pos: [10,100] });
+	var rand = Lite.createNode("math/rand",null, {pos: [10,100] });
 	graph.add(rand);
 
 	var nodes = [];
 	for(var i = 4; i >= 1; i--)
 	{
-		var n = LiteGraph.createNode("basic/watch",null, {pos: [i * 120,100] });
+		var n = Lite.createNode("basic/watch",null, {pos: [i * 120,100] });
 		graph.add(n);
 		nodes[i-1] = n;
 	}
@@ -115,7 +115,7 @@ function benchmark()
 	var nodes = [];
 	for(var i = 0; i < num_nodes; i++)
 	{
-		var n = LiteGraph.createNode("basic/watch",null, {pos: [(2000 * Math.random())|0, (2000 * Math.random())|0] });
+		var n = Lite.createNode("basic/watch",null, {pos: [(2000 * Math.random())|0, (2000 * Math.random())|0] });
 		graph.add(n);
 		nodes.push(n);
 	}
@@ -147,7 +147,7 @@ function TestWidgetsNode()
 
 TestWidgetsNode.title = "Widgets";
 
-LiteGraph.registerNodeType("features/widgets", TestWidgetsNode );
+Lite.registerNodeType("features/widgets", TestWidgetsNode );
 
 //Show value inside the debug console
 function TestSpecialNode()
@@ -162,7 +162,7 @@ function TestSpecialNode()
 }
 
 TestSpecialNode.title = "Custom Shapes";
-TestSpecialNode.title_mode = LiteGraph.TRANSPARENT_TITLE;
+TestSpecialNode.title_mode = Lite.TRANSPARENT_TITLE;
 TestSpecialNode.slot_start_y = 20;
 
 TestSpecialNode.prototype.onDrawBackground = function(ctx)
@@ -229,7 +229,7 @@ TestSpecialNode.prototype.onBounding = function(rect)
 		rect[3] = this.size[1] + 20;
 }
 
-LiteGraph.registerNodeType("features/shape", TestSpecialNode );
+Lite.registerNodeType("features/shape", TestSpecialNode );
 
 
 
@@ -246,7 +246,7 @@ function TestSlotsNode()
 TestSlotsNode.title = "Flat Slots";
 
 
-LiteGraph.registerNodeType("features/slots", TestSlotsNode );
+Lite.registerNodeType("features/slots", TestSlotsNode );
 
 
 //Show value inside the debug console
@@ -272,7 +272,7 @@ function TestPropertyEditorsNode()
 TestPropertyEditorsNode.title = "Properties";
 
 
-LiteGraph.registerNodeType("features/properties_editor", TestPropertyEditorsNode );
+Lite.registerNodeType("features/properties_editor", TestPropertyEditorsNode );
 
 
 
@@ -305,5 +305,5 @@ function LargeInputNode()
 LargeInputNode.title = "Large Input Node";
 
 
-LiteGraph.registerNodeType("features/largeinput_editor", LargeInputNode);
+Lite.registerNodeType("features/largeinput_editor", LargeInputNode);
 

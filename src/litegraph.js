@@ -2,7 +2,7 @@
 import { LGraphNode } from "./lgraphnode.js";
 
 /**
- * @class LiteGraph
+ * @class Lite
  *
  * @NOTE:
  * Try to avoid adding things to this class.
@@ -15,7 +15,7 @@ import { LGraphNode } from "./lgraphnode.js";
  *
  */
 
-export var LiteGraph = new class {
+export var Lite = new class {
     constructor() {
         // @TODO: This is awful, and these settings need to be put where they belong.
 
@@ -235,7 +235,7 @@ export var LiteGraph = new class {
         }
         base_class.type = type;
 
-        if (LiteGraph.debug) {
+        if (Lite.debug) {
             console.log("Node registered: " + type);
         }
 
@@ -260,7 +260,7 @@ export var LiteGraph = new class {
         });
 
         const prev = this.registered_node_types[type];
-        if(prev && LiteGraph.debug) {
+        if(prev && Lite.debug) {
             console.log("replacing node type: " + type);
         }
         if( !Object.prototype.hasOwnProperty.call( base_class.prototype, "shape") ) {
@@ -271,16 +271,16 @@ export var LiteGraph = new class {
                             delete this._shape;
                             break;
                         case "box":
-                            this._shape = LiteGraph.BOX_SHAPE;
+                            this._shape = Lite.BOX_SHAPE;
                             break;
                         case "round":
-                            this._shape = LiteGraph.ROUND_SHAPE;
+                            this._shape = Lite.ROUND_SHAPE;
                             break;
                         case "circle":
-                            this._shape = LiteGraph.CIRCLE_SHAPE;
+                            this._shape = Lite.CIRCLE_SHAPE;
                             break;
                         case "card":
-                            this._shape = LiteGraph.CARD_SHAPE;
+                            this._shape = Lite.CARD_SHAPE;
                             break;
                         default:
                             this._shape = v;
@@ -309,14 +309,14 @@ export var LiteGraph = new class {
         if (base_class.constructor.name) {
             this.Nodes[classname] = base_class;
         }
-        LiteGraph.onNodeTypeRegistered?.(type, base_class);
+        Lite.onNodeTypeRegistered?.(type, base_class);
         if (prev) {
-            LiteGraph.onNodeTypeReplaced?.(type, base_class, prev);
+            Lite.onNodeTypeReplaced?.(type, base_class, prev);
         }
 
         // warnings
         if (base_class.prototype.onPropertyChange) {
-            console.warn("LiteGraph node class " +
+            console.warn("Lite node class " +
                     type +
                     " has onPropertyChange method, it must be called onPropertyChanged with d at the end");
         }
@@ -465,7 +465,7 @@ export var LiteGraph = new class {
      * @param {Object} properties [optional] properties to be configurable
      */
     wrapFunctionAsNode(name, func, param_types, return_type, properties) {
-        const names = LiteGraph.getParameterNames(func);
+        const names = Lite.getParameterNames(func);
 
         const code = names.map((name, i) => {
             const paramType = param_types?.[i] ? `'${param_types[i]}'` : "0";
@@ -535,7 +535,7 @@ export var LiteGraph = new class {
         const base_class = this.registered_node_types[type] ?? null;
 
         if (!base_class) {
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.log(`GraphNode type "${type}" not registered.`);
             }
             return null;
@@ -545,7 +545,7 @@ export var LiteGraph = new class {
 
         let node = null;
 
-        if (LiteGraph.catch_exceptions) {
+        if (Lite.catch_exceptions) {
             try {
                 node = new base_class(title);
             } catch (err) {
@@ -562,8 +562,8 @@ export var LiteGraph = new class {
         node.properties_info ??= [];
         node.flags ??= {};
         node.size ??= node.computeSize();
-        node.pos ??= LiteGraph.DEFAULT_POSITION.concat();
-        node.mode ??= LiteGraph.ALWAYS;
+        node.pos ??= Lite.DEFAULT_POSITION.concat();
+        node.mode ??= Lite.ALWAYS;
 
         // extra options
         Object.assign(node, options);
@@ -655,7 +655,7 @@ export var LiteGraph = new class {
             }
 
             try {
-                if (LiteGraph.debug) {
+                if (Lite.debug) {
                     console.log("Reloading: " + src);
                 }
                 var dynamicScript = document.createElement("script");
@@ -664,16 +664,16 @@ export var LiteGraph = new class {
                 docHeadObj.appendChild(dynamicScript);
                 docHeadObj.removeChild(script_files[i]);
             } catch (err) {
-                if (LiteGraph.throw_errors) {
+                if (Lite.throw_errors) {
                     throw err;
                 }
-                if (LiteGraph.debug) {
+                if (Lite.debug) {
                     console.log("Error while reloading " + src);
                 }
             }
         }
 
-        if (LiteGraph.debug) {
+        if (Lite.debug) {
             console.log("Nodes reloaded");
         }
     }
@@ -716,7 +716,7 @@ export var LiteGraph = new class {
         if (type_a === "" || type_a === "*") type_a = 0;
         if (type_b === "" || type_b === "*") type_b = 0;
 
-        if (!type_a || !type_b || type_a === type_b || (type_a === LiteGraph.EVENT && type_b === LiteGraph.ACTION)) {
+        if (!type_a || !type_b || type_a === type_b || (type_a === Lite.EVENT && type_b === Lite.ACTION)) {
             return true;
         }
 
@@ -773,8 +773,8 @@ export var LiteGraph = new class {
 
         type = type || "text";
         if( url.constructor === String ) {
-            if (url.substr(0, 4) == "http" && LiteGraph.proxy) {
-                url = LiteGraph.proxy + url.substr(url.indexOf(":") + 3);
+            if (url.substr(0, 4) == "http" && Lite.proxy) {
+                url = Lite.proxy + url.substr(url.indexOf(":") + 3);
             }
             return fetch(url)
                 .then((response) => {
@@ -1011,16 +1011,16 @@ export var LiteGraph = new class {
 
 // timer that works everywhere
 if (typeof performance != "undefined") {
-    LiteGraph.getTime = performance.now.bind(performance);
+    Lite.getTime = performance.now.bind(performance);
 } else if (typeof Date != "undefined" && Date.now) {
-    LiteGraph.getTime = Date.now.bind(Date);
+    Lite.getTime = Date.now.bind(Date);
 } else if (typeof process != "undefined") {
-    LiteGraph.getTime = () => {
+    Lite.getTime = () => {
         var t = process.hrtime();
         return t[0] * 0.001 + t[1] * 1e-6;
     };
 } else {
-    LiteGraph.getTime = function getTime() {
+    Lite.getTime = function getTime() {
         return new Date().getTime();
     };
 }

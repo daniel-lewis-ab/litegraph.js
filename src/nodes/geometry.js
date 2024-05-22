@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 // @BUG: Gotta finish cleaning the file up so this doesn't cause the whole thing to crash
 // import { GL } from "../../editor/js/libs/litegl.js";
@@ -485,7 +485,7 @@ class LGraphPoints3D {
     static title = "list of points";
     static desc = "returns an array of points";
 }
-LiteGraph.registerNodeType("geometry/points3D", LGraphPoints3D);
+Lite.registerNodeType("geometry/points3D", LGraphPoints3D);
 
 
 class LGraphPointsToInstances {
@@ -622,7 +622,7 @@ class LGraphPointsToInstances {
 
     static title = "points to inst";
 }
-LiteGraph.registerNodeType("geometry/points_to_instances", LGraphPointsToInstances);
+Lite.registerNodeType("geometry/points_to_instances", LGraphPointsToInstances);
 
 
 class LGraphGeometryTransform {
@@ -750,7 +750,7 @@ class LGraphGeometryTransform {
 
     static title = "Transform";
 }
-LiteGraph.registerNodeType("geometry/transform", LGraphGeometryTransform);
+Lite.registerNodeType("geometry/transform", LGraphGeometryTransform);
 
 
 class LGraphGeometryPolygon {
@@ -813,7 +813,7 @@ class LGraphGeometryPolygon {
     }
     static title = "Polygon";
 }
-LiteGraph.registerNodeType("geometry/polygon", LGraphGeometryPolygon);
+Lite.registerNodeType("geometry/polygon", LGraphGeometryPolygon);
 
 
 class LGraphGeometryExtrude {
@@ -907,7 +907,7 @@ class LGraphGeometryExtrude {
     }
     static title = "extrude";
 }
-LiteGraph.registerNodeType("geometry/extrude", LGraphGeometryExtrude);
+Lite.registerNodeType("geometry/extrude", LGraphGeometryExtrude);
 
 
 class LGraphGeometryEval {
@@ -1011,7 +1011,7 @@ class LGraphGeometryEval {
     static desc = "eval code";
     static widgets_info = { code: { widget: "code" } };
 }
-LiteGraph.registerNodeType("geometry/eval", LGraphGeometryEval);
+Lite.registerNodeType("geometry/eval", LGraphGeometryEval);
 
 
 /*
@@ -1079,7 +1079,7 @@ LGraphGeometryDisplace.prototype.onExecute = function() {
     this.setOutputData(0,this.geometry);
 }
 
-LiteGraph.registerNodeType( "geometry/displace", LGraphGeometryDisplace );
+Lite.registerNodeType( "geometry/displace", LGraphGeometryDisplace );
 */
 
 class LGraphConnectPoints {
@@ -1167,7 +1167,7 @@ class LGraphConnectPoints {
     static title = "connect points";
     static desc = "adds indices between near points";
 }
-LiteGraph.registerNodeType("geometry/connectPoints", LGraphConnectPoints);
+Lite.registerNodeType("geometry/connectPoints", LGraphConnectPoints);
 
 
 // Works with Litegl.js to create WebGL nodes
@@ -1206,7 +1206,7 @@ if (typeof GL != "undefined") {
         static title = "to geometry";
         static desc = "converts a mesh to geometry";
     }
-    LiteGraph.registerNodeType("geometry/toGeometry", LGraphToGeometry);
+    Lite.registerNodeType("geometry/toGeometry", LGraphToGeometry);
 
 
     class LGraphGeometryToMesh {
@@ -1278,7 +1278,7 @@ if (typeof GL != "undefined") {
         }
         static title = "Geo to Mesh";
     }
-    LiteGraph.registerNodeType("geometry/toMesh", LGraphGeometryToMesh);
+    Lite.registerNodeType("geometry/toMesh", LGraphGeometryToMesh);
 
 
     class LGraphRenderMesh {
@@ -1310,7 +1310,7 @@ if (typeof GL != "undefined") {
             if (!mesh) return;
 
             if (!LGraphRender.onRequestCameraMatrices) {
-                console.warn("cannot render geometry, LiteGraph.onRequestCameraMatrices is null, remember to fill this with a callback(view_matrix, projection_matrix,viewprojection_matrix) to use 3D rendering from the graph");
+                console.warn("cannot render geometry, Lite.onRequestCameraMatrices is null, remember to fill this with a callback(view_matrix, projection_matrix,viewprojection_matrix) to use 3D rendering from the graph");
                 return;
             }
 
@@ -1388,7 +1388,7 @@ if (typeof GL != "undefined") {
             color: { widget: "color" },
         };
     }
-    LiteGraph.registerNodeType("geometry/render_mesh", LGraphRenderMesh);
+    Lite.registerNodeType("geometry/render_mesh", LGraphRenderMesh);
 
 
     class LGraphGeometryPrimitive {
@@ -1526,7 +1526,7 @@ if (typeof GL != "undefined") {
             },
         };
     }
-    LiteGraph.registerNodeType("geometry/mesh_primitive", LGraphGeometryPrimitive);
+    Lite.registerNodeType("geometry/mesh_primitive", LGraphGeometryPrimitive);
 
 
     class LGraphRenderPoints {
@@ -1593,7 +1593,7 @@ if (typeof GL != "undefined") {
                 this.updateMesh(geometry);
 
             if (!LGraphRender.onRequestCameraMatrices) {
-                console.warn("cannot render geometry, LiteGraph.onRequestCameraMatrices is null, remember to fill this with a callback(view_matrix, projection_matrix,viewprojection_matrix) to use 3D rendering from the graph");
+                console.warn("cannot render geometry, Lite.onRequestCameraMatrices is null, remember to fill this with a callback(view_matrix, projection_matrix,viewprojection_matrix) to use 3D rendering from the graph");
                 return;
             }
 
@@ -1736,7 +1736,7 @@ if (typeof GL != "undefined") {
             }
         `;
     }
-    LiteGraph.registerNodeType("geometry/render_points", LGraphRenderPoints);
+    Lite.registerNodeType("geometry/render_points", LGraphRenderPoints);
 
 
     // based on https://inconvergent.net/2019/depth-of-field/
@@ -1805,7 +1805,7 @@ if (typeof GL != "undefined") {
 
 		if(!LGraphRender.onRequestCameraMatrices)
 		{
-			console.warn("cannot render geometry, LiteGraph.onRequestCameraMatrices is null, remember to fill this with a callback(view_matrix, projection_matrix,viewprojection_matrix) to use 3D rendering from the graph");
+			console.warn("cannot render geometry, Lite.onRequestCameraMatrices is null, remember to fill this with a callback(view_matrix, projection_matrix,viewprojection_matrix) to use 3D rendering from the graph");
 			return;
 		}
 
@@ -1863,7 +1863,7 @@ if (typeof GL != "undefined") {
 		gl.depthMask( true );
 	}
 
-	LiteGraph.registerNodeType( "geometry/render_dof", LGraphRenderGeometryDOF );
+	Lite.registerNodeType( "geometry/render_dof", LGraphRenderGeometryDOF );
 
 	LGraphRenderGeometryDOF.vertex_shader_code = '\
 		precision mediump float;\n\

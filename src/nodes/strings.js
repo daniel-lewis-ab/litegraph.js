@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 
 function toString(a) {
@@ -11,13 +11,13 @@ function toString(a) {
     }
     return String(a);
 }
-LiteGraph.wrapFunctionAsNode("string/toString", toString, [""], "string");
+Lite.wrapFunctionAsNode("string/toString", toString, [""], "string");
 
 
 function compare(a, b) {
     return a == b;
 }
-LiteGraph.wrapFunctionAsNode(
+Lite.wrapFunctionAsNode(
     "string/compare",
     compare,
     ["string", "string"],
@@ -34,7 +34,7 @@ function concatenate(a, b) {
     }
     return a + "" + b;
 }
-LiteGraph.wrapFunctionAsNode(
+Lite.wrapFunctionAsNode(
     "string/concatenate",
     concatenate,
     ["string", "string"],
@@ -48,7 +48,7 @@ function contains(a, b) {
     }
     return a.indexOf(b) != -1;
 }
-LiteGraph.wrapFunctionAsNode(
+Lite.wrapFunctionAsNode(
     "string/contains",
     contains,
     ["string", "string"],
@@ -62,7 +62,7 @@ function toUpperCase(a) {
     }
     return a;
 }
-LiteGraph.wrapFunctionAsNode(
+Lite.wrapFunctionAsNode(
     "string/toUpperCase",
     toUpperCase,
     ["string"],
@@ -84,7 +84,7 @@ function split(str, separator) {
     }
     return null;
 }
-LiteGraph.wrapFunctionAsNode(
+Lite.wrapFunctionAsNode(
     "string/split",
     split,
     ["string,array", "string"],
@@ -99,7 +99,7 @@ function toFixed(a) {
     }
     return a;
 }
-LiteGraph.wrapFunctionAsNode("string/toFixed", toFixed, ["number"], "string", { precision: 0 });
+Lite.wrapFunctionAsNode("string/toFixed", toFixed, ["number"], "string", { precision: 0 });
 
 
 class StringToTable {
@@ -131,4 +131,4 @@ class StringToTable {
         this.setOutputData(1, this._table ? this._table.length : 0);
     }
 }
-LiteGraph.registerNodeType("string/toTable", StringToTable);
+Lite.registerNodeType("string/toTable", StringToTable);

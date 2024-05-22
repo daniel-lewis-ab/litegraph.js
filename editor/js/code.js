@@ -1,12 +1,12 @@
 
-import { LiteGraph } from "../../src/litegraph.js";
+import { Lite } from "../../src/litegraph.js";
 import { Editor } from "../../src/litegraph-editor.js";
 
 export var gl;
 
 var webgl_canvas = null;
 
-LiteGraph.node_images_path = "../nodes_data/";
+Lite.node_images_path = "../nodes_data/";
 
 var editor = new Editor("main",{miniwindow:false});
 window.graphcanvas = editor.graphcanvas;
@@ -38,7 +38,7 @@ function updateEditorHiPPICanvas() {
 }
 
 //enable scripting
-LiteGraph.allow_scripts = true;
+Lite.allow_scripts = true;
 
 //test
 //editor.graphcanvas.viewport = [200,200,400,400];

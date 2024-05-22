@@ -1,4 +1,4 @@
-import { LiteGraph } from "./litegraph.js";
+import { Lite } from "./litegraph.js";
 import { LGraphCanvas } from "./lgraphcanvas.js";
 import { LGraphNode } from "./lgraphnode.js";
 
@@ -111,7 +111,7 @@ export class LGraphGroup {
 
         this._nodes = nodes.filter((node) => {
             node.getBounding(node_bounding);
-            return LiteGraph.overlapBounding(this._bounding, node_bounding);
+            return Lite.overlapBounding(this._bounding, node_bounding);
         });
     }
 

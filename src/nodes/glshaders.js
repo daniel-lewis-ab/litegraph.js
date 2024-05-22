@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 import { LGraph } from "../lgraph.js";
 import { GL } from "../../editor/js/libs/litegl.js";
 import { gl } from "../../editor/js/code.js";
@@ -6,7 +6,7 @@ import { LGraphTexture } from "./gltextures.js";
 
 var SHADERNODES_COLOR = "#345";
 
-var LGShaders = (LiteGraph.Shaders = {});
+var LGShaders = (Lite.Shaders = {});
 
 var GLSL_types = (LGShaders.GLSL_types = [
     "float",
@@ -155,7 +155,7 @@ function registerShaderNode(type, node_ctor) {
         }
     */
 
-    LiteGraph.registerNodeType("shader::" + type, node_ctor);
+    Lite.registerNodeType("shader::" + type, node_ctor);
 }
 
 function getShaderNodeVarName(node, name) {
@@ -243,7 +243,7 @@ export function valueToGLSL(
 }
 
 // makes sure that a var is of a type, and if not, it converts it
-var varToTypeGLSL = (LiteGraph.varToTypeGLSL = function varToTypeGLSL(
+var varToTypeGLSL = (Lite.varToTypeGLSL = function varToTypeGLSL(
     v,
     input_type,
     output_type,
@@ -317,7 +317,7 @@ var varToTypeGLSL = (LiteGraph.varToTypeGLSL = function varToTypeGLSL(
 });
 
 // used to plug incompatible stuff
-var convertVarToGLSLType = (LiteGraph.convertVarToGLSLType =
+var convertVarToGLSLType = (Lite.convertVarToGLSLType =
     function convertVarToGLSLType(varname, type, target_type) {
         if (type == target_type) return varname;
         if (type == "float") return target_type + "(" + varname + ")";
@@ -444,7 +444,7 @@ export class LGShaderContext {
         var finalcode = this.computeShaderCode(graph);
         console.log(finalcode.vs_code, finalcode.fs_code);
 
-        if (!LiteGraph.catch_exceptions) {
+        if (!Lite.catch_exceptions) {
             this._shader_error = true;
             if (shader)
                 shader.updateShader(finalcode.vs_code, finalcode.fs_code);
@@ -529,11 +529,11 @@ class LGraphShaderGraph {
         var inputNode = this.subgraph.findNodesByType("shader::input/uniform")[0];
         inputNode.pos = [200, 300];
 
-        var sampler = LiteGraph.createNode("shader::texture/sampler2D");
+        var sampler = Lite.createNode("shader::texture/sampler2D");
         sampler.pos = [400, 300];
         this.subgraph.add(sampler);
 
-        var outnode = LiteGraph.createNode("shader::output/fragcolor");
+        var outnode = Lite.createNode("shader::output/fragcolor");
         outnode.pos = [600, 300];
         this.subgraph.add(outnode);
 
@@ -660,7 +660,7 @@ class LGraphShaderGraph {
 
     // add input node inside subgraph
     onInputAdded(slot_info) {
-        var subnode = LiteGraph.createNode("shader::input/uniform");
+        var subnode = Lite.createNode("shader::input/uniform");
         subnode.setProperty("name", slot_info.name);
         subnode.setProperty("type", slot_info.type);
         this.subgraph.add(subnode);
@@ -681,8 +681,8 @@ class LGraphShaderGraph {
         var num_outputs = this.outputs ? this.outputs.length : 0;
         return [
             200,
-            Math.max(num_inputs, num_outputs) * LiteGraph.NODE_SLOT_HEIGHT +
-                LiteGraph.NODE_TITLE_HEIGHT +
+            Math.max(num_inputs, num_outputs) * Lite.NODE_SLOT_HEIGHT +
+                Lite.NODE_TITLE_HEIGHT +
                 10,
         ];
     }
@@ -701,43 +701,43 @@ class LGraphShaderGraph {
         // allows to preview the node if the canvas is a webgl canvas
         var tex = this.getOutputData(0);
         var inputs_y = this.inputs
-            ? this.inputs.length * LiteGraph.NODE_SLOT_HEIGHT
+            ? this.inputs.length * Lite.NODE_SLOT_HEIGHT
             : 0;
         if (
             tex &&
             ctx == tex.gl &&
-            this.size[1] > inputs_y + LiteGraph.NODE_TITLE_HEIGHT
+            this.size[1] > inputs_y + Lite.NODE_TITLE_HEIGHT
         ) {
             ctx.drawImage(
                 tex,
                 10,
                 y,
                 this.size[0] - 20,
-                this.size[1] - inputs_y - LiteGraph.NODE_TITLE_HEIGHT,
+                this.size[1] - inputs_y - Lite.NODE_TITLE_HEIGHT,
             );
         }
 
-        var y = this.size[1] - LiteGraph.NODE_TITLE_HEIGHT + 0.5;
+        var y = this.size[1] - Lite.NODE_TITLE_HEIGHT + 0.5;
 
         // button
-        var over = LiteGraph.isInsideRectangle(
+        var over = Lite.isInsideRectangle(
             pos[0],
             pos[1],
             this.pos[0],
             this.pos[1] + y,
             this.size[0],
-            LiteGraph.NODE_TITLE_HEIGHT,
+            Lite.NODE_TITLE_HEIGHT,
         );
         ctx.fillStyle = over ? "#555" : "#222";
         ctx.beginPath();
-        if (this._shape == LiteGraph.BOX_SHAPE)
-            ctx.rect(0, y, this.size[0] + 1, LiteGraph.NODE_TITLE_HEIGHT);
+        if (this._shape == Lite.BOX_SHAPE)
+            ctx.rect(0, y, this.size[0] + 1, Lite.NODE_TITLE_HEIGHT);
         else
             ctx.roundRect(
                 0,
                 y,
                 this.size[0] + 1,
-                LiteGraph.NODE_TITLE_HEIGHT,
+                Lite.NODE_TITLE_HEIGHT,
                 0,
                 8,
             );
@@ -751,7 +751,7 @@ class LGraphShaderGraph {
     }
 
     onMouseDown(e, localpos, graphcanvas) {
-        var y = this.size[1] - LiteGraph.NODE_TITLE_HEIGHT + 0.5;
+        var y = this.size[1] - Lite.NODE_TITLE_HEIGHT + 0.5;
         if (localpos[1] > y) {
             graphcanvas.showSubgraphPropertiesDialog(this);
         }
@@ -776,7 +776,7 @@ class LGraphShaderGraph {
         return options;
     }
 }
-LiteGraph.registerNodeType("texture/shaderGraph", LGraphShaderGraph);
+Lite.registerNodeType("texture/shaderGraph", LGraphShaderGraph);
 
 /*
     * @TODO: Either write it or excise it.

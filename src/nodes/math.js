@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 // Converter
 class Converter {
@@ -75,7 +75,7 @@ class Converter {
         ];
     }
 }
-LiteGraph.registerNodeType("math/converter", Converter);
+Lite.registerNodeType("math/converter", Converter);
 
 
 // Bypass
@@ -95,7 +95,7 @@ class Bypass {
         this.setOutputData(0, v);
     }
 }
-LiteGraph.registerNodeType("math/bypass", Bypass);
+Lite.registerNodeType("math/bypass", Bypass);
 
 
 class ToNumber {
@@ -113,7 +113,7 @@ class ToNumber {
         this.setOutputData(0, Number(v));
     }
 }
-LiteGraph.registerNodeType("math/to_number", ToNumber);
+Lite.registerNodeType("math/to_number", ToNumber);
 
 
 class MathRange {
@@ -180,7 +180,7 @@ class MathRange {
         this._last_v =
             ((v - in_min) / (in_max - in_min)) * (out_max - out_min) + out_min;
         this.setOutputData(0, this._last_v);
-        this.setOutputData(1, LiteGraph.clamp(this._last_v, out_min, out_max));
+        this.setOutputData(1, Lite.clamp(this._last_v, out_min, out_max));
     }
 
     onDrawBackground(_ctx) {
@@ -201,7 +201,7 @@ class MathRange {
         ];
     }
 }
-LiteGraph.registerNodeType("math/range", MathRange);
+Lite.registerNodeType("math/range", MathRange);
 
 
 class MathRand {
@@ -246,7 +246,7 @@ class MathRand {
         ];
     }
 }
-LiteGraph.registerNodeType("math/rand", MathRand);
+Lite.registerNodeType("math/rand", MathRand);
 
 
 // basic continuous noise
@@ -320,7 +320,7 @@ class MathNoise {
 
     static data = null;
 }
-LiteGraph.registerNodeType("math/noise", MathNoise);
+Lite.registerNodeType("math/noise", MathNoise);
 
 
 // generates spikes every random time
@@ -360,7 +360,7 @@ class MathSpikes {
         this.setOutputData(0, v);
     }
 }
-LiteGraph.registerNodeType("math/spikes", MathSpikes);
+Lite.registerNodeType("math/spikes", MathSpikes);
 
 
 // Math clamp
@@ -402,7 +402,7 @@ class MathClamp {
         return code;
     }
 }
-LiteGraph.registerNodeType("math/clamp", MathClamp);
+Lite.registerNodeType("math/clamp", MathClamp);
 
 
 class MathLerp {
@@ -442,7 +442,7 @@ class MathLerp {
         return [["f", "number"]];
     }
 }
-LiteGraph.registerNodeType("math/lerp", MathLerp);
+Lite.registerNodeType("math/lerp", MathLerp);
 
 
 class MathAbs {
@@ -464,7 +464,7 @@ class MathAbs {
         this.setOutputData(0, Math.abs(v));
     }
 }
-LiteGraph.registerNodeType("math/abs", MathAbs);
+Lite.registerNodeType("math/abs", MathAbs);
 
 
 class MathFloor {
@@ -486,7 +486,7 @@ class MathFloor {
         this.setOutputData(0, Math.floor(v));
     }
 }
-LiteGraph.registerNodeType("math/floor", MathFloor);
+Lite.registerNodeType("math/floor", MathFloor);
 
 
 // Math frac
@@ -509,7 +509,7 @@ class MathFrac {
         this.setOutputData(0, v % 1);
     }
 }
-LiteGraph.registerNodeType("math/frac", MathFrac);
+Lite.registerNodeType("math/frac", MathFrac);
 
 
 class MathSmoothStep {
@@ -534,14 +534,14 @@ class MathSmoothStep {
         var edge1 = this.properties.B;
 
         // Scale, bias and saturate x to 0..1 range
-        v = LiteGraph.clamp((v - edge0) / (edge1 - edge0), 0.0, 1.0);
+        v = Lite.clamp((v - edge0) / (edge1 - edge0), 0.0, 1.0);
         // Evaluate polynomial
         v = v * v * (3 - 2 * v);
 
         this.setOutputData(0, v);
     }
 }
-LiteGraph.registerNodeType("math/smoothstep", MathSmoothStep);
+Lite.registerNodeType("math/smoothstep", MathSmoothStep);
 
 
 class MathScale {
@@ -563,7 +563,7 @@ class MathScale {
         }
     }
 }
-LiteGraph.registerNodeType("math/scale", MathScale);
+Lite.registerNodeType("math/scale", MathScale);
 
 
 class Gate {
@@ -583,7 +583,7 @@ class Gate {
         this.setOutputData(0, this.getInputData(v ? 1 : 2));
     }
 }
-LiteGraph.registerNodeType("math/gate", Gate);
+Lite.registerNodeType("math/gate", Gate);
 
 
 class MathAverageFilter {
@@ -643,7 +643,7 @@ class MathAverageFilter {
         }
     }
 }
-LiteGraph.registerNodeType("math/average", MathAverageFilter);
+Lite.registerNodeType("math/average", MathAverageFilter);
 
 
 class MathTendTo {
@@ -673,7 +673,7 @@ class MathTendTo {
         this.setOutputData(0, this._value);
     }
 }
-LiteGraph.registerNodeType("math/tendTo", MathTendTo);
+Lite.registerNodeType("math/tendTo", MathTendTo);
 
 
 class MathOperation {
@@ -761,7 +761,7 @@ class MathOperation {
         ctx.fillText(
             this.properties.OP,
             this.size[0] * 0.5,
-            (this.size[1] + LiteGraph.NODE_TITLE_HEIGHT) * 0.5,
+            (this.size[1] + Lite.NODE_TITLE_HEIGHT) * 0.5,
         );
         ctx.textAlign = "left";
     }
@@ -809,12 +809,12 @@ class MathOperation {
 
     static size = [100, 60];
 }
-LiteGraph.registerNodeType("math/operation", MathOperation);
-LiteGraph.registerSearchboxExtra("math/operation", "MAX", {
+Lite.registerNodeType("math/operation", MathOperation);
+Lite.registerSearchboxExtra("math/operation", "MAX", {
     properties: { OP: "max" },
     title: "MAX()",
 });
-LiteGraph.registerSearchboxExtra("math/operation", "MIN", {
+Lite.registerSearchboxExtra("math/operation", "MIN", {
     properties: { OP: "min" },
     title: "MIN()",
 });
@@ -890,28 +890,28 @@ class MathCompare {
         ];
     }
 }
-LiteGraph.registerNodeType("math/compare", MathCompare);
-LiteGraph.registerSearchboxExtra("math/compare", "==", {
+Lite.registerNodeType("math/compare", MathCompare);
+Lite.registerSearchboxExtra("math/compare", "==", {
     outputs: [["A==B", "boolean"]],
     title: "A==B",
 });
-LiteGraph.registerSearchboxExtra("math/compare", "!=", {
+Lite.registerSearchboxExtra("math/compare", "!=", {
     outputs: [["A!=B", "boolean"]],
     title: "A!=B",
 });
-LiteGraph.registerSearchboxExtra("math/compare", ">", {
+Lite.registerSearchboxExtra("math/compare", ">", {
     outputs: [["A>B", "boolean"]],
     title: "A>B",
 });
-LiteGraph.registerSearchboxExtra("math/compare", "<", {
+Lite.registerSearchboxExtra("math/compare", "<", {
     outputs: [["A<B", "boolean"]],
     title: "A<B",
 });
-LiteGraph.registerSearchboxExtra("math/compare", ">=", {
+Lite.registerSearchboxExtra("math/compare", ">=", {
     outputs: [["A>=B", "boolean"]],
     title: "A>=B",
 });
-LiteGraph.registerSearchboxExtra("math/compare", "<=", {
+Lite.registerSearchboxExtra("math/compare", "<=", {
     outputs: [["A<=B", "boolean"]],
     title: "A<=B",
 });
@@ -997,7 +997,7 @@ class MathCondition {
         values: MathCondition.values,
     };
 }
-LiteGraph.registerNodeType("math/condition", MathCondition);
+Lite.registerNodeType("math/condition", MathCondition);
 
 
 class MathBranch {
@@ -1024,7 +1024,7 @@ class MathBranch {
         }
     }
 }
-LiteGraph.registerNodeType("math/branch", MathBranch);
+Lite.registerNodeType("math/branch", MathBranch);
 
 
 class MathAccumulate {
@@ -1053,7 +1053,7 @@ class MathAccumulate {
         this.setOutputData(0, this.properties.value);
     }
 }
-LiteGraph.registerNodeType("math/accumulate", MathAccumulate);
+Lite.registerNodeType("math/accumulate", MathAccumulate);
 
 
 class MathTrigonometry {
@@ -1134,16 +1134,16 @@ class MathTrigonometry {
         ];
     }
 }
-LiteGraph.registerNodeType("math/trigonometry", MathTrigonometry);
-LiteGraph.registerSearchboxExtra("math/trigonometry", "SIN()", {
+Lite.registerNodeType("math/trigonometry", MathTrigonometry);
+Lite.registerSearchboxExtra("math/trigonometry", "SIN()", {
     outputs: [["sin", "number"]],
     title: "SIN()",
 });
-LiteGraph.registerSearchboxExtra("math/trigonometry", "COS()", {
+Lite.registerSearchboxExtra("math/trigonometry", "COS()", {
     outputs: [["cos", "number"]],
     title: "COS()",
 });
-LiteGraph.registerSearchboxExtra("math/trigonometry", "TAN()", {
+Lite.registerSearchboxExtra("math/trigonometry", "TAN()", {
     outputs: [["tan", "number"]],
     title: "TAN()",
 });
@@ -1168,14 +1168,14 @@ class MathFormula {
                 node.properties.formula = v;
             },
         );
-        this.addWidget("toggle", "allow", LiteGraph.allow_scripts, function (v) {
-            LiteGraph.allow_scripts = v;
+        this.addWidget("toggle", "allow", Lite.allow_scripts, function (v) {
+            Lite.allow_scripts = v;
         });
         this._func = null;
     }
 
     onExecute() {
-        if (!LiteGraph.allow_scripts) {
+        if (!Lite.allow_scripts) {
             return;
         }
 
@@ -1225,7 +1225,7 @@ class MathFormula {
 
     static size = [160, 100];
 }
-LiteGraph.registerNodeType("math/formula", MathFormula);
+Lite.registerNodeType("math/formula", MathFormula);
 
 
 class Math3DVec2ToXY {
@@ -1249,7 +1249,7 @@ class Math3DVec2ToXY {
         this.setOutputData(1, v[1]);
     }
 }
-LiteGraph.registerNodeType("math3d/vec2-to-xy", Math3DVec2ToXY);
+Lite.registerNodeType("math3d/vec2-to-xy", Math3DVec2ToXY);
 
 
 class Math3DXYToVec2 {
@@ -1284,7 +1284,7 @@ class Math3DXYToVec2 {
         this.setOutputData(0, data);
     }
 }
-LiteGraph.registerNodeType("math3d/xy-to-vec2", Math3DXYToVec2);
+Lite.registerNodeType("math3d/xy-to-vec2", Math3DXYToVec2);
 
 
 class Math3DVec3ToXYZ {
@@ -1310,7 +1310,7 @@ class Math3DVec3ToXYZ {
         this.setOutputData(2, v[2]);
     }
 }
-LiteGraph.registerNodeType("math3d/vec3-to-xyz", Math3DVec3ToXYZ);
+Lite.registerNodeType("math3d/vec3-to-xyz", Math3DVec3ToXYZ);
 
 
 class Math3DXYZToVec3 {
@@ -1351,7 +1351,7 @@ class Math3DXYZToVec3 {
         this.setOutputData(0, data);
     }
 }
-LiteGraph.registerNodeType("math3d/xyz-to-vec3", Math3DXYZToVec3);
+Lite.registerNodeType("math3d/xyz-to-vec3", Math3DXYZToVec3);
 
 
 class Math3DVec4ToXYZW {
@@ -1379,7 +1379,7 @@ class Math3DVec4ToXYZW {
         this.setOutputData(3, v[3]);
     }
 }
-LiteGraph.registerNodeType("math3d/vec4-to-xyzw", Math3DVec4ToXYZW);
+Lite.registerNodeType("math3d/vec4-to-xyzw", Math3DVec4ToXYZW);
 
 
 class Math3DXYZWToVec4 {
@@ -1426,4 +1426,4 @@ class Math3DXYZWToVec4 {
         this.setOutputData(0, data);
     }
 }
-LiteGraph.registerNodeType("math3d/xyzw-to-vec4", Math3DXYZWToVec4);
+Lite.registerNodeType("math3d/xyzw-to-vec4", Math3DXYZWToVec4);

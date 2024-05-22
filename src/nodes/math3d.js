@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 const DEG2RAD = 0.0174532925;
 
@@ -58,7 +58,7 @@ class Math3DMat4 {
     static temp_mat4 = new Float32Array(16);
     static temp_vec3 = new Float32Array(3);
 }
-LiteGraph.registerNodeType("math3d/mat4", Math3DMat4);
+Lite.registerNodeType("math3d/mat4", Math3DMat4);
 
 
 // Math 3D operation
@@ -147,7 +147,7 @@ class Math3DOperation {
         ctx.fillText(
             this.properties.OP,
             this.size[0] * 0.5,
-            (this.size[1] + LiteGraph.NODE_TITLE_HEIGHT) * 0.5,
+            (this.size[1] + Lite.NODE_TITLE_HEIGHT) * 0.5,
         );
         ctx.textAlign = "left";
     }
@@ -173,15 +173,15 @@ class Math3DOperation {
 
     static size = [100, 60];
 }
-LiteGraph.registerSearchboxExtra("math3d/operation", "CROSS()", {
+Lite.registerSearchboxExtra("math3d/operation", "CROSS()", {
     properties: { OP: "cross" },
     title: "CROSS()",
 });
-LiteGraph.registerSearchboxExtra("math3d/operation", "DOT()", {
+Lite.registerSearchboxExtra("math3d/operation", "DOT()", {
     properties: { OP: "dot" },
     title: "DOT()",
 });
-LiteGraph.registerNodeType("math3d/operation", Math3DOperation);
+Lite.registerNodeType("math3d/operation", Math3DOperation);
 
 
 class Math3DVec3Scale {
@@ -214,7 +214,7 @@ class Math3DVec3Scale {
         this.setOutputData(0, data);
     }
 }
-LiteGraph.registerNodeType("math3d/vec3-scale", Math3DVec3Scale);
+Lite.registerNodeType("math3d/vec3-scale", Math3DVec3Scale);
 
 
 class Math3DVec3Length {
@@ -236,7 +236,7 @@ class Math3DVec3Length {
         this.setOutputData(0, dist);
     }
 }
-LiteGraph.registerNodeType("math3d/vec3-length", Math3DVec3Length);
+Lite.registerNodeType("math3d/vec3-length", Math3DVec3Length);
 
 
 class Math3DVec3Normalize {
@@ -264,7 +264,7 @@ class Math3DVec3Normalize {
         this.setOutputData(0, data);
     }
 }
-LiteGraph.registerNodeType("math3d/vec3-normalize", Math3DVec3Normalize);
+Lite.registerNodeType("math3d/vec3-normalize", Math3DVec3Normalize);
 
 
 class Math3DVec3Lerp {
@@ -300,7 +300,7 @@ class Math3DVec3Lerp {
         this.setOutputData(0, data);
     }
 }
-LiteGraph.registerNodeType("math3d/vec3-lerp", Math3DVec3Lerp);
+Lite.registerNodeType("math3d/vec3-lerp", Math3DVec3Lerp);
 
 
 class Math3DVec3Dot {
@@ -328,7 +328,7 @@ class Math3DVec3Dot {
         this.setOutputData(0, dot);
     }
 }
-LiteGraph.registerNodeType("math3d/vec3-dot", Math3DVec3Dot);
+Lite.registerNodeType("math3d/vec3-dot", Math3DVec3Dot);
 
 
 // if glMatrix is installed...
@@ -364,7 +364,7 @@ if (glMatrix) {
             ];
         }
     }
-    LiteGraph.registerNodeType("math3d/quaternion", Math3DQuaternion);
+    Lite.registerNodeType("math3d/quaternion", Math3DQuaternion);
 
 
     class Math3DRotation {
@@ -397,7 +397,7 @@ if (glMatrix) {
             this.setOutputData(0, R);
         }
     }
-    LiteGraph.registerNodeType("math3d/rotation", Math3DRotation);
+    Lite.registerNodeType("math3d/rotation", Math3DRotation);
 
 
     class MathEulerToQuat {
@@ -425,7 +425,7 @@ if (glMatrix) {
             this.setOutputData(0, R);
         }
     }
-    LiteGraph.registerNodeType("math3d/euler_to_quat", MathEulerToQuat);
+    Lite.registerNodeType("math3d/euler_to_quat", MathEulerToQuat);
 
 
     class MathQuatToEuler {
@@ -449,7 +449,7 @@ if (glMatrix) {
             this.setOutputData(0, this._value);
         }
     }
-    LiteGraph.registerNodeType("math3d/quat_to_euler", MathQuatToEuler);
+    Lite.registerNodeType("math3d/quat_to_euler", MathQuatToEuler);
 
 
     // Math3D rotate vec3
@@ -480,7 +480,7 @@ if (glMatrix) {
             }
         }
     }
-    LiteGraph.registerNodeType("math3d/rotate_vec3", Math3DRotateVec3);
+    Lite.registerNodeType("math3d/rotate_vec3", Math3DRotateVec3);
 
 
     class Math3DMultQuat {
@@ -512,7 +512,7 @@ if (glMatrix) {
             this.setOutputData(0, R);
         }
     }
-    LiteGraph.registerNodeType("math3d/mult-quat", Math3DMultQuat);
+    Lite.registerNodeType("math3d/mult-quat", Math3DMultQuat);
 
 
     class Math3DQuatSlerp {
@@ -550,7 +550,7 @@ if (glMatrix) {
             this.setOutputData(0, R);
         }
     }
-    LiteGraph.registerNodeType("math3d/quat-slerp", Math3DQuatSlerp);
+    Lite.registerNodeType("math3d/quat-slerp", Math3DQuatSlerp);
 
 
     class Math3DRemapRange {
@@ -598,7 +598,7 @@ if (glMatrix) {
 
             for (var i = 0; i < 3; ++i) {
                 var r = range_max[i] - range_min[i];
-                this._clamped[i] = LiteGraph.clamp(
+                this._clamped[i] = Lite.clamp(
                     this._value[i],
                     range_min[i],
                     range_max[i],
@@ -609,7 +609,7 @@ if (glMatrix) {
                 }
 
                 var n = (this._value[i] - range_min[i]) / r;
-                if (this.properties.clamp) n = LiteGraph.clamp(n, 0, 1);
+                if (this.properties.clamp) n = Lite.clamp(n, 0, 1);
                 var t = target_max[i] - target_min[i];
                 this._value[i] = target_min[i] + n * t;
             }
@@ -618,9 +618,9 @@ if (glMatrix) {
             this.setOutputData(1, this._clamped);
         }
     }
-    LiteGraph.registerNodeType("math3d/remap_range", Math3DRemapRange);
+    Lite.registerNodeType("math3d/remap_range", Math3DRemapRange);
 
 // glMatrix
-} else if (LiteGraph.debug) {
+} else if (Lite.debug) {
     console.warn("No glmatrix found, some Math3D nodes may not work");
 }

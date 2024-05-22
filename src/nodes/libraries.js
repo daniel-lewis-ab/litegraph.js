@@ -1,12 +1,12 @@
 
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 // https://api.cdnjs.com/libraries
 
-LiteGraph.libraries_known = {
+Lite.libraries_known = {
     // "jquery": {"obj":"jQuery","name":"jquery", "latest":"..URL.."}
 };
-LiteGraph.libraries_loaded = {
+Lite.libraries_loaded = {
     // "vue":{},
 };
 
@@ -17,14 +17,14 @@ LiteGraph.libraries_loaded = {
 class CDNLibSearch {
     constructor() {
         var that = this;
-        this.addInput("search", LiteGraph.ACTION);
+        this.addInput("search", Lite.ACTION);
         // this.addInput("name", "string"); in optionals
         this.addProperty("name", "", "string");
-        this.addOutput("ready", LiteGraph.EVENT);
+        this.addOutput("ready", Lite.EVENT);
         this.addOutput("results", "array");
         this.addOutput("first name", "object");
         this.addOutput("first object", "object");
-        // this.addOutput("error", LiteGraph.EVENT); // in optionals
+        // this.addOutput("error", Lite.EVENT); // in optionals
         this.addWidget("string", "name", this.properties.name, "name");
         // this.addWidget("button", "Fetch", null, this.fetch.bind(this));
         this._data = null;
@@ -115,10 +115,10 @@ class CDNLibSearch {
     }
 
     onGetOutputs() {
-        return [["error",LiteGraph.EVENT]];
+        return [["error",Lite.EVENT]];
     }
 }
-LiteGraph.registerNodeType("libraries/search_CDN_lib", CDNLibSearch);
+Lite.registerNodeType("libraries/search_CDN_lib", CDNLibSearch);
 
 
 // CDN LIBRARY LOAD INCLUDE
@@ -130,11 +130,11 @@ class CDNLibInclude {
 
     constructor() {
         var that = this;
-        this.addInput("load", LiteGraph.ACTION);
+        this.addInput("load", Lite.ACTION);
         this.addInput("lib_spec", "object");
-        this.addOutput("ready", LiteGraph.EVENT);
-        this.addOutput("error", LiteGraph.EVENT);
-        // this.addOutput("error", LiteGraph.EVENT); // in optionals
+        this.addOutput("ready", Lite.EVENT);
+        this.addOutput("error", Lite.EVENT);
+        // this.addOutput("error", Lite.EVENT); // in optionals
         // this.addWidget("button", "load", null, this.load.bind(this));
     }
 
@@ -189,7 +189,7 @@ class CDNLibInclude {
         // return [["name","string"]];
     }
     onGetOutputs() {
-        // return [["error",LiteGraph.EVENT]];
+        // return [["error",Lite.EVENT]];
     }
 }
-LiteGraph.registerNodeType("libraries/load", CDNLibInclude);
+Lite.registerNodeType("libraries/load", CDNLibInclude);

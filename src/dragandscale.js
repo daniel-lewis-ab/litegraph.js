@@ -1,4 +1,4 @@
-import { LiteGraph } from "./litegraph.js";
+import { Lite } from "./litegraph.js";
 
 /**
  * Class responsible for handling scale and offset transformations for an HTML element,
@@ -193,7 +193,7 @@ export class DragAndScale {
      */
     changeScale(value, zooming_center) {
 
-        value = LiteGraph.clamp(value, this.min_scale, this.max_scale);
+        value = Lite.clamp(value, this.min_scale, this.max_scale);
 
         if (value == this.scale || !this.element) {
             return;

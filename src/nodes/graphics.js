@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 
 class GraphicsPlot {
@@ -64,10 +64,10 @@ class GraphicsPlot {
                 ctx.strokeStyle = colors[i];
                 ctx.beginPath();
                 let v = values[0] * scale * -1 + offset;
-                ctx.moveTo(0, LiteGraph.clamp(v, 0, size[1]));
+                ctx.moveTo(0, Lite.clamp(v, 0, size[1]));
                 for (let j = 1; j < values.length && j < size[0]; ++j) {
                     v = values[j] * scale * -1 + offset;
-                    ctx.lineTo(j, LiteGraph.clamp(v, 0, size[1]));
+                    ctx.lineTo(j, Lite.clamp(v, 0, size[1]));
                 }
                 ctx.stroke();
             }
@@ -75,7 +75,7 @@ class GraphicsPlot {
     }
     static colors = ["#FFF", "#F99", "#9F9", "#99F"];
 }
-LiteGraph.registerNodeType("graphics/plot", GraphicsPlot);
+Lite.registerNodeType("graphics/plot", GraphicsPlot);
 
 
 class GraphicsImage {
@@ -134,8 +134,8 @@ class GraphicsImage {
 
         this.img = document.createElement("img");
 
-        if (url.substr(0, 4) == "http" && LiteGraph.proxy) {
-            url = LiteGraph.proxy + url.substr(url.indexOf(":") + 3);
+        if (url.substr(0, 4) == "http" && Lite.proxy) {
+            url = Lite.proxy + url.substr(url.indexOf(":") + 3);
         }
 
         this.img.src = url;
@@ -176,7 +176,7 @@ class GraphicsImage {
     static widgets = [{ name: "load", text: "Load", type: "button" }];
     static supported_extensions = ["jpg", "jpeg", "png", "gif"];
 }
-LiteGraph.registerNodeType("graphics/image", GraphicsImage);
+Lite.registerNodeType("graphics/image", GraphicsImage);
 
 
 class ColorPalette {
@@ -254,7 +254,7 @@ class ColorPalette {
         this.setOutputData(0, result);
     }
 }
-LiteGraph.registerNodeType("color/palette", ColorPalette);
+Lite.registerNodeType("color/palette", ColorPalette);
 
 
 class ImageFrame {
@@ -309,7 +309,7 @@ class ImageFrame {
         { name: "view", text: "View Image", type: "button" },
     ];
 }
-LiteGraph.registerNodeType("graphics/frame", ImageFrame);
+Lite.registerNodeType("graphics/frame", ImageFrame);
 
 
 class ImageFade {
@@ -372,7 +372,7 @@ class ImageFade {
         { name: "resizeB", text: "Resize to B", type: "button" },
     ];
 }
-LiteGraph.registerNodeType("graphics/imagefade", ImageFade);
+Lite.registerNodeType("graphics/imagefade", ImageFade);
 
 
 class ImageCrop {
@@ -456,7 +456,7 @@ class ImageCrop {
         return true;
     }
 }
-LiteGraph.registerNodeType("graphics/cropImage", ImageCrop);
+Lite.registerNodeType("graphics/cropImage", ImageCrop);
 
 
 class CanvasNode {
@@ -465,7 +465,7 @@ class CanvasNode {
     static desc = "Canvas to render stuff";
 
     constructor() {
-        this.addInput("clear", LiteGraph.ACTION);
+        this.addInput("clear", Lite.ACTION);
         this.addOutput("", "canvas");
         this.properties = { width: 512, height: 512, autoclear: true };
 
@@ -496,7 +496,7 @@ class CanvasNode {
         }
     }
 }
-LiteGraph.registerNodeType("graphics/canvas", CanvasNode);
+Lite.registerNodeType("graphics/canvas", CanvasNode);
 
 
 class DrawImageNode {
@@ -529,7 +529,7 @@ class DrawImageNode {
         ctx.drawImage(img, x, y);
     }
 }
-LiteGraph.registerNodeType("graphics/drawImage", DrawImageNode);
+Lite.registerNodeType("graphics/drawImage", DrawImageNode);
 
 
 class DrawRectangleNode {
@@ -567,7 +567,7 @@ class DrawRectangleNode {
         ctx.fillRect(x, y, w, h);
     }
 }
-LiteGraph.registerNodeType("graphics/drawRectangle", DrawRectangleNode);
+Lite.registerNodeType("graphics/drawRectangle", DrawRectangleNode);
 
 
 class ImageVideo {
@@ -635,10 +635,10 @@ class ImageVideo {
         if (
             this.properties.use_proxy &&
             protocol &&
-            LiteGraph.proxy &&
+            Lite.proxy &&
             host != location.host
         ) {
-            url = LiteGraph.proxy + url.substr(url.indexOf(":") + 3);
+            url = Lite.proxy + url.substr(url.indexOf(":") + 3);
         }
 
         this._video = document.createElement("video");
@@ -761,7 +761,7 @@ class ImageVideo {
         { name: "mute", text: "Mute video", type: "button" },
     ];
 }
-LiteGraph.registerNodeType("graphics/video", ImageVideo);
+Lite.registerNodeType("graphics/video", ImageVideo);
 
 
 class ImageWebcam {
@@ -917,12 +917,12 @@ class ImageWebcam {
         return [
             ["width", "number"],
             ["height", "number"],
-            ["stream_ready", LiteGraph.EVENT],
-            ["stream_closed", LiteGraph.EVENT],
-            ["stream_error", LiteGraph.EVENT],
+            ["stream_ready", Lite.EVENT],
+            ["stream_closed", Lite.EVENT],
+            ["stream_error", Lite.EVENT],
         ];
     }
 
     static is_webcam_open = false;
 }
-LiteGraph.registerNodeType("graphics/webcam", ImageWebcam);
+Lite.registerNodeType("graphics/webcam", ImageWebcam);

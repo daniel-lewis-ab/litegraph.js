@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 import { LGraphCanvas } from "../lgraphcanvas.js";
 import { GL, Shader } from "../../editor/js/libs/litegl.js";
 import { gl } from "../../editor/js/code.js";
@@ -64,9 +64,9 @@ export class LGraphTexture {
         options = options || {};
         var url = name;
         if (url.substr(0, 7) == "http://") {
-            if (LiteGraph.proxy) {
+            if (Lite.proxy) {
                 // proxy external files
-                url = LiteGraph.proxy + url.substr(7);
+                url = Lite.proxy + url.substr(7);
             }
         }
 
@@ -371,7 +371,7 @@ export class LGraphTexture {
         });
     }
 }
-LiteGraph.registerNodeType("texture/texture", LGraphTexture);
+Lite.registerNodeType("texture/texture", LGraphTexture);
 
 //* *************************
 class LGraphTexturePreview {
@@ -420,7 +420,7 @@ class LGraphTexturePreview {
         ctx.restore();
     }
 }
-LiteGraph.registerNodeType("texture/preview", LGraphTexturePreview);
+Lite.registerNodeType("texture/preview", LGraphTexturePreview);
 
 //* *************************************
 
@@ -467,7 +467,7 @@ class LGraphTextureSave {
         this.setOutputData(1, this.properties.name);
     }
 }
-LiteGraph.registerNodeType("texture/save", LGraphTextureSave);
+Lite.registerNodeType("texture/save", LGraphTextureSave);
 
 //* ***************************************************
 
@@ -775,7 +775,7 @@ LGraphTextureOperation.registerPreset(
     "threshold",
     "vec3(color.x > colorB.x * value ? 1.0 : 0.0,color.y > colorB.y * value ? 1.0 : 0.0,color.z > colorB.z * value ? 1.0 : 0.0)",
 );
-LiteGraph.registerNodeType("texture/operation", LGraphTextureOperation);
+Lite.registerNodeType("texture/operation", LGraphTextureOperation);
 
 
 class LGraphTextureShader {
@@ -1011,7 +1011,7 @@ class LGraphTextureShader {
         }
     `;
 }
-LiteGraph.registerNodeType("texture/shader", LGraphTextureShader);
+Lite.registerNodeType("texture/shader", LGraphTextureShader);
 
 
 // Texture Scale Offset
@@ -1132,7 +1132,7 @@ class LGraphTextureScaleOffset {
         }
     `;
 }
-LiteGraph.registerNodeType("texture/scaleOffset", LGraphTextureScaleOffset);
+Lite.registerNodeType("texture/scaleOffset", LGraphTextureScaleOffset);
 
 
 class LGraphTextureWarp {
@@ -1265,7 +1265,7 @@ class LGraphTextureWarp {
         }
     `;
 }
-LiteGraph.registerNodeType("texture/warp", LGraphTextureWarp);
+Lite.registerNodeType("texture/warp", LGraphTextureWarp);
 
 
 class LGraphTextureToViewport {
@@ -1432,7 +1432,7 @@ class LGraphTextureToViewport {
         }
     `;
 }
-LiteGraph.registerNodeType("texture/toviewport", LGraphTextureToViewport);
+Lite.registerNodeType("texture/toviewport", LGraphTextureToViewport);
 
 
 class LGraphTextureCopy {
@@ -1519,7 +1519,7 @@ class LGraphTextureCopy {
         this.setOutputData(0, this._temp_texture);
     }
 }
-LiteGraph.registerNodeType("texture/copy", LGraphTextureCopy);
+Lite.registerNodeType("texture/copy", LGraphTextureCopy);
 
 
 class LGraphTextureDownsample {
@@ -1642,7 +1642,7 @@ class LGraphTextureDownsample {
         }
     `;
 }
-LiteGraph.registerNodeType("texture/downsample", LGraphTextureDownsample);
+Lite.registerNodeType("texture/downsample", LGraphTextureDownsample);
 
 
 class LGraphTextureResize {
@@ -1709,7 +1709,7 @@ class LGraphTextureResize {
         this.setOutputData(0, this._texture);
     }
 }
-LiteGraph.registerNodeType("texture/resize", LGraphTextureResize);
+Lite.registerNodeType("texture/resize", LGraphTextureResize);
 
 
 class LGraphTextureAverage {
@@ -1864,7 +1864,7 @@ class LGraphTextureAverage {
         }
     `;
 }
-LiteGraph.registerNodeType("texture/average", LGraphTextureAverage);
+Lite.registerNodeType("texture/average", LGraphTextureAverage);
 
 
 class LGraphTextureMinMax {
@@ -1993,7 +1993,7 @@ class LGraphTextureMinMax {
         }
     `;
 }
-// LiteGraph.registerNodeType("texture/clustered_operation", LGraphTextureClusteredOperation);
+// Lite.registerNodeType("texture/clustered_operation", LGraphTextureClusteredOperation);
 
 
 class LGraphTextureTemporalSmooth {
@@ -2080,7 +2080,7 @@ class LGraphTextureTemporalSmooth {
     }\n\
     ";
 }
-LiteGraph.registerNodeType("texture/temporal_smooth", LGraphTextureTemporalSmooth);
+Lite.registerNodeType("texture/temporal_smooth", LGraphTextureTemporalSmooth);
 
 
 class LGraphTextureLinearAvgSmooth {
@@ -2213,7 +2213,7 @@ class LGraphTextureLinearAvgSmooth {
     }\n\
     ";
 }
-LiteGraph.registerNodeType("texture/linear_avg_smooth", LGraphTextureLinearAvgSmooth);
+Lite.registerNodeType("texture/linear_avg_smooth", LGraphTextureLinearAvgSmooth);
 
 
 class LGraphImageToTexture {
@@ -2260,7 +2260,7 @@ class LGraphImageToTexture {
         this.setOutputData(0, this._temp_texture);
     }
 }
-LiteGraph.registerNodeType("texture/imageToTexture", LGraphImageToTexture);
+Lite.registerNodeType("texture/imageToTexture", LGraphImageToTexture);
 
 
 class LGraphTextureLUT {
@@ -2383,7 +2383,7 @@ class LGraphTextureLUT {
     }\n\
     ";
 }
-LiteGraph.registerNodeType("texture/LUT", LGraphTextureLUT);
+Lite.registerNodeType("texture/LUT", LGraphTextureLUT);
 
 
 class LGraphTextureEncode {
@@ -2536,7 +2536,7 @@ class LGraphTextureEncode {
     }\n\
     ";
 }
-LiteGraph.registerNodeType("texture/encode", LGraphTextureEncode);
+Lite.registerNodeType("texture/encode", LGraphTextureEncode);
 
 
 class LGraphTextureChannels {
@@ -2639,7 +2639,7 @@ class LGraphTextureChannels {
         }\n\
         ";
 }
-LiteGraph.registerNodeType("texture/textureChannels", LGraphTextureChannels);
+Lite.registerNodeType("texture/textureChannels", LGraphTextureChannels);
 
 
 class LGraphChannelsTexture {
@@ -2752,7 +2752,7 @@ class LGraphChannelsTexture {
     }\n\
     ";
 }
-LiteGraph.registerNodeType("texture/channelsTexture", LGraphChannelsTexture);
+Lite.registerNodeType("texture/channelsTexture", LGraphChannelsTexture);
 
 
 class LGraphTextureColor {
@@ -2854,7 +2854,7 @@ class LGraphTextureColor {
         ];
     }
 }
-LiteGraph.registerNodeType("texture/color", LGraphTextureColor);
+Lite.registerNodeType("texture/color", LGraphTextureColor);
 
 
 class LGraphTextureGradient {
@@ -2971,7 +2971,7 @@ class LGraphTextureGradient {
         }\n\
         ";
 }
-LiteGraph.registerNodeType("texture/gradient", LGraphTextureGradient);
+Lite.registerNodeType("texture/gradient", LGraphTextureGradient);
 
 
 class LGraphTextureMix {
@@ -3101,7 +3101,7 @@ class LGraphTextureMix {
         }\n\
         ";
 }
-LiteGraph.registerNodeType("texture/mix", LGraphTextureMix);
+Lite.registerNodeType("texture/mix", LGraphTextureMix);
 
 
 class LGraphTextureEdges {
@@ -3208,7 +3208,7 @@ class LGraphTextureEdges {
         }\n\
         ";
 }
-LiteGraph.registerNodeType("texture/edges", LGraphTextureEdges);
+Lite.registerNodeType("texture/edges", LGraphTextureEdges);
 
 
 class LGraphTextureDepthRange {
@@ -3350,7 +3350,7 @@ class LGraphTextureDepthRange {
         }\n\
     ";
 }
-LiteGraph.registerNodeType("texture/depth_range", LGraphTextureDepthRange);
+Lite.registerNodeType("texture/depth_range", LGraphTextureDepthRange);
 
 
 class LGraphTextureLinearDepth {
@@ -3464,7 +3464,7 @@ class LGraphTextureLinearDepth {
         }\n\
         ";
 }
-LiteGraph.registerNodeType("texture/linear_depth", LGraphTextureLinearDepth);
+Lite.registerNodeType("texture/linear_depth", LGraphTextureLinearDepth);
 
 
 class LGraphTextureBlur {
@@ -3544,7 +3544,7 @@ class LGraphTextureBlur {
         }
 
         // blur sometimes needs an aspect correction
-        var aspect = LiteGraph.camera_aspect;
+        var aspect = Lite.camera_aspect;
         if (!aspect && window.gl !== undefined) {
             aspect = gl.canvas.height / gl.canvas.width;
         }
@@ -3590,7 +3590,7 @@ class LGraphTextureBlur {
         ";
     */
 }
-LiteGraph.registerNodeType("texture/blur", LGraphTextureBlur);
+Lite.registerNodeType("texture/blur", LGraphTextureBlur);
 
 
 // Independent glow FX
@@ -3963,7 +3963,7 @@ class LGraphTextureGlow {
         if (this.isOutputConnected(2)) this.setOutputData(2, glow_texture);
     }
 }
-LiteGraph.registerNodeType("texture/glow", LGraphTextureGlow);
+Lite.registerNodeType("texture/glow", LGraphTextureGlow);
 
 // Texture Filter *****************************************
 function LGraphTextureKuwaharaFilter() {
@@ -4019,7 +4019,7 @@ LGraphTextureKuwaharaFilter.prototype.onExecute = function () {
     var intensity = this.properties.intensity;
 
     // blur sometimes needs an aspect correction
-    var aspect = LiteGraph.camera_aspect;
+    var aspect = Lite.camera_aspect;
     if (!aspect && window.gl !== undefined) {
         aspect = gl.canvas.height / gl.canvas.width;
     }
@@ -4150,7 +4150,7 @@ if (sigma2 < min_sigma2) {\n\
 }\n\
 ";
 
-LiteGraph.registerNodeType("texture/kuwahara", LGraphTextureKuwaharaFilter);
+Lite.registerNodeType("texture/kuwahara", LGraphTextureKuwaharaFilter);
 
 // Texture  *****************************************
 function LGraphTextureXDoGFilter() {
@@ -4290,7 +4290,7 @@ destColor = vec3(edge);\n\
 gl_FragColor = vec4(destColor, 1.0);\n\
 }";
 
-LiteGraph.registerNodeType("texture/xDoG", LGraphTextureXDoGFilter);
+Lite.registerNodeType("texture/xDoG", LGraphTextureXDoGFilter);
 
 // Texture Webcam *****************************************
 function LGraphTextureWebcam() {
@@ -4470,13 +4470,13 @@ LGraphTextureWebcam.prototype.onGetOutputs = function () {
     return [
         ["width", "number"],
         ["height", "number"],
-        ["stream_ready", LiteGraph.EVENT],
-        ["stream_closed", LiteGraph.EVENT],
-        ["stream_error", LiteGraph.EVENT],
+        ["stream_ready", Lite.EVENT],
+        ["stream_closed", Lite.EVENT],
+        ["stream_error", Lite.EVENT],
     ];
 };
 
-LiteGraph.registerNodeType("texture/webcam", LGraphTextureWebcam);
+Lite.registerNodeType("texture/webcam", LGraphTextureWebcam);
 
 // from https://github.com/spite/Wagner
 function LGraphLensFX() {
@@ -4612,7 +4612,7 @@ LGraphLensFX.pixel_shader =
         gl_FragColor = sumcol / sumw;\n\
     }";
 
-LiteGraph.registerNodeType("texture/lensfx", LGraphLensFX);
+Lite.registerNodeType("texture/lensfx", LGraphLensFX);
 
 function LGraphTextureFromData() {
     this.addInput("in", "");
@@ -4667,7 +4667,7 @@ LGraphTextureFromData.prototype.onExecute = function () {
     this.setOutputData(0, temp);
 };
 
-LiteGraph.registerNodeType("texture/fromdata", LGraphTextureFromData);
+Lite.registerNodeType("texture/fromdata", LGraphTextureFromData);
 
 // applies a curve (or generates one)
 function LGraphTextureCurve() {
@@ -4897,7 +4897,7 @@ LGraphTextureCurve.prototype.onDrawBackground = function (
     if (this.flags.collapsed) return;
 
     if (!this.curve_editor)
-        this.curve_editor = new LiteGraph.CurveEditor(this._points.R);
+        this.curve_editor = new Lite.CurveEditor(this._points.R);
     ctx.save();
     ctx.translate(0, this.curve_offset);
     var channel = this.widgets[1].value;
@@ -4968,7 +4968,7 @@ LGraphTextureCurve.pixel_shader =
         gl_FragColor = color;\n\
     }";
 
-LiteGraph.registerNodeType("texture/curve", LGraphTextureCurve);
+Lite.registerNodeType("texture/curve", LGraphTextureCurve);
 
 // simple exposition, but plan to expand it to support different gamma curves
 function LGraphExposition() {
@@ -5050,7 +5050,7 @@ LGraphExposition.pixel_shader = `
     `;
 
 
-LiteGraph.registerNodeType("texture/exposition", LGraphExposition);
+Lite.registerNodeType("texture/exposition", LGraphExposition);
 
 function LGraphToneMapping() {
     this.addInput("in", "Texture");
@@ -5211,7 +5211,7 @@ LGraphToneMapping.pixel_shader =
         gl_FragColor = vec4( rgb, color.a );\n\
     }";
 
-LiteGraph.registerNodeType("texture/tonemapping", LGraphToneMapping);
+Lite.registerNodeType("texture/tonemapping", LGraphToneMapping);
 
 function LGraphTexturePerlin() {
     this.addOutput("out", "Texture");
@@ -5392,7 +5392,7 @@ LGraphTexturePerlin.pixel_shader =
         gl_FragColor = color;\n\
     }";
 
-LiteGraph.registerNodeType("texture/perlin", LGraphTexturePerlin);
+Lite.registerNodeType("texture/perlin", LGraphTexturePerlin);
 
 function LGraphTextureCanvas2D() {
     this.addInput("v");
@@ -5432,7 +5432,7 @@ LGraphTextureCanvas2D.prototype.onPropertyChanged = function (name, value) {
 
 LGraphTextureCanvas2D.prototype.compileCode = function (code) {
     this._func = null;
-    if (!LiteGraph.allow_scripts) return;
+    if (!Lite.allow_scripts) return;
 
     try {
         this._func = new Function(
@@ -5563,7 +5563,7 @@ LGraphTextureCanvas2D.prototype.executeDraw = function (func_context) {
     this.setOutputData(0, temp);
 };
 
-LiteGraph.registerNodeType("texture/canvas2D", LGraphTextureCanvas2D);
+Lite.registerNodeType("texture/canvas2D", LGraphTextureCanvas2D);
 
 // To do chroma keying *****************
 
@@ -5659,7 +5659,7 @@ LGraphTextureMatte.pixel_shader =
         gl_FragColor = vec4( color, alpha );\n\
     }";
 
-LiteGraph.registerNodeType("texture/matte", LGraphTextureMatte);
+Lite.registerNodeType("texture/matte", LGraphTextureMatte);
 
 //* **********************************
 function LGraphCubemapToTexture2D() {
@@ -5695,7 +5695,7 @@ LGraphCubemapToTexture2D.prototype.onExecute = function () {
     this.setOutputData(0, this._last_tex);
 };
 
-LiteGraph.registerNodeType(
+Lite.registerNodeType(
     "texture/cubemapToTexture2D",
     LGraphCubemapToTexture2D,
 );

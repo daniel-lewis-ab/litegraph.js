@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 
 class GamepadInput {
 
@@ -8,7 +8,7 @@ class GamepadInput {
     constructor() {
         this.addOutput("left_x_axis", "number");
         this.addOutput("left_y_axis", "number");
-        this.addOutput("button_pressed", LiteGraph.EVENT);
+        this.addOutput("button_pressed", Lite.EVENT);
         this.properties = { gamepad_index: 0, threshold: 0.1 };
 
         this._left_axis = new Float32Array(2);
@@ -299,22 +299,22 @@ class GamepadInput {
             ["rs_button", "number"],
             ["start_button", "number"],
             ["back_button", "number"],
-            ["a_button_event", LiteGraph.EVENT],
-            ["b_button_event", LiteGraph.EVENT],
-            ["x_button_event", LiteGraph.EVENT],
-            ["y_button_event", LiteGraph.EVENT],
-            ["lb_button_event", LiteGraph.EVENT],
-            ["rb_button_event", LiteGraph.EVENT],
-            ["ls_button_event", LiteGraph.EVENT],
-            ["rs_button_event", LiteGraph.EVENT],
-            ["start_button_event", LiteGraph.EVENT],
-            ["back_button_event", LiteGraph.EVENT],
+            ["a_button_event", Lite.EVENT],
+            ["b_button_event", Lite.EVENT],
+            ["x_button_event", Lite.EVENT],
+            ["y_button_event", Lite.EVENT],
+            ["lb_button_event", Lite.EVENT],
+            ["rb_button_event", Lite.EVENT],
+            ["ls_button_event", Lite.EVENT],
+            ["rs_button_event", Lite.EVENT],
+            ["start_button_event", Lite.EVENT],
+            ["back_button_event", Lite.EVENT],
             ["hat_left", "number"],
             ["hat_right", "number"],
             ["hat_up", "number"],
             ["hat_down", "number"],
             ["hat", "number"],
-            ["button_pressed", LiteGraph.EVENT],
+            ["button_pressed", Lite.EVENT],
         ];
     }
 
@@ -373,4 +373,4 @@ GamepadInput.RIGHT = 2;
 GamepadInput.UP = 4;
 GamepadInput.DOWN = 8;
 
-LiteGraph.registerNodeType("input/gamepad", GamepadInput);
+Lite.registerNodeType("input/gamepad", GamepadInput);

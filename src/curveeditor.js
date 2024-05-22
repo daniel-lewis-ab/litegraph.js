@@ -1,4 +1,4 @@
-import { LiteGraph } from "./litegraph.js";
+import { Lite } from "./litegraph.js";
 
 // used by some widgets to render a curve editor
 export class CurveEditor {
@@ -120,10 +120,10 @@ export class CurveEditor {
                 return;
             }
             if( !is_edge_point ) // not edges
-                point[0] = LiteGraph.clamp(x, 0, 1);
+                point[0] = Lite.clamp(x, 0, 1);
             else
                 point[0] = s == 0 ? 0 : 1;
-            point[1] = 1.0 - LiteGraph.clamp(y, 0, 1);
+            point[1] = 1.0 - Lite.clamp(y, 0, 1);
             points.sort((a, b) => a[0] - b[0]);
             this.selected = points.indexOf(point);
             this.must_update = true;

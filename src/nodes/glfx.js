@@ -1,4 +1,4 @@
-import { LiteGraph } from "../litegraph.js";
+import { Lite } from "../litegraph.js";
 import { LGraphTexture } from "./gltextures.js";
 import { GL } from "../../editor/js/libs/litegl.js";
 import { gl } from "../../editor/js/code.js";
@@ -133,7 +133,7 @@ class LGraphFXLens {
     }\n\
 */
 }
-LiteGraph.registerNodeType("fx/lens", LGraphFXLens);
+Lite.registerNodeType("fx/lens", LGraphFXLens);
 
 /* not working yet
 function LGraphDepthOfField()
@@ -206,7 +206,7 @@ const float RAD_SCALE = 0.5; // Smaller = nicer blur, larger = faster\n\
 \n\
 float getBlurSize(float depth, float focusPoint, float focusScale)\n\
 {\n\
-    float coc = LiteGraph.clamp((1.0 / focusPoint - 1.0 / depth)*focusScale, -1.0, 1.0);\n\
+    float coc = Lite.clamp((1.0 / focusPoint - 1.0 / depth)*focusScale, -1.0, 1.0);\n\
     return abs(coc) * MAX_BLUR_SIZE;\n\
 }\n\
 \n\
@@ -226,7 +226,7 @@ vec3 depthOfField(vec2 texCoord, float focusPoint, float focusScale)\n\
     float sampleDepth = texture2D(u_depth_texture, tc).r * u_far;\n\
     float sampleSize = getBlurSize( sampleDepth, focusPoint, focusScale );\n\
     if (sampleDepth > centerDepth)\n\
-    sampleSize = LiteGraph.clamp(sampleSize, 0.0, centerSize*2.0);\n\
+    sampleSize = Lite.clamp(sampleSize, 0.0, centerSize*2.0);\n\
     \n\
     float m = smoothstep(radius-0.5, radius+0.5, sampleSize);\n\
     color += mix(color/tot, sampleColor, m);\n\
@@ -244,7 +244,7 @@ void main()\n\
 }\n\
 ";
 
-LiteGraph.registerNodeType("fx/DOF", LGraphDepthOfField );
+Lite.registerNodeType("fx/DOF", LGraphDepthOfField );
 */
 
 //* ******************************************************
@@ -484,7 +484,7 @@ class LGraphFXBokeh {
         }
     `;
 }
-LiteGraph.registerNodeType("fx/bokeh", LGraphFXBokeh);
+Lite.registerNodeType("fx/bokeh", LGraphFXBokeh);
 
 
 class LGraphFXGeneric {
@@ -692,7 +692,7 @@ class LGraphFXGeneric {
         }
     `;
 }
-LiteGraph.registerNodeType("fx/generic", LGraphFXGeneric);
+Lite.registerNodeType("fx/generic", LGraphFXGeneric);
 
 
 class LGraphFXVigneting {
@@ -790,4 +790,4 @@ class LGraphFXVigneting {
         }
     `;
 }
-LiteGraph.registerNodeType("fx/vigneting", LGraphFXVigneting);
+Lite.registerNodeType("fx/vigneting", LGraphFXVigneting);

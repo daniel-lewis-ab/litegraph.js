@@ -1,4 +1,4 @@
-import { LiteGraph } from "./litegraph.js";
+import { Lite } from "./litegraph.js";
 import { LGraphCanvas } from "./lgraphcanvas.js";
 import { LGraphGroup } from "./lgraphgroup.js";
 import { LLink } from "./llink.js";
@@ -23,7 +23,7 @@ export class LGraph {
      * @param {Object} o data from previous serialization [optional]} o
      */
     constructor(o) {
-        if (LiteGraph.debug) {
+        if (Lite.debug) {
             console.log("Graph created");
         }
         this.list_of_graphcanvas = null;
@@ -134,7 +134,7 @@ export class LGraph {
      * @param {object} opts options to merge
     */
     configApplyDefaults() {
-        var opts = LiteGraph.graphDefaultConfig;
+        var opts = Lite.graphDefaultConfig;
         this.configApply(opts);
     }
 
@@ -188,7 +188,7 @@ export class LGraph {
         this.onPlayEvent?.();
         this.sendEventToAllNodes("onStart");
 
-        this.starttime = LiteGraph.getTime();
+        this.starttime = Lite.getTime();
         this.last_update_time = this.starttime;
 
         const onAnimationFrame = () => {
@@ -240,7 +240,7 @@ export class LGraph {
      * @param {number} limit max number of nodes to execute (used to execute from start to a node)
      */
     runStep(num = 1, do_not_catch_errors, limit) {
-        var start = LiteGraph.getTime();
+        var start = Lite.getTime();
         this.globaltime = 0.001 * (start - this.starttime);
 
         var nodes = this._nodes_executable ?? this._nodes;
@@ -253,11 +253,11 @@ export class LGraph {
         if (do_not_catch_errors) {
             for (let i = 0; i < num; i++) {
                 nodes.forEach((node) => {
-                    if (LiteGraph.use_deferred_actions && node._waiting_actions?.length) {
+                    if (Lite.use_deferred_actions && node._waiting_actions?.length) {
                         node.executePendingActions();
                     }
 
-                    if (node.mode === LiteGraph.ALWAYS) {
+                    if (node.mode === Lite.ALWAYS) {
                         node.doExecute?.();
                     }
                 });
@@ -270,11 +270,11 @@ export class LGraph {
             try {
                 for (let i = 0; i < num; i++) {
                     nodes.forEach((node) => {
-                        if (LiteGraph.use_deferred_actions && node._waiting_actions?.length) {
+                        if (Lite.use_deferred_actions && node._waiting_actions?.length) {
                             node.executePendingActions();
                         }
 
-                        if (node.mode === LiteGraph.ALWAYS) {
+                        if (node.mode === Lite.ALWAYS) {
                             node.doExecute?.();
                         }
                     });
@@ -288,17 +288,17 @@ export class LGraph {
             } catch (err) {
 
                 this.errors_in_execution = true;
-                if (LiteGraph.throw_errors) {
+                if (Lite.throw_errors) {
                     throw err;
                 }
-                if (LiteGraph.debug) {
+                if (Lite.debug) {
                     console.log(`Error during execution: ${err}`);
                 }
                 this.stop();
             }
         }
 
-        var now = LiteGraph.getTime();
+        var now = Lite.getTime();
         var elapsed = now - start;
         if (elapsed == 0) {
             elapsed = 1;
@@ -440,7 +440,7 @@ export class LGraph {
             L.push(M[i]);
         }
 
-        if (L.length != this._nodes.length && LiteGraph.debug) {
+        if (L.length != this._nodes.length && Lite.debug) {
             console.warn("something went wrong, nodes missing");
         }
 
@@ -588,17 +588,17 @@ export class LGraph {
                 continue;
             }
             let max_size = 100;
-            let y = margin + LiteGraph.NODE_TITLE_HEIGHT;
+            let y = margin + Lite.NODE_TITLE_HEIGHT;
             for (let j = 0; j < column.length; ++j) {
                 const node = column[j];
-                node.pos[0] = (layout == LiteGraph.VERTICAL_LAYOUT) ? y : x;
-                node.pos[1] = (layout == LiteGraph.VERTICAL_LAYOUT) ? x : y;
-                const max_size_index = (layout == LiteGraph.VERTICAL_LAYOUT) ? 1 : 0;
+                node.pos[0] = (layout == Lite.VERTICAL_LAYOUT) ? y : x;
+                node.pos[1] = (layout == Lite.VERTICAL_LAYOUT) ? x : y;
+                const max_size_index = (layout == Lite.VERTICAL_LAYOUT) ? 1 : 0;
                 if (node.size[max_size_index] > max_size) {
                     max_size = node.size[max_size_index];
                 }
-                const node_size_index = (layout == LiteGraph.VERTICAL_LAYOUT) ? 0 : 1;
-                y += node.size[node_size_index] + margin + LiteGraph.NODE_TITLE_HEIGHT;
+                const node_size_index = (layout == Lite.VERTICAL_LAYOUT) ? 0 : 1;
+                y += node.size[node_size_index] + margin + Lite.NODE_TITLE_HEIGHT;
             }
             x += max_size + margin;
         }
@@ -640,7 +640,7 @@ export class LGraph {
      * @param {String} eventname the name of the event (function to be called)
      * @param {Array} params parameters in array format
      */
-    sendEventToAllNodes(eventname, params, mode = LiteGraph.ALWAYS) {
+    sendEventToAllNodes(eventname, params, mode = Lite.ALWAYS) {
         var nodes = this._nodes_in_order ? this._nodes_in_order : this._nodes;
         if (!nodes) {
             return;
@@ -650,7 +650,7 @@ export class LGraph {
             const node = nodes[j];
 
             if (
-                node.constructor === LiteGraph.Subgraph &&
+                node.constructor === Lite.Subgraph &&
                 eventname !== "onExecute"
             ) {
                 if (node.mode == mode) {
@@ -718,22 +718,22 @@ export class LGraph {
 
         // nodes
         if (node.id != -1 && this._nodes_by_id[node.id] != null) {
-            console.warn("LiteGraph: there is already a node with this ID, changing it");
-            if (LiteGraph.use_uuids) {
-                node.id = LiteGraph.uuidv4();
+            console.warn("Lite: there is already a node with this ID, changing it");
+            if (Lite.use_uuids) {
+                node.id = Lite.uuidv4();
             } else {
                 node.id = ++this.last_node_id;
             }
         }
 
-        if (this._nodes.length >= LiteGraph.MAX_NUMBER_OF_NODES) {
-            throw new Error("LiteGraph: max number of nodes in a graph reached");
+        if (this._nodes.length >= Lite.MAX_NUMBER_OF_NODES) {
+            throw new Error("Lite: max number of nodes in a graph reached");
         }
 
         // give him an id
-        if (LiteGraph.use_uuids) {
+        if (Lite.use_uuids) {
             if (node.id == null || node.id == -1)
-                node.id = LiteGraph.uuidv4();
+                node.id = Lite.uuidv4();
         } else {
             if (node.id == null || node.id == -1) {
                 node.id = ++this.last_node_id;
@@ -942,13 +942,13 @@ export class LGraph {
     checkNodeTypes() {
         for (var i = 0; i < this._nodes.length; i++) {
             var node = this._nodes[i];
-            var ctor = LiteGraph.registered_node_types[node.type];
+            var ctor = Lite.registered_node_types[node.type];
             if (node.constructor == ctor) {
                 continue;
             }
-            if(LiteGraph.debug)
+            if(Lite.debug)
                 console.log(`node being replaced by newer version: ${node.type}`);
-            var newnode = LiteGraph.createNode(node.type);
+            var newnode = Lite.createNode(node.type);
             this._nodes[i] = newnode;
             newnode.configure(node.serialize());
             newnode.graph = this;
@@ -971,7 +971,7 @@ export class LGraph {
      */
     onAction(action, param, options) {
         this._input_nodes = this.findNodesByClass(
-            LiteGraph.GraphInput,
+            Lite.GraphInput,
             this._input_nodes,
         );
         for (var i = 0; i < this._input_nodes.length; ++i) {
@@ -1313,7 +1313,7 @@ export class LGraph {
      * @method change
      */
     change() {
-        if (LiteGraph.debug) {
+        if (Lite.debug) {
             console.log("Graph visually changed");
         }
         this.sendActionToCanvas("setDirty", [true, true]);
@@ -1379,7 +1379,7 @@ export class LGraph {
             groups: groupsInfo,
             config: this.config,
             extra: this.extra,
-            version: LiteGraph.VERSION,
+            version: Lite.VERSION,
         };
         this.onSerialize?.(data);
         return data;
@@ -1431,9 +1431,9 @@ export class LGraph {
         if (nodes) {
             for (let i = 0, l = nodes.length; i < l; ++i) {
                 var n_info = nodes[i]; // stored info
-                var node = LiteGraph.createNode(n_info.type, n_info.title);
+                var node = Lite.createNode(n_info.type, n_info.title);
                 if (!node) {
-                    if (LiteGraph.debug) {
+                    if (Lite.debug) {
                         console.log(`Node not found or has errors: ${n_info.type}`);
                     }
 
@@ -1474,7 +1474,7 @@ export class LGraph {
         // TODO implement: when loading (configuring) a whole graph, skip calling graphChanged on every single configure
         if (!data._version) {
             this.onGraphChanged({action: "graphConfigure", doSave: false}); // this._version++;
-        } else if (LiteGraph.debug) {
+        } else if (Lite.debug) {
             console.debug("skip onGraphChanged when configure passing version too!"); // atlasan DEBUG REMOVE
         }
         this.setDirtyCanvas(true, true);
@@ -1558,18 +1558,18 @@ export class LGraph {
         this._version++;
 
         if(opts.action) {
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.debug("Graph change",opts.action);
             }
         }else{
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.debug("Graph change, no action",opts);
             }
         }
 
-        if(opts.doSave && LiteGraph.actionHistory_enabled) {
+        if(opts.doSave && Lite.actionHistory_enabled) {
 
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.debug("onGraphChanged SAVE :: "+opts.action); // debug history
             }
 
@@ -1583,15 +1583,15 @@ export class LGraph {
 
             // check if pointer has gone back: remove newest
             while(obH.actionHistoryPtr < obH.actionHistoryVersions.length-1) {
-                if (LiteGraph.debug) {
+                if (Lite.debug) {
                     console.debug("popping: gone back? "+(obH.actionHistoryPtr+" < "+(obH.actionHistoryVersions.length-1))); // debug history
                 }
                 obH.actionHistoryVersions.pop();
             }
             // check if maximum saves
-            if(obH.actionHistoryVersions.length>=LiteGraph.actionHistoryMaxSave) {
+            if(obH.actionHistoryVersions.length>=Lite.actionHistoryMaxSave) {
                 var olderSave = obH.actionHistoryVersions.shift();
-                if (LiteGraph.debug) {
+                if (Lite.debug) {
                     console.debug("maximum saves reached: "+obH.actionHistoryVersions.length+", remove older: "+olderSave); // debug history
                 }
                 obH.actionHistory[olderSave] = false; // unset
@@ -1604,7 +1604,7 @@ export class LGraph {
             // save to pointer
             obH.actionHistory[obH.actionHistoryPtr] = oHistory;
 
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.debug("history saved: "+obH.actionHistoryPtr,oHistory.actionName); // debug history
             }
         }
@@ -1623,7 +1623,7 @@ export class LGraph {
 
         if (obH.actionHistoryPtr != undefined && obH.actionHistoryPtr >= 0) {
             obH.actionHistoryPtr--;
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.debug("history step back: "+obH.actionHistoryPtr); // debug history
             }
             if (!this.actionHistoryLoad({iVersion: obH.actionHistoryPtr})) {
@@ -1632,14 +1632,14 @@ export class LGraph {
                 obH.actionHistoryPtr++;
                 return false;
             }else{
-                if (LiteGraph.debug) {
+                if (Lite.debug) {
                     console.debug("history loaded back: "+obH.actionHistoryPtr); // debug history
                     console.debug(this.history);
                 }
                 return true;
             }
         }else{
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.debug("history is already at older state");
             }
             return false;
@@ -1659,7 +1659,7 @@ export class LGraph {
 
         if (obH.actionHistoryPtr<obH.actionHistoryVersions.length) {
             obH.actionHistoryPtr++;
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.debug("history step forward: "+obH.actionHistoryPtr); // debug history
             }
             if (!this.actionHistoryLoad({iVersion: obH.actionHistoryPtr})) {
@@ -1668,13 +1668,13 @@ export class LGraph {
                 obH.actionHistoryPtr--;
                 return false;
             }else{
-                if (LiteGraph.debug) {
+                if (Lite.debug) {
                     console.debug("history loaded forward: "+obH.actionHistoryPtr); // debug history
                 }
                 return true;
             }
         }else{
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.debug("history is already at newer state");
             }
             return false;
@@ -1699,7 +1699,7 @@ export class LGraph {
             var tmpHistory = JSON.stringify(this.history);
             this.configure( obH.actionHistory[opts.iVersion].graphSave );
             this.history = JSON.parse(tmpHistory);
-            if (LiteGraph.debug) {
+            if (Lite.debug) {
                 console.debug("history loaded: "+opts.iVersion,obH.actionHistory[opts.iVersion].actionName); // debug history
             }
             // no: this.onGraphLoaded();

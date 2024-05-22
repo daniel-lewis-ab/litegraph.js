@@ -12,10 +12,10 @@ export type widgetTypes =
     | "toggle"
     | "button";
 export type SlotShape =
-    | typeof LiteGraph.BOX_SHAPE
-    | typeof LiteGraph.CIRCLE_SHAPE
-    | typeof LiteGraph.ARROW_SHAPE
-    | typeof LiteGraph.SQUARE_SHAPE
+    | typeof Lite.BOX_SHAPE
+    | typeof Lite.CIRCLE_SHAPE
+    | typeof Lite.ARROW_SHAPE
+    | typeof Lite.SQUARE_SHAPE
     | number; // For custom shapes
 
 /** https://github.com/jagenjo/litegraph.js/tree/master/guides#node-slots */
@@ -24,10 +24,10 @@ export interface INodeSlot {
     type: string | -1;
     label?: string;
     dir?:
-        | typeof LiteGraph.UP
-        | typeof LiteGraph.RIGHT
-        | typeof LiteGraph.DOWN
-        | typeof LiteGraph.LEFT;
+        | typeof Lite.UP
+        | typeof Lite.RIGHT
+        | typeof Lite.DOWN
+        | typeof Lite.LEFT;
     color_on?: string;
     color_off?: string;
     shape?: SlotShape;
@@ -143,7 +143,7 @@ export type ContextMenuEventListener = (
     node: LGraphNode
 ) => boolean | void;
 
-export const LiteGraph: {
+export const Lite: {
     VERSION: number;
 
     CANVAS_GRID_SIZE: number;
@@ -342,7 +342,7 @@ export type serializedLGraph<
     links: TLink[];
     groups: TGroup[];
     config: LGraph["config"];
-    version: typeof LiteGraph.VERSION;
+    version: typeof Lite.VERSION;
 };
 
 export declare class LGraph {
@@ -628,21 +628,21 @@ export declare class LGraphNode {
     bgcolor: string;
     boxcolor: string;
     shape:
-        | typeof LiteGraph.BOX_SHAPE
-        | typeof LiteGraph.ROUND_SHAPE
-        | typeof LiteGraph.CIRCLE_SHAPE
-        | typeof LiteGraph.CARD_SHAPE
-        | typeof LiteGraph.ARROW_SHAPE;
+        | typeof Lite.BOX_SHAPE
+        | typeof Lite.ROUND_SHAPE
+        | typeof Lite.CIRCLE_SHAPE
+        | typeof Lite.CARD_SHAPE
+        | typeof Lite.ARROW_SHAPE;
 
     serialize_widgets: boolean;
     skip_list: boolean;
 
     /** Used in `LGraphCanvas.onMenuNodeMode` */
     mode?:
-        | typeof LiteGraph.ON_EVENT
-        | typeof LiteGraph.ON_TRIGGER
-        | typeof LiteGraph.NEVER
-        | typeof LiteGraph.ALWAYS;
+        | typeof Lite.ON_EVENT
+        | typeof Lite.ON_TRIGGER
+        | typeof Lite.NEVER
+        | typeof Lite.ALWAYS;
 
     /** If set to true widgets do not start after the slots */
     widgets_up: boolean;
@@ -1015,7 +1015,7 @@ export declare class LGraphNode {
         inputIndex: number
     ): number;
     
-    /** a connection changed (new one or removed) (LiteGraph.INPUT or LiteGraph.OUTPUT, slot, true if connected, link_info, input_info or output_info ) */
+    /** a connection changed (new one or removed) (Lite.INPUT or Lite.OUTPUT, slot, true if connected, link_info, input_info or output_info ) */
     onConnectionsChange(
         type: number,
         slotIndex: number,
@@ -1201,9 +1201,9 @@ export declare class LGraphCanvas {
     /** Timestamp of last mouse click, defaults to 0 */
     last_mouseclick: number;
     links_render_mode:
-        | typeof LiteGraph.STRAIGHT_LINK
-        | typeof LiteGraph.LINEAR_LINK
-        | typeof LiteGraph.SPLINE_LINK;
+        | typeof Lite.STRAIGHT_LINK
+        | typeof Lite.LINEAR_LINK
+        | typeof Lite.SPLINE_LINK;
     live_mode: boolean;
     node_capturing_input: LGraphNode | null;
     node_dragged: LGraphNode | null;
