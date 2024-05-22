@@ -3,13 +3,13 @@ import { LGraphCanvas } from "./lgraphcanvas.js";
 import { LGraphGroup } from "./lgraphgroup.js";
 
 /**
- * LGraph is the class that contain a full graph. We instantiate one and add nodes to it, and then we can run the execution loop.
+ * Graph is the class that contain a full graph. We instantiate one and add nodes to it, and then we can run the execution loop.
  * supported callbacks:
     + onNodeAdded: when a new node is added to the graph
     + onNodeRemoved: when a node inside this graph is removed
     + onNodeConnectionChange: some connection has changed in the graph (connected or disconnected)
  */
-export class LGraph {
+export class Graph {
 
     // default supported types
     static supported_types = ["number", "string", "boolean"];
@@ -34,11 +34,11 @@ export class LGraph {
     }
 
     /**
-     * Gets the supported types of the LGraph class, falling back to the default supported types if not defined for the instance.
-     * @returns {Array} An array of supported types for the LGraph class.
+     * Gets the supported types of the Graph class, falling back to the default supported types if not defined for the instance.
+     * @returns {Array} An array of supported types for the Graph class.
      */
     getSupportedTypes() {
-        return this.supported_types ?? LGraph.supported_types;
+        return this.supported_types ?? Graph.supported_types;
     }
 
     /**
@@ -47,7 +47,7 @@ export class LGraph {
      */
     clear() {
         this.stop();
-        this.status = LGraph.STATUS_STOPPED;
+        this.status = Graph.STATUS_STOPPED;
 
         this.last_node_id = 0;
         this.last_link_id = 0;
@@ -115,7 +115,7 @@ export class LGraph {
     }
 
     /**
-    * Apply config values to LGraph config object
+    * Apply config values to Graph config object
     * @method configApply
      * @param {object} opts options to merge
     */
@@ -128,7 +128,7 @@ export class LGraph {
     }
 
     /**
-    * Apply config values to LGraph config object
+    * Apply config values to Graph config object
     * @method configApply
      * @param {object} opts options to merge
     */
@@ -179,11 +179,11 @@ export class LGraph {
      * @param {number} interval amount of milliseconds between executions, if 0 then it renders to the monitor refresh rate
      */
     start(interval = 0) {
-        if (this.status === LGraph.STATUS_RUNNING) {
+        if (this.status === Graph.STATUS_RUNNING) {
             return;
         }
 
-        this.status = LGraph.STATUS_RUNNING;
+        this.status = Graph.STATUS_RUNNING;
         this.onPlayEvent?.();
         this.sendEventToAllNodes("onStart");
 
@@ -217,10 +217,10 @@ export class LGraph {
      * @method stop execution
      */
     stop() {
-        if (this.status == LGraph.STATUS_STOPPED) {
+        if (this.status == Graph.STATUS_STOPPED) {
             return;
         }
-        this.status = LGraph.STATUS_STOPPED;
+        this.status = Graph.STATUS_STOPPED;
         this.onStopEvent?.();
         if (this.execution_timer_id != null) {
             if (this.execution_timer_id != -1) {

@@ -1,5 +1,5 @@
+import { Lite } from "./Lite.js";
 import { LGraphCanvas } from "./lgraphcanvas.js";
-import { LGraph } from "./lgraph.js";
 
 // Creates an interface to access extra features from a graph (like play, stop, live, etc)
 export class Editor {
@@ -28,7 +28,7 @@ export class Editor {
         this.footer = root.querySelector(".footer");
 
         const canvas = this.canvas = root.querySelector(".graphcanvas");
-        const graph = this.graph = new LGraph();
+        const graph = this.graph = new Lite.Graph();
         const graphcanvas = this.graphcanvas = new LGraphCanvas(canvas, graph);
 
         graphcanvas.background_image = "imgs/grid.png";
@@ -123,7 +123,7 @@ export class Editor {
         setInterval(() => {
             meter.querySelector(".cpuload .fgload").style.width =
                 `${2 * self.graph.execution_time * 90}px`;
-            if (self.graph.status == LGraph.STATUS_RUNNING) {
+            if (self.graph.status == Lite.Graph.STATUS_RUNNING) {
                 meter.querySelector(".gpuload .fgload").style.width =
                     `${self.graphcanvas.render_time * 10 * 90}px`;
             } else {
@@ -162,7 +162,7 @@ export class Editor {
 
     onPlayButton() {
         var graph = this.graph;
-        if (graph.status == LGraph.STATUS_STOPPED) {
+        if (graph.status == Lite.Graph.STATUS_STOPPED) {
             graph.start();
         } else {
             graph.stop();

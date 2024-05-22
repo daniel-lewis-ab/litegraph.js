@@ -1,5 +1,4 @@
 import { Lite } from "../Lite.js";
-import { LGraph } from "../lgraph.js";
 
 class LGAudio {
 
@@ -266,7 +265,7 @@ class LGAudioSource {
     }
 
     onAdded(graph) {
-        if (graph.status === LGraph.STATUS_RUNNING) {
+        if (graph.status === Lite.Graph.STATUS_RUNNING) {
             this.onStart();
         }
     }
@@ -432,7 +431,7 @@ class LGAudioSource {
             that._audiobuffer = buffer;
             that._loading_audio = false;
             // if is playing, then play it
-            if (that.graph && that.graph.status === LGraph.STATUS_RUNNING) {
+            if (that.graph && that.graph.status === Lite.Graph.STATUS_RUNNING) {
                 that.onStart();
             } // this controls the autoplay already
         });
@@ -499,7 +498,7 @@ class LGAudioMediaSource {
     }
 
     onAdded(graph) {
-        if (graph.status === LGraph.STATUS_RUNNING) {
+        if (graph.status === Lite.Graph.STATUS_RUNNING) {
             this.onStart();
         }
     }
@@ -1387,7 +1386,7 @@ class LGAudioScript {
     }
 
     onAdded(graph) {
-        if (graph.status == LGraph.STATUS_RUNNING) {
+        if (graph.status == Lite.Graph.STATUS_RUNNING) {
             this.audionode.onaudioprocess = this._callback;
         }
     }
@@ -1433,7 +1432,7 @@ class LGAudioScript {
         if (name == "code") {
             this.properties.code = value;
             this.processCode();
-            if (this.graph && this.graph.status == LGraph.STATUS_RUNNING) {
+            if (this.graph && this.graph.status == Lite.Graph.STATUS_RUNNING) {
                 this.audionode.onaudioprocess = this._callback;
             }
         }

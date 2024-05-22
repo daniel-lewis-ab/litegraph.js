@@ -10,7 +10,7 @@ import { LGraphGroup } from "./lgraphgroup.js";
  * @class LGraphCanvas
  * @constructor
  * @param {HTMLCanvas} canvas the canvas where you want to render (it accepts a selector in string format or the canvas element itself)
- * @param {LGraph} graph [optional]
+ * @param {Lite.Graph} graph [optional]
  * @param {Object} options [optional] { skip_rendering, autoresize, viewport }
  */
 export class LGraphCanvas {
@@ -198,7 +198,7 @@ export class LGraphCanvas {
      * assigns a graph, you can reassign graphs to the same canvas
      *
      * @method setGraph
-     * @param {LGraph} graph
+     * @param {Lite.Graph} graph
      */
     setGraph(graph, skip_clear) {
         if (this.graph == graph) {
@@ -225,7 +225,7 @@ export class LGraphCanvas {
      * returns the top level graph (in case there are subgraphs open on the canvas)
      *
      * @method getTopGraph
-     * @return {LGraph} graph
+     * @return {Lite.Graph} graph
      */
     getTopGraph() {
         if(this._graph_stack.length)
@@ -237,7 +237,7 @@ export class LGraphCanvas {
      * opens a graph contained inside a node in the current graph
      *
      * @method openSubgraph
-     * @param {LGraph} graph
+     * @param {Lite.Graph} graph
      */
     openSubgraph(graph) {
         if (!graph) {
@@ -264,7 +264,7 @@ export class LGraphCanvas {
      * closes a subgraph contained inside a node
      *
      * @method closeSubgraph
-     * @param {LGraph} assigns a graph
+     * @param {Lite.Graph} assigns a graph
      */
     closeSubgraph() {
         if (!this._graph_stack || this._graph_stack.length == 0) {
@@ -288,7 +288,7 @@ export class LGraphCanvas {
     /**
      * returns the visually active graph (in case there are more in the stack)
      * @method getCurrentGraph
-     * @return {LGraph} the active graph
+     * @return {Lite.Graph} the active graph
      */
     getCurrentGraph() {
         return this.graph;

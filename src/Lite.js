@@ -1,6 +1,7 @@
 
 import { LGraphNode } from "./lgraphnode.js";
 import { Link } from "./Link.js";
+import { Graph } from "./lgraph.js";
 
 /**
  * @class Lite
@@ -1011,7 +1012,7 @@ export var Lite = new class {
 }
 
 Lite.Link = Link;
-
+Lite.Graph = Graph;
 
 
 
