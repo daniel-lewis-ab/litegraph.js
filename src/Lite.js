@@ -1,5 +1,5 @@
 
-import { Node } from "./lgraphnode.js";
+import { Node } from "./Node.js";
 import { Link } from "./Link.js";
 import { Graph } from "./Graph.js";
 import { Group } from "./Group.js";
