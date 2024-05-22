@@ -1,5 +1,5 @@
 import { Lite } from "./Lite.js";
-import { LGraphCanvas } from "./renderers/lgraphcanvas.js";
+import { LGraphCanvas } from "./renderers/canvas.js";
 
 /**
  * Graph is the class that contain a full graph. We instantiate one and add nodes to it, and then we can run the execution loop.
