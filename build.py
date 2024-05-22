@@ -9,14 +9,14 @@ js_files_lists = [
     {
         "output_filename": "litegraph.js",
         "js_files": [
-           "./src/litegraph.js",
-           "./src/contextmenu.js",
-           "./src/lgraphcanvas.js",
-           "./src/dragandscale.js",
-           "./src/lgraphnode.js",
-           "./src/lgraphgroup.js",
-           "./src/lgraph.js",
-           "./src/llink.js",
+            "./src/Lite.js",
+            "./src/ContextMenu.js",
+            "./src/renderers/canvas.js",
+            "./src/dragandscale.js",
+            "./src/Node.js",
+            "./src/Group.js",
+            "./src/Graph.js",
+            "./src/Link.js",
            
             "./src/nodes/base.js",
             "./src/nodes/events.js",
@@ -39,14 +39,14 @@ js_files_lists = [
     {
         "output_filename": "litegraph.mini.js",
         "js_files": [    
-            "./src/litegraph.js",
-           "./src/contextmenu.js",
-           "./src/lgraphcanvas.js",
-           "./src/dragandscale.js",
-           "./src/lgraphnode.js",
-           "./src/lgraphgroup.js",
-           "./src/lgraph.js",
-           "./src/llink.js",
+            "./src/Lite.js",
+            "./src/ContextMenu.js",
+            "./src/renderers/canvas.js",
+            "./src/dragandscale.js",
+            "./src/Node.js",
+            "./src/Group.js",
+            "./src/Graph.js",
+            "./src/Link.js",
             
             "./src/nodes/base.js",
             "./src/nodes/events.js",
@@ -59,15 +59,15 @@ js_files_lists = [
     },
     {
         "output_filename": "litegraph.core.js",
-        "js_files": [    
-            "./src/litegraph.js",
-           "./src/contextmenu.js",
-           "./src/lgraphcanvas.js",
-           "./src/dragandscale.js",
-           "./src/lgraphnode.js",
-           "./src/lgraphgroup.js",
-           "./src/lgraph.js",
-           "./src/llink.js",
+        "js_files": [
+            "./src/Lite.js",
+            "./src/ContextMenu.js",
+            "./src/renderers/canvas.js",
+            "./src/dragandscale.js",
+            "./src/Node.js",
+            "./src/Group.js",
+            "./src/Graph.js",
+            "./src/Link.js",
         ]
     }
 ]

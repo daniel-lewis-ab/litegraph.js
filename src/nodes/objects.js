@@ -233,7 +233,7 @@ class objMethodWidget {
 
     static title = "Obj Method widget";
     static desc = "Choose and execute a method from an object";
-    
+
     constructor() {
         this.addInput("obj", "object");
         // this.addInput("onTrigger", Lite.ACTION);
@@ -333,7 +333,7 @@ class objMethodWidget {
     //     console.debug("Property changed", name, value, prev_value)
     //     this.updateInputsForMethod();
     // }
-    
+
     onWidgetChanged(name, value, prev_value, widget) {
         console.debug("Widget changed", name, value, prev_value);
         // if changed, reset inputs

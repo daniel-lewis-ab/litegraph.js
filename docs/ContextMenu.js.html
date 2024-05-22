@@ -1,10 +1,38 @@
-import { Lite } from "./Lite.js";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ContextMenu.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ContextMenu.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Lite } from "./Lite.js";
 
 export class ContextMenu {
 
     /**
     * @constructor
-    * @param {Array<Object>} values (allows object { title: "Nice text", callback: function ... })
+    * @param {Array&lt;Object>} values (allows object { title: "Nice text", callback: function ... })
     * @param {Object} options [optional] Some options:\
     * - title: title to show on top of the menu
     * - callback: function to call when an option is clicked, it receives the item information
@@ -104,8 +132,8 @@ export class ContextMenu {
 
         // use strings because comparing classes between windows doesnt work
         const eventClass = this.options.event.constructor.name;
-        if ( eventClass !== "MouseEvent" &&
-            eventClass !== "CustomEvent" &&
+        if ( eventClass !== "MouseEvent" &amp;&amp;
+            eventClass !== "CustomEvent" &amp;&amp;
             eventClass !== "PointerEvent"
         ) {
             console.error(`Event passed to ContextMenu is not of type MouseEvent or CustomEvent. Ignoring it. (${eventClass})`);
@@ -131,15 +159,15 @@ export class ContextMenu {
 
     /**
      * Adds a set of values to the menu.
-     * @param {Array<string|object>} values - An array of values to be added.
+     * @param {Array&lt;string|object>} values - An array of values to be added.
      */
     addItems(values) {
 
-        for (let i = 0; i < values.length; i++) {
+        for (let i = 0; i &lt; values.length; i++) {
             let name = values[i];
 
             if (typeof name !== 'string') {
-                name = name && name.content !== undefined ? String(name.content) : String(name);
+                name = name &amp;&amp; name.content !== undefined ? String(name.content) : String(name);
             }
 
             let value = values[i];
@@ -207,11 +235,11 @@ export class ContextMenu {
                                         ? Math.min(Math.max(that.selectedOption+1, 0), that.allOptions.length-1) // currentOptions vs allOptions
                                         : 0;
                                 } while(that.allOptions[that.selectedOption]
-                                        && that.allOptions[that.selectedOption].hidden
-                                        && that.selectedOption < that.allOptions.length-1
+                                        &amp;&amp; that.allOptions[that.selectedOption].hidden
+                                        &amp;&amp; that.selectedOption &lt; that.allOptions.length-1
                                 );
                                 // fix last filtered pos
-                                if(that.allOptions[that.selectedOption] && that.allOptions[that.selectedOption].hidden) {
+                                if(that.allOptions[that.selectedOption] &amp;&amp; that.allOptions[that.selectedOption].hidden) {
                                     that.selectedOption = that.currentOptions[that.currentOptions.length-1].menu_index;
                                 }
                                 kdone = true;
@@ -222,12 +250,12 @@ export class ContextMenu {
                                         ? Math.min(Math.max(that.selectedOption-1, 0), that.allOptions.length-1)
                                         : 0;
                                 } while(that.allOptions[that.selectedOption]
-                                        && that.allOptions[that.selectedOption].hidden
-                                        && that.selectedOption > 0
+                                        &amp;&amp; that.allOptions[that.selectedOption].hidden
+                                        &amp;&amp; that.selectedOption > 0
                                 );
                                 // fix first filtered pos
-                                if(that.allOptions[that.selectedOption] && that.allOptions[that.selectedOption].hidden) {
-                                    if(that.currentOptions && that.currentOptions.length) {
+                                if(that.allOptions[that.selectedOption] &amp;&amp; that.allOptions[that.selectedOption].hidden) {
+                                    if(that.currentOptions &amp;&amp; that.currentOptions.length) {
                                         that.selectedOption = that.currentOptions[0].menu_index;
                                     }else{
                                         that.selectedOption = false;
@@ -266,9 +294,9 @@ export class ContextMenu {
                                     if(that.filteringText.length) {
                                         for(var iO in that.allOptions) {
                                             if( that.allOptions[iO].style.display !== "none" // filtering for visible
-                                                && !(that.allOptions[iO].classList+"").includes("separator")
-                                                // && that.allOptions[iO].textContent !== "Add Node"
-                                                && that.allOptions[iO].textContent !== "Search"
+                                                &amp;&amp; !(that.allOptions[iO].classList+"").includes("separator")
+                                                // &amp;&amp; that.allOptions[iO].textContent !== "Add Node"
+                                                &amp;&amp; that.allOptions[iO].textContent !== "Search"
                                             ) {
                                                 if( Lite.debug ) {
                                                     console.debug("ContextElement simCLICK",that.allOptions[iO]);
@@ -307,7 +335,7 @@ export class ContextMenu {
                                 }
                                 break;
                         }
-                        if(!kdone && e.key.length == 1) {
+                        if(!kdone &amp;&amp; e.key.length == 1) {
                             that.filteringText += e.key;
                             if(that.parentMenu) {
                                 // that.lock = true; // ??
@@ -317,7 +345,7 @@ export class ContextMenu {
                     }
 
                     // process text filtering
-                    if(that.filteringText && that.filteringText!=="") {
+                    if(that.filteringText &amp;&amp; that.filteringText!=="") {
                         var aFilteredOpts = [];
                         that.currentOptions = []; // reset filtered
                         for(var iO in that.allOptions) {
@@ -328,13 +356,13 @@ export class ContextMenu {
                             var wSplits = txtCont.split("/");
                             var isStartLast = false;
                             // DBG("check splits",wSplits);
-                            isStartLast = ( (wSplits.length>1) && wSplits[wSplits.length-1].toLocaleLowerCase().startsWith(that.filteringText.toLocaleLowerCase()) )
-                                                || ( wSplits.length==1 && isStartW );
+                            isStartLast = ( (wSplits.length>1) &amp;&amp; wSplits[wSplits.length-1].toLocaleLowerCase().startsWith(that.filteringText.toLocaleLowerCase()) )
+                                                || ( wSplits.length==1 &amp;&amp; isStartW );
                             var isExtra = (that.allOptions[iO].classList+"").includes("separator")
                                                 // || txtCont === "Add Node"
                                                 || txtCont === "Search";
                             that.allOptions[iO].menu_index = iO; // original allOptions index
-                            if(doesContainW && !isExtra) {
+                            if(doesContainW &amp;&amp; !isExtra) {
                                 aFilteredOpts.push(that.allOptions[iO]);
                                 that.allOptions[iO].style.display = "block";
                                 that.allOptions[iO].hidden = false;
@@ -360,7 +388,7 @@ export class ContextMenu {
                             : 0
                         ;
                         // fix first filtered pos
-                        if(that.allOptions[that.selectedOption] && that.allOptions[that.selectedOption].hidden && that.currentOptions.length) {
+                        if(that.allOptions[that.selectedOption] &amp;&amp; that.allOptions[that.selectedOption].hidden &amp;&amp; that.currentOptions.length) {
                             that.selectedOption = that.currentOptions[0].menu_index;
                         }
                     }else{
@@ -401,7 +429,7 @@ export class ContextMenu {
                     var body_rect = document.body.getBoundingClientRect();
                     var root_rect = root.getBoundingClientRect();
                     root.style.top = that.top_original + "px";
-                    // if (body_rect.height && top > body_rect.height - root_rect.height - 10) {
+                    // if (body_rect.height &amp;&amp; top > body_rect.height - root_rect.height - 10) {
                     // var new_top = body_rect.height - root_rect.height - 10;
                     // root.style.top = this.top_original + "px";
                     // }
@@ -452,10 +480,10 @@ export class ContextMenu {
             if(body_rect.height === 0)
                 console.error("document.body height is 0. That is dangerous, set html,body { height: 100%; }");
 
-            if (body_rect.width && left > body_rect.width - root_rect.width - 10) {
+            if (body_rect.width &amp;&amp; left > body_rect.width - root_rect.width - 10) {
                 left = body_rect.width - root_rect.width - 10;
             }
-            if (body_rect.height && top > body_rect.height - root_rect.height - 10) {
+            if (body_rect.height &amp;&amp; top > body_rect.height - root_rect.height - 10) {
                 top = body_rect.height - root_rect.height - 10;
             }
         }
@@ -514,7 +542,7 @@ export class ContextMenu {
         if (!disabled) {
             element.addEventListener("click", handleMenuItemClick);
         }
-        if (!disabled && options.autoopen) {
+        if (!disabled &amp;&amp; options.autoopen) {
             element.addEventListener("pointerenter",(event) => {
                 const value = this.value;
                 if (!value || !value.has_submenu) {
@@ -550,7 +578,7 @@ export class ContextMenu {
 
             // Handle special cases
             if (value) {
-                if (value.callback && !options.ignore_item_callbacks && value.disabled !== true) {
+                if (value.callback &amp;&amp; !options.ignore_item_callbacks &amp;&amp; value.disabled !== true) {
 
                     if(Lite.debug)
                         console.debug("ContextMenu using value callback and !ignore_item_callbacks",this,value,options,event,that,options.node);
@@ -581,7 +609,7 @@ export class ContextMenu {
             }
 
             // Close parent menu if necessary and not locked
-            if (closeParent && !that.lock) {
+            if (closeParent &amp;&amp; !that.lock) {
                 that.close();
             }
         }
@@ -599,7 +627,7 @@ export class ContextMenu {
             let doc = document;
             doc.removeEventListener('keydown',this.root.f_textfilter,true);
             doc.removeEventListener('keydown',this.root.f_textfilter,false);
-            if (e && e.target) {
+            if (e &amp;&amp; e.target) {
                 doc = e.target.ownerDocument;
             }
             if (!doc) {
@@ -609,13 +637,13 @@ export class ContextMenu {
             doc.removeEventListener('keydown',this.root.f_textfilter,false);
         }
 
-        if (this.parentMenu && !ignore_parent_menu) {
+        if (this.parentMenu &amp;&amp; !ignore_parent_menu) {
             this.parentMenu.lock = false;
             this.parentMenu.current_submenu = null;
             if (e === undefined) {
                 this.parentMenu.close();
             } else if (
-                e &&
+                e &amp;&amp;
                 !ContextMenu.isCursorOverElement(e, this.parentMenu.root)
             ) {
                 ContextMenu.trigger(this.parentMenu.root, "pointerleave", e);
@@ -655,7 +683,7 @@ export class ContextMenu {
      * @param {HTMLElement} element - The element on which to trigger the event.
      * @param {string} event_name - The name of the event to trigger.
      * @param {Object} params - Additional parameters to include in the event.
-     * @param {HTMLElement} origin - The origin of the event <currently not supported as CustomEvent can't have a target!>
+     * @param {HTMLElement} origin - The origin of the event &lt;currently not supported as CustomEvent can't have a target!>
      * @returns {CustomEvent} - The created CustomEvent instance.
      * @BUG: Probable bug related to params, origin not being configured/populated correctly
      */
@@ -687,3 +715,26 @@ export class ContextMenu {
         return Lite.isInsideRectangle(event.clientX, event.clientY, element.left, element.top, element.width, element.height);
     }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Canvas.html">Canvas</a></li><li><a href="ContextMenu_ContextMenu.html">ContextMenu</a></li><li><a href="DragAndScale.html">DragAndScale</a></li><li><a href="Graph.html">Graph</a></li><li><a href="Group_Group.html">Group</a></li><li><a href="LGraphNode.html">LGraphNode</a></li><li><a href="Lite.html">Lite</a></li></ul><h3>Global</h3><ul><li><a href="global.html#actionDo">actionDo</a></li><li><a href="global.html#actionHistoryBack">actionHistoryBack</a></li><li><a href="global.html#actionHistoryForward">actionHistoryForward</a></li><li><a href="global.html#actionHistoryLoad">actionHistoryLoad</a></li><li><a href="global.html#add">add</a></li><li><a href="global.html#addConnection">addConnection</a></li><li><a href="global.html#addGlobalInput">addGlobalInput</a></li><li><a href="global.html#addNodeMethod">addNodeMethod</a></li><li><a href="global.html#addOutput">addOutput</a></li><li><a href="global.html#addProperty">addProperty</a></li><li><a href="global.html#addWidget">addWidget</a></li><li><a href="global.html#adjustMouseEvent">adjustMouseEvent</a></li><li><a href="global.html#arrange">arrange</a></li><li><a href="global.html#attachCanvas">attachCanvas</a></li><li><a href="global.html#bindEvents">bindEvents</a></li><li><a href="global.html#bringToFront">bringToFront</a></li><li><a href="global.html#buildNodeClassFromObject">buildNodeClassFromObject</a></li><li><a href="global.html#centerOnNode">centerOnNode</a></li><li><a href="global.html#change">change</a></li><li><a href="global.html#changeInputType">changeInputType</a></li><li><a href="global.html#changeOutputType">changeOutputType</a></li><li><a href="global.html#checkNodeTypes">checkNodeTypes</a></li><li><a href="global.html#clear">clear</a></li><li><a href="global.html#clearRegisteredTypes">clearRegisteredTypes</a></li><li><a href="global.html#clearTriggeredSlot">clearTriggeredSlot</a></li><li><a href="global.html#clearTriggeredSlots">clearTriggeredSlots</a></li><li><a href="global.html#closeSubgraph">closeSubgraph</a></li><li><a href="global.html#collapse">collapse</a></li><li><a href="global.html#computeSize">computeSize</a></li><li><a href="global.html#computeVisibleNodes">computeVisibleNodes</a></li><li><a href="global.html#configApply">configApply</a></li><li><a href="global.html#configure">configure</a></li><li><a href="global.html#connect">connect</a></li><li><a href="global.html#connectByType">connectByType</a></li><li><a href="global.html#convertCanvasToOffset">convertCanvasToOffset</a></li><li><a href="global.html#convertOffsetToCanvas">convertOffsetToCanvas</a></li><li><a href="global.html#createNode">createNode</a></li><li><a href="global.html#deleteSelectedNodes">deleteSelectedNodes</a></li><li><a href="global.html#deselectAllNodes">deselectAllNodes</a></li><li><a href="global.html#deselectNode">deselectNode</a></li><li><a href="global.html#detachCanvas">detachCanvas</a></li><li><a href="global.html#disconnectInput">disconnectInput</a></li><li><a href="global.html#disconnectOutput">disconnectOutput</a></li><li><a href="global.html#doExecute">doExecute</a></li><li><a href="global.html#draw">draw</a></li><li><a href="global.html#drawBackCanvas">drawBackCanvas</a></li><li><a href="global.html#drawConnections">drawConnections</a></li><li><a href="global.html#drawFrontCanvas">drawFrontCanvas</a></li><li><a href="global.html#drawGroups">drawGroups</a></li><li><a href="global.html#drawNode">drawNode</a></li><li><a href="global.html#drawNodeShape">drawNodeShape</a></li><li><a href="global.html#drawNodeWidgets">drawNodeWidgets</a></li><li><a href="global.html#drawSubgraphPanel">drawSubgraphPanel</a></li><li><a href="global.html#enableWebGL">enableWebGL</a></li><li><a href="global.html#executePendingActions">executePendingActions</a></li><li><a href="global.html#fetchFile">fetchFile</a></li><li><a href="global.html#findInputSlot">findInputSlot</a></li><li><a href="global.html#findInputSlotFree">findInputSlotFree</a></li><li><a href="global.html#findNodeByTitle">findNodeByTitle</a></li><li><a href="global.html#findNodesByClass">findNodesByClass</a></li><li><a href="global.html#findNodesByTitle">findNodesByTitle</a></li><li><a href="global.html#findNodesByType">findNodesByType</a></li><li><a href="global.html#findOutputSlot">findOutputSlot</a></li><li><a href="global.html#findOutputSlotFree">findOutputSlotFree</a></li><li><a href="global.html#findSlotByType">findSlotByType</a></li><li><a href="global.html#getAncestors">getAncestors</a></li><li><a href="global.html#getBounding">getBounding</a></li><li><a href="global.html#getCanvasWindow">getCanvasWindow</a></li><li><a href="global.html#getConnectionPos">getConnectionPos</a></li><li><a href="global.html#getCurrentGraph">getCurrentGraph</a></li><li><a href="global.html#getElapsedTime">getElapsedTime</a></li><li><a href="global.html#getFixedTime">getFixedTime</a></li><li><a href="global.html#getGroupOnPos">getGroupOnPos</a></li><li><a href="global.html#getInputData">getInputData</a></li><li><a href="global.html#getInputDataByName">getInputDataByName</a></li><li><a href="global.html#getInputDataType">getInputDataType</a></li><li><a href="global.html#getInputInfo">getInputInfo</a></li><li><a href="global.html#getInputLink">getInputLink</a></li><li><a href="global.html#getInputNode">getInputNode</a></li><li><a href="global.html#getInputOrProperty">getInputOrProperty</a></li><li><a href="global.html#getNodeById">getNodeById</a></li><li><a href="global.html#getNodeOnPos">getNodeOnPos</a></li><li><a href="global.html#getNodeType">getNodeType</a></li><li><a href="global.html#getNodeTypesCategories">getNodeTypesCategories</a></li><li><a href="global.html#getOutputData">getOutputData</a></li><li><a href="global.html#getOutputInfo">getOutputInfo</a></li><li><a href="global.html#getOutputNodes">getOutputNodes</a></li><li><a href="global.html#getPropertyInfo">getPropertyInfo</a></li><li><a href="global.html#getSlotInPosition">getSlotInPosition</a></li><li><a href="global.html#getTime">getTime</a></li><li><a href="global.html#getTitle">getTitle</a></li><li><a href="global.html#getTopGraph">getTopGraph</a></li><li><a href="global.html#isAnyOutputConnected">isAnyOutputConnected</a></li><li><a href="global.html#isInputConnected">isInputConnected</a></li><li><a href="global.html#isLive">isLive</a></li><li><a href="global.html#isOutputConnected">isOutputConnected</a></li><li><a href="global.html#isOverNodeBox">isOverNodeBox</a></li><li><a href="global.html#isOverNodeInput">isOverNodeInput</a></li><li><a href="global.html#isOverNodeOuput">isOverNodeOuput</a></li><li><a href="global.html#isPointInside">isPointInside</a></li><li><a href="global.html#isValidConnection">isValidConnection</a></li><li><a href="global.html#onGraphChanged">onGraphChanged</a></li><li><a href="global.html#onGraphSaved">onGraphSaved</a></li><li><a href="global.html#openSubgraph">openSubgraph</a></li><li><a href="global.html#pin">pin</a></li><li><a href="global.html#processDrop">processDrop</a></li><li><a href="global.html#processKey">processKey</a></li><li><a href="global.html#processMouseMove">processMouseMove</a></li><li><a href="global.html#processMouseUp">processMouseUp</a></li><li><a href="global.html#processMouseWheel">processMouseWheel</a></li><li><a href="global.html#processNodeWidgets">processNodeWidgets</a></li><li><a href="global.html#registerNodeType">registerNodeType</a></li><li><a href="global.html#registerSearchboxExtra">registerSearchboxExtra</a></li><li><a href="global.html#registerSlotType">registerSlotType</a></li><li><a href="global.html#remove">remove</a></li><li><a href="global.html#removeInput">removeInput</a></li><li><a href="global.html#removeLink">removeLink</a></li><li><a href="global.html#removeOutput">removeOutput</a></li><li><a href="global.html#renameInput">renameInput</a></li><li><a href="global.html#renameOutput">renameOutput</a></li><li><a href="global.html#renderInfo">renderInfo</a></li><li><a href="global.html#renderLink">renderLink</a></li><li><a href="global.html#resize">resize</a></li><li><a href="global.html#runStep">runStep</a></li><li><a href="global.html#selectNode">selectNode</a></li><li><a href="global.html#selectNodes">selectNodes</a></li><li><a href="global.html#sendEventToAllNodes">sendEventToAllNodes</a></li><li><a href="global.html#sendToBack">sendToBack</a></li><li><a href="global.html#serialize">serialize</a></li><li><a href="global.html#setCanvas">setCanvas</a></li><li><a href="global.html#setDirty">setDirty</a></li><li><a href="global.html#setGlobalInputData">setGlobalInputData</a></li><li><a href="global.html#setGraph">setGraph</a></li><li><a href="global.html#setOutputData">setOutputData</a></li><li><a href="global.html#setOutputDataType">setOutputDataType</a></li><li><a href="global.html#setProperty">setProperty</a></li><li><a href="global.html#setSize">setSize</a></li><li><a href="global.html#setZoom">setZoom</a></li><li><a href="global.html#start">start</a></li><li><a href="global.html#startRendering">startRendering</a></li><li><a href="global.html#stopexecution">stop execution</a></li><li><a href="global.html#stopRendering">stopRendering</a></li><li><a href="global.html#switchLiveMode">switchLiveMode</a></li><li><a href="global.html#toString">toString</a></li><li><a href="global.html#trigger">trigger</a></li><li><a href="global.html#triggerSlot">triggerSlot</a></li><li><a href="global.html#unbindEvents">unbindEvents</a></li><li><a href="global.html#unregisterNodeType">unregisterNodeType</a></li><li><a href="global.html#updateExecutionOrder">updateExecutionOrder</a></li><li><a href="global.html#wrapFunctionAsNode">wrapFunctionAsNode</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Wed May 22 2024 00:10:18 GMT-0600 (Mountain Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
