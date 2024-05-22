@@ -1,5 +1,5 @@
-import { Lite } from "./Lite.js";
-import { DragAndScale } from "./dragandscale.js";
+import { Lite } from "../Lite.js";
+import { DragAndScale } from "../dragandscale.js";
 
 /**
  * This class is in charge of rendering one graph inside a canvas. And provides all the interaction required.

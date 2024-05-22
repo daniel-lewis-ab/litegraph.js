@@ -1,5 +1,5 @@
 import { Lite } from "./Lite.js";
-import { LGraphCanvas } from "./lgraphcanvas.js";
+import { LGraphCanvas } from "./renderers/lgraphcanvas.js";
 
 export class Group {
 
