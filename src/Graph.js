@@ -1,6 +1,5 @@
 import { Lite } from "./Lite.js";
 import { LGraphCanvas } from "./lgraphcanvas.js";
-import { LGraphGroup } from "./lgraphgroup.js";
 
 /**
  * Graph is the class that contain a full graph. We instantiate one and add nodes to it, and then we can run the execution loop.
@@ -706,7 +705,7 @@ export class Graph {
         }
 
         // groups
-        if (node.constructor === LGraphGroup) {
+        if (node.constructor === Lite.Group) {
             this._groups.push(node);
             this.setDirtyCanvas(true);
             this.change();
@@ -774,7 +773,7 @@ export class Graph {
      * @param {LGraphNode} node the instance of the node
      */
     remove(node) {
-        if (node.constructor === LGraphGroup) {
+        if (node.constructor === Lite.Group) {
             var index = this._groups.indexOf(node);
             if (index != -1) {
                 this._groups.splice(index, 1);
@@ -927,7 +926,7 @@ export class Graph {
      * @method getGroupOnPos
      * @param {number} x the x coordinate in canvas space
      * @param {number} y the y coordinate in canvas space
-     * @return {LGraphGroup} the group or null
+     * @return {Lite.Group} the group or null
      */
     getGroupOnPos(x, y) {
         return this._groups.find((group) => group.isPointInside(x, y, 2, true)) ?? null;
@@ -1459,7 +1458,7 @@ export class Graph {
         this._groups.length = 0;
         if (data.groups) {
             data.groups.forEach((groupData) => {
-                const group = new LGraphGroup();
+                const group = new Lite.Group();
                 group.configure(groupData);
                 this.add(group, true, {doProcessChange: false});
             });

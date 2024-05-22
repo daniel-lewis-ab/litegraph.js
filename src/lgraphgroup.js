@@ -2,7 +2,7 @@ import { Lite } from "./Lite.js";
 import { LGraphCanvas } from "./lgraphcanvas.js";
 import { LGraphNode } from "./lgraphnode.js";
 
-export class LGraphGroup {
+export class Group {
 
     /**
      * Constructor for the LGraphGroup class.
