@@ -5640,8 +5640,8 @@ export class LGraphCanvas {
         var destType = false;
         if (node_right && node_right.outputs && node_right.outputs[link.target_slot]) destType = node_right.inputs[link.target_slot].type;
 
-        // @TODO: See if deleting this is a bug:
-        // var options = ["Add Node",null,"Delete",null];
+        // @TODO: Do these work?
+        var options = ["Add Node",null,"Delete",null];
 
 
         var menu = new ContextMenu(options, {
