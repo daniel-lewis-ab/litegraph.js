@@ -1,4 +1,5 @@
 import { Lite } from "../Lite.js";
+import { Renderer } from "./all.js";
 import { DragAndScale } from "../dragandscale.js";
 
 /**
@@ -11,8 +12,10 @@ import { DragAndScale } from "../dragandscale.js";
  * @param {Lite.Graph} graph [optional]
  * @param {Object} options [optional] { skip_rendering, autoresize, viewport }
  */
-export class Canvas {
+export class Canvas extends Renderer {
     constructor(canvas, graph, options) {
+        super();
+
         options ??= {
             skip_render: false,
             autoresize: false,
