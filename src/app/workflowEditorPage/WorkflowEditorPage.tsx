@@ -11,6 +11,7 @@ import { EditorErrorNotification } from './components/workflowEditorSidebar/comp
 import { EditorLogs } from './components/workflowEditorSidebar/components/EditorLogs';
 import { EditorSideActionsBar } from './components/workflowEditorSidebar/components/EditorSideActionsBar';
 import { LogData } from '@/api/types';
+import { useStateWithLocalStorage } from '@/hooks/useStateWithLocalStorage/useStateWithLocalStorage';
 
 type WorkflowEditorPageProps = {
   workflowId: string;
@@ -29,12 +30,15 @@ export const WorkflowEditorPage = ({
   onCreateNewWorkflowExecution,
   onSaveWorkflow,
 }: WorkflowEditorPageProps) => {
-  const [activeSidebarSection, setActiveSidebarSection] = useState<'images' | 'executions' | null>(null);
   const [showDeploymentDialog, setShowDeploymentDialog] = useState(false);
-  const [isLogsVisible, setIsLogsVisible] = useState(false);
+  const [isLogsVisible, setIsLogsVisible] = useStateWithLocalStorage('isLogsVisible', false);
   const [areLogsExpanded, setAreLogsExpanded] = useState(false);
   const innerPanelRef = useRef<ImperativePanelGroupHandle | null>(null);
   const [isErrorNotificationVisible, setIsErrorNotificationVisible] = useState(false);
+  const [activeSidebarSection, setActiveSidebarSection] = useStateWithLocalStorage<'images' | 'executions' | null>(
+    'activeSidebarSection',
+    null,
+  );
   const toggleLogsFullWidth = () => innerPanelRef.current?.setLayout(areLogsExpanded ? [90, 20] : [0, 100]);
   const handleViewLogsClick = () => {
     setIsLogsVisible(true);
