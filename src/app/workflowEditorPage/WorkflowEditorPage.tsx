@@ -1,6 +1,4 @@
-import { constants } from '@/contants';
-import { Banner, EditorBannerContent } from '@/shared/components/banner/Banner';
-import { useBannerVisibility } from '@/shared/components/banner/useBannerVisibility';
+import { Banner } from '@/shared/components/banner/Banner';
 import { CreateDeploymentDialogContainer } from '@/shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
 import { useEffect, useRef, useState } from 'react';
 import { ImperativePanelGroupHandle, Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
@@ -37,8 +35,6 @@ export const WorkflowEditorPage = ({
   const [areLogsExpanded, setAreLogsExpanded] = useState(false);
   const innerPanelRef = useRef<ImperativePanelGroupHandle | null>(null);
   const [isErrorNotificationVisible, setIsErrorNotificationVisible] = useState(false);
-
-  const { isBannerVisible, closeBanner } = useBannerVisibility(constants.ftueBannerEditorKey);
   const toggleLogsFullWidth = () => innerPanelRef.current?.setLayout(areLogsExpanded ? [90, 20] : [0, 100]);
   const handleViewLogsClick = () => {
     setIsLogsVisible(true);
@@ -58,12 +54,9 @@ export const WorkflowEditorPage = ({
             <div
               className={`flex flex-1 flex-col ${activeSidebarSection !== null ? 'flex grow basis-0' : 'flex basis-full'}`}
             >
-              {isBannerVisible && (
-                <Banner onClickClose={closeBanner} className="rounded-lg">
-                  <EditorBannerContent />
-                </Banner>
-              )}
-
+              <Banner className="rounded-lg">
+                <Banner.EditorBannerContent />
+              </Banner>
               <WorkflowEditorHeader
                 workflowName={workflowName}
                 onRunWorkflowClick={onCreateNewWorkflowExecution}

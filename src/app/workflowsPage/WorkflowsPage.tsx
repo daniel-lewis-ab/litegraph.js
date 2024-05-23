@@ -2,7 +2,7 @@ import { Workflow } from '@/api/types';
 import { PageActions } from '@/app/workflowsPage/components/PageActions';
 import { constants } from '@/contants';
 import { routes } from '@/routes/routes';
-import { Banner, PageBannerContent } from '@/shared/components/banner/Banner';
+import { Banner } from '@/shared/components/banner/Banner';
 import { useBannerVisibility } from '@/shared/components/banner/useBannerVisibility';
 import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
 import { WorkflowTile } from '@/shared/components/workflowTile/WorkflowTile';
@@ -28,18 +28,15 @@ export const WorkflowsPage = ({
 }: WorkflowsPageProps) => {
   const [workflowIdToDelete, setWorkflowIdToDelete] = useState<null | string>(null);
   const [workflowIdToDeploy, setWorkflowIdToDeploy] = useState<null | string>(null);
-
-  const { isBannerVisible, closeBanner } = useBannerVisibility(constants.ftueBannerPageKey);
+  const { isBannerVisible } = useBannerVisibility(constants.ftueBannerPageKey);
 
   if (workflows.length === 0) {
     return (
       <EmptyWorkflowsPage
         banner={
-          isBannerVisible && (
-            <Banner onClickClose={closeBanner}>
-              <PageBannerContent />
-            </Banner>
-          )
+          <Banner>
+            <Banner.PageBannerContent />
+          </Banner>
         }
       />
     );
@@ -48,11 +45,9 @@ export const WorkflowsPage = ({
   return (
     <PageTemplate
       banner={
-        isBannerVisible && (
-          <Banner onClickClose={closeBanner}>
-            <PageBannerContent />
-          </Banner>
-        )
+        <Banner>
+          <Banner.PageBannerContent />
+        </Banner>
       }
     >
       <PageTemplate.Header showFeedback={!isBannerVisible}>

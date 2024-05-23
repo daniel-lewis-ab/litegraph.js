@@ -4,31 +4,30 @@ import clsx from 'clsx';
 import { ReactNode } from 'react';
 import { Button } from '../button/Button';
 import { Icon } from '../icon/Icon';
+import { useBannerVisibility } from './useBannerVisibility';
 
-const Banner = ({
-  children,
-  className,
-  onClickClose,
-}: {
-  children: ReactNode;
-  className?: string;
-  onClickClose?: () => void;
-}) => (
-  <div
-    className={clsx(
-      'flex content-center items-center justify-between gap-4 bg-secondary-1 p-1 px-3 py-2 text-center text-xs font-medium',
-      className,
-    )}
-  >
-    <div></div>
-    <div className="flex content-center items-center gap-4">{children}</div>
-    {onClickClose && (
-      <button onClick={onClickClose}>
+export const Banner = ({ children, className }: { children: ReactNode; className?: string }) => {
+  const { isBannerVisible, closeBanner } = useBannerVisibility(constants.ftueBannerPageKey);
+
+  if (!isBannerVisible) {
+    return null;
+  }
+
+  return (
+    <div
+      className={clsx(
+        'flex content-center items-center justify-between gap-4 bg-secondary-1 p-1 px-3 py-2 text-center text-xs font-medium',
+        className,
+      )}
+    >
+      <div></div>
+      <div className="flex content-center items-center gap-4">{children}</div>
+      <button onClick={closeBanner}>
         <Icon icon={faClose} size={16} />
       </button>
-    )}
-  </div>
-);
+    </div>
+  );
+};
 
 const PageBannerContent = () => (
   <>
@@ -58,4 +57,5 @@ const EditorBannerContent = () => (
   </>
 );
 
-export { Banner, EditorBannerContent, PageBannerContent };
+Banner.EditorBannerContent = EditorBannerContent;
+Banner.PageBannerContent = PageBannerContent;

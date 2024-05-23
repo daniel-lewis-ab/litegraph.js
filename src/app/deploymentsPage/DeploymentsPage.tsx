@@ -1,12 +1,12 @@
 import { Deployment, DeploymentStatus } from '@/api/types';
-import { constants } from '@/contants';
-import { Banner, PageBannerContent } from '@/shared/components/banner/Banner';
-import { useBannerVisibility } from '@/shared/components/banner/useBannerVisibility';
+import { Banner } from '@/shared/components/banner/Banner';
 import { PageTemplate } from '@/shared/components/pageTemplate/PageTemplate';
 import { useState } from 'react';
 import { DeleteDeploymentConfirmationDialog } from './components/DeleteDeploymentConfirmationDialog';
 import { DeploymentListItem } from './components/DeploymentListItem';
 import { EmptyDeploymentsPage } from './components/emptyDeploymentsPage/EmptyDeploymentsPage';
+import { useBannerVisibility } from '@/shared/components/banner/useBannerVisibility';
+import { constants } from '@/contants';
 
 type DeploymentsPageProps = {
   deployments: Deployment[];
@@ -24,17 +24,15 @@ export const DeploymentsPage = ({
   prefetchDeployment,
 }: DeploymentsPageProps) => {
   const [deploymentIdToDelete, setDeploymentIdToDelete] = useState<null | string>(null);
-  const { isBannerVisible, closeBanner } = useBannerVisibility(constants.ftueBannerPageKey);
+  const { isBannerVisible } = useBannerVisibility(constants.ftueBannerPageKey);
 
   return (
     <PageTemplate
       className={deployments.length === 0 ? 'max-h-screen' : undefined}
       banner={
-        isBannerVisible && (
-          <Banner onClickClose={closeBanner}>
-            <PageBannerContent />
-          </Banner>
-        )
+        <Banner>
+          <Banner.PageBannerContent />
+        </Banner>
       }
     >
       <PageTemplate.Header showFeedback={!isBannerVisible}>
