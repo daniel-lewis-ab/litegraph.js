@@ -59,7 +59,7 @@ GL.FLOAT = 5126;
 GL.HALF_FLOAT_OES = 36193; //webgl 1.0 only
 
 //webgl2 formats
-GL.HALF_FLOAT = 5131; 
+GL.HALF_FLOAT = 5131;
 GL.DEPTH_COMPONENT16 = 33189;
 GL.DEPTH_COMPONENT24 = 33190;
 GL.DEPTH_COMPONENT32F = 36012;
@@ -439,7 +439,7 @@ if(!String.prototype.hasOwnProperty("replaceAll"))
 			return str;
 		},
 		enumerable: false
-	});	
+	});
 
 /*
 String.prototype.replaceAll = function(words){
@@ -464,7 +464,7 @@ if(!String.prototype.hasOwnProperty("hashCode"))
 			return hash;
 		},
 		enumerable: false
-	});	
+	});
 
 //avoid errors when Typed array is expected and regular array is found
 //Array.prototype.subarray = Array.prototype.slice;
@@ -611,7 +611,7 @@ global.getFileExtension = function getFileExtension(url)
 	if(point == -1) 
 		return "";
 	return url.substr(point+1).toLowerCase();
-} 
+}
 
 
 //allows to pack several (text)files inside one single file (useful for shaders)
@@ -4345,101 +4345,98 @@ GL.Mesh.EXTENSION = "wbin";
 GL.Mesh.enable_wbin_compression = true;
 
 //this is used when a mesh is dynamic and constantly changes
-function DynamicMesh( size, normals, coords, colors, gl )
-{
-	size = size || 1024;
+class DynamicMesh {
+    constructor(size, normals, coords, colors, gl) {
+        size = size || 1024;
 
-	if(GL.debug)
-		console.log("GL.Mesh created");
+        if(GL.debug)
+            console.log("GL.Mesh created");
 
-	if( gl !== null )
-	{
-		gl = gl || global.gl;
-		this.gl = gl;
-	}
+        if( gl !== null )
+        {
+            gl = gl || global.gl;
+            this.gl = gl;
+        }
 
-	//used to avoid problems with resources moving between different webgl context
-	this._context_id = gl.context_id; 
+        //used to avoid problems with resources moving between different webgl context
+        this._context_id = gl.context_id; 
 
-	this.vertexBuffers = {};
-	this.indexBuffers = {};
+        this.vertexBuffers = {};
+        this.indexBuffers = {};
 
-	//here you can store extra info, like groups, which is an array of { name, start, length, material }
-	this.info = {
-		groups: []
-	}; 
-	this._bounding = BBox.create(); //here you can store a AABB in BBox format
+        //here you can store extra info, like groups, which is an array of { name, start, length, material }
+        this.info = {
+            groups: []
+        }; 
+        this._bounding = BBox.create(); //here you can store a AABB in BBox format
 
-	this.resize( size );
+        this.resize( size );
+    }
+
+    resize(size) {
+        var buffers = {};
+
+        this._vertex_data = new Float32Array( size * 3 );
+        buffers.vertices = this._vertex_data;
+
+        if( normals )
+            buffers.normals = this._normal_data = new Float32Array( size * 3 );
+        if( coords )
+            buffers.coords = this._coord_data = new Float32Array( size * 2 );
+        if( colors )
+            buffers.colors = this._color_data = new Float32Array( size * 4 );
+
+        this.addBuffers( buffers );
+
+        this.current_pos = 0;
+        this.max_size = size;
+        this._must_update = true;
+    }
+
+    clear() {
+        this.current_pos = 0;
+    }
+
+    addPoint(vertex, normal, coord, color) {
+        if (pos >= this.max_size)
+        {
+            console.warn("DynamicMesh: not enough space, reserve more");
+            return false;
+        }
+        var pos = this.current_pos++;
+
+        this._vertex_data.set( vertex, pos*3 );
+
+        if(this._normal_data)
+            this._normal_data.set( normal || DynamicMesh.DEFAULT_NORMAL, pos*3 );
+        if(this._coord_data)
+            this._coord_data.set( coord || DynamicMesh.DEFAULT_COORD, pos*2 );
+        if(this._color_data)
+            this._color_data.set( color || DynamicMesh.DEFAULT_COLOR, pos*4 );
+
+        this._must_update = true;
+        return true;
+    }
+
+    update(force) {
+        if(!this._must_update && !force)
+            return this.current_pos;
+        this._must_update = false;
+
+        this.getBuffer("vertices").upload( gl.STREAM_DRAW );
+        if(this._normal_data)
+            this.getBuffer("normal").upload( gl.STREAM_DRAW );
+        if(this._coord_data)
+            this.getBuffer("coord").upload( gl.STREAM_DRAW );
+        if(this._color_data)
+            this.getBuffer("color").upload( gl.STREAM_DRAW );
+        return this.current_pos;
+    }
 }
 
 DynamicMesh.DEFAULT_NORMAL = vec3.fromValues(0,1,0);
 DynamicMesh.DEFAULT_COORD = vec2.fromValues(0.5,0.5);
 DynamicMesh.DEFAULT_COLOR = vec4.fromValues(1,1,1,1);
-
-DynamicMesh.prototype.resize = function( size )
-{
-	var buffers = {};
-
-	this._vertex_data = new Float32Array( size * 3 );
-	buffers.vertices = this._vertex_data;
-
-	if( normals )
-		buffers.normals = this._normal_data = new Float32Array( size * 3 );
-	if( coords )
-		buffers.coords = this._coord_data = new Float32Array( size * 2 );
-	if( colors )
-		buffers.colors = this._color_data = new Float32Array( size * 4 );
-
-	this.addBuffers( buffers );
-
-	this.current_pos = 0;
-	this.max_size = size;
-	this._must_update = true;
-}
-
-DynamicMesh.prototype.clear = function()
-{
-	this.current_pos = 0;
-}
-
-DynamicMesh.prototype.addPoint = function( vertex, normal, coord, color )
-{
-	if (pos >= this.max_size)
-	{
-		console.warn("DynamicMesh: not enough space, reserve more");
-		return false;
-	}
-	var pos = this.current_pos++;
-
-	this._vertex_data.set( vertex, pos*3 );
-
-	if(this._normal_data)
-		this._normal_data.set( normal || DynamicMesh.DEFAULT_NORMAL, pos*3 );
-	if(this._coord_data)
-		this._coord_data.set( coord || DynamicMesh.DEFAULT_COORD, pos*2 );
-	if(this._color_data)
-		this._color_data.set( color || DynamicMesh.DEFAULT_COLOR, pos*4 );
-
-	this._must_update = true;
-	return true;
-}
-
-DynamicMesh.prototype.update = function( force )
-{
-	if(!this._must_update && !force)
-		return this.current_pos;
-	this._must_update = false;
-
-	this.getBuffer("vertices").upload( gl.STREAM_DRAW );
-	if(this._normal_data)
-		this.getBuffer("normal").upload( gl.STREAM_DRAW );
-	if(this._coord_data)
-		this.getBuffer("coord").upload( gl.STREAM_DRAW );
-	if(this._color_data)
-		this.getBuffer("color").upload( gl.STREAM_DRAW );
-	return this.current_pos;
-}
 
 extendClass( DynamicMesh, Mesh );
 
@@ -7350,421 +7347,414 @@ Texture.nextPOT = function( size )
 * @param {Bool} stencil create a stencil buffer?
 * @constructor
 */
-function FBO( textures, depth_texture, stencil, gl )
-{
-	gl = gl || global.gl;
-	this.gl = gl;
-	this._context_id = gl.context_id; 
+class FBO {
+    constructor(textures, depth_texture, stencil, gl) {
+        gl = gl || global.gl;
+        this.gl = gl;
+        this._context_id = gl.context_id; 
 
-	if(textures && textures.constructor !== Array)
-		throw("FBO textures must be an Array");
+        if(textures && textures.constructor !== Array)
+            throw("FBO textures must be an Array");
 
-	this.handler = null;
-	this.width = -1;
-	this.height = -1;
-	this.color_textures = [];
-	this.depth_texture = null;
-	this.stencil = !!stencil;
+        this.handler = null;
+        this.width = -1;
+        this.height = -1;
+        this.color_textures = [];
+        this.depth_texture = null;
+        this.stencil = !!stencil;
 
-	this._stencil_enabled = false;
-	this._num_binded_textures = 0;
+        this._stencil_enabled = false;
+        this._num_binded_textures = 0;
 
-	//assign textures
-	if((textures && textures.length) || depth_texture)
-		this.setTextures( textures, depth_texture );
+        //assign textures
+        if((textures && textures.length) || depth_texture)
+            this.setTextures( textures, depth_texture );
 
-	//save state
-	this._old_fbo_handler = null;
-	this._old_viewport = new Float32Array(4);
-	this.order = null;
+        //save state
+        this._old_fbo_handler = null;
+        this._old_viewport = new Float32Array(4);
+        this.order = null;
+    }
+
+    /**
+    * Changes the textures binded to this FBO
+    * @method setTextures
+    * @param {Array} color_textures an array containing the color textures, if not supplied a render buffer will be used
+    * @param {GL.Texture} depth_texture the depth texture, if not supplied a render buffer will be used
+    * @param {Boolean} skip_disable it doenst try to go back to the previous FBO enabled in case there was one
+    */
+    setTextures(color_textures, depth_texture, skip_disable) {
+        //test depth
+        if( depth_texture && depth_texture.constructor === GL.Texture )
+        {
+            if( depth_texture.format !== GL.DEPTH_COMPONENT && 
+                depth_texture.format !== GL.DEPTH_STENCIL && 
+                depth_texture.format !== GL.DEPTH_COMPONENT16 && 
+                depth_texture.format !== GL.DEPTH_COMPONENT24 &&
+                depth_texture.format !== GL.DEPTH_COMPONENT32F )
+                throw("FBO Depth texture must be of format: gl.DEPTH_COMPONENT, gl.DEPTH_STENCIL or gl.DEPTH_COMPONENT16/24/32F (only in webgl2)");
+
+            if( depth_texture.type != GL.UNSIGNED_SHORT && 
+                depth_texture.type != GL.UNSIGNED_INT && 
+                depth_texture.type != GL.UNSIGNED_INT_24_8_WEBGL &&
+                depth_texture.type != GL.FLOAT)
+                throw("FBO Depth texture must be of type: gl.UNSIGNED_SHORT, gl.UNSIGNED_INT, gl.UNSIGNED_INT_24_8_WEBGL");
+        }
+
+        //test if is already binded
+        var same = this.depth_texture == depth_texture;
+        if( same && color_textures )
+        {
+            if( color_textures.constructor !== Array )
+                throw("FBO: color_textures parameter must be an array containing all the textures to be binded in the color");
+            if( color_textures.length == this.color_textures.length )
+            {
+                for(var i = 0; i < color_textures.length; ++i)
+                    if( color_textures[i] != this.color_textures[i] )
+                    {
+                        same = false;
+                        break;
+                    }
+            }
+            else
+                same = false;
+        }
+
+        if(this._stencil_enabled !== this.stencil)
+            same = false;
+            
+        if(same)
+            return;
+
+        //copy textures in place
+        this.color_textures.length = color_textures ? color_textures.length : 0;
+        if(color_textures)
+            for(var i = 0; i < color_textures.length; ++i)
+                this.color_textures[i] = color_textures[i];
+        this.depth_texture = depth_texture;
+
+        //update GPU FBO
+        this.update( skip_disable );
+    }
+
+    /**
+    * Updates the FBO with the new set of textures and buffers
+    * @method update
+    * @param {Boolean} skip_disable it doenst try to go back to the previous FBO enabled in case there was one
+    */
+    update(skip_disable) {
+        //save state to restore afterwards
+        this._old_fbo_handler = gl.getParameter( gl.FRAMEBUFFER_BINDING );
+
+        if(!this.handler)
+            this.handler = gl.createFramebuffer();
+
+        var w = -1,
+            h = -1,
+            type = null;
+
+        var color_textures = this.color_textures;
+        var depth_texture = this.depth_texture;
+
+        //compute the W and H (and check they have the same size)
+        if(color_textures && color_textures.length)
+            for(var i = 0; i < color_textures.length; i++)
+            {
+                var t = color_textures[i];
+                if(t.constructor !== GL.Texture)
+                    throw("FBO can only bind instances of GL.Texture");
+                if(w == -1) 
+                    w = t.width;
+                else if(w != t.width)
+                    throw("Cannot bind textures with different dimensions");
+                if(h == -1) 
+                    h = t.height;
+                else if(h != t.height)
+                    throw("Cannot bind textures with different dimensions");
+                if(type == null) //first one defines the type
+                    type = t.type;
+                else if (type != t.type)
+                    throw("Cannot bind textures to a FBO with different pixel formats");
+                if (t.texture_type != gl.TEXTURE_2D)
+                    throw("Cannot bind a Cubemap to a FBO");
+            }
+        else
+        {
+            w = depth_texture.width;
+            h = depth_texture.height;
+        }
+
+        this.width = w;
+        this.height = h;
+
+        gl.bindFramebuffer( gl.FRAMEBUFFER, this.handler );
+
+        //draw_buffers allow to have more than one color texture binded in a FBO
+        var ext = gl.extensions["WEBGL_draw_buffers"];
+        if( gl.webgl_version == 1 && !ext && color_textures && color_textures.length > 1)
+            throw("Rendering to several textures not supported by your browser");
+
+        var target = gl.webgl_version == 1 ? gl.FRAMEBUFFER : gl.DRAW_FRAMEBUFFER;
+
+        //detach anything bindede
+        gl.framebufferRenderbuffer( target, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, null );
+        gl.framebufferRenderbuffer( target, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, null );
+        //detach color too?
+
+        //bind a buffer for the depth
+        if( depth_texture && depth_texture.constructor === GL.Texture )
+        {
+            if(gl.webgl_version == 1 && !gl.extensions["WEBGL_depth_texture"] )
+                throw("Rendering to depth texture not supported by your browser");
+
+            if(this.stencil && depth_texture.format !== gl.DEPTH_STENCIL )
+                console.warn("Stencil cannot be enabled if there is a depth texture with a DEPTH_STENCIL format");
+
+            if( depth_texture.format == gl.DEPTH_STENCIL )
+                gl.framebufferTexture2D( target, gl.DEPTH_STENCIL_ATTACHMENT, gl.TEXTURE_2D, depth_texture.handler, 0);
+            else
+                gl.framebufferTexture2D( target, gl.DEPTH_ATTACHMENT, gl.TEXTURE_2D, depth_texture.handler, 0);
+        }
+        else //create a renderbuffer to store depth
+        {
+            var depth_renderbuffer = null;
+            
+            //allows to reuse a renderbuffer between FBOs
+            if( depth_texture && depth_texture.constructor === WebGLRenderbuffer && depth_texture.width == w && depth_texture.height == h ) 
+                depth_renderbuffer = this._depth_renderbuffer = depth_texture;
+            else
+            {
+                //create one
+                depth_renderbuffer = this._depth_renderbuffer = this._depth_renderbuffer || gl.createRenderbuffer();
+                depth_renderbuffer.width = w;
+                depth_renderbuffer.height = h;
+            }
+            
+            gl.bindRenderbuffer( gl.RENDERBUFFER, depth_renderbuffer );
+            if(this.stencil)
+            {
+                gl.renderbufferStorage( gl.RENDERBUFFER, gl.DEPTH_STENCIL, w, h );
+                gl.framebufferRenderbuffer( target, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, depth_renderbuffer );
+            }
+            else
+            {
+                gl.renderbufferStorage( gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, w, h );
+                gl.framebufferRenderbuffer( target, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depth_renderbuffer );
+            }
+        }
+
+        //bind buffers for the colors
+        if(color_textures && color_textures.length)
+        {
+            this.order = []; //draw_buffers request the use of an array with the order of the attachments
+            for(var i = 0; i < color_textures.length; i++)
+            {
+                var t = color_textures[i];
+
+                //not a bug, gl.COLOR_ATTACHMENT0 + i because COLOR_ATTACHMENT is sequential numbers
+                gl.framebufferTexture2D( target, gl.COLOR_ATTACHMENT0 + i, gl.TEXTURE_2D, t.handler, 0 );
+                this.order.push( gl.COLOR_ATTACHMENT0 + i );
+            }
+        }
+        else //create renderbuffer to store color
+        {
+            var color_renderbuffer = this._color_renderbuffer = this._color_renderbuffer || gl.createRenderbuffer();
+            color_renderbuffer.width = w;
+            color_renderbuffer.height = h;
+            gl.bindRenderbuffer( gl.RENDERBUFFER, color_renderbuffer );
+            gl.renderbufferStorage( gl.RENDERBUFFER, gl.RGBA4, w, h );
+            gl.framebufferRenderbuffer( target, gl.COLOR_ATTACHMENT0, gl.RENDERBUFFER, color_renderbuffer );
+        }
+
+        //detach old ones (only if is reusing a FBO with a different set of textures)
+        var num = color_textures ? color_textures.length : 0;
+        for(var i = num; i < this._num_binded_textures; ++i)
+            gl.framebufferTexture2D( target, gl.COLOR_ATTACHMENT0 + i, gl.TEXTURE_2D, null, 0);
+        this._num_binded_textures = num;
+
+        this._stencil_enabled = this.stencil;
+
+        /* does not work, must be used with the depth_stencil
+        if(this.stencil && !depth_texture)
+        {
+            var stencil_buffer = this._stencil_buffer = this._stencil_buffer || gl.createRenderbuffer();
+            stencil_buffer.width = w;
+            stencil_buffer.height = h;
+            gl.bindRenderbuffer( gl.RENDERBUFFER, stencil_buffer );
+            gl.renderbufferStorage( gl.RENDERBUFFER, gl.STENCIL_INDEX8, w, h);
+            gl.framebufferRenderbuffer( gl.FRAMEBUFFER, gl.STENCIL_ATTACHMENT, gl.RENDERBUFFER, stencil_buffer );
+            this._stencil_enabled = true;
+        }
+        else
+        {
+            this._stencil_buffer = null;
+            this._stencil_enabled = false;
+        }
+        */
+
+        //when using more than one texture you need to use the multidraw extension
+        if(color_textures && color_textures.length > 1)
+        {
+            if( ext )
+                ext.drawBuffersWEBGL( this.order );
+            else
+                gl.drawBuffers( this.order );
+        }
+
+        //check completion
+        var complete = gl.checkFramebufferStatus( target );
+        if(complete !== gl.FRAMEBUFFER_COMPLETE) //36054: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
+            throw("FBO not complete: " + complete);
+
+        //restore state
+        gl.bindTexture(gl.TEXTURE_2D, null);
+        gl.bindRenderbuffer(gl.RENDERBUFFER, null);
+        if(!skip_disable)
+            gl.bindFramebuffer( target, this._old_fbo_handler );
+    }
+
+    /**
+    * Enables this FBO (from now on all the render will be stored in the textures attached to this FBO)
+    * It stores the previous viewport to restore it afterwards, and changes it to full FBO size
+    * @method bind
+    * @param {boolean} keep_old keeps the previous FBO is one was attached to restore it afterwards
+    */
+    bind(keep_old) {
+        if(!this.color_textures.length && !this.depth_texture)
+            throw("FBO: no textures attached to FBO");
+        this._old_viewport.set( gl.viewport_data );
+
+        if(keep_old)
+            this._old_fbo_handler = gl.getParameter( gl.FRAMEBUFFER_BINDING );
+        else
+            this._old_fbo_handler = null;
+
+        if(this._old_fbo_handler != this.handler )
+            gl.bindFramebuffer( gl.FRAMEBUFFER, this.handler );
+
+        //mark them as in use in the FBO
+        for(var i = 0; i < this.color_textures.length; ++i)
+            this.color_textures[i]._in_current_fbo = true;
+        if(this.depth_texture)
+            this.depth_texture._in_current_fbo = true;
+
+        gl.viewport( 0,0, this.width, this.height );
+        FBO.current = this;
+    }
+
+    /**
+    * Disables this FBO, if it was binded with keep_old then the old FBO is enabled, otherwise it will render to the screen
+    * Restores viewport to previous
+    * @method unbind
+    */
+    unbind() {
+        gl.bindFramebuffer( gl.FRAMEBUFFER, this._old_fbo_handler );
+        this._old_fbo_handler = null;
+        gl.setViewport( this._old_viewport );
+
+        //mark the textures as no longer in use
+        for(var i = 0; i < this.color_textures.length; ++i)
+            this.color_textures[i]._in_current_fbo = false;
+        if(this.depth_texture)
+            this.depth_texture._in_current_fbo = false;
+        FBO.current = null;
+    }
+
+    //binds another FBO without switch back to previous (faster)
+    switchTo(next_fbo) {
+        next_fbo._old_fbo_handler = this._old_fbo_handler;
+        next_fbo._old_viewport.set( this._old_viewport );
+        gl.bindFramebuffer( gl.FRAMEBUFFER, next_fbo.handler );
+        this._old_fbo_handler = null;
+        gl.viewport( 0,0, this.width, this.height );
+
+        //mark the textures as no longer in use
+        for(var i = 0; i < this.color_textures.length; ++i)
+            this.color_textures[i]._in_current_fbo = false;
+        if(this.depth_texture)
+            this.depth_texture._in_current_fbo = false;
+
+        //mark them as in use in the FBO
+        for(var i = 0; i < next_fbo.color_textures.length; ++i)
+            next_fbo.color_textures[i]._in_current_fbo = true;
+        if(next_fbo.depth_texture)
+            next_fbo.depth_texture._in_current_fbo = true;
+
+        FBO.current = next_fbo;
+    }
+
+    delete() {
+        gl.deleteFramebuffer( this.handler );
+        this.handler = null;
+    }
+
+    //type: gl.FLOAT, format: gl.RGBA
+    static testSupport(type, format) {
+        var name = type +":" + format;
+        if( FBO.supported[ name ] != null )
+            return FBO.supported[ name ];
+
+        var tex = new GL.Texture(1,1,{ format: format, type: type });
+        try
+        {
+            var fbo = new GL.FBO([tex]);
+        }
+        catch (err)
+        {
+            console.warn("This browser WEBGL implementation doesn't support this FBO format: " + GL.reverse[type] + " " + GL.reverse[format] );
+            return FBO.supported[ name ] = false;
+        }
+        FBO.supported[ name ] = true;
+        return true;
+    }
+
+    toSingle() {
+        if( this.color_textures.length < 2 )
+            return; //nothing to do
+        var ext = gl.extensions.WEBGL_draw_buffers;
+        if( ext )
+            ext.drawBuffersWEBGL( [ this.order[0] ] );
+        else
+            gl.drawBuffers( [ this.order[0] ] );
+    }
+
+    toMulti() {
+        if( this.color_textures.length < 2 )
+            return; //nothing to do
+        var ext = gl.extensions.WEBGL_draw_buffers;
+        if( ext )
+            ext.drawBuffersWEBGL( this.order );
+        else
+            gl.drawBuffers( this.order );
+    }
+
+    //clears only the secondary buffers (not the main one)
+    clearSecondary(color) {
+        if(!this.order || this.order.length < 2)
+            return;
+
+        var ext = gl.extensions.WEBGL_draw_buffers;
+        var new_order = [gl.NONE];
+        for(var i = 1; i < this.order.length; ++i)
+            new_order.push(this.order[i]);
+        if(ext)
+            ext.drawBuffersWEBGL( new_order );
+        else
+            gl.drawBuffers( new_order );
+        gl.clearColor( color[0],color[1],color[2],color[3] );
+        gl.clear( gl.COLOR_BUFFER_BIT );
+
+        if(ext)
+            ext.drawBuffersWEBGL( this.order );
+        else
+            gl.drawBuffers( this.order );
+    }
 }
 
 GL.FBO = FBO;
 
-/**
-* Changes the textures binded to this FBO
-* @method setTextures
-* @param {Array} color_textures an array containing the color textures, if not supplied a render buffer will be used
-* @param {GL.Texture} depth_texture the depth texture, if not supplied a render buffer will be used
-* @param {Boolean} skip_disable it doenst try to go back to the previous FBO enabled in case there was one
-*/
-FBO.prototype.setTextures = function( color_textures, depth_texture, skip_disable )
-{
-	//test depth
-	if( depth_texture && depth_texture.constructor === GL.Texture )
-	{
-		if( depth_texture.format !== GL.DEPTH_COMPONENT && 
-			depth_texture.format !== GL.DEPTH_STENCIL && 
-			depth_texture.format !== GL.DEPTH_COMPONENT16 && 
-			depth_texture.format !== GL.DEPTH_COMPONENT24 &&
-			depth_texture.format !== GL.DEPTH_COMPONENT32F )
-			throw("FBO Depth texture must be of format: gl.DEPTH_COMPONENT, gl.DEPTH_STENCIL or gl.DEPTH_COMPONENT16/24/32F (only in webgl2)");
-
-		if( depth_texture.type != GL.UNSIGNED_SHORT && 
-			depth_texture.type != GL.UNSIGNED_INT && 
-			depth_texture.type != GL.UNSIGNED_INT_24_8_WEBGL &&
-			depth_texture.type != GL.FLOAT)
-			throw("FBO Depth texture must be of type: gl.UNSIGNED_SHORT, gl.UNSIGNED_INT, gl.UNSIGNED_INT_24_8_WEBGL");
-	}
-
-	//test if is already binded
-	var same = this.depth_texture == depth_texture;
-	if( same && color_textures )
-	{
-		if( color_textures.constructor !== Array )
-			throw("FBO: color_textures parameter must be an array containing all the textures to be binded in the color");
-		if( color_textures.length == this.color_textures.length )
-		{
-			for(var i = 0; i < color_textures.length; ++i)
-				if( color_textures[i] != this.color_textures[i] )
-				{
-					same = false;
-					break;
-				}
-		}
-		else
-			same = false;
-	}
-
-	if(this._stencil_enabled !== this.stencil)
-		same = false;
-		
-	if(same)
-		return;
-
-	//copy textures in place
-	this.color_textures.length = color_textures ? color_textures.length : 0;
-	if(color_textures)
-		for(var i = 0; i < color_textures.length; ++i)
-			this.color_textures[i] = color_textures[i];
-	this.depth_texture = depth_texture;
-
-	//update GPU FBO
-	this.update( skip_disable );
-}
-
-/**
-* Updates the FBO with the new set of textures and buffers
-* @method update
-* @param {Boolean} skip_disable it doenst try to go back to the previous FBO enabled in case there was one
-*/
-FBO.prototype.update = function( skip_disable )
-{
-	//save state to restore afterwards
-	this._old_fbo_handler = gl.getParameter( gl.FRAMEBUFFER_BINDING );
-
-	if(!this.handler)
-		this.handler = gl.createFramebuffer();
-
-	var w = -1,
-		h = -1,
-		type = null;
-
-	var color_textures = this.color_textures;
-	var depth_texture = this.depth_texture;
-
-	//compute the W and H (and check they have the same size)
-	if(color_textures && color_textures.length)
-		for(var i = 0; i < color_textures.length; i++)
-		{
-			var t = color_textures[i];
-			if(t.constructor !== GL.Texture)
-				throw("FBO can only bind instances of GL.Texture");
-			if(w == -1) 
-				w = t.width;
-			else if(w != t.width)
-				throw("Cannot bind textures with different dimensions");
-			if(h == -1) 
-				h = t.height;
-			else if(h != t.height)
-				throw("Cannot bind textures with different dimensions");
-			if(type == null) //first one defines the type
-				type = t.type;
-			else if (type != t.type)
-				throw("Cannot bind textures to a FBO with different pixel formats");
-			if (t.texture_type != gl.TEXTURE_2D)
-				throw("Cannot bind a Cubemap to a FBO");
-		}
-	else
-	{
-		w = depth_texture.width;
-		h = depth_texture.height;
-	}
-
-	this.width = w;
-	this.height = h;
-
-	gl.bindFramebuffer( gl.FRAMEBUFFER, this.handler );
-
-	//draw_buffers allow to have more than one color texture binded in a FBO
-	var ext = gl.extensions["WEBGL_draw_buffers"];
-	if( gl.webgl_version == 1 && !ext && color_textures && color_textures.length > 1)
-		throw("Rendering to several textures not supported by your browser");
-
-	var target = gl.webgl_version == 1 ? gl.FRAMEBUFFER : gl.DRAW_FRAMEBUFFER;
-
-	//detach anything bindede
-	gl.framebufferRenderbuffer( target, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, null );
-	gl.framebufferRenderbuffer( target, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, null );
-	//detach color too?
-
-	//bind a buffer for the depth
-	if( depth_texture && depth_texture.constructor === GL.Texture )
-	{
-		if(gl.webgl_version == 1 && !gl.extensions["WEBGL_depth_texture"] )
-			throw("Rendering to depth texture not supported by your browser");
-
-		if(this.stencil && depth_texture.format !== gl.DEPTH_STENCIL )
-			console.warn("Stencil cannot be enabled if there is a depth texture with a DEPTH_STENCIL format");
-
-		if( depth_texture.format == gl.DEPTH_STENCIL )
-			gl.framebufferTexture2D( target, gl.DEPTH_STENCIL_ATTACHMENT, gl.TEXTURE_2D, depth_texture.handler, 0);
-		else
-			gl.framebufferTexture2D( target, gl.DEPTH_ATTACHMENT, gl.TEXTURE_2D, depth_texture.handler, 0);
-	}
-	else //create a renderbuffer to store depth
-	{
-		var depth_renderbuffer = null;
-		
-		//allows to reuse a renderbuffer between FBOs
-		if( depth_texture && depth_texture.constructor === WebGLRenderbuffer && depth_texture.width == w && depth_texture.height == h ) 
-			depth_renderbuffer = this._depth_renderbuffer = depth_texture;
-		else
-		{
-			//create one
-			depth_renderbuffer = this._depth_renderbuffer = this._depth_renderbuffer || gl.createRenderbuffer();
-			depth_renderbuffer.width = w;
-			depth_renderbuffer.height = h;
-		}
-		
-		gl.bindRenderbuffer( gl.RENDERBUFFER, depth_renderbuffer );
-		if(this.stencil)
-		{
-			gl.renderbufferStorage( gl.RENDERBUFFER, gl.DEPTH_STENCIL, w, h );
-			gl.framebufferRenderbuffer( target, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, depth_renderbuffer );
-		}
-		else
-		{
-			gl.renderbufferStorage( gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, w, h );
-			gl.framebufferRenderbuffer( target, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depth_renderbuffer );
-		}
-	}
-
-	//bind buffers for the colors
-	if(color_textures && color_textures.length)
-	{
-		this.order = []; //draw_buffers request the use of an array with the order of the attachments
-		for(var i = 0; i < color_textures.length; i++)
-		{
-			var t = color_textures[i];
-
-			//not a bug, gl.COLOR_ATTACHMENT0 + i because COLOR_ATTACHMENT is sequential numbers
-			gl.framebufferTexture2D( target, gl.COLOR_ATTACHMENT0 + i, gl.TEXTURE_2D, t.handler, 0 );
-			this.order.push( gl.COLOR_ATTACHMENT0 + i );
-		}
-	}
-	else //create renderbuffer to store color
-	{
-		var color_renderbuffer = this._color_renderbuffer = this._color_renderbuffer || gl.createRenderbuffer();
-		color_renderbuffer.width = w;
-		color_renderbuffer.height = h;
-		gl.bindRenderbuffer( gl.RENDERBUFFER, color_renderbuffer );
-		gl.renderbufferStorage( gl.RENDERBUFFER, gl.RGBA4, w, h );
-		gl.framebufferRenderbuffer( target, gl.COLOR_ATTACHMENT0, gl.RENDERBUFFER, color_renderbuffer );
-	}
-
-	//detach old ones (only if is reusing a FBO with a different set of textures)
-	var num = color_textures ? color_textures.length : 0;
-	for(var i = num; i < this._num_binded_textures; ++i)
-		gl.framebufferTexture2D( target, gl.COLOR_ATTACHMENT0 + i, gl.TEXTURE_2D, null, 0);
-	this._num_binded_textures = num;
-
-	this._stencil_enabled = this.stencil;
-
-	/* does not work, must be used with the depth_stencil
-	if(this.stencil && !depth_texture)
-	{
-		var stencil_buffer = this._stencil_buffer = this._stencil_buffer || gl.createRenderbuffer();
-		stencil_buffer.width = w;
-		stencil_buffer.height = h;
-		gl.bindRenderbuffer( gl.RENDERBUFFER, stencil_buffer );
-		gl.renderbufferStorage( gl.RENDERBUFFER, gl.STENCIL_INDEX8, w, h);
-		gl.framebufferRenderbuffer( gl.FRAMEBUFFER, gl.STENCIL_ATTACHMENT, gl.RENDERBUFFER, stencil_buffer );
-		this._stencil_enabled = true;
-	}
-	else
-	{
-		this._stencil_buffer = null;
-		this._stencil_enabled = false;
-	}
-	*/
-
-	//when using more than one texture you need to use the multidraw extension
-	if(color_textures && color_textures.length > 1)
-	{
-		if( ext )
-			ext.drawBuffersWEBGL( this.order );
-		else
-			gl.drawBuffers( this.order );
-	}
-
-	//check completion
-	var complete = gl.checkFramebufferStatus( target );
-	if(complete !== gl.FRAMEBUFFER_COMPLETE) //36054: GL_FRAMEBUFFER_INCOMPLETE_ATTACHMENT
-		throw("FBO not complete: " + complete);
-
-	//restore state
-	gl.bindTexture(gl.TEXTURE_2D, null);
-	gl.bindRenderbuffer(gl.RENDERBUFFER, null);
-	if(!skip_disable)
-		gl.bindFramebuffer( target, this._old_fbo_handler );
-}
-
-/**
-* Enables this FBO (from now on all the render will be stored in the textures attached to this FBO)
-* It stores the previous viewport to restore it afterwards, and changes it to full FBO size
-* @method bind
-* @param {boolean} keep_old keeps the previous FBO is one was attached to restore it afterwards
-*/
-FBO.prototype.bind = function( keep_old )
-{
-	if(!this.color_textures.length && !this.depth_texture)
-		throw("FBO: no textures attached to FBO");
-	this._old_viewport.set( gl.viewport_data );
-
-	if(keep_old)
-		this._old_fbo_handler = gl.getParameter( gl.FRAMEBUFFER_BINDING );
-	else
-		this._old_fbo_handler = null;
-
-	if(this._old_fbo_handler != this.handler )
-		gl.bindFramebuffer( gl.FRAMEBUFFER, this.handler );
-
-	//mark them as in use in the FBO
-	for(var i = 0; i < this.color_textures.length; ++i)
-		this.color_textures[i]._in_current_fbo = true;
-	if(this.depth_texture)
-		this.depth_texture._in_current_fbo = true;
-
-	gl.viewport( 0,0, this.width, this.height );
-	FBO.current = this;
-}
-
-/**
-* Disables this FBO, if it was binded with keep_old then the old FBO is enabled, otherwise it will render to the screen
-* Restores viewport to previous
-* @method unbind
-*/
-FBO.prototype.unbind = function()
-{
-	gl.bindFramebuffer( gl.FRAMEBUFFER, this._old_fbo_handler );
-	this._old_fbo_handler = null;
-	gl.setViewport( this._old_viewport );
-
-	//mark the textures as no longer in use
-	for(var i = 0; i < this.color_textures.length; ++i)
-		this.color_textures[i]._in_current_fbo = false;
-	if(this.depth_texture)
-		this.depth_texture._in_current_fbo = false;
-	FBO.current = null;
-}
-
-//binds another FBO without switch back to previous (faster)
-FBO.prototype.switchTo = function( next_fbo )
-{
-	next_fbo._old_fbo_handler = this._old_fbo_handler;
-	next_fbo._old_viewport.set( this._old_viewport );
-	gl.bindFramebuffer( gl.FRAMEBUFFER, next_fbo.handler );
-	this._old_fbo_handler = null;
-	gl.viewport( 0,0, this.width, this.height );
-
-	//mark the textures as no longer in use
-	for(var i = 0; i < this.color_textures.length; ++i)
-		this.color_textures[i]._in_current_fbo = false;
-	if(this.depth_texture)
-		this.depth_texture._in_current_fbo = false;
-
-	//mark them as in use in the FBO
-	for(var i = 0; i < next_fbo.color_textures.length; ++i)
-		next_fbo.color_textures[i]._in_current_fbo = true;
-	if(next_fbo.depth_texture)
-		next_fbo.depth_texture._in_current_fbo = true;
-
-	FBO.current = next_fbo;
-}
-
-FBO.prototype.delete = function()
-{
-	gl.deleteFramebuffer( this.handler );
-	this.handler = null;
-}
-
 //WebGL 1.0 support for certaing FBOs is not very clear and can crash sometimes
 FBO.supported = {};
-//type: gl.FLOAT, format: gl.RGBA
-FBO.testSupport = function( type, format ) {
-	var name = type +":" + format;
-	if( FBO.supported[ name ] != null )
-		return FBO.supported[ name ];
-
-	var tex = new GL.Texture(1,1,{ format: format, type: type });
-	try
-	{
-		var fbo = new GL.FBO([tex]);
-	}
-	catch (err)
-	{
-		console.warn("This browser WEBGL implementation doesn't support this FBO format: " + GL.reverse[type] + " " + GL.reverse[format] );
-		return FBO.supported[ name ] = false;
-	}
-	FBO.supported[ name ] = true;
-	return true;
-}
-
-FBO.prototype.toSingle = function()
-{
-	if( this.color_textures.length < 2 )
-		return; //nothing to do
-	var ext = gl.extensions.WEBGL_draw_buffers;
-	if( ext )
-		ext.drawBuffersWEBGL( [ this.order[0] ] );
-	else
-		gl.drawBuffers( [ this.order[0] ] );
-}
-
-FBO.prototype.toMulti = function()
-{
-	if( this.color_textures.length < 2 )
-		return; //nothing to do
-	var ext = gl.extensions.WEBGL_draw_buffers;
-	if( ext )
-		ext.drawBuffersWEBGL( this.order );
-	else
-		gl.drawBuffers( this.order );
-}
-
-//clears only the secondary buffers (not the main one)
-FBO.prototype.clearSecondary = function( color )
-{
-	if(!this.order || this.order.length < 2)
-		return;
-
-	var ext = gl.extensions.WEBGL_draw_buffers;
-	var new_order = [gl.NONE];
-	for(var i = 1; i < this.order.length; ++i)
-		new_order.push(this.order[i]);
-	if(ext)
-		ext.drawBuffersWEBGL( new_order );
-	else
-		gl.drawBuffers( new_order );
-	gl.clearColor( color[0],color[1],color[2],color[3] );
-	gl.clear( gl.COLOR_BUFFER_BIT );
-
-	if(ext)
-		ext.drawBuffersWEBGL( this.order );
-	else
-		gl.drawBuffers( this.order );
-}
 
 
 
@@ -12492,9 +12482,9 @@ Raytracer.prototype.setup = function( viewprojection_matrix, viewport )
 	vec3.subtract(this.ray11, this.ray11, eye);
 }
 
-  // ### .getRayForPixel(x, y)
-  // 
-  // Returns the ray direction originating from the camera and traveling through the pixel `x, y`.
+// ### .getRayForPixel(x, y)
+// 
+// Returns the ray direction originating from the camera and traveling through the pixel `x, y`.
 Raytracer.prototype.getRayForPixel = (function(){ 
 	var ray0 = vec3.create();
 	var ray1 = vec3.create();

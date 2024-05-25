@@ -114,14 +114,19 @@ describe("register node types", () => {
 
         // Create two node types with calc_times overriding .pdf
         Sum.supported_extensions = ["PDF", "exe", null];
-        function Times() {
-            this.addInput("a", "number");
-            this.addInput("b", "number");
-            this.addOutput("times", "number");
+
+        class Times {
+            constructor() {
+                this.addInput("a", "number");
+                this.addInput("b", "number");
+                this.addOutput("times", "number");
+            }
+
+            onExecute(a, b) {
+                this.setOutputData(0, a * b);
+            }
         }
-        Times.prototype.onExecute = function (a, b) {
-            this.setOutputData(0, a * b);
-        };
+
         Times.supported_extensions = ["pdf", "jpg"];
         lg.LiteGraph.registerNodeType("math/sum", Sum);
         lg.LiteGraph.registerNodeType("math/times", Times);
@@ -153,13 +158,17 @@ describe("register node types", () => {
         });
 
         // Test slot type registration with second type
-        function ToInt() {
-            this.addInput("string", "string");
-            this.addOutput("number", "number");
-        };
-        ToInt.prototype.onExecute = function (str) {
-            this.setOutputData(0, Number(str));
-        };
+        class ToInt {
+            constructor() {
+                this.addInput("string", "string");
+                this.addOutput("number", "number");
+            }
+
+            onExecute(str) {
+                this.setOutputData(0, Number(str));
+            }
+        }
+
         lg.LiteGraph.registerNodeType("basic/to_int", ToInt);
         expect(lg.LiteGraph.registered_slot_in_types).toEqual({
             number: { nodes: ["math/sum"] },

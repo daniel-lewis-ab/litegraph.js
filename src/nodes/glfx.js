@@ -5,31 +5,89 @@ var LGraphTexture = global.LGraphTexture;
 //Works with Litegl.js to create WebGL nodes
 if (typeof GL != "undefined") {
     // Texture Lens *****************************************
-    function LGraphFXLens() {
-        this.addInput("Texture", "Texture");
-        this.addInput("Aberration", "number");
-        this.addInput("Distortion", "number");
-        this.addInput("Blur", "number");
-        this.addOutput("Texture", "Texture");
-        this.properties = {
-            aberration: 1.0,
-            distortion: 1.0,
-            blur: 1.0,
-            precision: LGraphTexture.DEFAULT
-        };
+    class LGraphFXLens {
+        constructor() {
+            this.addInput("Texture", "Texture");
+            this.addInput("Aberration", "number");
+            this.addInput("Distortion", "number");
+            this.addInput("Blur", "number");
+            this.addOutput("Texture", "Texture");
+            this.properties = {
+                aberration: 1.0,
+                distortion: 1.0,
+                blur: 1.0,
+                precision: LGraphTexture.DEFAULT
+            };
 
-        if (!LGraphFXLens._shader) {
-            LGraphFXLens._shader = new GL.Shader(
-                GL.Shader.SCREEN_VERTEX_SHADER,
-                LGraphFXLens.pixel_shader
+            if (!LGraphFXLens._shader) {
+                LGraphFXLens._shader = new GL.Shader(
+                    GL.Shader.SCREEN_VERTEX_SHADER,
+                    LGraphFXLens.pixel_shader
+                );
+                LGraphFXLens._texture = new GL.Texture(3, 1, {
+                    format: gl.RGB,
+                    wrap: gl.CLAMP_TO_EDGE,
+                    magFilter: gl.LINEAR,
+                    minFilter: gl.LINEAR,
+                    pixel_data: [255, 0, 0, 0, 255, 0, 0, 0, 255]
+                });
+            }
+        }
+
+        onExecute() {
+            var tex = this.getInputData(0);
+            if (this.properties.precision === LGraphTexture.PASS_THROUGH) {
+                this.setOutputData(0, tex);
+                return;
+            }
+
+            if (!tex) {
+                return;
+            }
+
+            this._tex = LGraphTexture.getTargetTexture(
+                tex,
+                this._tex,
+                this.properties.precision
             );
-            LGraphFXLens._texture = new GL.Texture(3, 1, {
-                format: gl.RGB,
-                wrap: gl.CLAMP_TO_EDGE,
-                magFilter: gl.LINEAR,
-                minFilter: gl.LINEAR,
-                pixel_data: [255, 0, 0, 0, 255, 0, 0, 0, 255]
+
+            var aberration = this.properties.aberration;
+            if (this.isInputConnected(1)) {
+                aberration = this.getInputData(1);
+                this.properties.aberration = aberration;
+            }
+
+            var distortion = this.properties.distortion;
+            if (this.isInputConnected(2)) {
+                distortion = this.getInputData(2);
+                this.properties.distortion = distortion;
+            }
+
+            var blur = this.properties.blur;
+            if (this.isInputConnected(3)) {
+                blur = this.getInputData(3);
+                this.properties.blur = blur;
+            }
+
+            gl.disable(gl.BLEND);
+            gl.disable(gl.DEPTH_TEST);
+            var mesh = Mesh.getScreenQuad();
+            var shader = LGraphFXLens._shader;
+            //var camera = LS.Renderer._current_camera;
+
+            this._tex.drawTo(function() {
+                tex.bind(0);
+                shader
+                    .uniforms({
+                        u_texture: 0,
+                        u_aberration: aberration,
+                        u_distortion: distortion,
+                        u_blur: blur
+                    })
+                    .draw(mesh);
             });
+
+            this.setOutputData(0, this._tex);
         }
     }
 
@@ -37,62 +95,6 @@ if (typeof GL != "undefined") {
     LGraphFXLens.desc = "Camera Lens distortion";
     LGraphFXLens.widgets_info = {
         precision: { widget: "combo", values: LGraphTexture.MODE_VALUES }
-    };
-
-    LGraphFXLens.prototype.onExecute = function() {
-        var tex = this.getInputData(0);
-        if (this.properties.precision === LGraphTexture.PASS_THROUGH) {
-            this.setOutputData(0, tex);
-            return;
-        }
-
-        if (!tex) {
-            return;
-        }
-
-        this._tex = LGraphTexture.getTargetTexture(
-            tex,
-            this._tex,
-            this.properties.precision
-        );
-
-        var aberration = this.properties.aberration;
-        if (this.isInputConnected(1)) {
-            aberration = this.getInputData(1);
-            this.properties.aberration = aberration;
-        }
-
-        var distortion = this.properties.distortion;
-        if (this.isInputConnected(2)) {
-            distortion = this.getInputData(2);
-            this.properties.distortion = distortion;
-        }
-
-        var blur = this.properties.blur;
-        if (this.isInputConnected(3)) {
-            blur = this.getInputData(3);
-            this.properties.blur = blur;
-        }
-
-        gl.disable(gl.BLEND);
-        gl.disable(gl.DEPTH_TEST);
-        var mesh = Mesh.getScreenQuad();
-        var shader = LGraphFXLens._shader;
-        //var camera = LS.Renderer._current_camera;
-
-        this._tex.drawTo(function() {
-            tex.bind(0);
-            shader
-                .uniforms({
-                    u_texture: 0,
-                    u_aberration: aberration,
-                    u_distortion: distortion,
-                    u_blur: blur
-                })
-                .draw(mesh);
-        });
-
-        this.setOutputData(0, this._tex);
     };
 
     LGraphFXLens.pixel_shader =
@@ -246,175 +248,173 @@ global.LGraphDepthOfField = LGraphDepthOfField;
 
     //*******************************************************
 
-    function LGraphFXBokeh() {
-        this.addInput("Texture", "Texture");
-        this.addInput("Blurred", "Texture");
-        this.addInput("Mask", "Texture");
-        this.addInput("Threshold", "number");
-        this.addOutput("Texture", "Texture");
-        this.properties = {
-            shape: "",
-            size: 10,
-            alpha: 1.0,
-            threshold: 1.0,
-            high_precision: false
-        };
+    class LGraphFXBokeh {
+        constructor() {
+            this.addInput("Texture", "Texture");
+            this.addInput("Blurred", "Texture");
+            this.addInput("Mask", "Texture");
+            this.addInput("Threshold", "number");
+            this.addOutput("Texture", "Texture");
+            this.properties = {
+                shape: "",
+                size: 10,
+                alpha: 1.0,
+                threshold: 1.0,
+                high_precision: false
+            };
+        }
+
+        onExecute() {
+            var tex = this.getInputData(0);
+            var blurred_tex = this.getInputData(1);
+            var mask_tex = this.getInputData(2);
+            if (!tex || !mask_tex || !this.properties.shape) {
+                this.setOutputData(0, tex);
+                return;
+            }
+
+            if (!blurred_tex) {
+                blurred_tex = tex;
+            }
+
+            var shape_tex = LGraphTexture.getTexture(this.properties.shape);
+            if (!shape_tex) {
+                return;
+            }
+
+            var threshold = this.properties.threshold;
+            if (this.isInputConnected(3)) {
+                threshold = this.getInputData(3);
+                this.properties.threshold = threshold;
+            }
+
+            var precision = gl.UNSIGNED_BYTE;
+            if (this.properties.high_precision) {
+                precision = gl.half_float_ext ? gl.HALF_FLOAT_OES : gl.FLOAT;
+            }
+            if (
+                !this._temp_texture ||
+                this._temp_texture.type != precision ||
+                this._temp_texture.width != tex.width ||
+                this._temp_texture.height != tex.height
+            ) {
+                this._temp_texture = new GL.Texture(tex.width, tex.height, {
+                    type: precision,
+                    format: gl.RGBA,
+                    filter: gl.LINEAR
+                });
+            }
+
+            //iterations
+            var size = this.properties.size;
+
+            var first_shader = LGraphFXBokeh._first_shader;
+            if (!first_shader) {
+                first_shader = LGraphFXBokeh._first_shader = new GL.Shader(
+                    Shader.SCREEN_VERTEX_SHADER,
+                    LGraphFXBokeh._first_pixel_shader
+                );
+            }
+
+            var second_shader = LGraphFXBokeh._second_shader;
+            if (!second_shader) {
+                second_shader = LGraphFXBokeh._second_shader = new GL.Shader(
+                    LGraphFXBokeh._second_vertex_shader,
+                    LGraphFXBokeh._second_pixel_shader
+                );
+            }
+
+            var points_mesh = this._points_mesh;
+            if (
+                !points_mesh ||
+                points_mesh._width != tex.width ||
+                points_mesh._height != tex.height ||
+                points_mesh._spacing != 2
+            ) {
+                points_mesh = this.createPointsMesh(tex.width, tex.height, 2);
+            }
+
+            var screen_mesh = Mesh.getScreenQuad();
+
+            var point_size = this.properties.size;
+            var min_light = this.properties.min_light;
+            var alpha = this.properties.alpha;
+
+            gl.disable(gl.DEPTH_TEST);
+            gl.disable(gl.BLEND);
+
+            this._temp_texture.drawTo(function() {
+                tex.bind(0);
+                blurred_tex.bind(1);
+                mask_tex.bind(2);
+                first_shader
+                    .uniforms({
+                        u_texture: 0,
+                        u_texture_blur: 1,
+                        u_mask: 2,
+                        u_texsize: [tex.width, tex.height]
+                    })
+                    .draw(screen_mesh);
+            });
+
+            this._temp_texture.drawTo(function() {
+                //clear because we use blending
+                //gl.clearColor(0.0,0.0,0.0,1.0);
+                //gl.clear( gl.COLOR_BUFFER_BIT );
+                gl.enable(gl.BLEND);
+                gl.blendFunc(gl.ONE, gl.ONE);
+
+                tex.bind(0);
+                shape_tex.bind(3);
+                second_shader
+                    .uniforms({
+                        u_texture: 0,
+                        u_mask: 2,
+                        u_shape: 3,
+                        u_alpha: alpha,
+                        u_threshold: threshold,
+                        u_pointSize: point_size,
+                        u_itexsize: [1.0 / tex.width, 1.0 / tex.height]
+                    })
+                    .draw(points_mesh, gl.POINTS);
+            });
+
+            this.setOutputData(0, this._temp_texture);
+        }
+
+        createPointsMesh(width, height, spacing) {
+            var nwidth = Math.round(width / spacing);
+            var nheight = Math.round(height / spacing);
+
+            var vertices = new Float32Array(nwidth * nheight * 2);
+
+            var ny = -1;
+            var dx = (2 / width) * spacing;
+            var dy = (2 / height) * spacing;
+            for (var y = 0; y < nheight; ++y) {
+                var nx = -1;
+                for (var x = 0; x < nwidth; ++x) {
+                    var pos = y * nwidth * 2 + x * 2;
+                    vertices[pos] = nx;
+                    vertices[pos + 1] = ny;
+                    nx += dx;
+                }
+                ny += dy;
+            }
+
+            this._points_mesh = GL.Mesh.load({ vertices2D: vertices });
+            this._points_mesh._width = width;
+            this._points_mesh._height = height;
+            this._points_mesh._spacing = spacing;
+
+            return this._points_mesh;
+        }
     }
 
     LGraphFXBokeh.title = "Bokeh";
     LGraphFXBokeh.desc = "applies an Bokeh effect";
 
     LGraphFXBokeh.widgets_info = { shape: { widget: "texture" } };
-
-    LGraphFXBokeh.prototype.onExecute = function() {
-        var tex = this.getInputData(0);
-        var blurred_tex = this.getInputData(1);
-        var mask_tex = this.getInputData(2);
-        if (!tex || !mask_tex || !this.properties.shape) {
-            this.setOutputData(0, tex);
-            return;
-        }
-
-        if (!blurred_tex) {
-            blurred_tex = tex;
-        }
-
-        var shape_tex = LGraphTexture.getTexture(this.properties.shape);
-        if (!shape_tex) {
-            return;
-        }
-
-        var threshold = this.properties.threshold;
-        if (this.isInputConnected(3)) {
-            threshold = this.getInputData(3);
-            this.properties.threshold = threshold;
-        }
-
-        var precision = gl.UNSIGNED_BYTE;
-        if (this.properties.high_precision) {
-            precision = gl.half_float_ext ? gl.HALF_FLOAT_OES : gl.FLOAT;
-        }
-        if (
-            !this._temp_texture ||
-            this._temp_texture.type != precision ||
-            this._temp_texture.width != tex.width ||
-            this._temp_texture.height != tex.height
-        ) {
-            this._temp_texture = new GL.Texture(tex.width, tex.height, {
-                type: precision,
-                format: gl.RGBA,
-                filter: gl.LINEAR
-            });
-        }
-
-        //iterations
-        var size = this.properties.size;
-
-        var first_shader = LGraphFXBokeh._first_shader;
-        if (!first_shader) {
-            first_shader = LGraphFXBokeh._first_shader = new GL.Shader(
-                Shader.SCREEN_VERTEX_SHADER,
-                LGraphFXBokeh._first_pixel_shader
-            );
-        }
-
-        var second_shader = LGraphFXBokeh._second_shader;
-        if (!second_shader) {
-            second_shader = LGraphFXBokeh._second_shader = new GL.Shader(
-                LGraphFXBokeh._second_vertex_shader,
-                LGraphFXBokeh._second_pixel_shader
-            );
-        }
-
-        var points_mesh = this._points_mesh;
-        if (
-            !points_mesh ||
-            points_mesh._width != tex.width ||
-            points_mesh._height != tex.height ||
-            points_mesh._spacing != 2
-        ) {
-            points_mesh = this.createPointsMesh(tex.width, tex.height, 2);
-        }
-
-        var screen_mesh = Mesh.getScreenQuad();
-
-        var point_size = this.properties.size;
-        var min_light = this.properties.min_light;
-        var alpha = this.properties.alpha;
-
-        gl.disable(gl.DEPTH_TEST);
-        gl.disable(gl.BLEND);
-
-        this._temp_texture.drawTo(function() {
-            tex.bind(0);
-            blurred_tex.bind(1);
-            mask_tex.bind(2);
-            first_shader
-                .uniforms({
-                    u_texture: 0,
-                    u_texture_blur: 1,
-                    u_mask: 2,
-                    u_texsize: [tex.width, tex.height]
-                })
-                .draw(screen_mesh);
-        });
-
-        this._temp_texture.drawTo(function() {
-            //clear because we use blending
-            //gl.clearColor(0.0,0.0,0.0,1.0);
-            //gl.clear( gl.COLOR_BUFFER_BIT );
-            gl.enable(gl.BLEND);
-            gl.blendFunc(gl.ONE, gl.ONE);
-
-            tex.bind(0);
-            shape_tex.bind(3);
-            second_shader
-                .uniforms({
-                    u_texture: 0,
-                    u_mask: 2,
-                    u_shape: 3,
-                    u_alpha: alpha,
-                    u_threshold: threshold,
-                    u_pointSize: point_size,
-                    u_itexsize: [1.0 / tex.width, 1.0 / tex.height]
-                })
-                .draw(points_mesh, gl.POINTS);
-        });
-
-        this.setOutputData(0, this._temp_texture);
-    };
-
-    LGraphFXBokeh.prototype.createPointsMesh = function(
-        width,
-        height,
-        spacing
-    ) {
-        var nwidth = Math.round(width / spacing);
-        var nheight = Math.round(height / spacing);
-
-        var vertices = new Float32Array(nwidth * nheight * 2);
-
-        var ny = -1;
-        var dx = (2 / width) * spacing;
-        var dy = (2 / height) * spacing;
-        for (var y = 0; y < nheight; ++y) {
-            var nx = -1;
-            for (var x = 0; x < nwidth; ++x) {
-                var pos = y * nwidth * 2 + x * 2;
-                vertices[pos] = nx;
-                vertices[pos + 1] = ny;
-                nx += dx;
-            }
-            ny += dy;
-        }
-
-        this._points_mesh = GL.Mesh.load({ vertices2D: vertices });
-        this._points_mesh._width = width;
-        this._points_mesh._height = height;
-        this._points_mesh._spacing = spacing;
-
-        return this._points_mesh;
-    };
 
     /*
 LGraphTextureBokeh._pixel_shader = "precision highp float;\n\
@@ -492,17 +492,108 @@ LGraphTextureBokeh._pixel_shader = "precision highp float;\n\
 
     //************************************************
 
-    function LGraphFXGeneric() {
-        this.addInput("Texture", "Texture");
-        this.addInput("value1", "number");
-        this.addInput("value2", "number");
-        this.addOutput("Texture", "Texture");
-        this.properties = {
-            fx: "halftone",
-            value1: 1,
-            value2: 1,
-            precision: LGraphTexture.DEFAULT
-        };
+    class LGraphFXGeneric {
+        constructor() {
+            this.addInput("Texture", "Texture");
+            this.addInput("value1", "number");
+            this.addInput("value2", "number");
+            this.addOutput("Texture", "Texture");
+            this.properties = {
+                fx: "halftone",
+                value1: 1,
+                value2: 1,
+                precision: LGraphTexture.DEFAULT
+            };
+        }
+
+        onExecute() {
+            if (!this.isOutputConnected(0)) {
+                return;
+            } //saves work
+
+            var tex = this.getInputData(0);
+            if (this.properties.precision === LGraphTexture.PASS_THROUGH) {
+                this.setOutputData(0, tex);
+                return;
+            }
+
+            if (!tex) {
+                return;
+            }
+
+            this._tex = LGraphTexture.getTargetTexture(
+                tex,
+                this._tex,
+                this.properties.precision
+            );
+
+            //iterations
+            var value1 = this.properties.value1;
+            if (this.isInputConnected(1)) {
+                value1 = this.getInputData(1);
+                this.properties.value1 = value1;
+            }
+
+            var value2 = this.properties.value2;
+            if (this.isInputConnected(2)) {
+                value2 = this.getInputData(2);
+                this.properties.value2 = value2;
+            }
+
+            var fx = this.properties.fx;
+            var shader = LGraphFXGeneric.shaders[fx];
+            if (!shader) {
+                var pixel_shader_code = LGraphFXGeneric["pixel_shader_" + fx];
+                if (!pixel_shader_code) {
+                    return;
+                }
+
+                shader = LGraphFXGeneric.shaders[fx] = new GL.Shader(
+                    Shader.SCREEN_VERTEX_SHADER,
+                    pixel_shader_code
+                );
+            }
+
+            gl.disable(gl.BLEND);
+            gl.disable(gl.DEPTH_TEST);
+            var mesh = Mesh.getScreenQuad();
+            var camera = global.LS ? LS.Renderer._current_camera : null;
+            var camera_planes;
+            if (camera) {
+                camera_planes = [
+                    LS.Renderer._current_camera.near,
+                    LS.Renderer._current_camera.far
+                ];
+            } else {
+                camera_planes = [1, 100];
+            }
+
+            var noise = null;
+            if (fx == "noise") {
+                noise = LGraphTexture.getNoiseTexture();
+            }
+
+            this._tex.drawTo(function() {
+                tex.bind(0);
+                if (fx == "noise") {
+                    noise.bind(1);
+                }
+
+                shader
+                    .uniforms({
+                        u_texture: 0,
+                        u_noise: 1,
+                        u_size: [tex.width, tex.height],
+                        u_rand: [Math.random(), Math.random()],
+                        u_value1: value1,
+                        u_value2: value2,
+                        u_camera_planes: camera_planes
+                    })
+                    .draw(mesh);
+            });
+
+            this.setOutputData(0, this._tex);
+        }
     }
 
     LGraphFXGeneric.title = "FX";
@@ -516,95 +607,6 @@ LGraphTextureBokeh._pixel_shader = "precision highp float;\n\
         precision: { widget: "combo", values: LGraphTexture.MODE_VALUES }
     };
     LGraphFXGeneric.shaders = {};
-
-    LGraphFXGeneric.prototype.onExecute = function() {
-        if (!this.isOutputConnected(0)) {
-            return;
-        } //saves work
-
-        var tex = this.getInputData(0);
-        if (this.properties.precision === LGraphTexture.PASS_THROUGH) {
-            this.setOutputData(0, tex);
-            return;
-        }
-
-        if (!tex) {
-            return;
-        }
-
-        this._tex = LGraphTexture.getTargetTexture(
-            tex,
-            this._tex,
-            this.properties.precision
-        );
-
-        //iterations
-        var value1 = this.properties.value1;
-        if (this.isInputConnected(1)) {
-            value1 = this.getInputData(1);
-            this.properties.value1 = value1;
-        }
-
-        var value2 = this.properties.value2;
-        if (this.isInputConnected(2)) {
-            value2 = this.getInputData(2);
-            this.properties.value2 = value2;
-        }
-
-        var fx = this.properties.fx;
-        var shader = LGraphFXGeneric.shaders[fx];
-        if (!shader) {
-            var pixel_shader_code = LGraphFXGeneric["pixel_shader_" + fx];
-            if (!pixel_shader_code) {
-                return;
-            }
-
-            shader = LGraphFXGeneric.shaders[fx] = new GL.Shader(
-                Shader.SCREEN_VERTEX_SHADER,
-                pixel_shader_code
-            );
-        }
-
-        gl.disable(gl.BLEND);
-        gl.disable(gl.DEPTH_TEST);
-        var mesh = Mesh.getScreenQuad();
-        var camera = global.LS ? LS.Renderer._current_camera : null;
-        var camera_planes;
-        if (camera) {
-            camera_planes = [
-                LS.Renderer._current_camera.near,
-                LS.Renderer._current_camera.far
-            ];
-        } else {
-            camera_planes = [1, 100];
-        }
-
-        var noise = null;
-        if (fx == "noise") {
-            noise = LGraphTexture.getNoiseTexture();
-        }
-
-        this._tex.drawTo(function() {
-            tex.bind(0);
-            if (fx == "noise") {
-                noise.bind(1);
-            }
-
-            shader
-                .uniforms({
-                    u_texture: 0,
-                    u_noise: 1,
-                    u_size: [tex.width, tex.height],
-                    u_rand: [Math.random(), Math.random()],
-                    u_value1: value1,
-                    u_value2: value2,
-                    u_camera_planes: camera_planes
-                })
-                .draw(mesh);
-        });
-
-        this.setOutputData(0, this._tex);
-    };
 
     LGraphFXGeneric.pixel_shader_halftone =
         "precision highp float;\n\
@@ -692,22 +694,70 @@ LGraphTextureBokeh._pixel_shader = "precision highp float;\n\
 
     // Vigneting ************************************
 
-    function LGraphFXVigneting() {
-        this.addInput("Tex.", "Texture");
-        this.addInput("intensity", "number");
+    class LGraphFXVigneting {
+        constructor() {
+            this.addInput("Tex.", "Texture");
+            this.addInput("intensity", "number");
 
-        this.addOutput("Texture", "Texture");
-        this.properties = {
-            intensity: 1,
-            invert: false,
-            precision: LGraphTexture.DEFAULT
-        };
+            this.addOutput("Texture", "Texture");
+            this.properties = {
+                intensity: 1,
+                invert: false,
+                precision: LGraphTexture.DEFAULT
+            };
 
-        if (!LGraphFXVigneting._shader) {
-            LGraphFXVigneting._shader = new GL.Shader(
-                Shader.SCREEN_VERTEX_SHADER,
-                LGraphFXVigneting.pixel_shader
+            if (!LGraphFXVigneting._shader) {
+                LGraphFXVigneting._shader = new GL.Shader(
+                    Shader.SCREEN_VERTEX_SHADER,
+                    LGraphFXVigneting.pixel_shader
+                );
+            }
+        }
+
+        onExecute() {
+            var tex = this.getInputData(0);
+
+            if (this.properties.precision === LGraphTexture.PASS_THROUGH) {
+                this.setOutputData(0, tex);
+                return;
+            }
+
+            if (!tex) {
+                return;
+            }
+
+            this._tex = LGraphTexture.getTargetTexture(
+                tex,
+                this._tex,
+                this.properties.precision
             );
+
+            var intensity = this.properties.intensity;
+            if (this.isInputConnected(1)) {
+                intensity = this.getInputData(1);
+                this.properties.intensity = intensity;
+            }
+
+            gl.disable(gl.BLEND);
+            gl.disable(gl.DEPTH_TEST);
+
+            var mesh = Mesh.getScreenQuad();
+            var shader = LGraphFXVigneting._shader;
+            var invert = this.properties.invert;
+
+            this._tex.drawTo(function() {
+                tex.bind(0);
+                shader
+                    .uniforms({
+                        u_texture: 0,
+                        u_intensity: intensity,
+                        u_isize: [1 / tex.width, 1 / tex.height],
+                        u_invert: invert ? 1 : 0
+                    })
+                    .draw(mesh);
+            });
+
+            this.setOutputData(0, this._tex);
         }
     }
 
@@ -716,52 +766,6 @@ LGraphTextureBokeh._pixel_shader = "precision highp float;\n\
 
     LGraphFXVigneting.widgets_info = {
         precision: { widget: "combo", values: LGraphTexture.MODE_VALUES }
-    };
-
-    LGraphFXVigneting.prototype.onExecute = function() {
-        var tex = this.getInputData(0);
-
-        if (this.properties.precision === LGraphTexture.PASS_THROUGH) {
-            this.setOutputData(0, tex);
-            return;
-        }
-
-        if (!tex) {
-            return;
-        }
-
-        this._tex = LGraphTexture.getTargetTexture(
-            tex,
-            this._tex,
-            this.properties.precision
-        );
-
-        var intensity = this.properties.intensity;
-        if (this.isInputConnected(1)) {
-            intensity = this.getInputData(1);
-            this.properties.intensity = intensity;
-        }
-
-        gl.disable(gl.BLEND);
-        gl.disable(gl.DEPTH_TEST);
-
-        var mesh = Mesh.getScreenQuad();
-        var shader = LGraphFXVigneting._shader;
-        var invert = this.properties.invert;
-
-        this._tex.drawTo(function() {
-            tex.bind(0);
-            shader
-                .uniforms({
-                    u_texture: 0,
-                    u_intensity: intensity,
-                    u_isize: [1 / tex.width, 1 / tex.height],
-                    u_invert: invert ? 1 : 0
-                })
-                .draw(mesh);
-        });
-
-        this.setOutputData(0, this._tex);
     };
 
     LGraphFXVigneting.pixel_shader =
