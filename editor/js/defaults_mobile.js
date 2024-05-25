@@ -17,8 +17,6 @@ LiteGraph.search_filter_enabled = true; // [true!] enable filtering slots type i
 LiteGraph.search_show_all_on_open = true; // [true!] opens the results list when opening the search widget
 
 LiteGraph.auto_load_slot_types = true; // [if want false; use true; run; get vars values to be statically set; than disable] nodes types and nodeclass association with node types need to be calculated; if dont want this; calculate once and set registered_slot_[in/out]_types and slot_types_[in/out]
-LiteGraph.show_node_tooltip = true; // [true!] show a tooltip with node property "tooltip" over the selected node
-LiteGraph.show_node_tooltip_use_descr_property = true; // enabled tooltip from desc when property tooltip not set
 /*// set these values if not using auto_load_slot_types
 LiteGraph.registered_slot_in_types = {}; // slot types for nodeclass
 LiteGraph.registered_slot_out_types = {}; // slot types for nodeclass
@@ -32,23 +30,3 @@ LiteGraph.middle_click_slot_add_default_node = true;  //[true!] allows to create
 LiteGraph.release_link_on_empty_shows_menu = true; //[true!] dragging a link to empty space will open a menu, add from list, search or defaults
 LiteGraph.pointerevents_method = "pointer"; // "mouse"|"pointer" use mouse for retrocompatibility issues? (none found @ now)
 LiteGraph.ctrl_shift_v_paste_connect_unselected_outputs = true; //[true!] allows ctrl + shift + v to paste nodes with the outputs of the unselected nodes connected with the inputs of the newly pasted nodes
-LiteGraph.backspace_delete = false;  // [false!] delete key is enough, don't mess with text edit and custom
-
-LiteGraph.two_fingers_opens_menu = true;
-
-LiteGraph.actionHistory_enabled = false; // [true!] cntrlZ, cntrlY
-LiteGraph.actionHistoryMaxSave = 40;
-
-LiteGraph.showCanvasOptions = true; // enable canvas options panel, customize in LiteGrpah.availableCanvasOptions
-
-LiteGraph.use_uuids = false; // why not? maybe not good for comparison?
-
-/* -- EVENTS PROCESSING METHODS -- */
-
-/* METHOD 1 ANCESTORS : EXECUTING ACTIONS BEFORE THE NEXT FRAME, AFFECTING INPUT NODES WILL BE REPROCESSED */
-LiteGraph.refreshAncestorsOnTriggers = true; //[true!]
-LiteGraph.refreshAncestorsOnActions = true; //[true!]
-LiteGraph.ensureUniqueExecutionAndActionCall = true; //[true!]
-
-/* METHOD 2 DEFERRED ACTIONS */
-LiteGraph.use_deferred_actions = false; // disabling deferred

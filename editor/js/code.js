@@ -1,27 +1,15 @@
-
-import { LiteGraph } from "../../src/litegraph.js";
-import { Editor } from "../../src/litegraph-editor.js";
-
-export var gl = null; // webgl_canvas
-
-// remove to prevent access from the console (why should?)
-if (typeof(global)=="object") global.LiteGraph = LiteGraph;
-if (typeof(window)=="object") window.LiteGraph = LiteGraph;
-
-LiteGraph.info?.("LiteGraph included");
-
 var webgl_canvas = null;
 
 LiteGraph.node_images_path = "../nodes_data/";
 
-var editor = new Editor("main",{miniwindow:false});
+var editor = new LiteGraph.Editor("main",{miniwindow:false});
 window.graphcanvas = editor.graphcanvas;
 window.graph = editor.graph;
 updateEditorHiPPICanvas();
 window.addEventListener("resize", function() { 
- 	editor.graphcanvas.resize();
-  	updateEditorHiPPICanvas();
-});
+  editor.graphcanvas.resize();
+  updateEditorHiPPICanvas();
+} );
 //window.addEventListener("keydown", editor.graphcanvas.processKey.bind(editor.graphcanvas) );
 window.onbeforeunload = function(){
 	var data = JSON.stringify( graph.serialize() );
@@ -29,18 +17,16 @@ window.onbeforeunload = function(){
 }
 
 function updateEditorHiPPICanvas() {
-  	const ratio = window.devicePixelRatio;
-  	if(ratio == 1) { 
-		return 
-	}
-  	const rect = editor.canvas.parentNode.getBoundingClientRect();
-  	const { width, height } = rect;
-  	editor.canvas.width = width * ratio;
-  	editor.canvas.height = height * ratio;
-  	editor.canvas.style.width = width + "px";
-  	editor.canvas.style.height = height + "px";
-  	editor.canvas.getContext("2d").scale(ratio, ratio);
-  	return editor.canvas;
+  const ratio = window.devicePixelRatio;
+  if(ratio == 1) { return }
+  const rect = editor.canvas.parentNode.getBoundingClientRect();
+  const { width, height } = rect;
+  editor.canvas.width = width * ratio;
+  editor.canvas.height = height * ratio;
+  editor.canvas.style.width = width + "px";
+  editor.canvas.style.height = height + "px";
+  editor.canvas.getContext("2d").scale(ratio, ratio);
+  return editor.canvas;
 }
 
 //enable scripting
@@ -70,7 +56,7 @@ select.addEventListener("change", function(e){
 });
 
 elem.querySelector("#save").addEventListener("click",function(){
-	console.log?.("saved");
+	console.log("saved");
 	localStorage.setItem( "graphdemo_save", JSON.stringify( graph.serialize() ) );
 });
 
@@ -78,7 +64,7 @@ elem.querySelector("#load").addEventListener("click",function(){
 	var data = localStorage.getItem( "graphdemo_save" );
 	if(data)
 		graph.configure( JSON.parse( data ) );
-	console.log?.("loaded");
+	console.log("loaded");
 });
 
 elem.querySelector("#download").addEventListener("click",function(){
@@ -99,7 +85,8 @@ elem.querySelector("#webgl").addEventListener("click", enableWebGL );
 elem.querySelector("#multiview").addEventListener("click", function(){ editor.addMultiview()  } );
 
 
-function addDemo( name, url ) {
+function addDemo( name, url )
+{
 	var option = document.createElement("option");
 	if(url.constructor === String)
 		option.dataset["url"] = url;
@@ -127,36 +114,42 @@ addDemo("autobackup", function(){
 });
 
 //allows to use the WebGL nodes like textures
-function enableWebGL() {
-	if( webgl_canvas ) {
+function enableWebGL()
+{
+	if( webgl_canvas )
+	{
 		webgl_canvas.style.display = (webgl_canvas.style.display == "none" ? "block" : "none");
 		return;
 	}
 
-	let libs = [
-		"./libs/gl-matrix-min.js",
-		"./libs/litegl.js",
+	var libs = [
+		"js/libs/gl-matrix-min.js",
+		"js/libs/litegl.js",
+		"../src/nodes/gltextures.js",
+		"../src/nodes/glfx.js",
+		"../src/nodes/glshaders.js",
+		"../src/nodes/geometry.js"
 	];
-	  
-	async function fetchJS(scriptPath) {
-		if (libs.length === 0) {
-		 	return on_ready();
-		}
-	  	try {
-		 	await import(scriptPath);
-		  	console.log?.(`${scriptPath} loaded successfully`);
-		} catch (error) {
-		  	console.error?.(`Error loading ${scriptPath}: ${error}`);
-		}
-	}
-	libs.forEach(lib => fetchJS(lib));
 
-	const on_ready = () => {
-		console.log?.(this.src);
-		if(!window.GL) {
-			LiteGraph.warn?.("GL doesn't exist");
+	function fetchJS()
+	{
+		if(libs.length == 0)
+			return on_ready();
+
+		var script = null;
+		script = document.createElement("script");
+		script.onload = fetchJS;
+		script.src = libs.shift();
+		document.head.appendChild(script);
+	}
+
+	fetchJS();
+
+	function on_ready()
+	{
+		console.log(this.src);
+		if(!window.GL)
 			return;
-		}
 		webgl_canvas = document.createElement("canvas");
 		webgl_canvas.width = 400;
 		webgl_canvas.height = 300;
@@ -165,13 +158,15 @@ function enableWebGL() {
 		webgl_canvas.style.right = "0px";
 		webgl_canvas.style.border = "1px solid #AAA";
 
-		webgl_canvas.addEventListener("click", function() {
+		webgl_canvas.addEventListener("click", function(){
 			var rect = webgl_canvas.parentNode.getBoundingClientRect();
-			if( webgl_canvas.width != rect.width ) {
+			if( webgl_canvas.width != rect.width )
+			{
 				webgl_canvas.width = rect.width;
 				webgl_canvas.height = rect.height;
 			}
-			else {
+			else
+			{
 				webgl_canvas.width = 400;
 				webgl_canvas.height = 300;
 			}
@@ -179,26 +174,19 @@ function enableWebGL() {
 
 		var parent = document.querySelector(".editor-area");
 		parent.appendChild( webgl_canvas );
-		gl = GL.create({ canvas: webgl_canvas });
-		if(!gl) {
-			LiteGraph.warn?.("gl doesn't exist");
+		var gl = GL.create({ canvas: webgl_canvas });
+		if(!gl)
 			return;
-		}
-		libs = [
-			"../src/nodes/gltextures.js",
-			"../src/nodes/glfx.js",
-			"../src/nodes/glshaders.js",
-			"../src/nodes/geometry.js"
-		];
-		libs.forEach(lib => fetchJS(lib));
 
-		editor.graph.onBeforeStep = () => {
+		editor.graph.onBeforeStep = ondraw;
+
+		console.log("webgl ready");
+		function ondraw ()
+		{
 			gl.clearColor(0,0,0,0);
 			gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT );
 			gl.viewport(0,0,gl.canvas.width, gl.canvas.height );
 		}
-
-		console.log?.("webgl ready");
 	}
 }
 

@@ -1,6 +1,4 @@
 
-import { LiteGraph } from "../../src/litegraph.js";
-
 function demo()
 {
 	multiConnection();
@@ -265,7 +263,7 @@ function TestPropertyEditorsNode()
 
 	var that = this;
 	this.addWidget("button","Log",null,function(){
-		console.log?.(that.properties);
+		console.log(that.properties);
 	});
 }
 
