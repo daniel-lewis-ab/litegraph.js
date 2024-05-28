@@ -6,7 +6,7 @@ export const initWebsocket = (app: any) => {
       console.log(`Received message: ${msg}`);
       if (msg.includes('CL')) {
         console.log('Closing WebSocket connection by server request');
-        ws.close(1001, 'Closing by requestX'); // 1000 oznacza normalne zamknięcie
+        ws.close(1001, 'Closing by request'); // 100 is a normal close
         return;
       }
 
