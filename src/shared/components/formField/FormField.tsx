@@ -14,7 +14,7 @@ type FormFieldProps = {
 export const FormField = ({ children, className, label, hint, htmlFor, errorMsg }: FormFieldProps) => (
   <div className={className}>
     {label && (
-      <label className="mb-2 mt-4 block font-medium" htmlFor={htmlFor}>
+      <label className="mb-2 mt-4 block text-sm font-medium text-text-base" htmlFor={htmlFor}>
         {label}
       </label>
     )}

@@ -62,7 +62,8 @@
     "react-spring": "^9.7.3",
     "react-use-websocket": "^4.8.1",
     "tailwind-radix-colors": "^0.0.11",
-    "three": "^0.163.0"
+    "three": "^0.163.0",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
     "@childrentime/devcert": "^1.2.8",
@@ -73,6 +74,7 @@
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
+    "@types/valid-url": "^1.0.7",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.2.1",

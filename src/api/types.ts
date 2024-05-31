@@ -144,6 +144,35 @@ export type GetWorkflowInputAssetsResponse = {
 };
 
 // ============================
+// Model imports
+// ============================
+
+export type MetadataResponse = {
+  name: string;
+  license: string;
+};
+
+export type MetadataResponseError = {
+  error_code: 'INVALID_DOMAIN' | 'INVALID_URL' | 'INCOMPATIBLE_FILE_TYPE' | 'MODEL_PRIVATE';
+};
+
+type LoadingModel = { id: string; status: ModelImportStatus };
+
+export type LoadingModelCreateResponse = LoadingModel;
+export type LoadingModelCreateError = {
+  error_code:
+    | 'RESTRICTED_LICENSE'
+    | 'INVALID_DOMAIN'
+    | 'INVALID_URL'
+    | 'INCOMPATIBLE_FILE_TYPE'
+    | 'MODEL_PRIVATE'
+    | 'MODEL_ALREADY_EXISTS'
+    | 'MODEL_ALREADY_EXISTS_WITH_INACTIVE';
+};
+
+export type LoadingModelsResponse = LoadingModel[];
+
+// ============================
 // Websockets
 // ============================
 
@@ -200,6 +229,15 @@ export type LogData = {
   module: string;
 };
 
+type ModelImportStatus = 'READY' | 'IMPORTING' | 'COMPLETED' | 'FAILED';
+
+export type ModelImportFinishedData = {
+  type: 'finished';
+  id: string;
+  status: ModelImportStatus;
+  name: string;
+};
+
 type GeneralIframeMessageData = { data: object; type: string };
 
 export type ParsedComfyUIExecutionError = {
@@ -221,7 +259,8 @@ export type WebSocketMessage = {
     | PreviewExecutionData
     | ExecutionStartData
     | ExecutionErrorData
-    | WebSocketLoggingData;
-  action: 'artcraft_status' | 'send_response';
+    | WebSocketLoggingData
+    | ModelImportFinishedData;
+  action: 'artcraft_status' | 'send_response' | 'model_import_status';
   response_status: number;
 };

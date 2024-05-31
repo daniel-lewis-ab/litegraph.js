@@ -1,9 +1,11 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import expressWs from 'express-ws';
-import { ApiWorkflowOutputAsset, ApiWorkflowOutputAssetDetails, Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowOutputAssetsResponse, GetWorkflowsResponse, PostLoginResponse, WorkflowContent, WorkflowDetails, WorkflowExecutionDetails } from '../../src/api/types';
+import urlMetadata from 'url-metadata';
+import { ApiWorkflowOutputAsset, ApiWorkflowOutputAssetDetails, Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowInputAssetsResponse, GetWorkflowOutputAssetsResponse, GetWorkflowsResponse, LoadingModelCreateError, MetadataResponseError, PostLoginResponse, WorkflowContent, WorkflowDetails, WorkflowExecutionDetails } from '../../src/api/types';
 import { initWebsocket } from './mockWebsocket';
 import { examplePrompt1, examplePrompt2, examplePrompt3, workflowExecutions } from './workflowExecutions';
+
 
 const app = express();
 const PORT = 3000;
@@ -442,6 +444,67 @@ app.get('/v1/assets/:assetId', (req: Request, res: Response) => {
   }
 
   res.json(assetDetails);
+});
+
+app.get('/v1/workflows/:workflowId/assets', (req: Request, res: Response) => {
+  const response: GetWorkflowInputAssetsResponse = {
+    results: [],
+  }
+
+  res.json(response);
+});
+
+// Metadata
+const METADATA_ERROR_CODE: MetadataResponseError['error_code']  = 'MODEL_PRIVATE';
+app.get('/v1/models/metadata/', async (req: Request, res: Response) => {
+  const { url } = req.query;
+  try {
+    const metadata = await urlMetadata(url as string);
+    const updatedData = {
+      name: metadata.title,
+      license: 'openrail++',
+    };
+    const ERROR = false;
+    if(ERROR) {
+      res.status(400).json({ errorCode: METADATA_ERROR_CODE });
+    } else {
+      res.json(updatedData);
+    }
+  } catch (e) {
+    res.status(400).json({ errorCode: METADATA_ERROR_CODE });
+  }
+});
+
+export const LOADING_MODEL_ID = 'new-loading-model';
+export let models = [{ id: generateUUID() }, { id: generateUUID() }, { id: LOADING_MODEL_ID }];
+app.get('/v1/models/import_requests', async (req: Request, res: Response) => {
+  try {
+    const ERROR = false;
+    if(ERROR) {
+      res.status(400).json({ errorCode: METADATA_ERROR_CODE });
+    } else {
+      res.json(models);
+    }
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to fetch metadata' });
+  }
+});
+
+const IMPORT_ERROR_CODE: LoadingModelCreateError['error_code'] = 'MODEL_ALREADY_EXISTS_WITH_INACTIVE';
+app.post('/v1/models/import', async (req: Request, res: Response) => {
+  const { url } = req.body;
+  console.log('Downloading model', url);
+  try {
+
+    const ERROR = false;
+    if(ERROR) {
+      res.status(400).json({ errorCode: IMPORT_ERROR_CODE });
+    } else {
+      res.json({ id: LOADING_MODEL_ID });
+    }
+  } catch (e) {
+    res.status(400).json({ error: 'Failed to fetch metadata' });
+  }
 });
 
 // WebSocket endpoint

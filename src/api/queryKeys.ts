@@ -6,4 +6,6 @@ export const QueryKeys = {
   workflowOutputAssets: ['workflowOutputAssets'],
   asset: ['asset'],
   execution: ['execution'],
+  urlMetadata: ['urlMetadata'],
+  loadingModels: ['loadingModels'],
 };

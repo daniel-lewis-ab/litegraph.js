@@ -5,7 +5,7 @@ import { Icon } from '@/shared/components/icon/Icon';
 import { Logo } from '@/shared/components/icons/Logo';
 import { OptionsList } from '@/shared/components/optionsList/OptionsList';
 import { faPlay } from '@awesome.me/kit-b6cda292ae/icons/classic/light';
-import { faAngleLeft, faDownload } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
+import { faAngleLeft, faDownload, faFileImport } from '@awesome.me/kit-b6cda292ae/icons/classic/regular';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 type WorkflowHeaderProps = {
   workflowName: string;
   className?: string;
+  onImportModelClick(): void;
   onRunWorkflowClick(): Promise<void>;
   onSaveClick(): void;
   onDeployClick(): void;
@@ -22,6 +23,7 @@ type WorkflowHeaderProps = {
 export const WorkflowEditorHeader = ({
   workflowName,
   className,
+  onImportModelClick,
   onRunWorkflowClick,
   onSaveClick,
   onDeployClick,
@@ -79,6 +81,9 @@ export const WorkflowEditorHeader = ({
               onClick={(e) => e.preventDefault()}
             >
               <OptionsList onClick={() => setOptionsSectionOpen(null)}>
+                <OptionsList.Item icon={faFileImport} onClick={onImportModelClick}>
+                  Import model
+                </OptionsList.Item>
                 <OptionsList.Item icon={faDownload} onClick={onSaveClick}>
                   Export JSON
                 </OptionsList.Item>

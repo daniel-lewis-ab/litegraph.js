@@ -12,4 +12,7 @@ export const apiEndpoints = {
   asset: ({ assetId, executionId }: { assetId: string; executionId: string }) =>
     `/v1/executions/${executionId}/artifacts/${assetId}/`,
   execution: (executionId: string) => `/v1/executions/${executionId}/`,
+  modelMetadata: (url: string) => `/v1/models/metadata/?url=` + url,
+  importModel: '/v1/models/import/',
+  loadingModels: '/v1/models/import_requests/',
 };

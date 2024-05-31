@@ -3,7 +3,6 @@ import { CreateDeploymentDialogContainer } from '@/shared/components/createDeplo
 import { useEffect, useRef, useState } from 'react';
 import { ImperativePanelGroupHandle, Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { EditorDevTools } from './components/EditorDevTools';
-import { EditorFooter } from './components/EditorFooter';
 import { EditorIframe } from './components/EditorIframe/EditorIframe';
 import { WorkflowEditorHeader } from './components/WorkflowEditorHeader';
 import { WorkflowEditorSidebar } from './components/workflowEditorSidebar/WorkflowEditorSidebar';
@@ -12,6 +11,8 @@ import { EditorLogs } from './components/workflowEditorSidebar/components/Editor
 import { EditorSideActionsBar } from './components/workflowEditorSidebar/components/EditorSideActionsBar';
 import { LogData } from '@/api/types';
 import { useStateWithLocalStorage } from '@/hooks/useStateWithLocalStorage/useStateWithLocalStorage';
+import { ImportModelDialog } from './components/importModelDialog/ImportModelDialog';
+import { EditorFooterContainer } from './components/editorFooter/EditorFooterContainer';
 
 type WorkflowEditorPageProps = {
   workflowId: string;
@@ -32,6 +33,7 @@ export const WorkflowEditorPage = ({
 }: WorkflowEditorPageProps) => {
   const [showDeploymentDialog, setShowDeploymentDialog] = useState(false);
   const [isLogsVisible, setIsLogsVisible] = useStateWithLocalStorage('isLogsVisible', false);
+  const [showImportModelDialog, setShowImportModelDialog] = useState(false);
   const [areLogsExpanded, setAreLogsExpanded] = useState(false);
   const innerPanelRef = useRef<ImperativePanelGroupHandle | null>(null);
   const [isErrorNotificationVisible, setIsErrorNotificationVisible] = useState(false);
@@ -66,6 +68,7 @@ export const WorkflowEditorPage = ({
                 onRunWorkflowClick={onCreateNewWorkflowExecution}
                 onSaveClick={onSaveWorkflow}
                 onDeployClick={() => setShowDeploymentDialog(true)}
+                onImportModelClick={() => setShowImportModelDialog(true)}
               />
               <div className="flex flex-1 flex-col">
                 <PanelGroup direction="vertical" ref={innerPanelRef} autoSaveId="logsAndIframe">
@@ -95,7 +98,7 @@ export const WorkflowEditorPage = ({
                   )}
                 </PanelGroup>
               </div>
-              <EditorFooter />
+              <EditorFooterContainer />
             </div>
           </Panel>
           <PanelResizeHandle />
@@ -124,6 +127,7 @@ export const WorkflowEditorPage = ({
           isOpen={showDeploymentDialog}
           onClose={() => setShowDeploymentDialog(false)}
         />
+        <ImportModelDialog isOpen={showImportModelDialog} onClose={() => setShowImportModelDialog(false)} />
         {import.meta.env.MODE === 'development' && import.meta.env.VITE_WEBSOCKET_URL.includes('localhost') ? (
           <EditorDevTools />
         ) : null}

@@ -13,6 +13,7 @@ export const constants = {
   validation: {
     workflowNameMaxLength: 80,
     deploymentNameMaxLength: 80,
+    importModelUrlMaxLength: 1500,
   },
   ftueBannerPageKey: 'ftue-banner',
   ftueBannerEditorKey: 'ftue-editor',

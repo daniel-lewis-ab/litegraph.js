@@ -34,7 +34,7 @@ export const EditorDevTools = () => {
   };
 
   return (
-    <div className="absolute bottom-0 left-0 w-[400px] bg-surface-4 p-2 *:text-surface-2">
+    <div className="absolute bottom-0 right-0 w-[400px] bg-surface-4 p-2 *:text-surface-2">
       <p>Send message from websocket:</p>
       <textarea className="h-96 w-full" onChange={(e) => setMsg(e.target.value)} value={msg} />
       <Button onClick={() => sendWebsocketMessage(msg)}>Send websocket echo</Button>
