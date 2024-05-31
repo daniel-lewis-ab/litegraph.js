@@ -8,6 +8,7 @@ import { useWorkflowInputAssetsQuery } from '@/api/hooks/useWorkflowInputAssetsQ
 import { useCreateWorkflowInputAssetMutation } from '@/api/hooks/useCreateWorkflowInputAssetMutation/useCreateWorkflowInputAssetMutation';
 import { useParams } from 'react-router-dom';
 import { publicAxiosClient } from '@/api/axiosClient';
+import { useEditorNotifications } from '@/hooks/useEditorNotifications/useEditorNotifications';
 
 const getWorkflowPreviewAsset = async (url: string) => {
   const response = await publicAxiosClient.get(url, { responseType: 'blob' });
@@ -26,6 +27,7 @@ export const EditorIframe = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [state, setState] = useState<'init' | 'loaded'>('init');
   const { lastMessage, readyState } = useWebSocket();
+  const { addNotification } = useEditorNotifications();
 
   const sendMessageToIframe = (message: FullMessage) => {
     import.meta.env.VITE_SHOW_IFRAME_LOGS === 'true' && console.log('Sending message to iframe', message);
@@ -140,13 +142,21 @@ export const EditorIframe = () => {
           await refetchInputAsset();
         }
       }
+
+      if (message.data.internal && message.data.internal.type === 'missing_nodes') {
+        addNotification({
+          type: 'missing_nodes',
+          missingNodes: message.data.internal.data,
+          allNodesCount: currentWorkflow?.content?.nodes?.length ?? 0,
+        });
+      }
     };
 
     window.addEventListener('message', handleMessageFromIframe);
     return () => {
       window.removeEventListener('message', handleMessageFromIframe);
     };
-  }, [currentWorkflow?.content, setCurrentWorkflow, createAssetAsync, id, refetchInputAsset]);
+  }, [currentWorkflow?.content, setCurrentWorkflow, createAssetAsync, id, refetchInputAsset, addNotification]);
 
   return (
     <iframe

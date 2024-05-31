@@ -15,6 +15,7 @@ import { useWorkflowExecutionsQuery } from '@/api/hooks/useWorkflowExecutionsQue
 import { usePrefetchWorkflowOutputAssets } from '@/api/hooks/useWorkflowOutputAssetsQuery/useWorkflowOutputAssetsQuery';
 import { useWorkflowExecutionWsUpdates } from '@/hooks/useWorkflowExecutionWsUpdates/useWorkflowExecutionWsUpdates';
 import { useWorkflowExecutionWsLogs } from '@/hooks/useWorkflowExecutionWsLogs/useWorkflowExecutionWsLogs';
+import { EditorNotificationsProvider } from '@/context/editorNotificationsContext/EditorNotificationsContext';
 
 export const WorkflowEditorPageContainer = () => {
   // We want to keep it to only send the update once
@@ -87,14 +88,16 @@ export const WorkflowEditorPageContainer = () => {
   }
 
   return (
-    <WorkflowEditorPage
-      logs={logs}
-      workflowId={id!}
-      workflowName={workflow!.name}
-      workflowsRunningCount={workflowsRunningCount}
-      onCreateNewWorkflowExecution={handleExecuteWorkflow}
-      onSaveWorkflow={handleSaveWorkflow}
-    />
+    <EditorNotificationsProvider>
+      <WorkflowEditorPage
+        logs={logs}
+        workflowId={id!}
+        workflowName={workflow!.name}
+        workflowsRunningCount={workflowsRunningCount}
+        onCreateNewWorkflowExecution={handleExecuteWorkflow}
+        onSaveWorkflow={handleSaveWorkflow}
+      />
+    </EditorNotificationsProvider>
   );
 };
 

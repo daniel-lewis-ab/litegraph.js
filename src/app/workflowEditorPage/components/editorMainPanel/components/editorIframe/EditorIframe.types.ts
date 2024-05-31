@@ -68,10 +68,17 @@ export type IframeToParentLoadedData = {
   data: WorkflowContent;
 };
 
+// When there are missing nodes in the workflow
+export type IframeToParentMissingNodes = {
+  type: 'missing_nodes';
+  data: string[];
+};
+
 export type IframeToParentMessage = {
   internal:
     | IframeToParentGetGraphData
     | IframeToParentUploadData
     | IframeToParentLoadedData
-    | IframeToParentCallViewEndpoint;
+    | IframeToParentCallViewEndpoint
+    | IframeToParentMissingNodes;
 };

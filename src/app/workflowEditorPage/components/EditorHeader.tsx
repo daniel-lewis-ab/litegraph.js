@@ -20,7 +20,7 @@ type WorkflowHeaderProps = {
   onDeployClick(): void;
 };
 
-export const WorkflowEditorHeader = ({
+export const EditorHeader = ({
   workflowName,
   className,
   onImportModelClick,

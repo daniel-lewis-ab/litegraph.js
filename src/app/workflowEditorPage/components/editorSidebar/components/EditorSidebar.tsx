@@ -1,5 +1,5 @@
-import { ExecutionsSectionContainer } from './components/executionsSection/ExecutionsSectionContainer';
-import { OutputsGalleryGridContainer } from './components/outputsGallerySection/OutputsGallerySectionContainer';
+import { ExecutionsSectionContainer } from './executionsSection/ExecutionsSectionContainer';
+import { OutputsGalleryGridContainer } from './outputsGallerySection/OutputsGallerySectionContainer';
 
 type WorkflowSidebarProps = {
   workflowId: string;
@@ -8,7 +8,7 @@ type WorkflowSidebarProps = {
   onClose(): void;
 };
 
-export const WorkflowEditorSidebar = ({ workflowId, workflowName, section, onClose }: WorkflowSidebarProps) => (
+export const EditorSidebar = ({ workflowId, workflowName, section, onClose }: WorkflowSidebarProps) => (
   <div className="ml-1 h-full flex-1 rounded-lg bg-surface-2">
     {section === 'images' && (
       <OutputsGalleryGridContainer workflowName={workflowName} workflowId={workflowId} onClose={onClose} />

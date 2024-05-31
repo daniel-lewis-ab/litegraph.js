@@ -1,18 +1,17 @@
 import { Banner } from '@/shared/components/banner/Banner';
 import { CreateDeploymentDialogContainer } from '@/shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
-import { useEffect, useRef, useState } from 'react';
-import { ImperativePanelGroupHandle, Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
+import { useEffect, useState } from 'react';
+import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { EditorDevTools } from './components/EditorDevTools';
-import { EditorIframe } from './components/EditorIframe/EditorIframe';
-import { WorkflowEditorHeader } from './components/WorkflowEditorHeader';
-import { WorkflowEditorSidebar } from './components/workflowEditorSidebar/WorkflowEditorSidebar';
-import { EditorErrorNotification } from './components/workflowEditorSidebar/components/EditorErrorNotification';
-import { EditorLogs } from './components/workflowEditorSidebar/components/EditorLogs';
-import { EditorSideActionsBar } from './components/workflowEditorSidebar/components/EditorSideActionsBar';
+import { EditorHeader } from './components/EditorHeader';
+import { EditorSidebar } from './components/editorSidebar/EditorSidebar';
 import { LogData } from '@/api/types';
 import { useStateWithLocalStorage } from '@/hooks/useStateWithLocalStorage/useStateWithLocalStorage';
 import { ImportModelDialog } from './components/importModelDialog/ImportModelDialog';
 import { EditorFooterContainer } from './components/editorFooter/EditorFooterContainer';
+import { useEditorNotifications } from '@/hooks/useEditorNotifications/useEditorNotifications';
+import { EditorMainPanel } from './components/editorMainPanel/EditorMainPanel';
+import { EditorSideActionsBar } from './components/EditorSideActionsBar';
 
 type WorkflowEditorPageProps = {
   workflowId: string;
@@ -34,23 +33,18 @@ export const WorkflowEditorPage = ({
   const [showDeploymentDialog, setShowDeploymentDialog] = useState(false);
   const [isLogsVisible, setIsLogsVisible] = useStateWithLocalStorage('isLogsVisible', false);
   const [showImportModelDialog, setShowImportModelDialog] = useState(false);
-  const [areLogsExpanded, setAreLogsExpanded] = useState(false);
-  const innerPanelRef = useRef<ImperativePanelGroupHandle | null>(null);
-  const [isErrorNotificationVisible, setIsErrorNotificationVisible] = useState(false);
   const [activeSidebarSection, setActiveSidebarSection] = useStateWithLocalStorage<'images' | 'executions' | null>(
     'activeSidebarSection',
     null,
   );
-  const toggleLogsFullWidth = () => innerPanelRef.current?.setLayout(areLogsExpanded ? [90, 20] : [0, 100]);
-  const handleViewLogsClick = () => {
-    setIsLogsVisible(true);
-    setIsErrorNotificationVisible(false);
-  };
+  const { addNotification } = useEditorNotifications();
 
   useEffect(() => {
     const hasErrors = logs.some((log) => log.level.toUpperCase() === 'ERROR');
-    setIsErrorNotificationVisible(hasErrors);
-  }, [logs]);
+    if (hasErrors) {
+      addNotification({ type: 'general' });
+    }
+  }, [logs, addNotification]);
 
   return (
     <>
@@ -63,7 +57,7 @@ export const WorkflowEditorPage = ({
               <Banner className="rounded-lg">
                 <Banner.EditorBannerContent />
               </Banner>
-              <WorkflowEditorHeader
+              <EditorHeader
                 workflowName={workflowName}
                 onRunWorkflowClick={onCreateNewWorkflowExecution}
                 onSaveClick={onSaveWorkflow}
@@ -71,32 +65,7 @@ export const WorkflowEditorPage = ({
                 onImportModelClick={() => setShowImportModelDialog(true)}
               />
               <div className="flex flex-1 flex-col">
-                <PanelGroup direction="vertical" ref={innerPanelRef} autoSaveId="logsAndIframe">
-                  <Panel defaultSize={75}>
-                    <div className="relative h-full">
-                      <EditorIframe />
-                      {isErrorNotificationVisible && (
-                        <div className="absolute right-4 top-4">
-                          <EditorErrorNotification
-                            onCloseClick={() => setIsErrorNotificationVisible(false)}
-                            onViewLogsClick={handleViewLogsClick}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </Panel>
-                  <PanelResizeHandle />
-                  {isLogsVisible && (
-                    <Panel defaultSize={25} minSize={5} onResize={(size) => setAreLogsExpanded(size === 100)}>
-                      <EditorLogs
-                        logs={logs}
-                        isExpanded={areLogsExpanded}
-                        onToggleExpand={toggleLogsFullWidth}
-                        onCloseClick={() => setIsLogsVisible(false)}
-                      />
-                    </Panel>
-                  )}
-                </PanelGroup>
+                <EditorMainPanel logs={logs} isLogsVisible={isLogsVisible} setIsLogsVisible={setIsLogsVisible} />
               </div>
               <EditorFooterContainer />
             </div>
@@ -112,7 +81,7 @@ export const WorkflowEditorPage = ({
           {activeSidebarSection !== null && (
             <Panel minSize={15}>
               <div className="flex h-full overflow-hidden">
-                <WorkflowEditorSidebar
+                <EditorSidebar
                   workflowId={workflowId}
                   workflowName={workflowName}
                   section={activeSidebarSection}
