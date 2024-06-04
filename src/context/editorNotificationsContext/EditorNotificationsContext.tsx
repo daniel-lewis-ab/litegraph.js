@@ -7,7 +7,6 @@ type ErrorNotification =
   | {
       type: 'missing_nodes';
       missingNodes: string[];
-      allNodesCount: number;
     };
 
 export type EditorNotificationType = ErrorNotification;

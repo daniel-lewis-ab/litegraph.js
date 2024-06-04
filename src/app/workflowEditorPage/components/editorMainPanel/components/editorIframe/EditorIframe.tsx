@@ -144,11 +144,7 @@ export const EditorIframe = () => {
       }
 
       if (message.data.internal && message.data.internal.type === 'missing_nodes') {
-        addNotification({
-          type: 'missing_nodes',
-          missingNodes: message.data.internal.data,
-          allNodesCount: currentWorkflow?.content?.nodes?.length ?? 0,
-        });
+        addNotification({ type: 'missing_nodes', missingNodes: message.data.internal.data });
       }
     };
 

@@ -1,6 +1,7 @@
 /* eslint-disable react/display-name */
 import { constants } from '@/contants';
 import { useEditorNotifications } from '@/hooks/useEditorNotifications/useEditorNotifications';
+import { useWorkflowEditor } from '@/hooks/useWorkflowEditor/useWorkflowEditor';
 import { Icon } from '@/shared/components/icon/Icon';
 import { faCircleExclamation, faClose } from '@awesome.me/kit-b6cda292ae/icons/sharp/regular';
 
@@ -26,10 +27,7 @@ export const EditorNotification = ({ onViewLogsClick }: { onViewLogsClick(): voi
           <EditorNotification.GeneralErrorBody onViewLogsClick={handleViewLogsClick} />
         )}
         {lastNotification.type === 'missing_nodes' && (
-          <EditorNotification.MissingNodesBody
-            missingNodes={lastNotification.missingNodes}
-            allNodesCount={lastNotification.allNodesCount}
-          />
+          <EditorNotification.MissingNodesBody missingNodes={lastNotification.missingNodes} />
         )}
       </div>
       <div>
@@ -50,31 +48,32 @@ EditorNotification.GeneralErrorBody = ({ onViewLogsClick }: { onViewLogsClick():
   </div>
 );
 
-EditorNotification.MissingNodesBody = ({
-  missingNodes,
-  allNodesCount,
-}: {
-  missingNodes: string[];
-  allNodesCount: number;
-}) => (
-  <div>
-    <p className="text-sm font-semibold">Missing nodes</p>
-    <p className="mb-2 text-sm">
-      {allNodesCount - missingNodes.length} of {allNodesCount} notes found
-    </p>
-    <div className="text-sm text-text-subtle *:text-sm *:text-text-subtle">
-      Missing:
-      <ul className="list-disc pl-5">
-        {missingNodes.map((node) => (
-          <li key={node}>{node}</li>
-        ))}
-      </ul>
-      <p className="mt-2">
-        Use an alternative node or request your node on{' '}
-        <a href={constants.discordFeedbackUrl} target="_blank" className="text-white underline" rel="noreferrer">
-          Discord
-        </a>
+const MissingNodesBody = ({ missingNodes }: { missingNodes: string[] }) => {
+  const { currentWorkflow } = useWorkflowEditor();
+  const allNodesCount = currentWorkflow?.content?.nodes?.length ?? 0;
+
+  return (
+    <div>
+      <p className="text-sm font-semibold">Missing nodes</p>
+      <p className="mb-2 text-sm">
+        {allNodesCount - missingNodes.length} of {allNodesCount} nodes found
       </p>
+      <div className="text-sm text-text-subtle *:text-sm *:text-text-subtle">
+        Missing:
+        <ul className="list-disc pl-5">
+          {missingNodes.map((node) => (
+            <li key={node}>{node}</li>
+          ))}
+        </ul>
+        <p className="mt-2">
+          Use an alternative node or request your node on{' '}
+          <a href={constants.discordFeedbackUrl} target="_blank" className="text-white underline" rel="noreferrer">
+            Discord
+          </a>
+        </p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
+EditorNotification.MissingNodesBody = MissingNodesBody;
