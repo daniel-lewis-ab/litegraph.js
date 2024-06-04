@@ -1,8 +1,14 @@
+include:
+  - project: 'plai-app/ai-studio/salt-reusable-pipeline'
+    ref: main
+    file: 'ci/release/docs.yml'
+
 stages:
   - lint
   - test
   - build
   - deploy
+  - release 
 
 variables:
   INFRASTRUCTURE_URL: https://gitlab-ci-token:${GITLAB_ACCESS_TOKEN}@gitlab.com/plai-app/ai-studio/orchestra-infrastructure.git
@@ -117,3 +123,14 @@ deploy-prod:
     - kustomize build > ../../kustomization/prod/prod.yaml
     - git commit -am "Set salt-frontend prod image tag to $SHORT_HASH"
     - git push origin main
+
+release-publish-changelog-to-notion:
+  dependencies: [deploy-prod]
+  extends: release:publish_to_notion
+  stage: release
+  variables:
+    DOC_PATH: CHANGELOG.md
+    NOTION_PAGE_ID: 67d5d130-37b8-4f8e-ba68-d4b46c96ee34
+    NOTION_TOKEN: ${NOTION_TOKEN}
+  only:
+    - main
