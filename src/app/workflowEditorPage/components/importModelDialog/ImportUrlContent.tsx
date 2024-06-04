@@ -58,7 +58,7 @@ export const ImportUrlContent = ({
   onBackClick(): void;
   onSuccessfulModelImport(): void;
 }) => {
-  const modelName = selectedModel ? 'Hugging Face' : 'Civitai';
+  const modelName = selectedModel === 'HuggingFace' ? 'Hugging Face' : 'Civitai';
   const { fetchModelMetadata: fetchUrlMetadata } = useFetchModelMetadata();
   const { mutateAsync: createModelMutation } = useCreateModelMutation();
   const [state, setState] = useState<State>({ isLoading: false, data: null, isError: false });
