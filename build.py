@@ -93,13 +93,14 @@ def concatenate_js_files(js_files, output_filename):
 
 def pack_js_files(js_files, output_filename):
     concatenated_data = "/*packed*/"
-    
+    uglifyjs_path = os.path.join(".", "node_modules", ".bin", "uglifyjs" + (".cmd" if sys.platform.startswith('win') else ""))
+
     for js_file in js_files:
         print("Processing " + js_file + " ", end="")
         
         if os.path.exists(js_file):
             # Minify the JS file using uglifyjs
-            minified_js = subprocess.run(["uglifyjs", js_file, "-c"], stdout=subprocess.PIPE, text=True)
+            minified_js = subprocess.run([uglifyjs_path, js_file, "-c"], stdout=subprocess.PIPE, text=True)
             concatenated_data += minified_js.stdout + "\n"
             print("\033[92mMinified\033[0m")
         else:
