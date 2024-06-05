@@ -126,6 +126,7 @@ export const extensions = [
     "/extensions/ComfyUI-Impact-Pack/impact-image-util.js",
     "/extensions/saltai_displayany/display_any.js",
     "/extensions/SaltAI/help_button.js",
+    "/extensions/SaltAI/by_category_menu.js",
     "/extensions/ComfyUI-AnimateDiff-Evolved/js/gif_preview.js",
     "/extensions/cg-use-everywhere/use_everywhere_apply.js",
     "/extensions/cg-use-everywhere/use_everywhere_ui.js",
