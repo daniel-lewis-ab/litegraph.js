@@ -1101,3 +1101,13 @@ if (typeof window != "undefined" && !window["requestAnimationFrame"]) {
             window.setTimeout(callback, 1000 / 60);
         });
 }
+
+// Expose core classes to the outside
+window.LiteGraph = LiteGraph;
+window.LLink = LLink;
+window.LGraph = LGraph;
+window.LGraphNode = LGraphNode;
+window.LGraphGroup = LGraphGroup;
+window.LGraphCanvas = LGraphCanvas;
+window.DragAndScale = DragAndScale;
+window.ContextMenu = ContextMenu;
