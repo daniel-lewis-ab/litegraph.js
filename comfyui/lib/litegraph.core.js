@@ -9968,10 +9968,7 @@ LGraphNode.prototype.executeAction = function(action)
                         }
                         ctx.fillStyle = text_color;
                         ctx.textAlign = "right";
-                        let value = w.value;
-                        if(w.type == "password") {
-                            value = value.replace(/./g, "*");
-                        }
+                        const value = w.type == "password" ? value.replace(/./g, "*") :  w.value;
                         ctx.fillText(String(value).substr(0,30), widget_width - margin * 2, y + H * 0.7); //30 chars max
 						ctx.restore();
                     }
