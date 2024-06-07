@@ -1,13 +1,15 @@
 import { routes } from '@/routes/routes';
 import { Icon } from '@/shared/components/icon/Icon';
 import { faEllipsisVertical } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
-import { faDownload, faRocket, faTrash } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
+import { faDownload, faTrash } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { OptionsList } from '../optionsList/OptionsList';
 import { faDiagramProject } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TimeSince } from '../timeSince/TimeSince';
+import { CodeIcon } from '../icons/CodeIcon';
+import { DiscordIcon } from '../icons/DiscordIcon';
 
 type WorkflowTileProps = {
   id: string;
@@ -69,10 +71,16 @@ export const WorkflowTile = ({
                 onClick={(e) => e.preventDefault()}
               >
                 <OptionsList onClick={closePopover}>
-                  <OptionsList.Item icon={faRocket} onClick={() => onDeployClick('discord')}>
+                  <OptionsList.Item
+                    pureIcon={<DiscordIcon variant="small" className="h-[20px] w-[16px]" />}
+                    onClick={() => onDeployClick('discord')}
+                  >
                     Deploy to Discord
                   </OptionsList.Item>
-                  <OptionsList.Item icon={faRocket} onClick={() => onDeployClick('api')}>
+                  <OptionsList.Item
+                    pureIcon={<CodeIcon className="h-[20px] w-[16px]" />}
+                    onClick={() => onDeployClick('api')}
+                  >
                     Deploy to API
                   </OptionsList.Item>
                   <OptionsList.Item icon={faTrash} onClick={onDeleteClick}>

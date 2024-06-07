@@ -12,11 +12,12 @@ type LinkProps = {
 type ItemProps = LinkProps & {
   children: ReactNode;
   icon?: FontAwesomeIconProps['icon'];
+  pureIcon?: ReactNode;
   className?: string;
   onClick?(): void;
 };
 
-const Item = ({ asLink, to, icon, children, className, onClick }: ItemProps) => {
+const Item = ({ asLink, to, icon, pureIcon, children, className, onClick }: ItemProps) => {
   const ButtonOrLink = asLink && to ? Link : 'button';
 
   return (
@@ -32,6 +33,7 @@ const Item = ({ asLink, to, icon, children, className, onClick }: ItemProps) => 
         type="button"
       >
         {icon && <Icon size={16} icon={icon} className="mr-2.5 text-surface-7 *:text-text-muted" />}
+        {pureIcon && <div className="mr-2.5 text-surface-7 *:text-text-muted">{pureIcon}</div>}
         <span className="font-medium">{children}</span>
       </ButtonOrLink>
     </li>
