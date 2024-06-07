@@ -49,9 +49,11 @@ export const DeploymentsPage = ({
               key={deployment.id}
               id={deployment.id}
               name={deployment.name}
+              executionExample={deployment.execution_example}
               created_at={deployment.created_at}
               deployed_at={deployment.deployed_at}
               status={deployment.status}
+              type={deployment.type}
               onStatusChange={onDeploymentStatusChange}
               onDelete={() => setDeploymentIdToDelete(deployment.id)}
               onDownload={() => onDownloadDeploymentJson(deployment.id)}

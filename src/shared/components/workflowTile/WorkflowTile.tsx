@@ -13,7 +13,7 @@ type WorkflowTileProps = {
   id: string;
   name: string;
   lastEdited: string;
-  onDeployClick: () => void;
+  onDeployClick: (type: 'api' | 'discord') => void;
   onDeleteClick: () => void;
   onExportClick: () => void;
   onTileOptionsMouseOver: () => void;
@@ -69,8 +69,11 @@ export const WorkflowTile = ({
                 onClick={(e) => e.preventDefault()}
               >
                 <OptionsList onClick={closePopover}>
-                  <OptionsList.Item icon={faRocket} onClick={onDeployClick}>
-                    Deploy
+                  <OptionsList.Item icon={faRocket} onClick={() => onDeployClick('discord')}>
+                    Deploy to Discord
+                  </OptionsList.Item>
+                  <OptionsList.Item icon={faRocket} onClick={() => onDeployClick('api')}>
+                    Deploy to API
                   </OptionsList.Item>
                   <OptionsList.Item icon={faTrash} onClick={onDeleteClick}>
                     Delete

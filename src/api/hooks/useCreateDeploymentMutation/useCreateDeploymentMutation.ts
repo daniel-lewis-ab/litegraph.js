@@ -5,19 +5,13 @@ import { QueryKeys } from '@/api/queryKeys';
 import { Deployment, GetDeploymentsResponse } from '@/api/types';
 
 type CreateDeploymentData = {
-  name: string;
+  name?: string;
   workflow_id: string;
-};
-
-const DEFAULT_DEPLOYMENT_DATA = {
-  type: 'DISC',
+  type: 'DISC' | 'API';
 };
 
 const createDeployment = async (deploymentData: CreateDeploymentData): Promise<Deployment> => {
-  const response = await axiosClient.post<Deployment>(apiEndpoints.deployments, {
-    ...DEFAULT_DEPLOYMENT_DATA,
-    ...deploymentData,
-  });
+  const response = await axiosClient.post<Deployment>(apiEndpoints.deployments, deploymentData);
 
   if (response.status !== 201) {
     throw new Error('Failed to create deployment');

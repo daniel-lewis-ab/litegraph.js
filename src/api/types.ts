@@ -56,13 +56,24 @@ export type GetWorkflowsResponse = {
 // Deployments
 // ============================
 
+export type DeploymentErrorCode =
+  | 'deployment_validation_error'
+  | 'deployment_workflow_version_exists_error'
+  | 'deployment_name_exists_error';
+export type CreateDeploymentErrorData = {
+  error_code: DeploymentErrorCode | string;
+};
+
 export type DeploymentStatus = 'LOADING' | 'ONLINE' | 'PAUSED' | 'FAILED';
+export type DeploymentType = 'API' | 'DISC';
 
 export type Deployment = {
   id: string;
   name: string;
   created_at: string;
+  execution_example?: string;
   deployed_at?: string;
+  type: DeploymentType;
   status: DeploymentStatus;
   workflow_id: string;
 };

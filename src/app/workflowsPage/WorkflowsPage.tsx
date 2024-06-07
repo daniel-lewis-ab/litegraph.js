@@ -9,9 +9,9 @@ import { WorkflowTile } from '@/shared/components/workflowTile/WorkflowTile';
 import { faSparkles } from '@awesome.me/kit-b6cda292ae/icons/classic/solid';
 import { faPlus } from '@awesome.me/kit-b6cda292ae/icons/sharp/solid';
 import { useState } from 'react';
-import { CreateDeploymentDialogContainer } from '../../shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
 import { DeleteConfirmationDialog } from './components/DeleteConfirmationDialog';
 import { EmptyWorkflowsPage } from './components/EmptyWorkflowsPage';
+import { CreateDeploymentDialog } from '@/shared/components/createDeploymentDialog/CreateDeploymentDialog';
 
 type WorkflowsPageProps = {
   workflows: Workflow[];
@@ -27,7 +27,9 @@ export const WorkflowsPage = ({
   prefetchWorkflowDetails,
 }: WorkflowsPageProps) => {
   const [workflowIdToDelete, setWorkflowIdToDelete] = useState<null | string>(null);
-  const [workflowIdToDeploy, setWorkflowIdToDeploy] = useState<null | string>(null);
+  const [workflowToDeploy, setWorkflowToDeploy] = useState<null | { workflowId: string; type: 'api' | 'discord' }>(
+    null,
+  );
   const { isBannerVisible } = useBannerVisibility(constants.ftueBannerPageKey);
 
   if (workflows.length === 0) {
@@ -66,7 +68,7 @@ export const WorkflowsPage = ({
             id={workflow.id}
             name={workflow.name}
             lastEdited={workflow.updated_at}
-            onDeployClick={() => setWorkflowIdToDeploy(workflow.id)}
+            onDeployClick={(type) => setWorkflowToDeploy({ workflowId: workflow.id, type })}
             onDeleteClick={() => setWorkflowIdToDelete(workflow.id)}
             onExportClick={() => onExportWorkflow(workflow.id)}
             onTileOptionsMouseOver={() => prefetchWorkflowDetails(workflow.id)}
@@ -78,10 +80,10 @@ export const WorkflowsPage = ({
         onClose={() => setWorkflowIdToDelete(null)}
         onConfirm={() => onWorkflowDelete(workflowIdToDelete!)}
       />
-      <CreateDeploymentDialogContainer
-        isOpen={!!workflowIdToDeploy}
-        workflowId={workflowIdToDeploy!}
-        onClose={() => setWorkflowIdToDeploy(null)}
+      <CreateDeploymentDialog
+        workflowId={workflowToDeploy?.workflowId}
+        deploymentType={workflowToDeploy?.type ?? null}
+        onClose={() => setWorkflowToDeploy(null)}
       />
     </PageTemplate>
   );

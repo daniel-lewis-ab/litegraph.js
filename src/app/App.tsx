@@ -7,6 +7,7 @@ import { ClientOnly, Head } from 'vite-react-ssg';
 import { createPortal } from 'react-dom';
 import { useScrollToTopOnPathChange } from '@/hooks/useScrollToTopOnPathChange/useScrollToTopOnPathChange';
 import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
+import { Tooltip } from '@/shared/components/tooltip/Tooltip';
 
 export const App = ({ children }: { children: ReactNode }) => {
   useScrollToTopOnPathChange();
@@ -25,23 +26,25 @@ export const App = ({ children }: { children: ReactNode }) => {
       <ErrorBoundary fallback={<PageErrorTemplate variant="down" className="h-screen" />}>
         <AuthContextProvider>
           <QueryClientProvider>
-            <ClientOnly>
-              {() => (
-                <>
-                  {createPortal(
-                    <Toaster
-                      position="bottom-right"
-                      toastOptions={{
-                        // success: { className: '!bg-success-10' },
-                        error: { className: '!bg-error-10 !text-white' },
-                      }}
-                    />,
-                    document.body,
-                  )}
-                </>
-              )}
-            </ClientOnly>
-            {children}
+            <Tooltip.Provider delayDuration={0}>
+              <ClientOnly>
+                {() => (
+                  <>
+                    {createPortal(
+                      <Toaster
+                        position="bottom-right"
+                        toastOptions={{
+                          // success: { className: '!bg-success-10' },
+                          error: { className: '!bg-error-10 !text-white' },
+                        }}
+                      />,
+                      document.body,
+                    )}
+                  </>
+                )}
+              </ClientOnly>
+              {children}
+            </Tooltip.Provider>
           </QueryClientProvider>
         </AuthContextProvider>
       </ErrorBoundary>

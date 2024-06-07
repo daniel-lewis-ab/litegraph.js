@@ -3,7 +3,7 @@ export const constants = {
   updateWorkflowThrottleTime: 1300,
   websocketReconnectAttempts: 3,
   discordFlowCatalogueUrl: 'https://discord.com/channels/1151592612525002822/1212150763858563112',
-  saltAiDiscordUrl: 'https://discord.gg/saltai',
+  saltAiDiscordUrl: 'https://discord.gg/q4p3mhmt',
   addBotToDiscordUrl:
     'https://discord.com/oauth2/authorize?client_id=1113909066587185274&scope=bot&permissions=2147605568',
   supportUrl: 'https://discord.com/channels/1151592612525002822/1212167911771217961',

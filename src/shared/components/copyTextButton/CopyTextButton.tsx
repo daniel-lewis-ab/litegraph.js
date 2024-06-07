@@ -7,10 +7,12 @@ import './CopyTextButton.scss';
 export const CopyTextButton = ({
   text,
   className,
+  textClassName,
   showToastOnCopy = true,
 }: {
   text: string;
   className?: string;
+  textClassName?: string;
   showToastOnCopy?: boolean;
 }) => {
   const handleCopyClick = () => {
@@ -37,7 +39,9 @@ export const CopyTextButton = ({
       onClick={handleCopyClick}
     >
       <div className="relative flex-1 overflow-hidden">
-        <p className="truncate-shadow truncate text-left font-mono font-medium text-text-subtle">{text}</p>
+        <p className={clsx('truncate-shadow truncate text-left font-mono font-medium text-text-subtle', textClassName)}>
+          {text}
+        </p>
       </div>
       <Icon icon={faClone} className="ml-2 *:text-icon-base" />
     </button>

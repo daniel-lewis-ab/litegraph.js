@@ -21,6 +21,7 @@ type ButtonProps = LinkProps & {
   isLoading?: boolean;
   leftIcon?: IconProps['icon'];
   rightIcon?: IconProps['icon'];
+  as?: string;
   onClick?(): void;
   onMouseOver?(): void;
 };
@@ -44,19 +45,20 @@ export const Button = ({
   asLink,
   to,
   onMouseOver,
+  as,
 }: ButtonProps) => {
-  const ButtonOrLink = asLink ?? to ? Link : 'button';
+  const Tag = as ? as : asLink ?? to ? Link : 'button';
 
   return (
-    <ButtonOrLink
+    <Tag
       to={to!}
       type={type}
       className={clsx(
         'button',
-        'rounded-lg font-medium',
+        'font-medium',
         size === 'xs' && 'space-x-1 rounded-md px-2 py-1 text-xs',
-        size === 'sm' && 'space-x-1 px-3 py-1.5 text-sm',
-        size === 'md' && 'space-x-2 px-3 py-2 text-sm',
+        size === 'sm' && 'space-x-1 rounded px-3 py-1.5 text-sm',
+        size === 'md' && 'space-x-2 rounded-lg px-3 py-2 text-sm',
         size === 'xl' && 'space-x-2 rounded-xl px-4 py-[13px] text-xl',
         size === 'lg' && 'space-x-2 rounded-xl px-4 py-[10.5px] text-lg',
 
@@ -66,12 +68,12 @@ export const Button = ({
         className,
       )}
       onClick={onClick}
-      disabled={disabled ?? isLoading}
       onMouseOver={onMouseOver}
+      {...{ disabled: disabled ?? isLoading }}
     >
       {leftIcon && <Icon icon={leftIcon} size={iconSize(size)} />}
       {isLoading ? <LoaderIcon size={20} /> : <span>{children}</span>}
       {rightIcon && <Icon icon={rightIcon} size={iconSize(size)} />}
-    </ButtonOrLink>
+    </Tag>
   );
 };

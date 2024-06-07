@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 button.button,
-a.button {
+a.button,
+div.button,
+.button {
   --base-color: var(--color-primary-10);
   --second-base-color: var(--color-primaryA-4);
   --text-color: var(--color-primary-1);
@@ -42,7 +44,7 @@ a.button {
   }
 
   &--color-secondary {
-    --base-color: var(--color-secondary-10);
+    --base-color: var(--color-secondary-4);
     --second-base-color: var(--color-secondaryA-3);
     --text-color: white;
     --text-color-muted: var(--color-secondary-9);

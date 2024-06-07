@@ -11,9 +11,10 @@ import { faTrash, faArrowDownToLine } from '@awesome.me/kit-b6cda292ae/icons/sha
 import { OptionsList } from '@/shared/components/optionsList/OptionsList';
 import { useState } from 'react';
 import { CopyTextButton } from '@/shared/components/copyTextButton/CopyTextButton';
-import { DeploymentStatus } from '@/api/types';
+import { DeploymentStatus, DeploymentType } from '@/api/types';
 import toast from 'react-hot-toast';
 import { constants } from '@/contants';
+import { CodeIcon } from '@/shared/components/icons/CodeIcon';
 
 const DeploymentStatusText = ({ status }: { status: DeploymentStatus }) => (
   <span
@@ -32,6 +33,8 @@ type DeploymentListItemProps = {
   created_at: string;
   deployed_at?: string;
   status: DeploymentStatus;
+  type: DeploymentType;
+  executionExample?: string;
   onStatusChange(id: string, status: DeploymentStatus): void;
   onDelete(): void;
   onDownload(): Promise<void>;
@@ -41,15 +44,18 @@ type DeploymentListItemProps = {
 export const DeploymentListItem = ({
   id,
   name,
+  executionExample,
   created_at,
   deployed_at,
   status,
+  type,
   onStatusChange,
   onDelete,
   onDownload,
   onPopoverOpen,
 }: DeploymentListItemProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const textToCopy = type === 'DISC' ? `/workflows name: ${name}` : executionExample!;
 
   const handleDownloadClick = async () => {
     try {
@@ -67,11 +73,12 @@ export const DeploymentListItem = ({
   };
 
   const addToDiscordServerClick = () => window.open(constants.addBotToDiscordUrl, '_blank');
+  const viewApiGuideClick = () => alert('@TODO');
 
   return (
     <li className="flex flex-row rounded-2xl bg-surface-2 p-2">
       <div className="rounded-lg bg-surface-4 px-7 py-8">
-        <DiscordIcon />
+        {type === 'DISC' ? <DiscordIcon /> : <CodeIcon className="h-[36px] w-[48px]" />}
       </div>
       <div className="flex flex-1 flex-row items-center justify-between">
         <div className="ml-6">
@@ -84,14 +91,14 @@ export const DeploymentListItem = ({
           </div>
         </div>
         <div className="flex flex-row items-center">
-          <CopyTextButton className="mr-8 w-[320px] flex-1" text={`/workflows name: ${name}`} />
+          <CopyTextButton className="mr-8 w-[320px] flex-1" text={textToCopy} />
           <Button
             variant="ringed"
             color="secondary"
             className="mr-6 !border-border-base"
-            onClick={addToDiscordServerClick}
+            onClick={type === 'DISC' ? addToDiscordServerClick : viewApiGuideClick}
           >
-            Add Salt AI Bot
+            {type === 'DISC' ? 'Add Salt AI Bot' : 'View API Guide'}
           </Button>
           <Switch
             className="mr-4"

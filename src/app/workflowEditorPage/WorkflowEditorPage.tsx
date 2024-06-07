@@ -1,5 +1,4 @@
 import { Banner } from '@/shared/components/banner/Banner';
-import { CreateDeploymentDialogContainer } from '@/shared/components/createDeploymentDialog/CreateDeploymentDialogContainer';
 import { useEffect, useState } from 'react';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { EditorDevTools } from './components/EditorDevTools';
@@ -30,7 +29,6 @@ export const WorkflowEditorPage = ({
   onCreateNewWorkflowExecution,
   onSaveWorkflow,
 }: WorkflowEditorPageProps) => {
-  const [showDeploymentDialog, setShowDeploymentDialog] = useState(false);
   const [isLogsVisible, setIsLogsVisible] = useStateWithLocalStorage('isLogsVisible', false);
   const [showImportModelDialog, setShowImportModelDialog] = useState(false);
   const [activeSidebarSection, setActiveSidebarSection] = useStateWithLocalStorage<'images' | 'executions' | null>(
@@ -58,10 +56,10 @@ export const WorkflowEditorPage = ({
                 <Banner.EditorBannerContent />
               </Banner>
               <EditorHeader
+                workflowId={workflowId}
                 workflowName={workflowName}
                 onRunWorkflowClick={onCreateNewWorkflowExecution}
                 onSaveClick={onSaveWorkflow}
-                onDeployClick={() => setShowDeploymentDialog(true)}
                 onImportModelClick={() => setShowImportModelDialog(true)}
               />
               <div className="flex flex-1 flex-col">
@@ -91,11 +89,6 @@ export const WorkflowEditorPage = ({
             </Panel>
           )}
         </PanelGroup>
-        <CreateDeploymentDialogContainer
-          workflowId={workflowId}
-          isOpen={showDeploymentDialog}
-          onClose={() => setShowDeploymentDialog(false)}
-        />
         <ImportModelDialog isOpen={showImportModelDialog} onClose={() => setShowImportModelDialog(false)} />
         {import.meta.env.MODE === 'development' && import.meta.env.VITE_WEBSOCKET_URL.includes('localhost') ? (
           <EditorDevTools />

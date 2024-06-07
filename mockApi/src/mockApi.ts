@@ -164,6 +164,18 @@ app.delete('/v1/workflows/:workflowId', (req: Request, res: Response) => {
 // Predefined deployments for demonstration
 export const apiDeployments: DeploymentDetails[] = [
   {
+    id: '0',
+    name: 'img2parallax5',
+    created_at: '2024-03-08T12:35:43.304570Z',
+    deployed_at: '2024-03-08T12:35:43.304570Z',
+    status: 'ONLINE',
+    workflow_id: '1',
+    workflow_api_json: '{}',
+    workflow_json: '{xd: 1}',
+    type: 'API',
+    execution_example: `curl --location 'http://localhost:8000/api/v1/workflows/1/executions/`,
+  },
+  {
     id: '1',
     name: 'img2parallax1',
     created_at: '2024-03-08T12:35:43.304570Z',
@@ -171,7 +183,8 @@ export const apiDeployments: DeploymentDetails[] = [
     status: 'PAUSED',
     workflow_id: '1',
     workflow_api_json: '{}',
-    workflow_json: '{thatsMyWorkflow: 1}'
+    workflow_json: '{thatsMyWorkflow: 1}',
+    type: 'DISC'
   },
   {
     id: '2',
@@ -181,7 +194,8 @@ export const apiDeployments: DeploymentDetails[] = [
     status: 'PAUSED',
     workflow_id: '1',
     workflow_api_json: '{}',
-    workflow_json: '{}'
+    workflow_json: '{}',
+    type: 'DISC'
   },
   {
     id: '3',
@@ -190,7 +204,8 @@ export const apiDeployments: DeploymentDetails[] = [
     status: 'ONLINE',
     workflow_id: '1',
     workflow_api_json: '{}',
-    workflow_json: '{}'
+    workflow_json: '{}',
+    type: 'DISC'
   },
   {
     id: '4',
@@ -200,7 +215,8 @@ export const apiDeployments: DeploymentDetails[] = [
     status: 'PAUSED',
     workflow_id: '1',
     workflow_api_json: '{}',
-    workflow_json: '{}'
+    workflow_json: '{}',
+    type: 'DISC'
   },
   {
     id: '5',
@@ -210,7 +226,8 @@ export const apiDeployments: DeploymentDetails[] = [
     status: 'ONLINE',
     workflow_id: '1',
     workflow_api_json: '{}',
-    workflow_json: '{xd: 1}'
+    workflow_json: '{xd: 1}',
+    type: 'DISC'
   },
 ];
 
@@ -222,7 +239,7 @@ app.get('/v1/deployments/', (req: Request, res: Response) => {
 
 // Endpoint to create a new deployment
 app.post('/v1/deployments/', async (req: Request, res: Response) => {
-  const { name } = req.body;
+  const { name, type } = req.body;
   const newDeployment: DeploymentDetails = {
     id: generateUUID(),
     name,
@@ -231,7 +248,9 @@ app.post('/v1/deployments/', async (req: Request, res: Response) => {
     status: 'ONLINE',
     workflow_id: '1', // Assume default workflow_id for demo
     workflow_api_json: '{}',
-    workflow_json: '{}'
+    workflow_json: '{}',
+    type,
+    execution_example: `curl --location 'http://localhost:8000/api/v1/workflows/1/executions/'`,
   };
 
   const SHOW_ERROR = false;
