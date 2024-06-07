@@ -1309,6 +1309,7 @@ export class ComfyApp {
     api.addEventListener('execution_error', ({ detail }) => {
       this.lastExecutionError = detail;
       const formattedError = this.#formatExecutionError(detail);
+      console.error(formattedError);
       // this.ui.dialog.show(formattedError);
       // this.canvas.draw(true, true);
     });
@@ -2056,7 +2057,6 @@ export class ComfyApp {
       result = `Error: ${error}`;
     }
     finally {
-      console.error(result);
       return result;
     }
   }
@@ -2076,7 +2076,6 @@ export class ComfyApp {
       result = `Error: ${error}`;
     }
     finally {
-      console.error(result);
       return result;
     }
   }
@@ -2107,6 +2106,7 @@ export class ComfyApp {
             }
           } catch (error) {
             const formattedError = this.#formatPromptError(error);
+            console.error(formattedError);
             this.ui.dialog.show(formattedError);
             if (error.response) {
               this.lastNodeErrors = error.response.node_errors;
