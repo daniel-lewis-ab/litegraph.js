@@ -2062,21 +2062,15 @@ export class ComfyApp {
   }
 
   #formatExecutionError(error) {
-    let result;
     try {
       if (error == null)
-        result = '(Unknown Error #2060)';
+        return '(Unknown Error #2060)';
       else {
         const traceback = error.traceback?.join('');
-        const nodeId = error.node_id;
-        const nodeType = error.node_type;
-        result = `Error occurred when executing ${nodeType}:\n\n${error.exception_message}\n\n${traceback}`;
+        return `Error occurred when executing ${error.node_type}:\n\n${error.exception_message}\n\n${traceback}`;
       }
     } catch(err2) {
-      result = `Error: ${error}`;
-    }
-    finally {
-      return result;
+      return `Error: ${error}`;
     }
   }
 
