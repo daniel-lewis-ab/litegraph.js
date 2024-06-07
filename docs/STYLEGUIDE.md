@@ -178,3 +178,6 @@
 3. Keep It Simple Stupid (KISS)
 4. [Avoid Hasty Abstractions (AHA)](https://kentcdodds.com/blog/aha-programming)
 
+## Branches
+
+- Branch naming pattern: `task_with_id_short-description-of-task` for example `SALTE-1030_deployment-discord` where `SALTE-1030` is linear work item id
