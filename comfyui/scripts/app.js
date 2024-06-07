@@ -2034,14 +2034,13 @@ export class ComfyApp {
   }
 
   #formatPromptError(error) {
-    let result;
     try {
       if (error == null) {
-        result = '(Unknown Error #2039)';
+        return '(Unknown Error #2039)';
       } else if (typeof error === 'string') {
-        result = error;
+        return error;
       } else if (error.stack && error.message && error.toString) {
-        result =  error.toString();
+        return error.toString();
       } else if (error.response) {
         let message = error.response.error.message;
         if (error.response.error.details) message += ': ' + error.response.error.details;
@@ -2051,13 +2050,10 @@ export class ComfyApp {
             message += '\n    - ' + errorReason.message + ': ' + errorReason.details;
           }
         }
-        result = message;
+        return message;
       }
     } catch(err2) {
-      result = `Error: ${error}`;
-    }
-    finally {
-      return result;
+      return `Error: ${error}`;
     }
   }
 
