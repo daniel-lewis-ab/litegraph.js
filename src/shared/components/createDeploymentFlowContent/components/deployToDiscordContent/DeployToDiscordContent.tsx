@@ -89,7 +89,7 @@ export const DeployToDiscordContent = ({ workflowId, variant, onSubmit, onClose 
           <CopyTextButton
             className="mb-4 w-full"
             textClassName="text-sm"
-            text={`/workflows name: ${getValues().name} replace`}
+            text={`/workflows name: ${getValues().name}`}
           />
         </div>
         <Button variant="filled" color="secondary" size="sm" onClick={openDiscord}>

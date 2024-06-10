@@ -143,7 +143,7 @@ export const EditorHeader = ({
         >
           Run
         </Button>
-        <Popover open={showDeploymentsPopover} onOpenChange={setShowDeploymentsPopover}>
+        <Popover modal open={showDeploymentsPopover} onOpenChange={setShowDeploymentsPopover}>
           <PopoverTrigger className="px-1.5 *:text-icon-muted">
             <Button as="div" color="secondary" variant="ringed" size="sm" className="px-4">
               Deploy
