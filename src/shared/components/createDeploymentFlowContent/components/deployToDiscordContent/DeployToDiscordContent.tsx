@@ -93,7 +93,7 @@ export const DeployToDiscordContent = ({ workflowId, variant, onSubmit, onClose 
           />
         </div>
         <Button variant="filled" color="secondary" size="sm" onClick={openDiscord}>
-          Open Slat AI Discord
+          Open Salt AI Discord
         </Button>
       </>
     );
