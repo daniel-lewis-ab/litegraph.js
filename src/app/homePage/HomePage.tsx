@@ -13,7 +13,7 @@ import { Suspense, lazy } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { ClientOnly } from 'vite-react-ssg';
 import s from './HomePage.module.css';
-import img from './images/deploy-discord-min.png';
+import img from './images/deployments.png';
 import gpuPromoImg from './images/promo-gpu.svg';
 import ideImg from './images/promo-ide.jpg';
 
@@ -125,12 +125,12 @@ const DeploymentsSection = () => {
           <img src={img} alt={'Deploy to Discord and APIs with Salt'} />
         </div>
         <div className="grid-row-1 space-y-3 md:grid md:grid-cols-6">
-          <div className="col-span-4 col-start-2 space-y-4">
+          <div className="col-span-5 space-y-4 lg:col-start-2">
             <div className="font-mono text-xs tracking-wide text-text-subtle">01</div>
-            <h2 className={s.sectionTitle}>From proof-of-concept to production-ready in seconds</h2>
+            <h2 className={s.sectionTitle}>Effortless, auto-scaling deployments</h2>
             <p className={s.sectionBody}>
-              Effortlessly deploy your ComfyUI workflows to any Discord, or expose them as APIs. There&apos;s no set up,
-              so the journey from idea to reality is faster.
+              Deploy your workflows instantly with just one click. Our auto-scaling backend ensures seamless scaling,
+              adapting to your needs whether you&apos;re running API services or Discord bots.
             </p>
           </div>
         </div>
