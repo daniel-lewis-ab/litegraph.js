@@ -8,6 +8,7 @@ import { createPortal } from 'react-dom';
 import { useScrollToTopOnPathChange } from '@/hooks/useScrollToTopOnPathChange/useScrollToTopOnPathChange';
 import { PageErrorTemplate } from '@/shared/components/pageErrorTemplate/PageErrorTemplate';
 import { Tooltip } from '@/shared/components/tooltip/Tooltip';
+import { FeatureFlagProvider } from '@/context/featureFlagProvider/FeatureFlagProvider';
 
 export const App = ({ children }: { children: ReactNode }) => {
   useScrollToTopOnPathChange();
@@ -25,27 +26,29 @@ export const App = ({ children }: { children: ReactNode }) => {
       {/* @TODO: Report to sentry */}
       <ErrorBoundary fallback={<PageErrorTemplate variant="down" className="h-screen" />}>
         <AuthContextProvider>
-          <QueryClientProvider>
-            <Tooltip.Provider delayDuration={0}>
-              <ClientOnly>
-                {() => (
-                  <>
-                    {createPortal(
-                      <Toaster
-                        position="bottom-right"
-                        toastOptions={{
-                          // success: { className: '!bg-success-10' },
-                          error: { className: '!bg-error-10 !text-white' },
-                        }}
-                      />,
-                      document.body,
-                    )}
-                  </>
-                )}
-              </ClientOnly>
-              {children}
-            </Tooltip.Provider>
-          </QueryClientProvider>
+          <FeatureFlagProvider>
+            <QueryClientProvider>
+              <Tooltip.Provider delayDuration={0}>
+                <ClientOnly>
+                  {() => (
+                    <>
+                      {createPortal(
+                        <Toaster
+                          position="bottom-right"
+                          toastOptions={{
+                            // success: { className: '!bg-success-10' },
+                            error: { className: '!bg-error-10 !text-white' },
+                          }}
+                        />,
+                        document.body,
+                      )}
+                    </>
+                  )}
+                </ClientOnly>
+                {children}
+              </Tooltip.Provider>
+            </QueryClientProvider>
+          </FeatureFlagProvider>
         </AuthContextProvider>
       </ErrorBoundary>
     </React.StrictMode>

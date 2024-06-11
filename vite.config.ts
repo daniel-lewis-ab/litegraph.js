@@ -36,5 +36,8 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: true,
     },
+    ssr: {
+      noExternal: ['launchdarkly-react-client-sdk'],
+    },
   };
 });

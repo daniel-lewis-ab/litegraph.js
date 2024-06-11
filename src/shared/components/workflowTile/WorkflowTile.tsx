@@ -7,9 +7,11 @@ import { faDiagramProject } from '@awesome.me/kit-b6cda292ae/icons/sharp/thin';
 import { Popover, PopoverContent, PopoverTrigger } from '@radix-ui/react-popover';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useFlags } from 'launchdarkly-react-client-sdk';
 import { TimeSince } from '../timeSince/TimeSince';
 import { CodeIcon } from '../icons/CodeIcon';
 import { DiscordIcon } from '../icons/DiscordIcon';
+import { FeatureFlags } from '@/context/featureFlagProvider/FeatureFlagProvider';
 
 type WorkflowTileProps = {
   id: string;
@@ -30,8 +32,8 @@ export const WorkflowTile = ({
   onExportClick,
   onTileOptionsMouseOver,
 }: WorkflowTileProps) => {
+  const flags = useFlags<FeatureFlags>();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
   const closePopover = () => setIsPopoverOpen(false);
 
   return (
@@ -77,12 +79,14 @@ export const WorkflowTile = ({
                   >
                     Deploy to Discord
                   </OptionsList.Item>
-                  <OptionsList.Item
-                    pureIcon={<CodeIcon className="h-[20px] w-[16px]" />}
-                    onClick={() => onDeployClick('api')}
-                  >
-                    Deploy to API
-                  </OptionsList.Item>
+                  {flags.apiDeploymentEnabled ? (
+                    <OptionsList.Item
+                      pureIcon={<CodeIcon className="h-[20px] w-[16px]" />}
+                      onClick={() => onDeployClick('api')}
+                    >
+                      Deploy to API
+                    </OptionsList.Item>
+                  ) : null}
                   <OptionsList.Item icon={faTrash} onClick={onDeleteClick}>
                     Delete
                   </OptionsList.Item>

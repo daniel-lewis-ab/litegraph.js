@@ -46,6 +46,7 @@
     "framer-motion-3d": "^11.0.25",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
+    "launchdarkly-react-client-sdk": "^3.3.2",
     "lodash.throttle": "^4.1.1",
     "maath": "^0.10.7",
     "react": "^18.2.0",
@@ -69,6 +70,7 @@
     "@childrentime/devcert": "^1.2.8",
     "@graphql-codegen/cli": "^5.0.2",
     "@playwright/test": "^1.43.1",
+    "@rollup/plugin-commonjs": "^26.0.1",
     "@types/js-cookie": "^3.0.6",
     "@types/lodash.throttle": "^4.1.9",
     "@types/node": "^20.11.19",
@@ -98,6 +100,7 @@
     "url": "^0.11.3",
     "vite": "^5.1.0",
     "vite-plugin-checker": "^0.6.4",
+    "vite-plugin-commonjs": "^0.10.1",
     "vite-plugin-radar": "^0.9.4",
     "vite-react-ssg": "^0.6.1"
   },

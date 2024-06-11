@@ -15,6 +15,7 @@ export type Action = {
     | typeof CLEAR_TOKENS;
   accessToken?: string;
   refreshToken?: string;
+  userId?: string;
 };
 
 export const authReducer = (state: AuthContextStateType, action: Action): AuthContextStateType => {
@@ -30,6 +31,7 @@ export const authReducer = (state: AuthContextStateType, action: Action): AuthCo
         ...state,
         isAuthorizing: false,
         isAuthorized: true,
+        user: { userId: action.userId! },
       };
     }
     case SET_UNAUTHORIZED: {

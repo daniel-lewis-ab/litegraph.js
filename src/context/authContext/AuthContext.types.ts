@@ -5,6 +5,7 @@ export type AuthContextStateType = {
   isAuthorized: boolean;
   accessToken: string;
   refreshToken: string;
+  user?: { userId: string };
 };
 
 export type AuthContextType = {
@@ -15,4 +16,5 @@ export type AuthContextType = {
 export type Token = {
   iat: number;
   exp: number;
+  user_id: string;
 };

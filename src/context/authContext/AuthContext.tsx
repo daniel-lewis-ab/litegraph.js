@@ -36,6 +36,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       if (expirationTime > new Date().getTime() || refreshExpirationTime > new Date().getTime()) {
         return dispatch({
           type: SET_AUTHORIZED,
+          userId: decodedToken.user_id,
         });
       }
 

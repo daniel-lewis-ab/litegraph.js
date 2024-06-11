@@ -15,6 +15,7 @@ interface ImportMetaEnv {
   VITE_DATOCMS_ENVIRONMENT: string;
   VITE_DD_APPLICATION_ID: string;
   VITE_DD_CLIENT_TOKEN: string;
+  VITE_LAUNCHDARKLY_CLIENT_ID: string;
 
   MODE: 'development' | 'production';
 }

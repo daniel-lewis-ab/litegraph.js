@@ -1,11 +1,13 @@
 import { faAngleRight, faCircleInfo } from '@awesome.me/kit-b6cda292ae/icons/sharp/light';
 import { Icon } from '../icon/Icon';
 import { ReactNode, useState } from 'react';
+import { useFlags } from 'launchdarkly-react-client-sdk';
 import { CodeIcon } from '../icons/CodeIcon';
 import { DiscordIcon } from '../icons/DiscordIcon';
 import { DeployToApiContentContainer } from './components/deployToApiContent/DeployToApiContentContainer';
 import { DeployToDiscordContentContainer } from './components/deployToDiscordContent/DeployToDiscordContentContainer';
 import { Tooltip } from '@/shared/components/tooltip/Tooltip';
+import { FeatureFlags } from '@/context/featureFlagProvider/FeatureFlagProvider';
 
 type Step = 'selectPlatform' | 'deployToApi' | 'deployToDiscord';
 
@@ -62,6 +64,7 @@ export const CreateDeploymentFlowContent = ({
   workflowId: string;
   onClose(): void;
 }) => {
+  const flags = useFlags<FeatureFlags>();
   const [step, setStep] = useState<Step>(initStep ?? 'selectPlatform');
 
   if (step === 'deployToApi') {
@@ -80,13 +83,15 @@ export const CreateDeploymentFlowContent = ({
         onClick={() => setStep('deployToDiscord')}
         onInfoClick={() => alert('@TODO')}
       />
-      <Item
-        icon={<CodeIcon />}
-        name="Deploy to API"
-        desc="Integrate this workflow in your app"
-        onClick={() => setStep('deployToApi')}
-        onInfoClick={() => alert('@TODO')}
-      />
+      {flags.apiDeploymentEnabled ? (
+        <Item
+          icon={<CodeIcon />}
+          name="Deploy to API"
+          desc="Integrate this workflow in your app"
+          onClick={() => setStep('deployToApi')}
+          onInfoClick={() => alert('@TODO')}
+        />
+      ) : null}
     </>
   );
 };
