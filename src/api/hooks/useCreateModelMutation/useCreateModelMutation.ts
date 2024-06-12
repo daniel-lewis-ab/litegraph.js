@@ -17,7 +17,6 @@ export const useCreateModelMutation = () => {
     mutationFn: createModel,
     onSuccess: (newModel) => {
       queryClient.setQueryData<LoadingModelsResponse>(QueryKeys.loadingModels, (oldData) => {
-        // @TODO: Update
         const newData: LoadingModelsResponse = [...(oldData ?? []), newModel];
         return newData;
       });

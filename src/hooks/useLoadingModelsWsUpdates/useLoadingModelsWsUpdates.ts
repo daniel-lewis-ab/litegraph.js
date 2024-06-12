@@ -13,7 +13,7 @@ export const useLoadingModelsWsUpdates = () => {
     if (!lastMessage) return;
 
     if (lastMessage.action === 'model_import_status') {
-      const data = lastMessage.data as ModelImportFinishedData;
+      const data = (lastMessage.data as ModelImportFinishedData).data;
       if (data.status === 'COMPLETED') {
         toast.success(`Model '${data.name}' has been successfully imported.`, { position: 'bottom-center' });
       } else if (data.status === 'FAILED') {

@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import expressWs from 'express-ws';
-import urlMetadata from 'url-metadata';
 import { ApiWorkflowOutputAsset, ApiWorkflowOutputAssetDetails, Deployment, DeploymentDetails, GetDeploymentsResponse, GetRefreshTokensResponse, GetWorkflowInputAssetsResponse, GetWorkflowOutputAssetsResponse, GetWorkflowsResponse, LoadingModelCreateError, MetadataResponseError, PostLoginResponse, WorkflowContent, WorkflowDetails, WorkflowExecutionDetails } from '../../src/api/types';
 import { initWebsocket } from './mockWebsocket';
 import { examplePrompt1, examplePrompt2, examplePrompt3, workflowExecutions } from './workflowExecutions';
@@ -476,11 +475,9 @@ app.get('/v1/workflows/:workflowId/assets', (req: Request, res: Response) => {
 // Metadata
 const METADATA_ERROR_CODE: MetadataResponseError['error_code']  = 'MODEL_PRIVATE';
 app.get('/v1/models/metadata/', async (req: Request, res: Response) => {
-  const { url } = req.query;
   try {
-    const metadata = await urlMetadata(url as string);
     const updatedData = {
-      name: metadata.title,
+      name: 'title',
       license: 'openrail++',
     };
     const ERROR = false;
@@ -490,12 +487,13 @@ app.get('/v1/models/metadata/', async (req: Request, res: Response) => {
       res.json(updatedData);
     }
   } catch (e) {
+    console.log(e);
     res.status(400).json({ errorCode: METADATA_ERROR_CODE });
   }
 });
 
 export const LOADING_MODEL_ID = 'new-loading-model';
-export let models = [{ id: generateUUID() }, { id: generateUUID() }, { id: LOADING_MODEL_ID }];
+export let models = [{ id: generateUUID(), status: 'READY', }, { id: generateUUID(), status: 'READY', }, { id: LOADING_MODEL_ID, status: 'READY', }];
 app.get('/v1/models/import_requests', async (req: Request, res: Response) => {
   try {
     const ERROR = false;

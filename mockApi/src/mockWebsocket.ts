@@ -18,11 +18,13 @@ export const initWebsocket = (app: any) => {
         ws.send(
           JSON.stringify({
             action: 'model_import_status',
-            type: 'finished',
             data: {
-              id: LOADING_MODEL_ID,
-              status: 'COMPLETED', // 'FAILED'
-              name: 'StableDiffusion XX'
+              type: 'finished',
+              data: {
+                id: LOADING_MODEL_ID,
+                status: 'COMPLETED', // 'FAILED'
+                name: 'StableDiffusion XX'
+              }
             }
           }),
         );

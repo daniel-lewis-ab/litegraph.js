@@ -243,10 +243,12 @@ export type LogData = {
 type ModelImportStatus = 'READY' | 'IMPORTING' | 'COMPLETED' | 'FAILED';
 
 export type ModelImportFinishedData = {
-  type: 'finished';
-  id: string;
-  status: ModelImportStatus;
-  name: string;
+  type: 'send_response';
+  data: {
+    id: string;
+    status: ModelImportStatus;
+    name: string;
+  };
 };
 
 type GeneralIframeMessageData = { data: object; type: string };
