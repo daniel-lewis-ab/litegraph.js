@@ -11,7 +11,6 @@ export const opaque = [
   "CR Font File List",
   "CR Load Schedule From File",
   "Load Text File",
-  "Text Load Line From File",
   "Save Text File",
   "Create Morph Image",
   "Write to GIF",
