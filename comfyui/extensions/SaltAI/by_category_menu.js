@@ -27,7 +27,7 @@ app.registerExtension({
             menuSoFar.unshift(
                 { content: "By Category", has_submenu: true, callback: menuGeneratorForByContent }
             );
-            
+
             return menuSoFar;
         };
     },
@@ -38,7 +38,11 @@ app.registerExtension({
 */
 function prune(data) {
     // Prune empty folders
+
     function isEmpty(obj) {
+        if (Array.isArray(obj)) {
+            return obj.length === 0;
+        }
         for (const prop in obj) {
             if (Object.hasOwn(obj, prop)) {
                 return false;
@@ -48,23 +52,32 @@ function prune(data) {
     }
 
     function recursiveCheck(obj) {
-        for (let key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                let value = obj[key];
-                if (typeof value === 'object' && value !== null) {
-
-                    // Recursively check child objects
-                    recursiveCheck(value);
-
-                    if(isEmpty(value))
-                        delete obj[key];
-                    
-                } else if (value === 1) {
-
-                    // Prune non-existent nodes
-                    if (!LiteGraph.registered_node_types[key]) {
-                        // console.log(key);
-                        delete obj[key];
+        if (Array.isArray(obj)) {
+            for (let i = obj.length - 1; i >= 0; i--) {
+                if (typeof obj[i] === 'object' && obj[i] !== null) {
+                    recursiveCheck(obj[i]);
+                    if (isEmpty(obj[i])) {
+                        obj.splice(i, 1);
+                    }
+                } else if (typeof obj[i] === 'string') {
+                    if (!LiteGraph.registered_node_types[obj[i]]) {
+                        obj.splice(i, 1);
+                    }
+                }
+            }
+        } else {
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    let value = obj[key];
+                    if (typeof value === 'object' && value !== null) {
+                        recursiveCheck(value);
+                        if (isEmpty(value)) {
+                            delete obj[key];
+                        }
+                    } else if (typeof value === 'string') {
+                        if (!LiteGraph.registered_node_types[value]) {
+                            delete obj[key];
+                        }
                     }
                 }
             }
@@ -88,26 +101,42 @@ function menuGeneratorForByContent(node, options, e, prev_menu, callback) {
     }
 
     function inner_onMenuAdded(base_object, base_key, prev_menu) {
-        // console.log("inner_onMenuAdded called");
-        // console.log("base_object:", base_object);
-        // console.log("base_key:", base_key);
-
         const entries = [];
 
-        // Duplicate entry checks
         const isAlreadyAdded = (entries, value) => {
             return entries.find(entry => entry.value === value);
         };
 
-        // Iterate over the keys of the base_object
         for (const key in base_object) {
-            // console.log("Iterating key:", key); // Debug logging
-            if (base_object[key]) {
+            if (base_object.hasOwnProperty(key)) {
                 const value = base_object[key];
 
-                if (value === 1) {
-                    // Is Node
-                    const node = LiteGraph.registered_node_types[key];
+                // console.log(`base_object=${JSON.stringify(base_object)}, key=${key}, value=${JSON.stringify(value)}`);
+
+                if (typeof value === 'object') {
+                    if (isAlreadyAdded(entries, key)) {
+                        continue;
+                    }
+
+                    entries.push({
+                        value: key,
+                        content: key,
+                        has_submenu: true,
+                        callback: (submenu_value, event, mouseEvent, contextMenu) => inner_onMenuAdded(value, key, contextMenu)
+                    });
+                } else if (Array.isArray(value)) {
+                    if (isAlreadyAdded(entries, key)) {
+                        continue;
+                    }
+
+                    entries.push({
+                        value: key,
+                        content: key,
+                        has_submenu: true,
+                        callback: (submenu_value, event, mouseEvent, contextMenu) => inner_onMenuAdded(value, key, contextMenu)
+                    });
+                } else if (typeof value === 'string') {
+                    const node = LiteGraph.registered_node_types[value];
                     if (node) {
                         if (node.skip_list) {
                             continue;
@@ -117,13 +146,10 @@ function menuGeneratorForByContent(node, options, e, prev_menu, callback) {
                             continue;
                         }
 
-                        // console.log(`Adding node: ${node.type} - ${node.title}`); // Debug logging
-
-                        // Add Node
                         entries.push({
                             value: node.type,
                             content: node.title,
-                            has_submenu: false, // Node entries are leaf nodes
+                            has_submenu: false,
                             callback: (value, event, mouseEvent, contextMenu) => {
                                 const first_event = contextMenu.getFirstEvent();
                                 canvas.graph.beforeChange();
@@ -136,35 +162,19 @@ function menuGeneratorForByContent(node, options, e, prev_menu, callback) {
                                 canvas.graph.afterChange();
                             },
                         });
-                    } else {
-                        // console.warn(`Node type not found: ${key}`); // Debug logging
                     }
-                } else {
-                    // Is Submenu
-                    if (isAlreadyAdded(entries, key)) {
-                        continue;
+                    /*
+                    else {
+                        console.warn(`Node type not found: ${value}`); // Debug logging
                     }
-
-                    // console.log(`Adding submenu: ${key}`); // Debug logging
-
-                    // Add Submenu
-                    entries.push({
-                        value: key,
-                        content: key,
-                        has_submenu: true,
-                        callback: (submenu_value, event, mouseEvent, contextMenu) => inner_onMenuAdded(value, key, contextMenu)
-                    });
+                    */
                 }
             }
         }
 
-        // Build the menu with the entries from above
         new LiteGraph.ContextMenu(entries, { event: e, parentMenu: prev_menu }, ref_window);
     }
 
-    // console.log("Initial data:", data); // Debug logging
-
-    // Ensure the initial call passes the correct data
     inner_onMenuAdded(data, '', prev_menu);
     return false;
 }
