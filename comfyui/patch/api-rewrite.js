@@ -455,8 +455,15 @@ class ComfyGraphPatcher extends EventTarget {
       const definition = definitions[nodeType];
       if (Array.isArray(definition) && Array.isArray(definition[0])) {
         for (let i = 0; i < definition[0].length; i++) {
-          if (definition[0][i] === '__models__') {
-            definitions[nodeType] = [[...definition[0].slice(0, i), ...this.models], ...definition.slice(1)];
+          if (definition[0][i].startsWith && definition[0][i].startsWith('__models__')) {
+            let modelSubtype = definition[0][i].slice("__models__/".length)
+            definitions[nodeType] = [
+              [
+                ...definition[0].slice(0, i), 
+                ...this.models.filter((model) => model && model.paths && model.paths.some(path => path.startsWith(modelSubtype))).map((model) => model.name),
+              ], 
+              ...definition.slice(1)
+            ];
           } else if (definition[0][i] === '__inputs__') {
             definitions[nodeType] = [[...definition[0].slice(0, i), ...this.inputs], ...definition.slice(1)];
           } else if (definition[0][i] === '__embeds__') {

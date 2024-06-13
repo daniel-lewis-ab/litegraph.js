@@ -5,6 +5,7 @@ import { GetWorkflowInputAssetsResponse, PreviewExecutionData, WebSocketMessage 
 import { FullMessage, IframeToParentMessage } from './EditorIframe.types';
 import { useWebSocket } from '@/hooks/useWebsocket/useWebsocket';
 import { useWorkflowInputAssetsQuery } from '@/api/hooks/useWorkflowInputAssetsQuery/useWorkflowInputAssetsQuery';
+import { useFetchOwnedModels } from '@/api/hooks/useFetchModelsQuery/useFetchOwnedModelsQuery';
 import { useCreateWorkflowInputAssetMutation } from '@/api/hooks/useCreateWorkflowInputAssetMutation/useCreateWorkflowInputAssetMutation';
 import { useParams } from 'react-router-dom';
 import { publicAxiosClient } from '@/api/axiosClient';
@@ -21,11 +22,12 @@ const getWorkflowPreviewAsset = async (url: string) => {
 
 export const EditorIframe = () => {
   const { id } = useParams();
-  const { currentWorkflow, setCurrentWorkflow } = useWorkflowEditor();
   const { inputAssets, refetch: refetchInputAsset } = useWorkflowInputAssetsQuery(id!);
+  const { ownedModels } = useFetchOwnedModels();
   const { mutateAsync: createAssetAsync } = useCreateWorkflowInputAssetMutation();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [state, setState] = useState<'init' | 'loaded'>('init');
+  const { currentWorkflow, setCurrentWorkflow } = useWorkflowEditor();
   const { lastMessage, readyState } = useWebSocket();
   const { addNotification } = useEditorNotifications();
 
@@ -100,11 +102,12 @@ export const EditorIframe = () => {
           data: {
             inputs:
               (inputAssets as GetWorkflowInputAssetsResponse)?.results.map((asset) => asset.comfy_file_path) ?? [],
+            models: ownedModels?.map((model) => model) ?? [],
           },
         },
       });
     }
-  }, [state, inputAssets]);
+  }, [state, inputAssets, ownedModels]);
 
   useEffect(() => {
     const handleMessageFromIframe = async (message: MessageEvent<IframeToParentMessage>) => {

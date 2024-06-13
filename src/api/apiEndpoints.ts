@@ -15,4 +15,5 @@ export const apiEndpoints = {
   modelMetadata: (url: string) => `/v1/models/metadata/?url=` + url,
   importModel: '/v1/models/import/',
   loadingModels: '/v1/models/import_requests/',
+  ownModels: '/v1/models/',
 };

@@ -8,4 +8,5 @@ export const QueryKeys = {
   execution: ['execution'],
   urlMetadata: ['urlMetadata'],
   loadingModels: ['loadingModels'],
+  ownedModels: ['ownedModels'],
 };

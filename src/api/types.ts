@@ -167,6 +167,18 @@ export type MetadataResponseError = {
   error_code: 'INVALID_DOMAIN' | 'INVALID_URL' | 'INCOMPATIBLE_FILE_TYPE' | 'MODEL_PRIVATE';
 };
 
+export type GetUserModelResponse = APIModelResponse[];
+
+export type APIModelResponse = {
+  id: string;
+  name: string;
+  path: [];
+};
+
+export type GetUserModelResponseError = {
+  error_code: 'MODEL_PRIVATE';
+};
+
 type LoadingModel = { id: string; status: ModelImportStatus };
 
 export type LoadingModelCreateResponse = LoadingModel;

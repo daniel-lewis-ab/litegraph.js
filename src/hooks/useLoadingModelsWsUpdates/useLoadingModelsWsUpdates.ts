@@ -15,6 +15,7 @@ export const useLoadingModelsWsUpdates = () => {
     if (lastMessage.action === 'model_import_status') {
       const data = (lastMessage.data as ModelImportFinishedData).data;
       if (data.status === 'COMPLETED') {
+        queryClient.invalidateQueries({ queryKey: QueryKeys.ownedModels });
         toast.success(`Model '${data.name}' has been successfully imported.`, { position: 'bottom-center' });
       } else if (data.status === 'FAILED') {
         toast.error(`Failed to import model '${data.name}'. Please try again.`, { position: 'bottom-center' });
