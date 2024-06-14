@@ -13,7 +13,7 @@ app.registerExtension({
         prune(data);
 
         // This uses a so-far unused method hook to provide a substitute root menu on *canvas
-        const og_getMenuOptions = LGraphCanvas.prototype.getMenuOptions;
+        const og_getMenuOptoriginalGetMenuOptionsions = LGraphCanvas.prototype.getMenuOptions;
         LGraphCanvas.prototype.getMenuOptions = function(){
 
             // This part is for compatibility
