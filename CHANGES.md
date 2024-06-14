@@ -40,11 +40,19 @@ This fork takes the 2011-2014 code for LiteGraph and renews it.
 * Removed LiteGraph.pointerevents_method
 * All mouse events are now *pointer* events
 
-# For 0.10.x
+# For "ForwardCompatible" branch
+
+This is where the fun development happens, but isn't suitable for immediate pull to working
+code.
 
 Integrated Atlasan's fork (admittedly imperfectly) and realized we need to separate a 1.x pathway
 and a 2.x pathway.  This one is loaded with features that will ultimately belong in 2.x
 
-# For 0.11.x/master
+# For "Reversion" branch
 
-At present, I believe 0.11.x presents no breaking changes from Javi's repo
+* At present, I believe 0.11.x presents <no breaking changes> from Javi's repo except
+blocking SillyClient.js from calling home.
+
+* This is an ES5/CommonJS upgrade from original that implements PRs to Javi's repo,
+bugfixes, compatibility fixes, passes linting, passes audit, fixed example JSON so there's
+no weird overflow happening, play/stop works, fullscreen works.
