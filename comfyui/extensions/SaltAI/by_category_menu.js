@@ -17,15 +17,15 @@ app.registerExtension({
         LGraphCanvas.prototype.getMenuOptions = function(){
 
             // This part is for compatibility
-            const menuSoFar = og_getMenuOptions?.() ?? [
+            const menuSoFar = originalGetMenuOptions?.() ?? [
                 // This is the original menu callback
-                { content: "By Pack", has_submenu: true, callback: LGraphCanvas.onMenuAdd },
+                { content: "Add By Pack", has_submenu: true, callback: LGraphCanvas.onMenuAdd },
                 { content: "Add Group", callback: LGraphCanvas.onGroupAdd },
             ];
 
             // Adds to the top
             menuSoFar.unshift(
-                { content: "By Category", has_submenu: true, callback: menuGeneratorForByContent }
+                { content: "Add By Category", has_submenu: true, callback: menuGeneratorForByContent }
             );
 
             return menuSoFar;
