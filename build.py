@@ -10,14 +10,14 @@ js_files_lists = [
         "output_filename": "litegraph.core.js",
         "pack_filename": "litegraph.core.pack.js",
         "js_files": [    
-            "./src/litegraph.js",
+            "./src/core/litegraph.js",
         ]
     },
     {
         "output_filename": "litegraph.mini.js",
         "pack_filename": "litegraph.mini.pack.js",
         "js_files": [    
-            "./src/litegraph.js",
+            "./src/core/litegraph.js",
             
             "./src/nodes/base.js",
             "./src/nodes/events.js",
@@ -32,7 +32,7 @@ js_files_lists = [
         "output_filename": "litegraph.full.js",
         "pack_filename": "litegraph.full.pack.js",
         "js_files": [
-           "./src/litegraph.js",
+           "./src/core/litegraph.js",
            
             "./src/nodes/base.js",
             "./src/nodes/events.js",
