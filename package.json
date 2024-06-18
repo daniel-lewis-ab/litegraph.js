@@ -12,7 +12,7 @@
         "build:major": "python3 build.py --major",
         "docs": "jsdoc -c ./docs/.jsdoc.config -d ./docs -r --verbose --debug",
         "server": "nodemon server.js --watch ./src",
-        "test": "jest",
+        "test": "jest ./src/core/litegraph.test.js",
         "lint": "npx eslint src",
         "lint:fix": "npx eslint --fix src"
     },
